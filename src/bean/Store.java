@@ -3,7 +3,7 @@ package bean;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Store extends UserManager implements Serializable {
+public class Store extends User implements Serializable {
 
 //	店舗ID
 	private String storeId;

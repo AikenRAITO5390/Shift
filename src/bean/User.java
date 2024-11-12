@@ -1,6 +1,6 @@
 package bean;
 
-public class UserWorker {
+public class User {
 	/**
 	 * 認証済みフラグ:boolean true:認証済み
 	 */

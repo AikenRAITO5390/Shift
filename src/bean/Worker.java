@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.apache.catalina.Store;
 
-public class Worker extends UserWorker implements Serializable {
+public class Worker extends User implements Serializable {
 
 //	従業員ID
 	private String workerId;
