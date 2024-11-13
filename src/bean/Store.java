@@ -24,7 +24,7 @@ public class Store extends User implements Serializable {
 	private String email;
 
 //	シフト時間設定ID
-	private String shiftTimeId;
+	private String workTimeId;
 
 //	シフト開始時間
 	private Date workTimeStart;
@@ -80,12 +80,12 @@ public class Store extends User implements Serializable {
 		this.email = email;
 	}
 
-	public String getShiftTimeId() {
-		return shiftTimeId;
+	public String getWorkTimeId() {
+		return workTimeId;
 	}
 
-	public void setShiftTimeId(String shiftTimeId) {
-		this.shiftTimeId = shiftTimeId;
+	public void setWorkTimeId(String workTimeId) {
+		this.workTimeId = workTimeId;
 	}
 
 	public Date getWorkTimeStart() {
