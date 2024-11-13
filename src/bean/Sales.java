@@ -8,7 +8,7 @@ import org.apache.catalina.Store;
 public class Sales implements Serializable {
 
 //	日商売上
-	private int sales;
+	private int daySales;
 
 //	年月日
 	private Date date;
@@ -16,12 +16,13 @@ public class Sales implements Serializable {
 //	店舗
 	private Store store;
 
-	public int getSales() {
-		return sales;
+
+	public int getDaySales() {
+		return daySales;
 	}
 
-	public void setSales(int sales) {
-		this.sales = sales;
+	public void setDaySales(int daySales) {
+		this.daySales = daySales;
 	}
 
 	public Date getDate() {
