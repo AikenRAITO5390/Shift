@@ -24,7 +24,7 @@ public class BBSDao extends Dao {
 		try{
 			//プリペアードステートメントにSQL文をセット
 			statement = connection.prepareStatement("select * from BBS where bbs_id=? ");
-			//プリペアードステートメントに学生番号をバインド
+			//値はBBS_IDでゲットしてくる
 			statement.setString(1, bbsId);
 			//プリペアードステートメントを実行
 			ResultSet rSet = statement.executeQuery();
@@ -37,17 +37,17 @@ public class BBSDao extends Dao {
 
 			if (rSet.next()) {
 				//リザルトセットが存在する場合
-				//学生インスタンスに検索結果をセット
+				//BBSインスタンスに検索結果をセット
 				bbs.setBbsText(rSet.getString("BBS_TEXT"));
 				bbs.setBbsId(rSet.getString("BBS_ID"));
 				//WORKERはworker_idコードで検索したworkerインスタンスをセット
-				bbs.setworker(WorkerDao.get(rSet.getString("WORKER_ID")));
+				bbs.setWorker(workerDao.get(rSet.getString("WORKER_ID")));
 				//STOREはworker_idコードで検索したworkerインスタンスをセット
-				bbs.setstore(StoreDao.get(rSet.getString("STORE_ID")));
+				bbs.setStore(storeDao.get(rSet.getString("STORE_ID")));
 
 			} else {
 				//リザルトセットが存在しない場合
-				//学生インスタンスにnullをセット
+				//掲示板にnullをセット
 				bbs = null;
 			}
 		} catch (Exception e) {
@@ -73,21 +73,23 @@ public class BBSDao extends Dao {
 		//listを返す
 		return bbs;
 	}
-
+	//ログインしているお店別で値を出すのでSQLはSTOREで検索
 	private String baseSql = "select * from BBS where STORE_ID=?  ";
 
-	public List<BBS> postFilter(ResultSet rSet, Store store) throws Exception {
+	public List<BBS> postFilter(ResultSet rSet,Store store) throws Exception {
 		//戻り値用のリスト
 		Worker worker = new Worker();
 		List<BBS> list = new ArrayList<>();
 		try{
 			while(rSet.next()) {
-				//学生インスタンスを初期化
+				//掲示板インスタンスを初期化
 				BBS bbs = new BBS();
-				//学生インスタンスに検索結果をセット
+				//掲示板インスタンスに検索結果をセット
 				bbs.setBbsId(rSet. getString("BBS_ID"));
 				bbs.setBbsText (rSet. getString("BBS_TEXT"));
+				//初期化したworker
 				bbs.setWorker (worker);
+				//引数のstore
 				bbs.setStore(store);
 				//リストに追加
 				list.add(bbs);
@@ -107,11 +109,13 @@ public class BBSDao extends Dao {
 	    PreparedStatement statement = null;
 	    //リザルトセット
 	    ResultSet rSet = null;
-	    //SQL文のソートー
+	    //SQL文のソート
+	    //投稿された順にしたいので、追加順となるBBS_IDで昇順
 	    String order = " order by BBS_ID asc";
 
 	    try {
 		    //プリペアードステートメントにSQL文をセット
+	    	//storeでお店で絞った＆投稿順になってる
 		    statement = connection. prepareStatement (baseSql + order);
 		    //プリペアードステートメントに学校コードをバインド
 		    statement. setString(1, store. getStoreId ());
@@ -143,6 +147,7 @@ public class BBSDao extends Dao {
 		return list;
 	}
 
+	//掲示板に変更はないので、UPDATE文は削除しました
 	public boolean save(BBS bbs) throws Exception {
 		//コネクションを確立
 		Connection connection = getConnection();
@@ -152,10 +157,6 @@ public class BBSDao extends Dao {
 		int count = 0;
 
 		try{
-			//データベースから学生を取得
-			BBS old = get(bbs.getBbsId());
-			if (old == null) {
-				//学生が存在しなかった場合
 				//プリペアードステートメンにINSERT文をセット
 				statement = connection.prepareStatement(
 						"insert into BBS (BBS_ID, BBS_TEXT, STORE_ID, WORKER_ID) values(?, ?, ?, ?,) ");
@@ -163,20 +164,7 @@ public class BBSDao extends Dao {
 				statement.setString(1, bbs.getBbsId());
 				statement.setString(2, bbs.getBbsText());
 				statement.setString(3, bbs.getStore().getStoreId());
-				statement.setString(4, bbs.getWorker().getWorkerId);
-			} else {
-				//学生が存在した場合
-				//プリペアードステートメントにUPDATE文をセット
-				statement = connection
-						.prepareStatement("update student set name=?, ent_year=?, class_num=?, is_attend=? where no=?");
-				//プリペアードステートメントに値をバインド
-				statement.setString(1, student.getName());
-				statement.setInt(2, student.getEntYear());
-				statement.setString(3, student.getClassNum());
-				statement.setBoolean(4, student.isAttend());
-				statement.setString(5, student.getNo());
-			}
-//さちこ
+				statement.setString(4, bbs.getWorker().getWorkerId());
 			//プリペアードステートメントを実行
 			count = statement.executeUpdate();
 
@@ -209,6 +197,39 @@ public class BBSDao extends Dao {
 			return false;
 		}
 
+	}
+//掲示板削除
+	public boolean delete(BBS bbs) throws Exception {
+
+		//コネクションを確立
+				Connection connection = getConnection();
+				//プリペアードステートメント
+				PreparedStatement statement = null;
+				//実行件数
+				int count = 0;
+
+				try{   //選ばれた掲示板投稿（BBSIDで管理）を削除
+					BBS old = get(bbs.getBbsId());
+					statement=connection.prepareStatement("delete from BBS where BBS_ID = ?");
+					statement.setString(1, bbs.getBbsId());
+					count = statement.executeUpdate();
+				}catch(Exception e){
+					throw e;
+				}finally{
+					if(statement !=null){
+						try{
+							connection.close();
+						}catch(SQLException sqle){
+							throw sqle;
+						}
+					}
+				}
+
+				if(count > 0){
+					return true;
+				}else{
+					return false;
+				}
 	}
 }
 

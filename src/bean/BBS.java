@@ -2,7 +2,6 @@ package bean;
 
 import java.io.Serializable;
 
-import org.apache.catalina.Store;
 
 public class BBS implements Serializable {
 
