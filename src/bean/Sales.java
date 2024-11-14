@@ -1,9 +1,7 @@
 package bean;
 
 import java.io.Serializable;
-import java.util.Date;
-
-import org.apache.catalina.Store;
+import java.util.Date;;
 
 public class Sales implements Serializable {
 
