@@ -9,7 +9,6 @@ import java.util.List;
 
 import bean.BBS;
 import bean.Store;
-import bean.Student;
 import bean.Worker;
 
 
@@ -143,7 +142,7 @@ public class BBSDao extends Dao {
 		//listを返す
 		return list;
 	}
-	
+
 	public boolean save(BBS bbs) throws Exception {
 		//コネクションを確立
 		Connection connection = getConnection();
@@ -163,7 +162,7 @@ public class BBSDao extends Dao {
 				//プリペアードステートメントに値をバインド
 				statement.setString(1, bbs.getBbsId());
 				statement.setString(2, bbs.getBbsText());
-				statement.setInt(3, bbs.getStore().getStoreId);
+				statement.setString(3, bbs.getStore().getStoreId());
 				statement.setString(4, bbs.getWorker().getWorkerId);
 			} else {
 				//学生が存在した場合
@@ -177,7 +176,7 @@ public class BBSDao extends Dao {
 				statement.setBoolean(4, student.isAttend());
 				statement.setString(5, student.getNo());
 			}
-
+//さちこ
 			//プリペアードステートメントを実行
 			count = statement.executeUpdate();
 
@@ -212,6 +211,6 @@ public class BBSDao extends Dao {
 
 	}
 }
-}
+
 
 
