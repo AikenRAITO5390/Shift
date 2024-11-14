@@ -1,4 +1,4 @@
-package scoremanager;
+package shiftmaker;
 
 import java.util.ArrayList;
 import java.util.List;
