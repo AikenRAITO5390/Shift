@@ -9,6 +9,36 @@ import bean.Worker;
 
 public class WorkerDao extends Dao{
 
+	// ログイン処理
+	public Worker login(String id, String password) throws Exception {
+
+		Worker worker = null;
+
+    	//school_cdによってJOIN SCHOOLさせて、SCHOOL_nameがゲットできるように
+        String sql = "SELECT * FROM WORKER WHERE worker_id = ? and worker_password = ?";
+
+        Connection con = getConnection();
+	    PreparedStatement ps = con.prepareStatement(sql);
+	    ps.setString(1, id);
+	    ps.setString(2, password);
+
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) { // 認証成功の場合
+            // Workerオブジェクトを作成して設定
+            worker = new Worker();
+            worker.setWorkerId(rs.getString("worker_id"));
+            worker.setWorkerPassword(rs.getString("worker_password"));
+            worker.setWorkerName(rs.getString("worker_name"));
+        }
+
+        ps.close();
+        rs.close();
+
+        //ログインされたworkerのデータを返す
+        return worker;
+
+	}
 
 	/**
 	 * getメソッド 従業員IDを指定して従業員インスタンスを1件取得する
