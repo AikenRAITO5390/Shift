@@ -32,6 +32,13 @@ public class Store extends User implements Serializable {
 //	シフト終了時間
 	private Date workTimeEnd;
 
+//	曜日別シフト点数
+	private int workWeekScore;
+
+//　シフト点数
+	private int weekScore;
+
+
 	public String getStoreId() {
 		return storeId;
 	}
@@ -104,6 +111,21 @@ public class Store extends User implements Serializable {
 		this.workTimeEnd = workTimeEnd;
 	}
 
+	public int getWorkWeekScore() {
+		return workWeekScore;
+	}
+
+	public void setWorkWeekScore(int workWeekScore) {
+		this.workWeekScore = workWeekScore;
+	}
+
+	public int getWeekScore() {
+		return weekScore;
+	}
+
+	public void setWeekScore(int weekScore) {
+		this.weekScore = weekScore;
+	}
 
 
 }

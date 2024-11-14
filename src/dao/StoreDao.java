@@ -49,6 +49,8 @@ public class StoreDao extends Dao{
 				store.setWorkTimeId(rSet.getString("work_time_id"));
 				store.setWorkTimeStart(rSet.getDate("work_time_start"));
 				store.setWorkTimeEnd(rSet.getDate("work_time_start"));
+				store.setWorkWeekScore(rSet.getInt("work_week_score"));
+				store.setWeekScore(rSet.getInt("week_score"));
 
 			} else {
 //				リザルトセットが存在しない場合
@@ -107,6 +109,8 @@ public class StoreDao extends Dao{
 				store.setWorkTimeId(rSet.getString("work_time_id"));
 				store.setWorkTimeStart(rSet.getDate("work_time_start"));
 				store.setWorkTimeEnd(rSet.getDate("work_time_start"));
+				store.setWorkWeekScore(rSet.getInt("work_week_score"));
+				store.setWeekScore(rSet.getInt("week_score"));
 //				リストに追加
 				list.add(store);
 			}
@@ -193,6 +197,8 @@ public class StoreDao extends Dao{
 				//引数２をDate型にキャスト。これでいけるかはまだわからん
 				statement.setDate(8, (Date) store.getWorkTimeStart());
 				statement.setDate(9, (Date) store.getWorkTimeEnd());
+				statement.setInt(10, store.getWorkWeekScore());
+				statement.setInt(11, store.getWeekScore());
 
 
 			}
