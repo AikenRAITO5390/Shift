@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import tool.Action;
 
-public class MenuAction extends Action{
+public class MainAction extends Action{
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -19,7 +19,7 @@ public class MenuAction extends Action{
 		//なし
 		//レスポンス値をセット 6
 		//JSPへフォワード 7
-		req.getRequestDispatcher("menu.jsp").forward(req, res);
+		req.getRequestDispatcher("main.jsp").forward(req, res);
 	}
 
 }
