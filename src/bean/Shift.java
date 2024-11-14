@@ -3,14 +3,13 @@ package bean;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.apache.catalina.Store;
-
-import javafx.concurrent.Worker;
-
 public class Shift implements Serializable {
 
 //	年月日
 	private Date shiftDate;
+
+//  希望シフト点数
+	private int shiftScore;
 
 //	希望シフト時間設定ID
 	private String shiftHopeTimeId;
@@ -31,7 +30,7 @@ public class Shift implements Serializable {
 	private Date shiftTimeEnd;
 
 //	シフト番号
-	private int shiftId;
+	private String shiftId;
 
 //	店舗
 	private Store store;
@@ -48,6 +47,14 @@ public class Shift implements Serializable {
 
 	public Date getShiftDate() {
 		return shiftDate;
+	}
+
+	public int getShiftScore() {
+		return shiftScore;
+	}
+
+	public void setShiftScore(int shiftScore) {
+		this.shiftScore = shiftScore;
 	}
 
 	public void setShiftDate(Date shiftDate) {
@@ -118,11 +125,11 @@ public class Shift implements Serializable {
 		this.shiftTimeEnd = shiftTimeEnd;
 	}
 
-	public int getShiftId() {
+	public String getShiftId() {
 		return shiftId;
 	}
 
-	public void setShiftId(int shiftId) {
+	public void setShiftId(String shiftId) {
 		this.shiftId = shiftId;
 	}
 

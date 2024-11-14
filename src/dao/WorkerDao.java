@@ -50,7 +50,7 @@ public class WorkerDao extends Dao{
 	 */
 	public Worker get(String worker_id) throws Exception {
 
-		// WorkerDaoの初期化
+		// Workerの初期化
 		Worker worker = new Worker();
 
 		Connection connection = getConnection();
