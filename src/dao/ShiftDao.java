@@ -13,16 +13,16 @@ import bean.Worker;
 public class ShiftDao extends Dao{
 
 	/**
-	 * getメソッド 従業員IDを指定して従業員インスタンスを1件取得する
+	 * getメソッド worker,shift_date,storeを指定してシフトインスタンスを1件取得する
 	 *
-	 * @param worker_id:String
-	 *            従業員ID
+	 * @param worker:Worker  shift_date:Date   store:Store
+ 	 *           従業員ID        年月日           店舗ID
 	 * @return シフトクラスのインスタンス 存在しない場合はnull
 	 * @throws Exception
 	 */
 	public Shift get(Worker worker, Date shift_date, Store store) throws Exception {
 
-		// Workerの初期化
+		// Shiftの初期化
 		Shift shift = new Shift();
 
 		Connection connection = getConnection();
@@ -31,7 +31,7 @@ public class ShiftDao extends Dao{
 
 	    try {
 
-	    	// SQL文を作成
+	    	// SQL文を作成 ※まだ未完成です
 	    	String sql = "SELECT * FROM worker WHERE worker_id = ?";
 	        statement = connection.prepareStatement(sql);
 	        statement.setString(1, worker.getWorkerId());
@@ -40,11 +40,12 @@ public class ShiftDao extends Dao{
 
 		    ResultSet rSet = statement.executeQuery();
 
-		    // StoreDaoの初期化
+		    // WorkerDaoの初期化
 		    WorkerDao workerDao = new WorkerDao();
+		    // StoreDaoの初期化
 		    StoreDao storeDao = new StoreDao();
 
-		    // リザルトセットから従業員インスタンスを作成
+		    // リザルトセットからシフトインスタンスを作成
 		    if(rSet.next()) {
 		    	shift.setShiftDate(rSet.getDate("shift_date"));
 		    	shift.setShiftScore(rSet.getInt("shift_score"));
