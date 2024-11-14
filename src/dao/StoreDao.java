@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -45,7 +46,7 @@ public class StoreDao extends Dao{
 				store.setManagerName(rSet.getString("manager_name"));
 				store.setPassword(rSet.getString("password"));
 				store.setEmail(rSet.getString("email"));
-				store.setShiftTimeId(rSet.getString("work_time_id"));
+				store.setWorkTimeId(rSet.getString("work_time_id"));
 				store.setWorkTimeStart(rSet.getDate("work_time_start"));
 				store.setWorkTimeEnd(rSet.getDate("work_time_start"));
 
@@ -103,7 +104,7 @@ public class StoreDao extends Dao{
 				store.setManagerName(rSet.getString("manager_name"));
 				store.setPassword(rSet.getString("password"));
 				store.setEmail(rSet.getString("email"));
-				store.setShiftTimeId(rSet.getString("work_time_id"));
+				store.setWorkTimeId(rSet.getString("work_time_id"));
 				store.setWorkTimeStart(rSet.getDate("work_time_start"));
 				store.setWorkTimeEnd(rSet.getDate("work_time_start"));
 //				リストに追加
@@ -180,9 +181,49 @@ public class StoreDao extends Dao{
 			if (old == null) {
 //				店舗情報が存在しなかった場合
 //				プリペアードステートメントにINSERT文をセット
-				statement = connection.prepareStatement("sql");
+				statement = connection.prepareStatement("insertsql");
 //				プリペアードステートメントに値をバウンド
+				statement.setString(1, store.getStoreId());
+				statement.setString(2, store.getStoreName());
+				statement.setString(3, store.getManagerId());
+				statement.setString(4, store.getManagerName());
+				statement.setString(5, store.getPassword());
+				statement.setString(6, store.getEmail());
+				statement.setString(7, store.getWorkTimeId());
+				//引数２をDate型にキャスト。これでいけるかはまだわからん
+				statement.setDate(8, (Date) store.getWorkTimeStart());
+				statement.setDate(9, (Date) store.getWorkTimeEnd());
+
+
+			}
+			//プリペアードステートメントにを実行
+			count = statement.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			//プリペアードステート面とをとじる
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			//コネクションを閉じる
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
 			}
 		}
+		if (count > 0){
+			//実行件数が1件以上ある場合
+			return true;
+		} else {
+			//実行件数が0件の場合
+			return false;
+	}
 	}
 }
