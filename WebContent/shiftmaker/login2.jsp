@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<form action = "LoginExecute.action" method="post">
+<form action = "ShiftLoginExecute.action" method="post">
 
 <!--
 	autocomplete
@@ -22,15 +22,15 @@
  -->
 
 
-	<h2>従業員用ログイン</h2>
+	<h2>シフト作成者用ログイン</h2>
 	<!-- ログインＩＤ -->
 	<label>ＩＤ</label>
-	<input type="text" name="WORKER_ID" maxlength="10" placeholder="10文字以内の半角英数字でご入力下さい"
+	<input type="text" name="MANAGER_ID" maxlength="10" placeholder="10文字以内の半角英数字でご入力下さい"
 	 autocomplete="off" style="ime-mode: disabled" value="" required/>
 
 	<!-- パスワード -->
 	<label>パスワード</label>
-	<input type="password" name="WORKER_PASSWORD" maxlength="20" placeholder="20文字以内の半角英数字でご入力下さい" value=""
+	<input type="password" name="PASSWORD" maxlength="20" placeholder="20文字以内の半角英数字でご入力下さい" value=""
 	style="ime-mode: disabled" required/>
 
 	<!-- パスワード表示チェックボックス -->
@@ -45,8 +45,7 @@
 	<input type="submit" name="login" value="ログイン"/>
 
 	<!-- シフト作成者用ログインリンク -->
-	<!-- <li><a href="LoginAction">シフト作成者用ログイン</a></li> -->
-	<li><a href="ShiftLogin.action">シフト作成者用ログインページ</a></li>
+	<!-- <li><a href="Login2.Action">シフト作成者用ログイン</a></li> -->
 
 </form>
 
