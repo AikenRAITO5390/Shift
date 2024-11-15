@@ -10,13 +10,45 @@
 </head>
 <c:import url="../../common/header.jsp"/>
 <body>
-<h2>メニュー</h2>
+<h2>📜　シフト</h2>
+<ul>
+        <li><a href="#">作成</a></li>
+        <li><a href="#">編集</a></li>
+        <li><a href="#">閲覧</a></li>
+        <li><a href="#">削除</a></li>
+</ul>
 
-<a href="#">学生管理</a>
-<a href="#">成績登録</a>
-<a href="#">成績参照</a>
-<a href="#">科目管理</a>
-<a href="#">ログアウト</a>
+<h2>👬　従業員</h2>
+<ul>
+        <li><a href="#">登録</a></li>
+        <li><a href="#">編集</a></li>
+        <li><a href="#">閲覧</a></li>
+        <li><a href="#">削除</a></li>
+</ul>
+
+<h2>📝　掲示板</h2>
+<ul>
+        <li><a href="#">掲示板</a></li>
+</ul>
+
+<h2>👦　シフト作成者</h2>
+<ul>
+        <li><a href="#">変更</a></li>
+</ul>
+
+<h2>💪　シフト条件</h2>
+<ul>
+        <li><a href="#">登録</a></li>
+        <li><a href="#">変更</a></li>
+        <li><a href="#">時間設定</a></li>
+        <li><a href="#">パワーバランス設定</a></li>
+</ul>
+
+<h2>💰　売上</h2>
+<ul>
+        <li><a href="#">売上</a></li>
+
+</ul>
 
 </body>
 <c:import url="../../common/footer.jsp"/>
