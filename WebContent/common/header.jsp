@@ -25,6 +25,8 @@
     align-items: center;
     color: white;
     z-index: 1000;
+    flex-direction: row; /* 横方向に配置 */
+    justify-content: flex-start; /* 左側に配置 */
 }
 </style>
 <script>
@@ -43,5 +45,5 @@
     <div id="sidebar" class="sidebar">
         <jsp:include page="../common/navigation.jsp" />
     </div>
-    <h2>まるごとシフトくん</h2>
+    <h2> まるごとシフトくん</h2>
 </div>
