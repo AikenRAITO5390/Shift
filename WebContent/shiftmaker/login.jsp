@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>得点管理システム</title>
+<title>まるごとシフトくん</title>
 </head>
 <body>
 
@@ -25,17 +25,17 @@
 	<h2>ログイン</h2>
 	<!-- ログインＩＤ -->
 	<label>ＩＤ</label>
-	<input type="text" name="id" maxlength="10" placeholder="10文字以内の半角英数字でご入力下さい"
+	<input type="text" name="WORKER_ID" maxlength="10" placeholder="10文字以内の半角英数字でご入力下さい"
 	 autocomplete="off" style="ime-mode: disabled" value="" required/>
 
 	<!-- パスワード -->
 	<label>パスワード</label>
-	<input type="password" name="password" maxlength="20" placeholder="20文字以内の半角英数字でご入力下さい" value=""
+	<input type="password" name="WORKER_PASSWORD" maxlength="20" placeholder="20文字以内の半角英数字でご入力下さい" value=""
 	style="ime-mode: disabled" required/>
 
 	<!-- パスワード表示チェックボックス -->
 	<!-- <input id="inputCheckbox" type="checkbox"> -->
-
+	<input id="togglePassword" type="checkbox"> パスワードを表示する
 
 	 <c:forEach var="error" items="${errors}">
 	 <li>${errors}</li>
@@ -43,6 +43,9 @@
 
 	<!-- ログイン用ボタン -->
 	<input type="submit" name="login" value="ログイン"/>
+
+	<!-- シフト作成者用ログインリンク -->
+	<li><a href="Login2.Action">Top</a></li>
 
 </form>
 

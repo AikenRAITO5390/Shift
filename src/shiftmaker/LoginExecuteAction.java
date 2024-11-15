@@ -27,8 +27,13 @@ public class LoginExecuteAction extends Action{
 		//リクエストパラメータ―の取得 2
 		String WORKER_ID = req.getParameter("WORKER_ID");
 		String WORKER_PASSWORD = req.getParameter("WORKER_PASSWORD");
+
+
 		//String name = req.getParameter("namae");
 		//String school_cd = req.getParameter("school_cd");
+
+		System.out.println(req.getParameter("WORKER_ID"));
+		System.out.println(WORKER_PASSWORD);
 
 		//DBからデータ取得 3
 		worker=workerDAO.login(WORKER_ID,WORKER_PASSWORD);
@@ -59,8 +64,9 @@ public class LoginExecuteAction extends Action{
 			session.setAttribute("user", worker);
 
 
-				//リダイレクト
-			url = "main/Menu.action";
+			//リダイレクト
+			url = "main/Main.action";
+
 			res.sendRedirect(url);
 		}else{
 				System.out.println("ffff");
