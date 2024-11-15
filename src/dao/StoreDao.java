@@ -13,6 +13,36 @@ import bean.Store;
 
 public class StoreDao extends Dao{
 
+	public Store login(String id, String password) throws Exception {
+
+		Store store = null;
+
+    	//manager_idとpasswordを使ってシフト作成者を取得
+        String sql = "SELECT * FROM Store WHERE manager_id = ? and password = ?";
+
+        Connection con = getConnection();
+	    PreparedStatement ps = con.prepareStatement(sql);
+	    ps.setString(1, id);
+	    ps.setString(2, password);
+
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) { // 認証成功の場合
+            // Storeオブジェクトを作成して設定
+            store = new Store();
+            store.setStoreId(rs.getString("manager_id"));
+            store.setPassword(rs.getString("password"));
+            store.setManagerName(rs.getString("manager_name"));
+        }
+
+        ps.close();
+        rs.close();
+
+        //ログインされたworkerのデータを返す
+        return store;
+
+	}
+
 	/**
 	 * getメソッド　店舗IDを指定して店舗インスタンスを一件取得
 	 *
