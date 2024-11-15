@@ -18,7 +18,7 @@ public class StoreDao extends Dao{
 		Store store = null;
 
     	//manager_idとpasswordを使ってシフト作成者を取得
-        String sql = "SELECT * FROM Store WHERE manager_id = ? and password = ?";
+        String sql = "SELECT * FROM STORE WHERE manager_id = ? and password = ?";
 
         Connection con = getConnection();
 	    PreparedStatement ps = con.prepareStatement(sql);
