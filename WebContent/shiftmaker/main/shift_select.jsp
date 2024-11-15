@@ -8,5 +8,7 @@
 </head>
 <body>
 <h1>シフト作成</h1>
+<%--ShiftCreateActionにボタンで飛ばす --%>
+<button onclick="location.href='ShiftCreate.action'" >作成</button>
 </body>
 </html>

@@ -75,7 +75,7 @@ function hideLinks(id) {
    <ul>
         <li><a href="#">作成</a></li>
         <li><a href="#">編集</a></li>
-        <li><a href="#">閲覧</a></li>
+        <li><a href="WorkerList.action">閲覧</a></li>
         <li><a href="#">削除</a></li>
     </ul>
 </div>
