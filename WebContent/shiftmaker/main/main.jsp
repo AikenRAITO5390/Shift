@@ -6,8 +6,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>まるごとシフト君</title>
+<title>まるごとシフトくん</title>
 </head>
+<c:import url="../../common/header.jsp"/>
 <body>
 <h2>メニュー</h2>
 
@@ -18,4 +19,5 @@
 <a href="#">ログアウト</a>
 
 </body>
+<c:import url="../../common/footer.jsp"/>
 </html>
