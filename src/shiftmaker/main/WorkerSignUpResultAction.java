@@ -77,16 +77,16 @@ public class WorkerSignUpResultAction extends Action{
 
 		// 従業員IDから従業員インスタンスを取得
 		worker = workerDao.get(worker_id);
-		// ログインユーザーの店情報をもとに店情報の一覧を取得
-		List<String> list = StoreDao.filter(manager.getStoreName());
+		// ログインユーザーの店情報をもとに店舗名の一覧を取得
+		List<String> list = storeDao.filter(manager.getStoreName());
 
 
 
-		//ビジネスロジック 4
+		// ビジネスロジック 4
 
 
 
-		//DBへデータ保存 5
+		// DBへデータ保存 5
 
 		// 従業員が未登録だった場合
 		if (worker == null) {
@@ -101,10 +101,10 @@ public class WorkerSignUpResultAction extends Action{
 			worker.setWorkerAddress(worker_address);
 			worker.setWorkerTel(worker_tel);
 			worker.setWorkerPassword(worker_password);
-			worker.setStore((Store)session.getAttribute("user").getStoreId);
+			worker.getStore().setStoreId(((Store) session.getAttribute("user")).getStoreId());
 			worker.setWorkerJudge(true);
 
-			// 学生を保存
+			// 従業員を保存
 			workerDao.save(worker);
 
 		// 入力された従業員IDがDBに保存されていた場合
@@ -120,11 +120,14 @@ public class WorkerSignUpResultAction extends Action{
 		//レスポンス値をセット 6
 		//JSPへフォワード 7
 
+		// 店情報のlistをセット
+		req.setAttribute("store_name_set", list);
+
 		if(!errors.isEmpty()){
 			// リクエスト属性をセット
 			req.setAttribute("errors", errors);
 			req.setAttribute("worker_id", worker_id);
-			req.setAttribute("name", worker_name);
+			req.setAttribute("worker_name", worker_name);
 			req.setAttribute("worker_date", worker_date);
 			req.setAttribute("worker_address", worker_address);
 			req.setAttribute("worker_tel", worker_tel);

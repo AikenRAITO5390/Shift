@@ -226,4 +226,96 @@ public class WorkerDao extends Dao{
 	}
 
 
+
+
+	/**
+	 * saveメソッド 従業員インスタンスをデータベースに保存する データが存在する場合は更新、存在しない場合は登録
+	 *
+	 * @param worker：Worker
+	 *            従業員
+	 * @return 成功:true, 失敗:false
+	 * @throws Exception
+	 */
+	public boolean save (Worker worker) throws Exception {
+
+		//コネクションを確立
+		Connection connection = getConnection();
+		//プリペアードステートメント
+		PreparedStatement statement = null;
+		// 実行件数
+		int count = 0;
+
+		try {
+			// データベースから学生を取得
+			Worker wk = get (worker.getWorkerId());
+
+			// 学生が存在しなかった場合
+			if(wk == null) {
+
+				// プリペアードステートメンにINSERT文をセットと
+				statement = connection. prepareStatement (
+				"insert into worker (worker_id,worker_name,worker_date,worker_address,worker_tel,worker_password,store_id,worker_judge,worker_score,worker_position) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				// プリペアードステートメントに値をバインド
+				statement.setString(1,worker.getWorkerId());
+				statement.setString(2,worker.getWorkerName());
+				statement.setString(3,worker.getWorkerDate());
+				statement.setString(4,worker.getWorkerAddress());
+				statement.setString(5,worker.getWorkerTel());
+				statement.setString(6,worker.getWorkerPassword());
+				statement.setString(7,worker.getStore().getStoreId());
+				statement.setBoolean(8,worker.isWorkerJudge());
+				statement.setString(9,worker.getWorkerScore());
+				statement.setString(10,worker.getWorkerPosition());
+
+			}else {
+				// 従業員が存在した場合 更新！
+				// プリペアードステートメントにUPDATE文をセット
+				statement = connection
+				.prepareStatement ("update worker set worker_id=?,worker_name=?,worker_date=?,worker_address=?,worker_tel=?,worker_password=?,store_id=?,worker_judge=?,worker_score=?,worker_position=? where worker_id = ? ");
+				// プリペアードステートメントに値をバインド
+				statement.setString(1,worker.getWorkerId());
+				statement.setString(2,worker.getWorkerName());
+				statement.setString(3,worker.getWorkerDate());
+				statement.setString(4,worker.getWorkerAddress());
+				statement.setString(5,worker.getWorkerTel());
+				statement.setString(6,worker.getWorkerPassword());
+				statement.setString(7,worker.getStore().getStoreId());
+				statement.setBoolean(8,worker.isWorkerJudge());
+				statement.setString(9,worker.getWorkerScore());
+				statement.setString(10,worker.getWorkerPosition());
+
+			}
+
+			//プリペアードステートメントを実行
+			count = statement.executeUpdate ();
+
+		}catch(Exception e) {
+				throw e;
+		}finally {
+			// プリペアードステートメントを閉じる
+			if (statement != null) {
+				try {
+					statement. close ();
+				}catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			//コネクションを閉じる
+			if (connection != null) {
+				try {
+					connection.close ();
+				}catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		if (count > 0) {
+			//実行件数が1件以上ある場合
+			return true;
+		}else{
+		    //実行件数が0件の場合
+		    return false;
+		}
+	}
+
 }

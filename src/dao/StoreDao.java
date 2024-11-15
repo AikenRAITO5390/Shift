@@ -201,6 +201,67 @@ public class StoreDao extends Dao{
 
 	}
 
+
+	/**
+	 * filterメソッド　店舗名を指定して一覧を取得
+	 * @param store_name
+	 * @return　店舗名のリスト:List<Store> 存在しない場合０件
+	 * @throws Exception
+	 */
+	public List<String> filter(String store_name) throws Exception {
+	    // 空のリストを作成して、結果を格納する
+	    List<String> storeList = new ArrayList<>();
+	    // コネクションを確立
+	    Connection connection = getConnection();
+	    PreparedStatement statement = null;
+	    ResultSet rSet = null;
+
+	    try {
+	        // SQL文を準備して店舗名に基づくフィルターを適用
+	        String sql = "SELECT store_name FROM STORE WHERE store_name LIKE ?";
+	        statement = connection.prepareStatement(sql);
+	        // プレースホルダーにstoreNameをセット
+	        statement.setString(1, "%" + store_name + "%");
+	        // クエリを実行
+	        rSet = statement.executeQuery();
+
+	        // 結果セットからデータを取得してリストに格納
+	        while (rSet.next()) {
+	            storeList.add(rSet.getString("store_name"));
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        throw e;
+	    } finally {
+	        // リソースを閉じる
+	        if (rSet != null) {
+	            try {
+	                rSet.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (statement != null) {
+	            try {
+	                statement.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+
+	    return storeList;
+	}
+
+
+
 	public boolean save(Store store)throws Exception{
 		//データベースへのコネクションを確立
 		Connection connection = getConnection();
