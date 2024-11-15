@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-    <style>
+	<style>
         .sidebar {
             display: none;
             width: 200px;
@@ -10,11 +10,13 @@
             background-color: #7d7d7d;
             position: fixed;
             left: 0;
-            top: 0;
+            top: 50px;
             padding: 10px;
             box-shadow: 2px 0 5px rgba(0,0,0,0.1);
         }
+
     </style>
+
     <script>
         function toggleSidebar() {
             var sidebar = document.getElementById("sidebar");
