@@ -1,6 +1,9 @@
 package shiftmaker.main;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,15 +33,30 @@ public class WorkerSignUpAction extends Action{
 		// ログインユーザーの店情報をもとに店舗名の一覧を取得
 		List<String> list = storeDao.filter(manager.getStoreName());
 
+
+
 		// ビジネスロジック 4
-		// なし
+
+		// 生年月日選択のための年リスト作成（例: 1950年～2023年）
+	    List<Integer> years = new ArrayList<>();
+	    for (int i = 1950; i <= 2023; i++) {
+	        years.add(i);
+	    }
+	    // 月、日リストを作成
+	    List<Integer> months = IntStream.rangeClosed(1, 12).boxed().collect(Collectors.toList());
+	    List<Integer> days = IntStream.rangeClosed(1, 31).boxed().collect(Collectors.toList());
+
 
 		// DBへデータ保存 5
 		// なし
 
 		// レスポンス値をセット 6
-		// クラス番号のlistをセット
+		// 店舗名のlistをセット
 		req.setAttribute("store_name_set", list);
+		// 年、月、日のlistをセット
+		req.setAttribute("year_list", years);
+		req.setAttribute("month_list", months);
+	    req.setAttribute("day_list", days);
 
 		// JSPへフォワード 7
 		req.getRequestDispatcher("worker_signup.jsp").forward(req, res);

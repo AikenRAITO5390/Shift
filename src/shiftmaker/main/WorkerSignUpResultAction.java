@@ -24,6 +24,11 @@ public class WorkerSignUpResultAction extends Action{
 		// セッションを取得
 		HttpSession session = req.getSession();
 
+		// リクエストパラメータの取得
+		String year = req.getParameter("year");
+		String month = req.getParameter("month");
+		String day = req.getParameter("day");
+
 		// WorkerDaoを初期化
 		WorkerDao workerDao = new WorkerDao();
 		// 従業員ID
@@ -31,7 +36,7 @@ public class WorkerSignUpResultAction extends Action{
 		// 名前
 		String worker_name = "";
 		// 生年月日
-		String worker_date = "";
+		String worker_date = year + "-" + month + "-" + day;
 		// 住所
 		String worker_address = "";
 		// 電話番号
@@ -79,6 +84,8 @@ public class WorkerSignUpResultAction extends Action{
 		worker = workerDao.get(worker_id);
 		// ログインユーザーの店情報をもとに店舗名の一覧を取得
 		List<String> list = storeDao.filter(manager.getStoreName());
+		// ラジオボタンの値を取得
+		String worker_type = req.getParameter("worker_type");
 
 
 
@@ -102,7 +109,8 @@ public class WorkerSignUpResultAction extends Action{
 			worker.setWorkerTel(worker_tel);
 			worker.setWorkerPassword(worker_password);
 			worker.getStore().setStoreId(((Store) session.getAttribute("user")).getStoreId());
-			worker.setWorkerJudge(true);
+			// workerJudgeをラジオボタンで設定した値に基づいてセット
+		    worker.setWorkerJudge(Boolean.parseBoolean(worker_type)); // "true"または"false"をbooleanに変換してセット
 
 			// 従業員を保存
 			workerDao.save(worker);
