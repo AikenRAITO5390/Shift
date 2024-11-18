@@ -30,7 +30,7 @@ public class StoreDao extends Dao{
         if (rs.next()) { // 認証成功の場合
             // Storeオブジェクトを作成して設定
             store = new Store();
-            store.setStoreId(rs.getString("manager_id"));
+            store.setStoreId(rs.getString("store_id"));
             store.setPassword(rs.getString("password"));
             store.setManagerName(rs.getString("manager_name"));
         }

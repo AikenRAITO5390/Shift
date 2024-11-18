@@ -34,7 +34,7 @@
 
 <h2>👦　シフト作成者</h2>
 <ul>
-        <li><a href="#">変更</a></li>
+        <li><a href="ShiftManagerSignUp.action">変更</a></li>
 </ul>
 
 <h2>💪　シフト条件</h2>
