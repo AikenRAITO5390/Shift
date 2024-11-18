@@ -13,9 +13,9 @@
 	<h2>シフト作成者変更</h2>
 	<form action = "ShiftManagerSignupResult.action" method="post">
 	<div class="form-group">
-		<label>ID</label>
-		<input type="text" name="storeId" placeholder="IDを入力してください"
-			maxlength="7"value="${storeId}">
+		<label>A</label>
+		<input type="text" name="work_time_id"
+			maxlength="1"value="${work_time_id}">
 	</div>
 	<div class="form-group">
 
