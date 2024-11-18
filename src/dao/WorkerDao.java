@@ -17,7 +17,7 @@ public class WorkerDao extends Dao{
 
 		Worker worker = null;
 
-    	//school_cdによってJOIN SCHOOLさせて、SCHOOL_nameがゲットできるように
+    	// SQL文を作成
         String sql = "SELECT * FROM WORKER WHERE worker_id = ? and worker_password = ?";
 
         Connection con = getConnection();
@@ -27,7 +27,8 @@ public class WorkerDao extends Dao{
 
         ResultSet rs = ps.executeQuery();
 
-        if (rs.next()) { // 認証成功の場合
+        // 認証成功の場合
+        if (rs.next()) {
             // Workerオブジェクトを作成して設定
             worker = new Worker();
             worker.setWorkerId(rs.getString("worker_id"));
@@ -90,7 +91,7 @@ public class WorkerDao extends Dao{
 
 
 	    } catch (SQLException e) {
-//	        e.printStackTrace();
+	    	// e.printStackTrace();
 	        throw e;
 	    } finally {
 	        // リソースを閉じる
@@ -271,7 +272,7 @@ public class WorkerDao extends Dao{
 				// 従業員が存在した場合 更新！
 				// プリペアードステートメントにUPDATE文をセット
 				statement = connection
-				.prepareStatement ("update worker set worker_id=?,worker_name=?,worker_date=?,worker_address=?,worker_tel=?,worker_password=?,store_id=?,worker_judge=?,worker_score=?,worker_position=? where worker_id = ? ");
+				.prepareStatement ("update worker set worker_id=?,worker_name=?,worker_date=?,worker_address=?,worker_tel=?,worker_password=?,store_id=?,worker_judge=?,worker_score=?,worker_position=? where worker_id = ?");
 				// プリペアードステートメントに値をバインド
 				statement.setString(1,worker.getWorkerId());
 				statement.setString(2,worker.getWorkerName());
