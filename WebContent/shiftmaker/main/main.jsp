@@ -13,7 +13,7 @@
 <div class="main-content">
 <h2>📜　シフト</h2>
 <ul>
-        <li><a href="#">作成</a></li>
+        <li><a href="ShiftSelect.action">作成</a></li>
         <li><a href="#">編集</a></li>
         <li><a href="#">閲覧</a></li>
         <li><a href="#">削除</a></li>
@@ -21,7 +21,7 @@
 
 <h2>👬　従業員</h2>
 <ul>
-        <li><a href="#">登録</a></li>
+        <li><a href="WorkerSignUp.action">登録</a></li>
         <li><a href="#">編集</a></li>
         <li><a href="WorkerList.action">閲覧</a></li>
         <li><a href="#">削除</a></li>

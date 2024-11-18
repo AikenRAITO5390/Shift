@@ -24,14 +24,14 @@ public class WorkerSignUpAction extends Action{
 		// StoreDaoを初期化
 		StoreDao storeDao = new StoreDao();
 		// ログインユーザーを取得
-		Store manager = (Store) session.getAttribute("user");
+		Store manager = (Store)session.getAttribute("user");
 
 		//リクエストパラメータ―の取得 2
 		//なし
 
 		// DBからデータ取得 3
-		// ログインユーザーの店情報をもとに店舗名の一覧を取得
-		List<String> list = storeDao.filter(manager.getStoreName());
+		// ログインユーザーのIDをもとに店舗名の一覧を取得
+		List<String> list = storeDao.filter(manager.getManagerId());
 
 
 
