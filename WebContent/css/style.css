@@ -8,3 +8,19 @@ body {
 .main-content {
     margin-top: 50px; /* ヘッダーの高さ分だけ下に配置 */
 }
+
+/* styles.css に追加 */
+h2 {
+    color: black ;
+}
+ul, .main-content li {
+    color: black ;
+}
+ul li a {
+    color: black ;
+}
+ul li a:hover, .main-content ul li a:focus {
+    color: red ;
+}
+
+

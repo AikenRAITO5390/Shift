@@ -10,6 +10,7 @@
 </head>
 <c:import url="../../common/header.jsp"/>
 <body>
+<div class="main-content">
 <h2>📜　シフト</h2>
 <ul>
         <li><a href="#">作成</a></li>
@@ -22,7 +23,7 @@
 <ul>
         <li><a href="#">登録</a></li>
         <li><a href="#">編集</a></li>
-        <li><a href="#">閲覧</a></li>
+        <li><a href="WorkerList.action">閲覧</a></li>
         <li><a href="#">削除</a></li>
 </ul>
 
@@ -49,7 +50,7 @@
         <li><a href="#">売上</a></li>
 
 </ul>
-
+</div>
 </body>
 <c:import url="../../common/footer.jsp"/>
 </html>
