@@ -32,10 +32,10 @@ public class ShiftDao extends Dao{
 	    try {
 
 	    	// SQL文を作成 ※まだ未完成です
-	    	String sql = "SELECT * FROM worker WHERE worker_id = ?";
+	    	String sql = "SELECT * FROM SHIFT WHERE shift_date = ? and worker_id = ? and store_id = ?";
 	        statement = connection.prepareStatement(sql);
-	        statement.setString(1, worker.getWorkerId());
-	        statement.setDate(2, new java.sql.Date(shift_date.getTime()));
+	        statement.setDate(1,(java.sql.Date) shift_date);
+	        statement.setString(2,worker.getWorkerId());
 	        statement.setString(3, store.getStoreId());
 
 		    ResultSet rSet = statement.executeQuery();

@@ -59,8 +59,9 @@ public class StoreDao extends Dao{
 		PreparedStatement statement = null;
 
 		try{
+			String sql = "SELECT * FROM store WHERE store_id = ?";
 			//プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement("sql");//後で書く
+			statement = connection.prepareStatement(sql);//後で書く
 			//プリペアードステートメントに店舗IDをバインド（？の一個めに入る）
 			statement.setString(1, store_id);
 			//プリペアードステートメントを実行
