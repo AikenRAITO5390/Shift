@@ -33,6 +33,7 @@ public class StoreDao extends Dao{
             store.setStoreId(rs.getString("store_id"));
             store.setPassword(rs.getString("password"));
             store.setManagerName(rs.getString("manager_name"));
+            store.setManagerId(rs.getString("manager_id"));
         }
 
         ps.close();
@@ -204,12 +205,12 @@ public class StoreDao extends Dao{
 
 
 	/**
-	 * filterメソッド　店舗名を指定して一覧を取得
-	 * @param store_name
+	 * filterメソッド　IDを指定して一覧を取得
+	 * @param manager_id
 	 * @return　店舗名のリスト:List<Store> 存在しない場合０件
 	 * @throws Exception
 	 */
-	public List<String> filter(String store_name) throws Exception {
+	public List<String> filter(String manager_id) throws Exception {
 	    // 空のリストを作成して、結果を格納する
 	    List<String> storeList = new ArrayList<>();
 	    // コネクションを確立
@@ -219,17 +220,17 @@ public class StoreDao extends Dao{
 
 	    try {
 	        // SQL文を準備して店舗名に基づくフィルターを適用
-	        String sql = "SELECT store_name FROM STORE WHERE store_name LIKE ?";
+	        String sql = "SELECT store_name FROM STORE WHERE manager_id = ?";
 	        statement = connection.prepareStatement(sql);
 	        // プレースホルダーにstoreNameをセット
-	        statement.setString(1, "%" + store_name + "%");
+	        statement.setString(1, manager_id);
 	        // クエリを実行
 	        rSet = statement.executeQuery();
 
-	        // 結果セットからデータを取得してリストに格納
-	        while (rSet.next()) {
-	            storeList.add(rSet.getString("store_name"));
+	        while(rSet.next()){
+	        	storeList.add(rSet.getString("store_name"));
 	        }
+
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	        throw e;
@@ -260,6 +261,7 @@ public class StoreDao extends Dao{
 
 	    return storeList;
 	}
+
 
 
 
