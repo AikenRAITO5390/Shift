@@ -13,7 +13,7 @@
 		<!-- 画面タイトル -->
 		<h2>従業員情報登録</h2>
 
-		<form action="WorkerSignUp.action" method="post">
+		<form action="WorkerSignUpResult.action" method="post">
 
 			<!-- ID入力 -->
 			<label>ID</label>
@@ -98,13 +98,4 @@
 
 </div>
 
-
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>従業員情報登録</title>
-</head>
-<body>
-	<h2>
-
-</body>
 </html>

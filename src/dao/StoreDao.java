@@ -30,7 +30,7 @@ public class StoreDao extends Dao{
         if (rs.next()) { // 認証成功の場合
             // Storeオブジェクトを作成して設定
             store = new Store();
-            store.setStoreId(rs.getString("manager_id"));
+            store.setStoreId(rs.getString("store_id"));
             store.setPassword(rs.getString("password"));
             store.setManagerName(rs.getString("manager_name"));
         }
@@ -292,6 +292,19 @@ public class StoreDao extends Dao{
 				statement.setInt(10, store.getWorkWeekScore());
 				statement.setInt(11, store.getWeekScore());
 
+
+			}else {
+				//学生が存在した場合
+				//プリペアードステートメントにUPDATE文をセット
+				statement = connection
+						.prepareStatement("update store set store_id=?, manager_name=?, password=?, email=?, store_name=? where store_id=?");
+				//プリペアードステートメントに値をバインド
+				statement.setString(1, store.getStoreId());
+				statement.setString(2, store.getManagerName());
+				statement.setString(3, store.getPassword());
+				statement.setString(4, store.getEmail());
+				statement.setString(5, store.getStoreName());
+				statement.setString(6, store.getStoreId());
 
 			}
 			//プリペアードステートメントにを実行
