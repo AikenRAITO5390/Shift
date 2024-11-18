@@ -293,6 +293,19 @@ public class StoreDao extends Dao{
 				statement.setInt(11, store.getWeekScore());
 
 
+			}else {
+				//学生が存在した場合
+				//プリペアードステートメントにUPDATE文をセット
+				statement = connection
+						.prepareStatement("update store set store_id=?, manager_name=?, password=?, email=?, store_name=? where store_id=?");
+				//プリペアードステートメントに値をバインド
+				statement.setString(1, store.getStoreId());
+				statement.setString(2, store.getManagerName());
+				statement.setString(3, store.getPassword());
+				statement.setString(4, store.getEmail());
+				statement.setString(5, store.getStoreName());
+				statement.setString(6, store.getStoreId());
+
 			}
 			//プリペアードステートメントにを実行
 			count = statement.executeUpdate();

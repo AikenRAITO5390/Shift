@@ -17,17 +17,9 @@ public class ShiftManagerSignUpAction extends Action {
 		StoreDao sDao = new StoreDao();
 		HttpSession session = req.getSession();//セッション
 		Store store_login = (Store)session.getAttribute("user");// ログインユーザーを取得
-
-		if (store_login != null) {
-		    System.out.println("Store ID: " + store_login.getStoreId());
-		} else {
-		    System.out.println("セッションにユーザーが見つかりません。");
-		}
 		Map<String, String> errors = new HashMap<>();
 
 		Store store = sDao.get(store_login.getStoreId());
-		System.out.println(store);
-		System.out.println(store_login.getStoreId());
 
 		if (store != null) {// 学生が存在していた場合
 			req.setAttribute("storeId", store.getStoreId());
