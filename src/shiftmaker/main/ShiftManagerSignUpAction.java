@@ -32,7 +32,7 @@ public class ShiftManagerSignUpAction extends Action {
 			req.setAttribute("errors", errors);
 		}
 		//JSPへフォワード 7
-		req.getRequestDispatcher("shiftmanager_signup.jsp").forward(req, res);
+		req.getRequestDispatcher("shiftmanager_edit_disp.jsp").forward(req, res);
 	}
 
 	}

@@ -5,6 +5,7 @@ body {
     color: #000000; /* メインページのテキスト色 */
 }
 
+
 .main-content {
     margin-top: 50px; /* ヘッダーの高さ分だけ下に配置 */
 }
@@ -22,5 +23,44 @@ ul li a {
 ul li a:hover, .main-content ul li a:focus {
     color: red ;
 }
+
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+}
+
+label {
+  display: block;
+  margin-top: 10px; /* 必要に応じてマージンを調整 */
+}
+
+
+input[type="text"],
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.form-group {
+    margin-bottom: 10px; /* 各フィールドの間にスペースを追加 */
+  }
 
 

@@ -43,7 +43,6 @@ public class ShiftManagerSignupResultAction extends Action {
 			// 学生を保存
 			sDao.save(store);
 		} else {
-			errors.put("cd", "科目が存在していません");
 		}
 
 		//エラーがあったかどうかで手順6~7の内容が分岐
@@ -57,10 +56,10 @@ public class ShiftManagerSignupResultAction extends Action {
 			req.setAttribute("password", password);
 			req.setAttribute("email", email);
 			req.setAttribute("store_name", store_name);
-			req.getRequestDispatcher("shiftmanager_signup.jsp").forward(req, res);
+			req.getRequestDispatcher("shiftmanager_edit_disp.jsp").forward(req, res);
 			return;
 		}
 
-		req.getRequestDispatcher("shiftmanager_signup_result.jsp").forward(req, res);
+		req.getRequestDispatcher("shiftmanager_edit_disp_result.jsp").forward(req, res);
 	}
 }
