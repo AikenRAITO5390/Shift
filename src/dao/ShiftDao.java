@@ -1,10 +1,10 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 
 import bean.Shift;
 import bean.Store;
@@ -34,7 +34,7 @@ public class ShiftDao extends Dao{
 	    	// SQL文を作成 ※まだ未完成です
 	    	String sql = "SELECT * FROM SHIFT WHERE shift_date = ? and worker_id = ? and store_id = ?";
 	        statement = connection.prepareStatement(sql);
-	        statement.setDate(1,(java.sql.Date) shift_date);
+	        statement.setDate(1,shift_date);
 	        statement.setString(2,worker.getWorkerId());
 	        statement.setString(3, store.getStoreId());
 
@@ -50,11 +50,11 @@ public class ShiftDao extends Dao{
 		    	shift.setShiftDate(rSet.getDate("shift_date"));
 		    	shift.setShiftScore(rSet.getInt("shift_score"));
 		    	shift.setShiftHopeTimeId(rSet.getString("shifthope_time_id"));
-		    	shift.setShiftHopeTimeStart(rSet.getDate("shifthope_time_start"));
-		    	shift.setShiftHopeTimeEnd(rSet.getDate("shifthope_time_end"));
-		    	shift.setWorkTimeId(rSet.getString("worker_time_id"));
-		    	shift.setShiftTimeStart(rSet.getDate("shift_time_start"));
-		    	shift.setShiftTimeEnd(rSet.getDate("shift_time_end"));
+		    	shift.setShiftHopeTimeStart(rSet.getTimestamp("shifthope_time_start"));
+		    	shift.setShiftHopeTimeEnd(rSet.getTimestamp("shifthope_time_end"));
+		    	shift.setWorkTimeId(rSet.getString("work_time_id"));
+		    	shift.setShiftTimeStart(rSet.getTimestamp("shift_time_start"));
+		    	shift.setShiftTimeEnd(rSet.getTimestamp("shift_time_end"));
 		    	shift.setShiftId(rSet.getString("shift_id"));
 		    	shift.setWorker(workerDao.get(rSet.getString("worker_id")));
 		    	shift.setStore(storeDao.get(rSet.getString("store_id")));

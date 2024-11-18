@@ -15,6 +15,17 @@
 </head>
 <body>
 
+	<p>${shift_date}</p>
+	<p>${score}</p>
+	<p>${hope_time_id}</p>
+	<p>${hope_time_start}</p>
+	<p>${hope_time_end}</p>
+	<p>${work_time_id}</p>
+	<p>${shift_time_start}</p>
+	<p>${shift_time_end}</p>
+	<p>${shift_id}</p>
+
+
 	<h1>カレンダー</h1>
     <table>
     	<%--曜日のヘッダー行 --%>

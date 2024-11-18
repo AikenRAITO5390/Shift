@@ -1,7 +1,8 @@
 package bean;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Shift implements Serializable {
 
@@ -15,19 +16,19 @@ public class Shift implements Serializable {
 	private String shiftHopeTimeId;
 
 //	希望その他開始時間
-	private Date shiftHopeTimeStart;
+	private Timestamp shiftHopeTimeStart;
 
 //	希望その他終了時間
-	private Date shiftHopeTimeEnd;
+	private Timestamp shiftHopeTimeEnd;
 
 //	シフト時間設定ID
 	private String workTimeId;
 
 //	その他開始時間
-	private Date shiftTimeStart;
+	private Timestamp shiftTimeStart;
 
 //	その他終了時間
-	private Date shiftTimeEnd;
+	private Timestamp shiftTimeEnd;
 
 //	シフト番号
 	private String shiftId;
@@ -85,19 +86,19 @@ public class Shift implements Serializable {
 		this.shiftHopeTimeId = shiftHopeTimeId;
 	}
 
-	public Date getShiftHopeTimeStart() {
+	public Timestamp getShiftHopeTimeStart() {
 		return shiftHopeTimeStart;
 	}
 
-	public void setShiftHopeTimeStart(Date shiftHopeTimeStart) {
+	public void setShiftHopeTimeStart(Timestamp shiftHopeTimeStart) {
 		this.shiftHopeTimeStart = shiftHopeTimeStart;
 	}
 
-	public Date getShiftHopeTimeEnd() {
+	public Timestamp getShiftHopeTimeEnd() {
 		return shiftHopeTimeEnd;
 	}
 
-	public void setShiftHopeTimeEnd(Date shiftHopeTimeEnd) {
+	public void setShiftHopeTimeEnd(Timestamp shiftHopeTimeEnd) {
 		this.shiftHopeTimeEnd = shiftHopeTimeEnd;
 	}
 
@@ -109,19 +110,19 @@ public class Shift implements Serializable {
 		this.workTimeId = workTimeId;
 	}
 
-	public Date getShiftTimeStart() {
+	public Timestamp getShiftTimeStart() {
 		return shiftTimeStart;
 	}
 
-	public void setShiftTimeStart(Date shiftTimeStart) {
+	public void setShiftTimeStart(Timestamp shiftTimeStart) {
 		this.shiftTimeStart = shiftTimeStart;
 	}
 
-	public Date getShiftTimeEnd() {
+	public Timestamp getShiftTimeEnd() {
 		return shiftTimeEnd;
 	}
 
-	public void setShiftTimeEnd(Date shiftTimeEnd) {
+	public void setShiftTimeEnd(Timestamp shiftTimeEnd) {
 		this.shiftTimeEnd = shiftTimeEnd;
 	}
 
