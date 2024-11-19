@@ -202,6 +202,7 @@ public class StoreDao extends Dao{
 
 	}
 
+	//必要ですか？？
 	public List<Store> filter(Store store, String work_time_id)throws Exception{
 //		空のリストを作成
 		List<Store> list = new ArrayList<>();

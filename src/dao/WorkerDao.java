@@ -222,12 +222,10 @@ public class WorkerDao extends Dao{
         // リザルトセット
         ResultSet rSet = null;
 
-        String condition = "and store_id = ?";
-        String order = " order by worker_id asc";
 
         try {
-            statement = connection.prepareStatement(baseSql + condition + order);
-            statement.setString(1, store.getStoreName());
+            statement = connection.prepareStatement("select * from worker where store_id=?");
+            statement.setString(1, store.getStoreId());
 
             rSet = statement.executeQuery();
             list = postFilter(rSet, store);

@@ -15,7 +15,7 @@
 
 
 	<c:choose>
-		<c:when test="${workers.size() > 0}">
+		<c:when test="${not empty workers}">
                   <table class="table table-hover">
                 <tr>
                     <th>ID</th>
@@ -25,10 +25,13 @@
                     <th>電話番号</th>
                     <th>パスワード</th>
                     <th>店情報</th>
+
+
                     <th></th>
                     <th></th>
                 </tr>
                 <c:forEach var="worker" items="${workers}">
+
 
                     <tr>
                         <td>${worker.workerId}</td>
@@ -37,9 +40,9 @@
                         <td>${worker.workerAddress}</td>
                         <td>${worker.workerTel}</td>
                         <td>${worker.workerPassword}</td>
-                        <td>${worker.storeId}</td>
-                        <td><a href="WorkerUpdate.action?no=${worker.workerId}">変更</a></td>
-                        <td><a href="WorkerDelete.action?no=${worker.workerId}">削除</a></td>
+                        <td>${store.storeName}</td>
+                        <td><a href="#">変更</a></td>
+                        <td><a href="#">削除</a></td>
                     </tr>
                 </c:forEach>
             </table>

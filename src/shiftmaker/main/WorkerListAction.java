@@ -19,34 +19,24 @@ public class WorkerListAction extends Action {
         HttpSession session = req.getSession();
         Store store = (Store) session.getAttribute("user");
 
-        String WORKER_ID = req.getParameter("f1");
-        String WORKER_NAME = req.getParameter("f2");
-        String WORKER_DATE = req.getParameter("f3");
-        String WORKER_ADDRESS = req.getParameter("f4");
-        String WORKER_TEL = req.getParameter("f5");
-        String WORKER_PASSWORD = req.getParameter("f6");
-        String STORE_ID = req.getParameter("f7");
-        String STORE_NAME = req.getParameter("f8");
-        String WORK_TIME_ID = req.getParameter("f9");
+
+
 
         WorkerDao wDao = new WorkerDao();
         StoreDao sDao = new StoreDao();
 
 
-        List<String> list = sDao.filter(store.getStoreName());
-        //stores = sDao.filter(store, WORK_TIME_ID);
-        List<Store> stores = sDao.filter(store, WORK_TIME_ID);
-
-		// リクエストに学生リストをセット
-
-		List<Worker> workers = wDao.getWorkersByStoreId(STORE_ID); // workers変数を宣言し、初期化
+        List<Store> stores = sDao.filterStore(store.getStoreId());
+		List<Worker> workers = wDao.filter(store); // workers変数を宣言し、初期化
 		// リクエストにデータをセット
 
+		req.setAttribute("workers", workers);
 		req.setAttribute("stores", stores);
 
+		System.out.println("Stores: " + stores);
+        System.out.println("Workers: " + workers);
 
-		//JSPへフォワード 7
-		req.getRequestDispatcher("worker_list.jsp").forward(req, res);
-	}
+        req.getRequestDispatcher("worker_list.jsp").forward(req, res);
+    }
 }
 
