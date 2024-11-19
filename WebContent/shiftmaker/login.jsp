@@ -35,7 +35,7 @@
 
 	<!-- パスワード表示チェックボックス -->
 	<!-- <input id="inputCheckbox" type="checkbox"> -->
-	<input id="togglePassword" type="checkbox"> パスワードを表示する
+	<!-- <input id="togglePassword" type="checkbox"> パスワードを表示する -->
 
 	 <c:forEach var="error" items="${errors}">
 	 <li>${errors}</li>

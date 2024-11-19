@@ -255,6 +255,35 @@ public class WorkerDao extends Dao{
 
 
 
+	public List<Worker> getWorkersByStoreId(String storeId)throws Exception {
+	    List<Worker> workers = new ArrayList<>(); {
+        String sql = "SELECT * FROM workers WHERE store_id = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, storeId);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Worker worker = new Worker();
+                // 結果セットからデータを取得してworkerオブジェクトに設定
+                worker.setWorkerId(rs.getString("worker_id"));
+                worker.setWorkerName(rs.getString("worker_name"));
+                worker.setWorkerDate(rs.getString("worker_date"));
+                worker.setWorkerAddress(rs.getString("worker_address"));
+                worker.setWorkerTel(rs.getString("worker_tel"));
+                worker.setWorkerPassword(rs.getString("worker_password"));
+                worker.setStoreId(rs.getString("store_id"));
+                workers.add(worker);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return workers;
+    }
+}
+
+
+
+
 
 	/**
 	 * saveメソッド 従業員インスタンスをデータベースに保存する データが存在する場合は更新、存在しない場合は登録

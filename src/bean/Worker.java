@@ -34,6 +34,11 @@ public class Worker extends User implements Serializable {
 //	店舗
 	private Store store;
 
+//	店舗ID
+	private String storeId;
+
+
+
 
 //	ゲッターセッター
 
@@ -119,6 +124,17 @@ public class Worker extends User implements Serializable {
 	public void setStore(Store store) {
 		this.store = store;
 	}
+
+	public String getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(String storeId) {
+		this.storeId = storeId;
+	}
+
+
+
 
 
 
