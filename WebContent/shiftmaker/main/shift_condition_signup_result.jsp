@@ -17,6 +17,7 @@
 	    </c:if>
 
 	    <!-- 他のコンテンツやリンクを配置 -->
+	    <a href="Main.action">topへ</a>
 
 </div>
 </html>

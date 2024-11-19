@@ -32,23 +32,18 @@
 	                        <input type="text" name="worker_name" value="${worker.workerName}" readonly />
 	                        <input type="hidden" name="worker_name" value="${worker.workerName}" />
 	                    </td>
-	                    <!-- ポジション選択と点数入力 -->
-	                    <c:if test="${worker.workerJudge == false}">
-	                        <td>
-	                            <select name="worker_position" required>
-	                                <option value="kitchen">キッチン</option>
-	                                <option value="hall">ホール</option>
-	                                <!-- 必要に応じて選択肢を追加 -->
-	                            </select>
-	                        </td>
-	                        <td>
-	                            <input type="text" name="worker_score" placeholder="点数を入力" maxlength="1" required />
-	                        </td>
-	                    </c:if>
-	                    <!-- `worker_judge`がtrueの場合 -->
-	                    <c:if test="${worker.workerJudge == true}">
-	                        <td colspan="2">設定不要</td>
-	                    </c:if>
+
+	                    <td>
+	                        <select name="worker_position" required>
+	                            <option value="kitchen">キッチン</option>
+	                            <option value="hall">ホール</option>
+	                            <!-- 必要に応じて選択肢を追加 -->
+	                        </select>
+	                    </td>
+	                    <td>
+	                        <input type="text" name="worker_score" placeholder="点数を入力" maxlength="1" required />
+	                    </td>
+
 	                </tr>
 	            </c:forEach>
 	        </table>
