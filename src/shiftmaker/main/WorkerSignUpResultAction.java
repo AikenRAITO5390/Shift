@@ -36,7 +36,7 @@ public class WorkerSignUpResultAction extends Action{
 		// 名前
 		String worker_name = "";
 		// 生年月日
-		String worker_date = year + "-" + month + "-" + day;
+		String worker_date = year + "/" + month + "/" + day;
 		// 住所
 		String worker_address = "";
 		// 電話番号
@@ -65,8 +65,7 @@ public class WorkerSignUpResultAction extends Action{
 		worker_id = req.getParameter("worker_id");
 		// 名前
 		worker_name = req.getParameter("worker_name");
-		// 生年月日
-		worker_date = req.getParameter("worker_date");
+		// 生年月日は39行目で設定しています
 		// 住所
 		worker_address = req.getParameter("worker_address");
 		// 電話番号
