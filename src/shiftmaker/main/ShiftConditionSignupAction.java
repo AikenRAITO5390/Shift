@@ -17,7 +17,7 @@ public class ShiftConditionSignupAction extends Action {
 		// WorkerDaoを初期化
 	    WorkerDao workerDao = new WorkerDao();
 	    //
-	    List<Worker> workers = workerDao.getWorkersWithNullPositionOrScoreAndJudge(false);
+	    List<Worker> workers = workerDao.getWorkersWithNullPositionOrScore();
 
 	    if (!workers.isEmpty()) {
 	        req.setAttribute("workers", workers);

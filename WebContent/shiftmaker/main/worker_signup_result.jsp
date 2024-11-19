@@ -12,7 +12,18 @@
 
 			<h2>従業員情報登録</h2>
 			<p>登録が完了しました</p>
-			<a href="ShiftConditionSignup.action">従業員シフト条件登録へ</a>
+
+
+			<!-- worker_judgeがtrueならMain.actionへ、falseならShiftConditionSignup.actionへリンク -->
+	        <c:choose>
+	            <c:when test="${worker_judge == true}">
+	                <a href="Main.action">topへ</a>
+	            </c:when>
+	            <c:otherwise>
+	                <a href="ShiftConditionSignup.action">従業員シフト条件登録へ</a>
+	            </c:otherwise>
+	        </c:choose>
+
 	</div>
 
 	<c:import url="../../common/footer.jsp"/>

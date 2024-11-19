@@ -12,52 +12,49 @@
     <h2>シフト条件登録</h2>
 
 	<c:if test="${not empty workers}">
-	    <c:if test="${worker.workerJudge == false}">
-	        <form action="ShiftConditionSignupResult.action" method="post">
-	            <table border="1">
+	    <form action="ShiftConditionSignupResult.action" method="post">
+	        <table border="1">
+	            <tr>
+	                <th>ID</th>
+	                <th>名前</th>
+	                <th>ポジション</th>
+	                <th>点数</th>
+	            </tr>
+	            <c:forEach var="worker" items="${workers}">
 	                <tr>
-	                    <th>ID</th>
-	                    <th>名前</th>
-	                    <th>ポジション</th>
-	                    <th>点数</th>
-	                </tr>
-	                <c:forEach var="worker" items="${workers}">
-	                    <tr>
-	                        <!-- IDを表示 -->
-	                        <td>
-	                            <input type="text" name="worker_id" value="${worker.workerId}" readonly />
-	                            <input type="hidden" name="worker_id" value="${worker.workerId}" />
-	                        </td>
-	                        <!-- 名前を表示 -->
-	                        <td>
-	                            <input type="text" name="worker_name" value="${worker.workerName}" readonly />
-	                            <input type="hidden" name="worker_name" value="${worker.workerName}" />
-	                        </td>
-	                        <!-- ポジション選択 -->
+	                    <!-- IDを表示 -->
+	                    <td>
+	                        <input type="text" name="worker_id" value="${worker.workerId}" readonly />
+	                        <input type="hidden" name="worker_id" value="${worker.workerId}" />
+	                    </td>
+	                    <!-- 名前を表示 -->
+	                    <td>
+	                        <input type="text" name="worker_name" value="${worker.workerName}" readonly />
+	                        <input type="hidden" name="worker_name" value="${worker.workerName}" />
+	                    </td>
+	                    <!-- ポジション選択と点数入力 -->
+	                    <c:if test="${worker.workerJudge == false}">
 	                        <td>
 	                            <select name="worker_position" required>
 	                                <option value="kitchen">キッチン</option>
-	                                <option value="hole">ホール</option>
+	                                <option value="hall">ホール</option>
 	                                <!-- 必要に応じて選択肢を追加 -->
 	                            </select>
 	                        </td>
-	                        <!-- 点数入力 -->
 	                        <td>
 	                            <input type="text" name="worker_score" placeholder="点数を入力" maxlength="1" required />
 	                        </td>
-	                    </tr>
-	                </c:forEach>
-	            </table>
-	            <input type="submit" value="登録" />
-	        </form>
-	    </c:if>
-
-	    <c:if test="${worker.workerJudge == true}">
-        	<p>設定不要</p>
-    	</c:if>
-
+	                    </c:if>
+	                    <!-- `worker_judge`がtrueの場合 -->
+	                    <c:if test="${worker.workerJudge == true}">
+	                        <td colspan="2">設定不要</td>
+	                    </c:if>
+	                </tr>
+	            </c:forEach>
+	        </table>
+	        <input type="submit" value="登録" />
+	    </form>
 	</c:if>
-
 
 </div>
 

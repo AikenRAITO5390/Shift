@@ -78,12 +78,12 @@
 
 			<!-- ラジオボタン選択（社員はTrue,アルバイトはFalseで判別） -->
 			<div>
-				<input type="radio" id="employee" name="worker_type" value="true" required>
+				<input type="radio" id="employee" name="worker_judge" value="true" required>
 		        <label for="employee">社員</label>
 	        </div>
 
 			<div>
-				<input type="radio" id="parttime" name="worker_type" value="false" required>
+				<input type="radio" id="parttime" name="worker_judge" value="false" required>
 				<label for="parttime">アルバイト</label>
 			</div>
 

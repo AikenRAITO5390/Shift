@@ -84,7 +84,7 @@ public class WorkerSignUpResultAction extends Action{
 		// ログインユーザーの店情報をもとに店舗名の一覧を取得
 		List<String> list = storeDao.filter(manager.getManagerId());
 		// ラジオボタンの値を取得
-		String worker_type = req.getParameter("worker_type");
+		String worker_judge = req.getParameter("worker_judge");
 
 
 
@@ -112,7 +112,7 @@ public class WorkerSignUpResultAction extends Action{
 			}
 			worker.getStore().setStoreId(((Store) session.getAttribute("user")).getStoreId());
 			// workerJudgeをラジオボタンで設定した値に基づいてセット
-		    worker.setWorkerJudge(Boolean.parseBoolean(worker_type)); // "true"または"false"をbooleanに変換してセット
+			req.setAttribute("worker_judge", worker.isWorkerJudge());
 
 			// 従業員を保存
 			workerDao.save(worker);

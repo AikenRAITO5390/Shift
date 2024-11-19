@@ -117,28 +117,38 @@ public class WorkerDao extends Dao{
 	}
 
 
-	// ポジションおよび点数がnullの従業員を取得するメソッド（アルバイトのみ）
-	public List<Worker> getWorkersWithNullPositionOrScoreAndJudge(boolean workerJudge) throws Exception {
+	// ポジションおよび点数がnullの従業員を取得するメソッド
+	public List<Worker> getWorkersWithNullPositionOrScore() throws Exception {
 	    List<Worker> workers = new ArrayList<>();
 	    Connection connection = getConnection();
-	    try{
-	        String sql = "SELECT * FROM WORKER WHERE (position IS NULL OR score IS NULL) AND worker_judge = ?";
+	    PreparedStatement statement = null;
+	    ResultSet resultSet = null;
 
-	        PreparedStatement statement = connection.prepareStatement(sql);
-	        statement.setBoolean(1, workerJudge);
-	        ResultSet resultSet = statement.executeQuery();
+	    try {
+	        // SQL文を作成
+	        String sql = "SELECT * FROM worker WHERE worker_position IS NULL OR worker_score IS NULL";
+	        statement = connection.prepareStatement(sql);
+	        resultSet = statement.executeQuery();
 
 	        while (resultSet.next()) {
 	            Worker worker = new Worker();
 	            worker.setWorkerId(resultSet.getString("worker_id"));
 	            worker.setWorkerName(resultSet.getString("worker_name"));
-	            worker.setWorkerPosition(resultSet.getString("position"));
-	            worker.setWorkerScore(resultSet.getString("score"));
-	            worker.setWorkerJudge(resultSet.getBoolean("worker_judge"));
+	            // 他の必要なフィールドもセット
 	            workers.add(worker);
 	        }
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        throw e;
+	    } finally {
+	        if (resultSet != null) {
+	            resultSet.close();
+	        }
+	        if (statement != null) {
+	            statement.close();
+	        }
+	        if (connection != null) {
+	            connection.close();
+	        }
 	    }
 	    return workers;
 	}
@@ -257,7 +267,7 @@ public class WorkerDao extends Dao{
 
 	public List<Worker> getWorkersByStoreId(String storeId)throws Exception {
 	    List<Worker> workers = new ArrayList<>(); {
-        String sql = "SELECT * FROM workers WHERE store_id = ?";
+        String sql = "SELECT * FROM worker WHERE store_id = ?";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, storeId);
