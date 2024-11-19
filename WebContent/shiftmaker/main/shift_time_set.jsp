@@ -30,8 +30,19 @@
 							        // input要素に設定
 							        document.getElementById("workTimeStart").value = workTimeStart;
 							    </script>
-													<p>～</p>
-						<input type="time" name="workTimeStart" value="${time_list.workTimeEnd}">
+							    ～
+						<input type="time" name="workTimeEnd" value="${time_list.workTimeEnd}">
+
+								<script>
+							        // データベースから取得した時間を文字列として扱う
+							        const Timedb = "${time_list.workTimeEnd}";
+
+							        // HH:MM形式に変換
+							        const workTimeEnd = Timedb.substring(0, 5);
+
+							        // input要素に設定
+							        document.getElementById("workTimeEnd").value = workTimeEnd;
+							    </script>
 							<%-- 在学フラグがたっている場合「○」それ以外は「×」を表示 --%>
 
 						<td><a href="ShiftTimeSetting.action">変更</a></td>

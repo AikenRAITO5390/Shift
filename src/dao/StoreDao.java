@@ -139,8 +139,8 @@ public class StoreDao extends Dao{
 				store.setPassword(rSet.getString("password"));
 				store.setEmail(rSet.getString("email"));
 				store.setWorkTimeId(rSet.getString("work_time_id"));
-				store.setWorkTimeStart(rSet.getDate("work_time_start"));
-				store.setWorkTimeEnd(rSet.getDate("work_time_start"));
+				store.setWorkTimeStart(rSet.getTime("work_time_start"));
+				store.setWorkTimeEnd(rSet.getTime("work_time_start"));
 				store.setWorkWeekScore(rSet.getInt("work_week_score"));
 				store.setWeekScore(rSet.getInt("week_score"));
 //				リストに追加
