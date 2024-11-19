@@ -1,7 +1,7 @@
 package bean;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Time;
 
 public class Store extends User implements Serializable {
 
@@ -27,10 +27,10 @@ public class Store extends User implements Serializable {
 	private String workTimeId;
 
 //	シフト開始時間
-	private Date workTimeStart;
+	private Time workTimeStart;
 
 //	シフト終了時間
-	private Date workTimeEnd;
+	private Time workTimeEnd;
 
 //	曜日別シフト点数
 	private int workWeekScore;
@@ -95,19 +95,19 @@ public class Store extends User implements Serializable {
 		this.workTimeId = workTimeId;
 	}
 
-	public Date getWorkTimeStart() {
+	public Time getWorkTimeStart() {
 		return workTimeStart;
 	}
 
-	public void setWorkTimeStart(Date workTimeStart) {
+	public void setWorkTimeStart(Time workTimeStart) {
 		this.workTimeStart = workTimeStart;
 	}
 
-	public Date getWorkTimeEnd() {
+	public Time getWorkTimeEnd() {
 		return workTimeEnd;
 	}
 
-	public void setWorkTimeEnd(Date workTimeEnd) {
+	public void setWorkTimeEnd(Time workTimeEnd) {
 		this.workTimeEnd = workTimeEnd;
 	}
 

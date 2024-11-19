@@ -1,10 +1,10 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -436,7 +436,9 @@ public class StoreDao extends Dao{
 			if (old == null) {
 //				店舗情報が存在しなかった場合
 //				プリペアードステートメントにINSERT文をセット
-				statement = connection.prepareStatement("insertsql");
+				statement = connection.prepareStatement("insert into STORE (STORE_ID,STORE_NAME,MANAGER_ID,MANAGER_NAME,PASSWORD,EMAIL,WORK_TIME_ID,"
+						+ "WORK_TIME_START,WORK_TIME_END,WORK_WEEK_SCORE,WEEK_SCORE)"
+						+ "values(?,?,?,?,?,?,?,?,?,?,?)");
 //				プリペアードステートメントに値をバウンド
 				statement.setString(1, store.getStoreId());
 				statement.setString(2, store.getStoreName());
@@ -445,9 +447,9 @@ public class StoreDao extends Dao{
 				statement.setString(5, store.getPassword());
 				statement.setString(6, store.getEmail());
 				statement.setString(7, store.getWorkTimeId());
-				//引数２をDate型にキャスト。これでいけるかはまだわからん
-				statement.setDate(8, (Date) store.getWorkTimeStart());
-				statement.setDate(9, (Date) store.getWorkTimeEnd());
+				//引数２をTIME型にキャスト。これでいけるかはまだわからん
+				statement.setTime(8, (Time) store.getWorkTimeStart());
+				statement.setTime(9, (Time) store.getWorkTimeEnd());
 				statement.setInt(10, store.getWorkWeekScore());
 				statement.setInt(11, store.getWeekScore());
 
@@ -496,4 +498,58 @@ public class StoreDao extends Dao{
 			return false;
 	}
 	}
+
+
+public boolean save_Time(Store store)throws Exception{
+	//データベースへのコネクションを確立
+	Connection connection = getConnection();
+	//プリペアードステート面と
+	PreparedStatement statement = null;
+	//実行件数
+	int count = 0;
+
+	try{
+			//学生が存在した場合
+			//プリペアードステートメントにUPDATE文をセット
+			statement = connection
+					.prepareStatement("UPDATE store SET  work_time_start=?, work_time_end=? WHERE store_id=? AND work_time_id=?");
+			//プリペアードステートメントに値をバインド
+			statement.setTime(1, store.getWorkTimeStart());
+			statement.setTime(2, store.getWorkTimeEnd());
+			statement.setString(3, store.getStoreId());
+			statement.setString(4, store.getWorkTimeId());
+
+		//プリペアードステートメントにを実行
+		count = statement.executeUpdate();
+	} catch (Exception e) {
+		throw e;
+	} finally {
+		//プリペアードステート面とをとじる
+		if (statement != null) {
+			try {
+				statement.close();
+			} catch (SQLException sqle) {
+				throw sqle;
+			}
+		}
+		//コネクションを閉じる
+		if (connection != null) {
+			try {
+				connection.close();
+			} catch (SQLException sqle) {
+				throw sqle;
+			}
+		}
+	}
+	if (count > 0){
+		//実行件数が1件以上ある場合
+		return true;
+	} else {
+		//実行件数が0件の場合
+		return false;
 }
+}
+}
+
+
+
