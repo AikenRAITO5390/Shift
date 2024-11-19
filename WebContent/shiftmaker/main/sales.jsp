@@ -8,16 +8,16 @@
 <title>売上</title>
 </head>
 
-<c:import url="./common/header.jsp"/>
+<c:import url="../../common/header.jsp"/>
 
 <div class="tmain">
-<c:import url="./common/navigation.jsp"/>
+<c:import url="../../common/navigation.jsp"/>
 
 	<h2>売上</h2>
 
 
 
-	<form action="SalesInputAction" method="post">
+	<form action="SalesInput.action" method="post">
 
 	<button>売上入力</button>
 
@@ -25,7 +25,7 @@
 
 
 
-	<form action="SalesTableCreateAction" method="post">
+	<form action="SalesTableCreate.action" method="post">
 
 	<button>売上予測</button>
 
@@ -33,6 +33,6 @@
 
 </div>
 
-<c:import url="./common/footer.jsp"/>
+<c:import url="../../common/footer.jsp"/>
 
 </html>

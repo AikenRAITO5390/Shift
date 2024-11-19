@@ -12,10 +12,10 @@
 <title>売上入力</title>
 </head>
 
-<c:import url="./common/header.jsp"/>
+<c:import url="../../common/header.jsp"/>
 
 <div class="tmain">
-<c:import url="./common/navigation.jsp"/>
+<c:import url="../../common/navigation.jsp"/>
 
 	<h2>売上入力</h2>
 
@@ -30,14 +30,14 @@
 		%>
 
 		<!-- 月日の選択 -->
-		<select name="month" required>
+		<select name="months" required>
 			<option value="">月を選択</option>
 			<c:forEach var="month" items="${month_list}">
 				<option value="${month}" ${month == selectedMonth ? 'selected' : ''}>${month}</option>
 			</c:forEach>
 		</select>
 
-		<select name="day" required>
+		<select name="days" required>
 			<option value="">日を選択</option>
 			<c:forEach var="day" items="${day_list}">
 				<option value="${day}" ${day == selectedDay ? 'selected' : ''}>${day}</option>
@@ -47,8 +47,7 @@
 
 		<label>売上金額を選択してください</label>
 
-		<!-- 名前入力 -->
-		<label>名前</label>
+		<!-- 売上金額入力 -->
 		<input type="text" name="sales" placeholder="売上金額を入力" maxlength="8" value="${sales}" required />
 		<div>${errors.get("sales")}</div>
 
@@ -64,6 +63,6 @@
 
 </div>
 
-<c:import url="./common/footer.jsp"/>
+<c:import url="../../common/footer.jsp"/>
 
 </html>
