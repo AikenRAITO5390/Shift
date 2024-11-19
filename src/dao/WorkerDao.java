@@ -126,7 +126,7 @@ public class WorkerDao extends Dao{
 
 	    try {
 	        // SQL文を作成
-	        String sql = "SELECT * FROM worker WHERE worker_position IS NULL OR worker_score IS NULL";
+	        String sql = "SELECT * FROM worker WHERE (worker_position IS NULL OR worker_score IS NULL) AND  worker_judge = FALSE";
 	        statement = connection.prepareStatement(sql);
 	        resultSet = statement.executeQuery();
 

@@ -112,7 +112,7 @@ public class WorkerSignUpResultAction extends Action{
 			}
 			worker.getStore().setStoreId(((Store) session.getAttribute("user")).getStoreId());
 			// workerJudgeをラジオボタンで設定した値に基づいてセット
-			req.setAttribute("worker_judge", worker.isWorkerJudge());
+			worker.setWorkerJudge(Boolean.parseBoolean(worker_judge)); // "true"または"false"をbooleanに変換してセット
 
 			// 従業員を保存
 			workerDao.save(worker);
