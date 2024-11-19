@@ -250,6 +250,7 @@ public class StoreDao extends Dao{
 	}
 
 
+
 	/**
 	 * filterメソッド　IDを指定して一覧を取得
 	 * @param manager_id
@@ -306,6 +307,116 @@ public class StoreDao extends Dao{
 	    }
 
 	    return storeList;
+	}
+
+	/**
+	 * WorkTimeのSTARTを取得するクラス
+	 * @param store_id
+	 * @param work_time_id
+	 * @return
+	 * @throws Exception
+	 */
+	public String TimeStartGet(String store_id)throws Exception{
+		//コネクションを確立
+		Connection connection = getConnection();
+		//プリペアードステートメント
+		PreparedStatement statement = null;
+		//リザルトセット
+		ResultSet rSet = null;
+		//時間を格納
+		String work_time_start =null;
+
+		try{
+//			プリペアードステートメントにSQL文をセット
+			statement = connection.prepareStatement("select work_time_start from STORE where STORE_ID=? and WORK_TIME_ID='A' ");//後で書く
+			//
+
+			statement.setString(1, store_id);
+
+//			プリペアードステートメントを実行
+			rSet = statement.executeQuery();
+//			リストへの格納処理を実行
+
+			if(rSet.next()){
+				work_time_start = rSet.getString("work_time_start");
+			}
+		} catch (Exception e) {
+			throw e;
+		}finally {
+			//プリペアードステート面とをとじる
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		//コネクションを閉じる
+		if (connection != null) {
+			try {
+				connection.close();
+			} catch (SQLException sqle) {
+				throw sqle;
+			}
+		}
+		return work_time_start;
+
+	}
+
+	/**
+	 * WorkTimeのSTARTを取得するクラス
+	 * @param store_id
+	 * @param work_time_id
+	 * @return
+	 * @throws Exception
+	 */
+	public String TimeEndGet(String store_id)throws Exception{
+		//コネクションを確立
+		Connection connection = getConnection();
+		//プリペアードステートメント
+		PreparedStatement statement = null;
+		//リザルトセット
+		ResultSet rSet = null;
+		//時間を格納
+		String work_time_end =null;
+
+		try{
+//			プリペアードステートメントにSQL文をセット
+			statement = connection.prepareStatement("select work_time_end from STORE where STORE_ID=? and WORK_TIME_ID='D'");
+			//
+
+			statement.setString(1, store_id);
+
+//			プリペアードステートメントを実行
+			rSet = statement.executeQuery();
+//			リストへの格納処理を実行
+
+			if(rSet.next()){
+				work_time_end = rSet.getString("work_time_end");
+			}
+		} catch (Exception e) {
+			throw e;
+		}finally {
+			//プリペアードステート面とをとじる
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		//コネクションを閉じる
+		if (connection != null) {
+			try {
+				connection.close();
+			} catch (SQLException sqle) {
+				throw sqle;
+			}
+		}
+		return work_time_end;
+
 	}
 
 

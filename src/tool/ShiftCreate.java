@@ -54,7 +54,9 @@ public class ShiftCreate {
         return String.format("%02d:%02d", hours, mins);
     }
 
-    public static void main(String[] args) {
+    public List<String> Shiftmain() {
+    	
+    	
         // 必要人数の設定（キッチンとホールで区別）
         ShiftRequirement requirement = new ShiftRequirement("09:00", "21:00", 1, 1);
 
@@ -128,5 +130,6 @@ public class ShiftCreate {
 
         // 社員の勤務時間を表示
         System.out.println(manager + ": [" + requirement.startTime + "-" + requirement.endTime + "]");
+		return null;
     }
 }
