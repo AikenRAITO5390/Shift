@@ -158,7 +158,7 @@ public class StoreDao extends Dao{
 	 * @return　店舗情報のリスト:List<Store> 存在しない場合０件
 	 * @throws Exception
 	 */
-	public List<Store> filter(Store store)throws Exception{
+	public List<Store> filterStore(String storeId)throws Exception{
 //		空のリストを作成
 		List<Store> list = new ArrayList<>();
 		//コネクションを確立
@@ -173,7 +173,7 @@ public class StoreDao extends Dao{
 //			プリペアードステートメントにSQL文をセット
 			statement = connection.prepareStatement("select * from STORE where STORE_ID=?");//後で書く
 			//
-			statement.setString(1, store.getStoreId());
+			statement.setString(1, storeId);
 //			プリペアードステートメントを実行
 			rSet = statement.executeQuery();
 //			リストへの格納処理を実行

@@ -20,9 +20,8 @@ public class ShiftTimeSignupAction extends Action {
 		Map<String, String> errors = new HashMap<>();
 
 
-		List<String> list = sDao.filter(store_login.getStoreId());
+		List<Store> list = sDao.filterStore(store_login.getStoreId());
 		//ここ直す
-		System.out.println(store_login.getStoreId());
 		System.out.println(list);
 
 		if (list != null) {// 学生が存在していた場合

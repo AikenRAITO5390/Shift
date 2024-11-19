@@ -5,8 +5,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" href="../../css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
+<c:import url="../../common/header.jsp"/>
 <body>
 
 	<h2>シフト時間設定</h2>
@@ -16,14 +18,11 @@
 
 			<table class="table table-hover">
 				<c:forEach var="time_list" items="${time_list}">
-					<tr>
-						<td>${time_list.work_time_id}</td>
-						<td>${time_list.work_time_start}</td>
-						<td>${time_list.work_time_end}</td>
+						<label>${time_list.workTimeId}</label>
+						<input type="time" name="managerName"　 value="${managerName}">
 							<%-- 在学フラグがたっている場合「○」それ以外は「×」を表示 --%>
 
 						<td><a href="ShiftTimeSetting.action">変更</a></td>
-					</tr>
 				</c:forEach>
 			</table>
 		</c:when>
