@@ -13,8 +13,11 @@ public class ShiftConditionSignupAction extends Action {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+
+		// WorkerDaoを初期化
 	    WorkerDao workerDao = new WorkerDao();
-	    List<Worker> workers = workerDao.getWorkersWithNullPositionOrScore();
+	    //
+	    List<Worker> workers = workerDao.getWorkersWithNullPositionOrScoreAndJudge(false);
 
 	    if (!workers.isEmpty()) {
 	        req.setAttribute("workers", workers);
