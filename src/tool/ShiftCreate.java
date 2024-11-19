@@ -2,6 +2,7 @@ package tool;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -24,7 +25,7 @@ public class ShiftCreate {
     }
 
     // バイトの情報を表すクラス
-    static class Worker {
+    static class WorkerShift {
         String name;         // バイトの名前
         String role;         // 役割（キッチン or ホール）
         String availableFrom; // 勤務可能開始時刻
@@ -32,7 +33,7 @@ public class ShiftCreate {
         int maxHours;         // 最大勤務時間
         List<String> assignedShifts = new ArrayList<>(); // 割り振られたシフト
 
-        Worker(String name, String role, String availableFrom, String availableTo, int maxHours) {
+        WorkerShift(String name, String role, String availableFrom, String availableTo, int maxHours) {
             this.name = name;
             this.role = role;
             this.availableFrom = availableFrom;
@@ -54,26 +55,26 @@ public class ShiftCreate {
         return String.format("%02d:%02d", hours, mins);
     }
 
-    public List<String> Shiftmain() {
-    	
-    	
+    public List<Map<String,Object>> Shiftmain(String work_time_start, String work_time_end) {
         // 必要人数の設定（キッチンとホールで区別）
-        ShiftRequirement requirement = new ShiftRequirement("09:00", "21:00", 1, 1);
+        ShiftRequirement requirement = new ShiftRequirement(work_time_start, work_time_end, 1, 1);
+        //シフトの情報を格納する
+        List<Map<String, Object>> ShiftDetail = new ArrayList<>();
 
         // 社員（固定勤務、常にシフトに含まれる）
         String manager = "Manager";
 
         // バイト情報（役割も含む）
-        List<Worker> workers = Arrays.asList(
-            new Worker("Alice", "Kitchen", "09:00", "15:00", 6),
-            new Worker("Bob", "Hall", "12:00", "18:00", 6),
-            new Worker("Charlie", "Kitchen", "15:00", "21:00", 6),
-            new Worker("David", "Hall", "09:00", "12:00", 3),
-            new Worker("Eve", "Kitchen", "18:00", "21:00", 3),
-            new Worker("Frank", "Hall", "09:00", "21:00", 9)
+        List<WorkerShift> workers = Arrays.asList(
+            new WorkerShift("Alice", "Kitchen", "09:00", "15:00", 6),
+            new WorkerShift("Bob", "Hall", "12:00", "18:00", 6),
+            new WorkerShift("Charlie", "Kitchen", "15:00", "21:00", 6),
+            new WorkerShift("David", "Hall", "09:00", "12:00", 3),
+            new WorkerShift("Eve", "Kitchen", "18:00", "21:00", 3),
+            new WorkerShift("Frank", "Hall", "09:00", "21:00", 9)
         );
 
-        // シフトスケジュールを格納するマップ（時間帯 → 割り振りリスト）
+        // シフトスケジュールを格納するマップ（時間帯 → 割り振りリスト）時系列で格納される
         Map<String, List<String>> schedule = new TreeMap<>();
 
         // シフトを区切る時間単位（1時間単位）
@@ -81,7 +82,7 @@ public class ShiftCreate {
         int startMinutes = timeToMinutes(requirement.startTime); // 開始時刻を分に変換
         int endMinutes = timeToMinutes(requirement.endTime);     // 終了時刻を分に変換
 
-        // シフト作成ループ
+        // シフト作成ループ 1時間区切りでシフトを作成
         for (int current = startMinutes; current < endMinutes; current += interval) {
             String timeSlot = minutesToTime(current) + "-" + minutesToTime(current + interval); // 時間帯文字列
             List<String> assigned = new ArrayList<>(); // 割り振られる従業員リスト
@@ -91,7 +92,7 @@ public class ShiftCreate {
             int requiredHall = requirement.requiredHall;       // 必要なホールスタッフ数
 
             // 各バイトを確認
-            for (Worker worker : workers) {
+            for (WorkerShift worker : workers) {
                 int workerStart = timeToMinutes(worker.availableFrom); // 勤務可能開始時刻
                 int workerEnd = timeToMinutes(worker.availableTo);     // 勤務可能終了時刻
 
@@ -122,14 +123,22 @@ public class ShiftCreate {
 
         // 各バイトの勤務時間を表示
         System.out.println("\n=== 各人の勤務時間 ===");
-        for (Worker worker : workers) {
+        for (WorkerShift worker : workers) {
             if (!worker.assignedShifts.isEmpty()) { // 割り振りが存在する場合のみ表示
                 System.out.println(worker.name + " (" + worker.role + "): " + worker.assignedShifts);
+                Map<String, Object> workerInfo = new HashMap<>();
+                workerInfo.put("name", worker.name);
+                workerInfo.put("role", worker.role);
+                workerInfo.put("assignedShifts", worker.assignedShifts);
+
+                // workerInfoをリストに追加
+                ShiftDetail.add(workerInfo);
             }
         }
 
         // 社員の勤務時間を表示
         System.out.println(manager + ": [" + requirement.startTime + "-" + requirement.endTime + "]");
-		return null;
+
+        return ShiftDetail;
     }
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.Shift;
 import bean.Store;
@@ -16,6 +17,7 @@ import dao.StoreDao;
 import dao.WorkerDao;
 import tool.Action;
 import tool.CalendeCreate;
+import tool.ShiftCreate;;
 
 public class ShiftCreateAction extends Action{
 
@@ -25,6 +27,7 @@ public class ShiftCreateAction extends Action{
 		ShiftDao  shDao = new ShiftDao();
 		WorkerDao wDao  = new WorkerDao();
 		StoreDao  stDao = new StoreDao();
+		ShiftCreate shift_create = new ShiftCreate();
 		Shift  shift  = null;
 		Worker worker = null;
 		Store  store  = null;
@@ -54,6 +57,13 @@ public class ShiftCreateAction extends Action{
 		}else{
 			System.out.println("しっぱーい＾＾");
 		}
+
+		HttpSession session = req.getSession();
+		Store manager = (Store)session.getAttribute("user");
+		String work_time_start = stDao.TimeStartGet(manager.getStoreId());
+		String work_time_end = stDao.TimeEndGet(manager.getStoreId());
+		shift_create.Shiftmain(work_time_start, work_time_end);
+
 
 		//リクエストにカレンダーをセット
 		req.setAttribute("dates", dates);
