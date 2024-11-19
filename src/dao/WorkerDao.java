@@ -117,6 +117,43 @@ public class WorkerDao extends Dao{
 	}
 
 
+	// WorkerDao クラスにポジションおよび点数がnullの従業員を取得するメソッド
+	public List<Worker> getWorkersWithNullPositionOrScore() throws Exception {
+	    List<Worker> workers = new ArrayList<>();
+	    Connection connection = getConnection();
+	    PreparedStatement statement = null;
+	    ResultSet resultSet = null;
+
+	    try {
+	        // SQL文を作成
+	        String sql = "SELECT * FROM worker WHERE worker_position IS NULL OR worker_score IS NULL";
+	        statement = connection.prepareStatement(sql);
+	        resultSet = statement.executeQuery();
+
+	        while (resultSet.next()) {
+	            Worker worker = new Worker();
+	            worker.setWorkerId(resultSet.getString("worker_id"));
+	            worker.setWorkerName(resultSet.getString("worker_name"));
+	            // 他の必要なフィールドもセット
+	            workers.add(worker);
+	        }
+	    } catch (SQLException e) {
+	        throw e;
+	    } finally {
+	        if (resultSet != null) {
+	            resultSet.close();
+	        }
+	        if (statement != null) {
+	            statement.close();
+	        }
+	        if (connection != null) {
+	            connection.close();
+	        }
+	    }
+	    return workers;
+	}
+
+
 	/**
 	 * baseSql:String 共通SQL文 プライベート
 	 */
@@ -272,7 +309,7 @@ public class WorkerDao extends Dao{
 				// 従業員が存在した場合 更新！
 				// プリペアードステートメントにUPDATE文をセット
 				statement = connection
-				.prepareStatement ("update worker set worker_id=?,worker_name=?,worker_date=?,worker_address=?,worker_tel=?,worker_password=?,store_id=?,worker_judge=?,worker_score=?,worker_position=? where worker_id = ?");
+				.prepareStatement ("update worker set worker_id=?, worker_name=?, worker_date=?, worker_address=?, worker_tel=?, worker_password=?, store_id=?, worker_judge=?, worker_score=?, worker_position=? where worker_id = ?");
 				// プリペアードステートメントに値をバインド
 				statement.setString(1,worker.getWorkerId());
 				statement.setString(2,worker.getWorkerName());
@@ -284,6 +321,8 @@ public class WorkerDao extends Dao{
 				statement.setBoolean(8,worker.isWorkerJudge());
 				statement.setString(9,worker.getWorkerScore());
 				statement.setString(10,worker.getWorkerPosition());
+				// UPDATE文の中でWHERE句のworker_idを設定する必要があるため
+				statement.setString(11, worker.getWorkerId());
 
 			}
 

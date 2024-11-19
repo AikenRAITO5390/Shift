@@ -1,5 +1,7 @@
 package shiftmaker.main;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,23 +11,18 @@ import tool.Action;
 
 public class ShiftConditionSignupAction extends Action {
 
-    @Override
-    public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        // 1. リクエストパラメータを取得
-        String workerId = req.getParameter("worker_id");
+	@Override
+	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+	    WorkerDao workerDao = new WorkerDao();
+	    List<Worker> workers = workerDao.getWorkersWithNullPositionOrScore();
 
-        // 2. DBから対象の従業員情報を取得
-        WorkerDao workerDao = new WorkerDao();
-        Worker worker = workerDao.get(workerId);
+	    if (!workers.isEmpty()) {
+	        req.setAttribute("workers", workers);
+	    } else {
+	        req.setAttribute("message", "更新が必要な従業員が見つかりませんでした。");
+	    }
 
-        if (worker != null) {
-            // 3. 従業員情報をリクエストスコープに設定
-            req.setAttribute("worker", worker);
-        } else {
-            req.setAttribute("message", "従業員情報が見つかりませんでした。");
-        }
-
-        // 4. JSPへフォワード
-        req.getRequestDispatcher("shift_condition_signup.jsp").forward(req, res);
-    }
+	    // JSPにフォワード
+	    req.getRequestDispatcher("shift_condition_signup.jsp").forward(req, res);
+	}
 }
