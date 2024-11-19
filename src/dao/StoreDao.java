@@ -79,8 +79,8 @@ public class StoreDao extends Dao{
 				store.setPassword(rSet.getString("password"));
 				store.setEmail(rSet.getString("email"));
 				store.setWorkTimeId(rSet.getString("work_time_id"));
-				store.setWorkTimeStart(rSet.getDate("work_time_start"));
-				store.setWorkTimeEnd(rSet.getDate("work_time_end"));
+				store.setWorkTimeStart(rSet.getTime("work_time_start"));
+				store.setWorkTimeEnd(rSet.getTime("work_time_end"));
 				store.setWorkWeekScore(rSet.getInt("work_week_score"));
 				store.setWeekScore(rSet.getInt("week_score"));
 
@@ -174,6 +174,50 @@ public class StoreDao extends Dao{
 			statement = connection.prepareStatement("select * from STORE where STORE_ID=?");//後で書く
 			//
 			statement.setString(1, storeId);
+//			プリペアードステートメントを実行
+			rSet = statement.executeQuery();
+//			リストへの格納処理を実行
+			list = postFilter(rSet);
+		} catch (Exception e) {
+			throw e;
+		}finally {
+			//プリペアードステート面とをとじる
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		//コネクションを閉じる
+		if (connection != null) {
+			try {
+				connection.close();
+			} catch (SQLException sqle) {
+				throw sqle;
+			}
+		}
+		return list;
+
+	}
+
+	public List<Store> filter(Store store, String work_time_id)throws Exception{
+//		空のリストを作成
+		List<Store> list = new ArrayList<>();
+		//コネクションを確立
+		Connection connection = getConnection();
+		//プリペアードステートメント
+		PreparedStatement statement = null;
+		//リザルトセット
+		ResultSet rSet = null;
+
+
+		try{
+//			プリペアードステートメントにSQL文をセット
+			statement = connection.prepareStatement("sql");//後で書く
+			//
+			statement.setString(1, store.getStoreId());
 //			プリペアードステートメントを実行
 			rSet = statement.executeQuery();
 //			リストへの格納処理を実行

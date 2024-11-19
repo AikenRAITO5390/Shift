@@ -22,12 +22,14 @@ public class ShiftTimeSignupAction extends Action {
 
 		List<Store> list = sDao.filterStore(store_login.getStoreId());
 		//ここ直す
-		System.out.println(list);
 
 		if (list != null) {// 学生が存在していた場合
 			// リクエストに学生リストをセット
 			// リクエストにデータをセット
 			req.setAttribute("time_list", list);
+            for (Store store : list) {
+                System.out.println("workTimeStart: " + store.getWorkTimeStart());
+            }
 		} else {// 学生が存在していなかった場合
 			errors.put("storeId", "時間");
 			req.setAttribute("errors", errors);

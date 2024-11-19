@@ -19,7 +19,19 @@
 			<table class="table table-hover">
 				<c:forEach var="time_list" items="${time_list}">
 						<label>${time_list.workTimeId}</label>
-						<input type="time" name="managerName"　 value="${managerName}">
+						 <input type="time" id="workTimeStart" name="workTimeStart" value="${time_list.workTimeStart}">
+							    <script>
+							        // データベースから取得した時間を文字列として扱う
+							        const dbTime = "${time_list.workTimeStart}";
+
+							        // HH:MM形式に変換
+							        const workTimeStart = dbTime.substring(0, 5);
+
+							        // input要素に設定
+							        document.getElementById("workTimeStart").value = workTimeStart;
+							    </script>
+													<p>～</p>
+						<input type="time" name="workTimeStart" value="${time_list.workTimeEnd}">
 							<%-- 在学フラグがたっている場合「○」それ以外は「×」を表示 --%>
 
 						<td><a href="ShiftTimeSetting.action">変更</a></td>
