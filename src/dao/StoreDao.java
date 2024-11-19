@@ -153,13 +153,12 @@ public class StoreDao extends Dao{
 	}
 
 	/**
-	 * filterメソッド　店舗情報、シフト時間設定IDを指定して一覧を取得
+	 * filterメソッド　店舗情報IDを指定して一覧を取得
 	 * @param store
-	 * @param work_time_id
 	 * @return　店舗情報のリスト:List<Store> 存在しない場合０件
 	 * @throws Exception
 	 */
-	public List<Store> filter(Store store,String work_time_id )throws Exception{
+	public List<Store> filter(Store store)throws Exception{
 //		空のリストを作成
 		List<Store> list = new ArrayList<>();
 		//コネクションを確立
@@ -172,9 +171,9 @@ public class StoreDao extends Dao{
 
 		try{
 //			プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement("sql");//後で書く
+			statement = connection.prepareStatement("select * from STORE where STORE_ID=?");//後で書く
 			//
-			statement.setString(1, "x");
+			statement.setString(1, store.getStoreId());
 //			プリペアードステートメントを実行
 			rSet = statement.executeQuery();
 //			リストへの格納処理を実行
