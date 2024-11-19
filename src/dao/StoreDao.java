@@ -140,7 +140,7 @@ public class StoreDao extends Dao{
 				store.setEmail(rSet.getString("email"));
 				store.setWorkTimeId(rSet.getString("work_time_id"));
 				store.setWorkTimeStart(rSet.getTime("work_time_start"));
-				store.setWorkTimeEnd(rSet.getTime("work_time_start"));
+				store.setWorkTimeEnd(rSet.getTime("work_time_end"));
 				store.setWorkWeekScore(rSet.getInt("work_week_score"));
 				store.setWeekScore(rSet.getInt("week_score"));
 //				リストに追加
