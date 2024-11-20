@@ -1,3 +1,4 @@
+<%-- 時間更新完了画面 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -8,6 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
+<%-- ヘッダーとサイドバー --%>
 <c:import url="../../common/header.jsp"/>
 	<h2>時間変更完了</h2>
 		<p>変更が完了しました</p>

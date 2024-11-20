@@ -21,6 +21,7 @@ public class ShiftManagerSignupResultAction extends Action {
 		Map<String, String> errors = new HashMap<>();
 
 		//リクエストパラメータ―の取得 2
+		// 変更されたであろうID,名前、パスワード、メール、お店名
 		String store_id= req.getParameter("storeId");
 		String manager_name = req.getParameter("managerName");
 		String password = req.getParameter("password");
@@ -28,19 +29,18 @@ public class ShiftManagerSignupResultAction extends Action {
 		String store_name = req.getParameter("storeName");
 
 		//DBからデータ取得 3
+		//　先ほどの変更したい情報のゲット（IDで）
 		Store store = sDao.get(store_login.getStoreId());
-		//ビジネスロジック 4
-		//DBへデータ保存 5
-		//条件で4～5が分岐
+
 		if (store != null) {
-			// 学生が存在していた場合
+			// 社員が存在していた場合
 			// インスタンスに値をセット
-			store.setStoreId(store_id);
+			store.setStoreId(store_login.getStoreId());
 			store.setManagerName(manager_name);
 			store.setPassword(password);
 			store.setEmail(email);
 			store.setStoreName(store_name);
-			// 学生を保存
+			// 社員を保存、UPDATE
 			sDao.save(store);
 		} else {
 		}
@@ -59,7 +59,7 @@ public class ShiftManagerSignupResultAction extends Action {
 			req.getRequestDispatcher("shiftmanager_edit_disp.jsp").forward(req, res);
 			return;
 		}
-
+//完了画面へ飛ぶ
 		req.getRequestDispatcher("shiftmanager_edit_disp_result.jsp").forward(req, res);
 	}
 }

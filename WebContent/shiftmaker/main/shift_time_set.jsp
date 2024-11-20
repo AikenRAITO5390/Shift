@@ -1,4 +1,4 @@
-<%-- 学生一覧JSP --%>
+<%-- 時間設定JSP --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -6,19 +6,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<%-- cssの取得 --%>
 <link rel="stylesheet" href="../../css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
+<%--ヘッダーサイドバー--%>
 <c:import url="../../common/header.jsp"/>
 <body>
 
 <h2>シフト時間設定</h2>
+<%--次とぶやつ--%>
 <form action="ShiftTimeSetting.action" method="post">
     <table class="table table-hover">
+    <%--四回繰り返す（A～D)　--%>
         <c:forEach var="i" begin="0" end="3">
             <tr>
+            <%--A~Dの表示　--%>
                 <td><label>${fn:substring('ABCD', i, i+1)}</label></td>
                 <td>
+                <%--スタート時間の表示--%>
+                <%--初期値timeSelectStart(下で設定）、nameはAのworkTimeStartでわたす　--%>
                     <select id="timeSelectStart_${fn:substring('ABCD', i, i+1)}" name="workTimeStart_${i}">
 			                        <option value="08:00:00">08:00</option>
 			                        <option value="09:00:00">09:00</option>
@@ -40,6 +47,8 @@
                     </select>
                 </td>
                 <td>
+                <%--エンド時間の表示--%>
+                <%--初期値timeSelectEnd(下で設定）、nameはAのworkTimeEndでわたす　--%>
                     <select id="timeSelectEnd_${fn:substring('ABCD', i, i+1)}" name="workTimeEnd_${i}">
                         			<option value="08:00:00">08:00</option>
 			                        <option value="09:00:00">09:00</option>
@@ -60,6 +69,7 @@
 	                                <option value="24:00:00">24:00</option>
                     </select>
                 </td>
+				<%--Idをわたす。hiddenで隠す --%>
                   <input type="hidden" name="workTimeId_${i}" value="${fn:substring('ABCD', i, i+1)}">
             </tr>
         </c:forEach>
@@ -79,6 +89,7 @@
                     selectElementEnd.value = workTimeEnd;
                 </c:when>
                 <c:otherwise>
+                <%--もし値がまだ未入力の場合の処理 --%>
                     // 空のエントリの場合はデフォルト値を設定
                     var selectElementStart = document.getElementById("timeSelectStart_${fn:substring('ABCD', i, i+1)}");
                     selectElementStart.value = "08:00:00";

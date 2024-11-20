@@ -19,16 +19,17 @@ public class ShiftManagerSignUpAction extends Action {
 		Store store_login = (Store)session.getAttribute("user");// ログインユーザーを取得
 		Map<String, String> errors = new HashMap<>();
 
+		//　ゲットでログインしている社員の店IDより絞り込んでゲット
 		Store store = sDao.get(store_login.getStoreId());
 
-		if (store != null) {// 学生が存在していた場合
+		if (store != null) {// ゲットした社員のID,名前、パスワード、メール、店舗名を渡す
 			req.setAttribute("storeId", store.getStoreId());
 			req.setAttribute("managerName", store.getManagerName());
 			req.setAttribute("password", store.getPassword());
 			req.setAttribute("email", store.getEmail());
 			req.setAttribute("storeName", store.getStoreName());
 		} else {// 学生が存在していなかった場合
-			errors.put("storeId", "学生が存在していません");
+			errors.put("storeId", "社員情報が存在していません");
 			req.setAttribute("errors", errors);
 		}
 		//JSPへフォワード 7

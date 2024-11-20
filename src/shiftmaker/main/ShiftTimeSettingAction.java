@@ -23,10 +23,12 @@ public class ShiftTimeSettingAction extends Action {
 		Map<String, String> errors = new HashMap<>();
 
 		//リクエストパラメータ―の取得 2
+		//A～Dの四つをもらってくる箱
 		String[] workTimeId = new String[4];
 		String[] workTimeStart = new String[4];
 		String[] workTimeEnd = new String[4];
 
+		//四つ分ゲットしてくる
 		for (int i = 0; i < 4; i++) {
 		    workTimeId[i] = req.getParameter("workTimeId_" + i);
 		    workTimeStart[i] = req.getParameter("workTimeStart_" + i);
@@ -34,28 +36,25 @@ public class ShiftTimeSettingAction extends Action {
 		}
 
 
-
+//String型でもってきてるのでTime型に変更する
 			Time[] workTimeEndTimes = new Time[workTimeEnd.length];
 			Time[] workTimeStartTimes = new Time[workTimeStart.length];
-			System.out.println("★★１");
 
 			for (int i = 0; i < workTimeEnd.length; i++) {
 			    workTimeEndTimes[i] = Time.valueOf(workTimeEnd[i]);
 			    workTimeStartTimes[i] = Time.valueOf(workTimeStart[i]);
 			}
-			System.out.println("★★2");
+
 		    // ここでworkTimeIdDates, workTimeEnds, workTimeStartsを使って処理を行う
 
 
 		//DBからデータ取得 3
 		List<Store> list = sDao.filterStore(store_login.getStoreId());
-		System.out.println(store_login);
-		//ビジネスロジック 4
-		//DBへデータ保存 5
-		//条件で4～5が分岐
+
+		//workTimeIdの数分（A~Dの四つ分やる）
 		if (workTimeId != null) {
 		    for (int i = 0; i < workTimeId.length; i++) {
-		        System.out.println("★★4");
+
 
 		        // 新しいStoreインスタンスを作成または既存のリストから取得
 		        Store store;
@@ -66,6 +65,7 @@ public class ShiftTimeSettingAction extends Action {
 		        }
 
 		        // インスタンスに値をセット
+		        //　新規作成の可能性もあるのでstoreの中身全てセットする
 		        store.setStoreId(store_login.getStoreId());
 		        store.setStoreName(store_login.getStoreName());
 		        store.setManagerName(store_login.getManagerName());

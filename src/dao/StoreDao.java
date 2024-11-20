@@ -26,7 +26,7 @@ public class StoreDao extends Dao{
 	    ps.setString(2, password);
 
         ResultSet rs = ps.executeQuery();
-
+//ログイン情報から全てもらってきました
         if (rs.next()) { // 認証成功の場合
             // Storeオブジェクトを作成して設定
             store = new Store();
@@ -120,9 +120,8 @@ public class StoreDao extends Dao{
 
 	}
 
+	//時間設定のために、店舗IDとAとかBとかで取得するやつ
 	public Store Time_get(String store_id, String store_time_id) throws Exception {
-		System.out.println("Time_getはできてる");
-		System.out.println(store_time_id);
 		//店舗情報インスタンスを初期化
 		Store store = new Store();
 		//データベースのコネクションを確立
@@ -230,6 +229,7 @@ public class StoreDao extends Dao{
 	 * @return　店舗情報のリスト:List<Store> 存在しない場合０件
 	 * @throws Exception
 	 */
+	//店舗IDをStringでもらって表示するやつ
 	public List<Store> filterStore(String storeId)throws Exception{
 //		空のリストを作成
 		List<Store> list = new ArrayList<>();
@@ -273,56 +273,6 @@ public class StoreDao extends Dao{
 		return list;
 
 	}
-
-	//必要ですか？？
-	public List<Store> filter(Store store, String work_time_id)throws Exception{
-//		空のリストを作成
-		List<Store> list = new ArrayList<>();
-		//コネクションを確立
-		Connection connection = getConnection();
-		//プリペアードステートメント
-		PreparedStatement statement = null;
-		//リザルトセット
-		ResultSet rSet = null;
-
-
-		try{
-//			プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement("select * from STORE where STORE_ID=? and WORK_TIME_ID=? ");//後で書く
-			//
-
-			statement.setString(1, store.getStoreId());
-			statement.setString(2, work_time_id);
-
-//			プリペアードステートメントを実行
-			rSet = statement.executeQuery();
-//			リストへの格納処理を実行
-			list = postFilter(rSet);
-		} catch (Exception e) {
-			throw e;
-		}finally {
-			//プリペアードステート面とをとじる
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-		}
-		//コネクションを閉じる
-		if (connection != null) {
-			try {
-				connection.close();
-			} catch (SQLException sqle) {
-				throw sqle;
-			}
-		}
-		return list;
-
-	}
-
-
 
 	/**
 	 * filterメソッド　IDを指定して一覧を取得
@@ -573,6 +523,7 @@ public class StoreDao extends Dao{
 	}
 
 
+	//TimeA~Dを設定した際に上書きするためのsave
 public boolean save_Time(Store store)throws Exception{
 	//データベースへのコネクションを確立
 	Connection connection = getConnection();
@@ -582,6 +533,7 @@ public boolean save_Time(Store store)throws Exception{
 	int count = 0;
 
 	try{
+		//店舗IDとTIMEIDでゲットする
 		Store old = Time_get(store.getStoreId(), store.getWorkTimeId());
 		if (old == null) {
 //			店舗情報が存在しなかった場合
@@ -605,7 +557,7 @@ public boolean save_Time(Store store)throws Exception{
 
 
 		}else {
-			//学生が存在した場合
+			//IDが存在した場合
 			//プリペアードステートメントにUPDATE文をセット
 			statement = connection
 					.prepareStatement("UPDATE store SET  work_time_start=?, work_time_end=? WHERE store_id=? AND work_time_id=?");
