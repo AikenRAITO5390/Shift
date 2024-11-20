@@ -20,8 +20,9 @@ public class WorkerListAction extends Action {
 
         WorkerDao wDao = new WorkerDao();
         StoreDao sDao = new StoreDao();
+        Store stores = new Store();
 
-        List<Store> stores = sDao.filterStore(store.getStoreId());
+        stores = sDao.get(store.getStoreId());
         List<Worker> workers = wDao.filter(store);
 
         //TRUE

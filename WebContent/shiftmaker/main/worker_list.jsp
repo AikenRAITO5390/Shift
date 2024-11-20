@@ -20,7 +20,7 @@
 
     </c:if>
     <c:if test="${not empty workers}">
-        <table class="table table-hover">
+        <table  class="table table-hover">
             <tr>
                 <th>ID</th>
                 <th>名前</th>
@@ -40,9 +40,9 @@
                     <td>${worker.workerAddress}</td>
                     <td>${worker.workerTel}</td>
                     <td>${worker.workerPassword}</td>
-                    <td>${store.storeName}</td>
-                    <td><a href="#">変更</a></td>
-                    <td><a href="#">削除</a></td>
+                    <td>${stores.storeName}</td>
+                    <td><a href="WorkerUpdate.action?workerId=${worker.workerId}">変更</a></td>
+                    <td><a href="Workerdelete.action">削除</a></td>
                 </tr>
             </c:forEach>
         </table>
@@ -53,7 +53,7 @@
     <h3>社員</h3>
 
     <c:if test="${empty workersnot}">
-        <p>従業員が見つかりませんでした。</p>
+        <p>社員が見つかりませんでした。</p>
 
     </c:if>
     <c:if test="${not empty workersnot}">
@@ -77,9 +77,9 @@
                     <td>${worker.workerAddress}</td>
                     <td>${worker.workerTel}</td>
                     <td>${worker.workerPassword}</td>
-                    <td>${store.storeName}</td>
-                    <td><a href="#">変更</a></td>
-                    <td><a href="#">削除</a></td>
+                    <td>${stores.storeName}</td>
+                    <td><a href="WorkerUpdate.action?workerId=${worker.workerId}">変更</a></td>
+                    <td><a href="Workerdelete.action">削除</a></td>
                 </tr>
             </c:forEach>
         </table>
