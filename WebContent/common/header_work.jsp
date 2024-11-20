@@ -13,7 +13,7 @@
     padding: 10px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
 }
-.header {
+.header_work {
     position: fixed;
     top: 0;
     left: 0;
@@ -28,6 +28,9 @@
     flex-direction: row; /* 横方向に配置 */
     justify-content: flex-start; /* 左側に配置 */
 }
+.header_work h2{
+    color: white;
+}
 </style>
 <script>
     function toggleSidebar() {
@@ -40,10 +43,10 @@
     }
 </script>
 
-<div class="header">
+<div class="header_work">
     <button onclick="toggleSidebar()">三</button>
     <div id="sidebar" class="sidebar">
-        <jsp:include page="../common/navigation.jsp" />
+        <jsp:include page="../common/navigation_work.jsp" />
     </div>
 <h2> まるごとシフトくん</h2>
 </div>

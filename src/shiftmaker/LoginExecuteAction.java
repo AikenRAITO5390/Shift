@@ -65,7 +65,7 @@ public class LoginExecuteAction extends Action{
 
 
 			//リダイレクト
-			url = "main/Main.action";
+			url = "main/MainWork.action";
 
 			res.sendRedirect(url);
 		}else{

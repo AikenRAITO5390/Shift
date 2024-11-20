@@ -21,7 +21,7 @@
 <%-- 店舗ID --%>
 		<label>店舗ID</label>
 		<input type="text" name="storeId"
-			maxlength="7"value="${storeId}">
+			maxlength="7"value="${storeId}"readonly>
 	</div>
 
 <%--名前  --%>
