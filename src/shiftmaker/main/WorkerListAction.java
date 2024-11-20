@@ -1,6 +1,7 @@
 package shiftmaker.main;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,31 +13,40 @@ import dao.StoreDao;
 import dao.WorkerDao;
 import tool.Action;
 
-
-
 public class WorkerListAction extends Action {
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
         HttpSession session = req.getSession();
         Store store = (Store) session.getAttribute("user");
 
-
-
-
         WorkerDao wDao = new WorkerDao();
         StoreDao sDao = new StoreDao();
 
-
         List<Store> stores = sDao.filterStore(store.getStoreId());
-		List<Worker> workers = wDao.filter(store); // workers変数を宣言し、初期化
-		// リクエストにデータをセット
+        List<Worker> workers = wDao.filter(store);
 
-		req.setAttribute("workers", workers);
-		req.setAttribute("stores", stores);
+        //TRUE
+        List<Worker> filteredWorkers = workers.stream()
+                                              .filter(worker -> worker.isWorkerJudge()) // isWorkerJudge()はWORKER_JUDGEを返すメソッド
+                                              .collect(Collectors.toList());
 
-		System.out.println("Stores: " + stores);
-        System.out.println("Workers: " + workers);
+        //FLASE
+        List<Worker> filteredWorkersnot = workers.stream()
+                .filter(worker -> !worker.isWorkerJudge()) // isWorkerJudge()はWORKER_JUDGEを返すメソッド
+                .collect(Collectors.toList());
+
+
+
+        // リクエストにデータをセット
+        req.setAttribute("workers", filteredWorkers);
+        req.setAttribute("workersnot", filteredWorkersnot);
+        req.setAttribute("stores", stores);
+
+
+
+        System.out.println("Stores: " + stores);
+        System.out.println("Filtered Workers: " + filteredWorkers);
+        System.out.println("Filtered Workers: " + filteredWorkersnot);
 
         req.getRequestDispatcher("worker_list.jsp").forward(req, res);
     }
 }
-

@@ -11,46 +11,81 @@
 </head>
 <body>
 
-	<h2>従業員一覧</h2>
+    <h2>従業員一覧</h2>
 
+    <h3>アルバイト</h3>
 
-	<c:choose>
-		<c:when test="${not empty workers}">
-                  <table class="table table-hover">
+    <c:if test="${empty workers}">
+        <p>従業員が見つかりませんでした。</p>
+
+    </c:if>
+    <c:if test="${not empty workers}">
+        <table class="table table-hover">
+            <tr>
+                <th>ID</th>
+                <th>名前</th>
+                <th>生年月日</th>
+                <th>住所</th>
+                <th>電話番号</th>
+                <th>パスワード</th>
+                <th>店情報</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <c:forEach var="worker" items="${workers}">
                 <tr>
-                    <th>ID</th>
-                    <th>名前</th>
-                    <th>生年月日</th>
-                    <th>住所</th>
-                    <th>電話番号</th>
-                    <th>パスワード</th>
-                    <th>店情報</th>
-
-
-                    <th></th>
-                    <th></th>
+                    <td>${worker.workerId}</td>
+                    <td>${worker.workerName}</td>
+                    <td>${worker.workerDate}</td>
+                    <td>${worker.workerAddress}</td>
+                    <td>${worker.workerTel}</td>
+                    <td>${worker.workerPassword}</td>
+                    <td>${store.storeName}</td>
+                    <td><a href="#">変更</a></td>
+                    <td><a href="#">削除</a></td>
                 </tr>
-                <c:forEach var="worker" items="${workers}">
+            </c:forEach>
+        </table>
+    </c:if>
 
 
-                    <tr>
-                        <td>${worker.workerId}</td>
-                        <td>${worker.workerName}</td>
-                        <td>${worker.workerDate}</td>
-                        <td>${worker.workerAddress}</td>
-                        <td>${worker.workerTel}</td>
-                        <td>${worker.workerPassword}</td>
-                        <td>${store.storeName}</td>
-                        <td><a href="#">変更</a></td>
-                        <td><a href="#">削除</a></td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </c:when>
-        <c:otherwise>
-            <p>従業員が見つかりませんでした。</p>
-        </c:otherwise>
-    </c:choose>
+
+    <h3>社員</h3>
+
+    <c:if test="${empty workersnot}">
+        <p>従業員が見つかりませんでした。</p>
+
+    </c:if>
+    <c:if test="${not empty workersnot}">
+        <table class="table table-hover">
+            <tr>
+                <th>ID</th>
+                <th>名前</th>
+                <th>生年月日</th>
+                <th>住所</th>
+                <th>電話番号</th>
+                <th>パスワード</th>
+                <th>店情報</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <c:forEach var="worker" items="${workersnot}">
+                <tr>
+                    <td>${worker.workerId}</td>
+                    <td>${worker.workerName}</td>
+                    <td>${worker.workerDate}</td>
+                    <td>${worker.workerAddress}</td>
+                    <td>${worker.workerTel}</td>
+                    <td>${worker.workerPassword}</td>
+                    <td>${store.storeName}</td>
+                    <td><a href="#">変更</a></td>
+                    <td><a href="#">削除</a></td>
+                </tr>
+            </c:forEach>
+        </table>
+    </c:if>
+
+    <a href="Main.action">メインへ戻る</a>
 
 </body>
 </html>
