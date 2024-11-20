@@ -25,7 +25,7 @@ public class ShiftCreate {
     }
 
     // バイトの情報を表すクラス
-    static class WorkerShift {
+    public static class WorkerShift {
         String name;         // バイトの名前
         String role;         // 役割（キッチン or ホール）
         String availableFrom; // 勤務可能開始時刻
@@ -125,11 +125,11 @@ public class ShiftCreate {
         System.out.println("\n=== 各人の勤務時間 ===");
         for (WorkerShift worker : workers) {
             if (!worker.assignedShifts.isEmpty()) { // 割り振りが存在する場合のみ表示
-                System.out.println(worker.name + " (" + worker.role + "): " + worker.assignedShifts);
                 Map<String, Object> workerInfo = new HashMap<>();
                 workerInfo.put("name", worker.name);
                 workerInfo.put("role", worker.role);
                 workerInfo.put("assignedShifts", worker.assignedShifts);
+                System.out.println(worker.name + " (" + worker.role + "): " + worker.assignedShifts);
 
                 // workerInfoをリストに追加
                 ShiftDetail.add(workerInfo);
