@@ -23,9 +23,16 @@ public class ShiftTimeSettingAction extends Action {
 		Map<String, String> errors = new HashMap<>();
 
 		//リクエストパラメータ―の取得 2
-        String[] workTimeId = req.getParameterValues("workTimeId");
-		String[] workTimeEnd = req.getParameterValues("workTimeEnd");
-		String[] workTimeStart = req.getParameterValues("workTimeStart");
+		String[] workTimeId = new String[4];
+		String[] workTimeStart = new String[4];
+		String[] workTimeEnd = new String[4];
+
+		for (int i = 0; i < 4; i++) {
+		    workTimeId[i] = req.getParameter("workTimeId_" + i);
+		    workTimeStart[i] = req.getParameter("workTimeStart_" + i);
+		    workTimeEnd[i] = req.getParameter("workTimeEnd_" + i);
+		}
+
 
 
 			Time[] workTimeEndTimes = new Time[workTimeEnd.length];
@@ -42,26 +49,41 @@ public class ShiftTimeSettingAction extends Action {
 
 		//DBからデータ取得 3
 		List<Store> list = sDao.filterStore(store_login.getStoreId());
-		System.out.println("★★3");
+		System.out.println(store_login);
 		//ビジネスロジック 4
 		//DBへデータ保存 5
 		//条件で4～5が分岐
-		if (list != null) {
-			int i=0;
-			for(Store store : list){
-				System.out.println("★★4");
+		if (workTimeId != null) {
+		    for (int i = 0; i < workTimeId.length; i++) {
+		        System.out.println("★★4");
 
-			// インスタンスに値をセット
-				store.setStoreId(store_login.getStoreId());
-				store.setWorkTimeId(workTimeId[i]);
-				store.setWorkTimeStart(workTimeStartTimes[i]);
-				store.setWorkTimeEnd(workTimeEndTimes[i]);
+		        // 新しいStoreインスタンスを作成または既存のリストから取得
+		        Store store;
+		        if (i < list.size()) {
+		            store = list.get(i);
+		        } else {
+		            store = new Store(); // 必要に応じて新しいインスタンスを作成
+		        }
 
-				System.out.println("★★5");
-			// 学生を保存
-			sDao.save_Time(store);
-			i += 1;
-			}
+		        // インスタンスに値をセット
+		        store.setStoreId(store_login.getStoreId());
+		        store.setStoreName(store_login.getStoreName());
+		        store.setManagerName(store_login.getManagerName());
+		        store.setManagerId(store_login.getManagerId());
+		        store.setPassword(store_login.getPassword());
+		        store.setEmail(store_login.getEmail());
+		        store.setWorkTimeId(workTimeId[i]);
+		        store.setWorkTimeStart(workTimeStartTimes[i]);
+		        store.setWorkTimeEnd(workTimeEndTimes[i]);
+		        store.setWorkWeekScore(store_login.getWorkWeekScore());
+		        store.setWeekScore(store_login.getWeekScore());
+
+		        System.out.println("★★5");
+
+		        // 学生を保存
+		        sDao.save_Time(store);
+		    }
+
 		} else {
 		}
 

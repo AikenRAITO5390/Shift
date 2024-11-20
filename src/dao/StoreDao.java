@@ -31,9 +31,13 @@ public class StoreDao extends Dao{
             // Storeオブジェクトを作成して設定
             store = new Store();
             store.setStoreId(rs.getString("store_id"));
+            store.setStoreName(rs.getString("store_name"));
             store.setPassword(rs.getString("password"));
+            store.setEmail(rs.getString("email"));
             store.setManagerName(rs.getString("manager_name"));
             store.setManagerId(rs.getString("manager_id"));
+            store.setWorkWeekScore(rs.getInt("work_week_score"));
+            store.setWeekScore(rs.getInt("week_score"));
         }
 
         ps.close();
@@ -65,6 +69,74 @@ public class StoreDao extends Dao{
 			statement = connection.prepareStatement(sql);//後で書く
 			//プリペアードステートメントに店舗IDをバインド（？の一個めに入る）
 			statement.setString(1, store_id);
+			//プリペアードステートメントを実行
+			ResultSet rSet = statement.executeQuery();
+
+
+			if(rSet.next()){
+				//リザルトセットが存在する場合(検索結果が存在した場合)
+				//店舗情報インスタンスに検索結果をセット
+				store.setStoreId(rSet.getString("store_id"));
+				store.setStoreName(rSet.getString("store_name"));
+				store.setManagerId(rSet.getString("manager_id"));
+				store.setManagerName(rSet.getString("manager_name"));
+				store.setPassword(rSet.getString("password"));
+				store.setEmail(rSet.getString("email"));
+				store.setWorkTimeId(rSet.getString("work_time_id"));
+				store.setWorkTimeStart(rSet.getTime("work_time_start"));
+				store.setWorkTimeEnd(rSet.getTime("work_time_end"));
+				store.setWorkWeekScore(rSet.getInt("work_week_score"));
+				store.setWeekScore(rSet.getInt("week_score"));
+
+			} else {
+//				リザルトセットが存在しない場合
+//				店舗情報インスタンスにNullをセット
+				store = null;
+			}
+		}catch (Exception e) {
+			throw e;
+		}finally {
+//			プリペアードステートメントを閉じる
+			if(statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+
+		}
+
+		//コネクションを閉じる
+		if (connection != null) {
+			try {
+				connection.close();
+			} catch (SQLException sqle) {
+				throw sqle;
+			}
+		}
+	//storeに入れた情報を返す
+	return store;
+
+	}
+
+	public Store Time_get(String store_id, String store_time_id) throws Exception {
+		System.out.println("Time_getはできてる");
+		System.out.println(store_time_id);
+		//店舗情報インスタンスを初期化
+		Store store = new Store();
+		//データベースのコネクションを確立
+		Connection connection = getConnection();
+		//プリペアードステートメント
+		PreparedStatement statement = null;
+
+		try{
+			String sql = "SELECT * FROM store WHERE store_id = ? AND work_time_id =?";
+			//プリペアードステートメントにSQL文をセット
+			statement = connection.prepareStatement(sql);//後で書く
+			//プリペアードステートメントに店舗IDをバインド（？の一個めに入る）
+			statement.setString(1, store_id);
+			statement.setString(2, store_time_id);
 			//プリペアードステートメントを実行
 			ResultSet rSet = statement.executeQuery();
 
@@ -510,6 +582,29 @@ public boolean save_Time(Store store)throws Exception{
 	int count = 0;
 
 	try{
+		Store old = Time_get(store.getStoreId(), store.getWorkTimeId());
+		if (old == null) {
+//			店舗情報が存在しなかった場合
+//			プリペアードステートメントにINSERT文をセット
+			statement = connection.prepareStatement("insert into STORE (STORE_ID,STORE_NAME,MANAGER_ID,MANAGER_NAME,PASSWORD,EMAIL,WORK_TIME_ID,"
+					+ "WORK_TIME_START,WORK_TIME_END,WORK_WEEK_SCORE,WEEK_SCORE)"
+					+ "values(?,?,?,?,?,?,?,?,?,?,?)");
+//			プリペアードステートメントに値をバウンド
+			statement.setString(1, store.getStoreId());
+			statement.setString(2, store.getStoreName());
+			statement.setString(3, store.getManagerId());
+			statement.setString(4, store.getManagerName());
+			statement.setString(5, store.getPassword());
+			statement.setString(6, store.getEmail());
+			statement.setString(7, store.getWorkTimeId());
+			//引数２をTIME型にキャスト。これでいけるかはまだわからん
+			statement.setTime(8, (Time) store.getWorkTimeStart());
+			statement.setTime(9, (Time) store.getWorkTimeEnd());
+			statement.setInt(10, store.getWorkWeekScore());
+			statement.setInt(11, store.getWeekScore());
+
+
+		}else {
 			//学生が存在した場合
 			//プリペアードステートメントにUPDATE文をセット
 			statement = connection
@@ -519,7 +614,7 @@ public boolean save_Time(Store store)throws Exception{
 			statement.setTime(2, store.getWorkTimeEnd());
 			statement.setString(3, store.getStoreId());
 			statement.setString(4, store.getWorkTimeId());
-
+		}
 		//プリペアードステートメントにを実行
 		count = statement.executeUpdate();
 	} catch (Exception e) {
