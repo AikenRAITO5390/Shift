@@ -291,6 +291,55 @@ public class WorkerDao extends Dao{
 
 
 
+	public boolean delete(Worker worker) throws Exception {
+	    // コネクションを確立
+	    Connection connection = getConnection();
+	    // プリペアードステートメント
+	    PreparedStatement statement = null;
+	    // 実行件数
+	    int count = 0;
+
+	    try {
+	        // データベースから従業員を取得
+	        Worker old = get(worker.getWorkerId());
+
+	        // 従業員が存在した場合
+	        if (old != null) {
+	            // プリペアードステートメントにUPDATE文をセット
+	            statement = connection.prepareStatement(
+	                    "UPDATE WORKER SET IS_ATTEND = FALSE WHERE WORKER_NAME = ? AND STORE_ID = ?");
+
+	            // プリペアードステートメントに値をバインド
+	            statement.setString(1, worker.getWorkerName());
+	            statement.setString(2, worker.getStore().getStoreId());
+
+	            // プリペアードステートメントを実行
+	            count = statement.executeUpdate();
+	        }
+	    } catch (Exception e) {
+	        throw e;
+	    } finally {
+	        if (statement != null) {
+	            try {
+	                statement.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	        // コネクションを閉じる
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	    }
+	    return count > 0;
+	}
+
+
+
 
 
 	/**
