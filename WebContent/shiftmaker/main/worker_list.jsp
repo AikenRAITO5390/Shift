@@ -42,7 +42,7 @@
                     <td>${worker.workerPassword}</td>
                     <td>${stores.storeName}</td>
                     <td><a href="WorkerUpdate.action?workerId=${worker.workerId}">変更</a></td>
-                    <td><a href="WorkerDelete.action?workerId=${worker.workerId}">削除</a></td>
+                    <td><a href="WorkerDelete.action?WORKER_ID=${worker.workerId}">削除</a></td>
                 </tr>
             </c:forEach>
         </table>
@@ -79,7 +79,7 @@
                     <td>${worker.workerPassword}</td>
                     <td>${stores.storeName}</td>
                     <td><a href="WorkerUpdate.action?workerId=${worker.workerId}">変更</a></td>
-                    <td><a href="WorkerDelete.action?workerId=${worker.workerId}">削除</a></td>
+                    <td><a href="WorkerDelete.action?WORKER_ID=${worker.workerId}">削除</a></td>
                 </tr>
             </c:forEach>
         </table>

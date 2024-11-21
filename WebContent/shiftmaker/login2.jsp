@@ -45,7 +45,7 @@
 	<input type="submit" name="login" value="ログイン"/>
 
 	<!-- シフト作成者用ログインリンク -->
-	<!-- <li><a href="Login2.Action">シフト作成者用ログイン</a></li> -->
+	<li><a href="Login.action">戻る</a></li>
 
 </form>
 

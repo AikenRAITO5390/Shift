@@ -307,7 +307,7 @@ public class WorkerDao extends Dao{
 	        if (old != null) {
 	            // プリペアードステートメントにUPDATE文をセット
 	            statement = connection.prepareStatement(
-	                    "UPDATE WORKER SET IS_ATTEND = FALSE WHERE WORKER_NAME = ? AND STORE_ID = ?");
+	            		"DELETE FROM WORKER WHERE WORKER_NAME = ? AND STORE_ID = ?;");
 
 	            // プリペアードステートメントに値をバインド
 	            statement.setString(1, worker.getWorkerName());
