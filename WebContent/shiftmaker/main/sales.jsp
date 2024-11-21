@@ -25,7 +25,7 @@
 
 
 
-	<form action="SalesTableCreate.action" method="post">
+	<form action="SalesDetail.action" method="post">
 
 	<button>売上予測</button>
 
