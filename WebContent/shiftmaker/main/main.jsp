@@ -42,7 +42,7 @@
         <li><a href="#">登録</a></li>
         <li><a href="#">変更</a></li>
         <li><a href="ShiftTimeSignup.action">時間設定</a></li>
-        <li><a href="#">パワーバランス設定</a></li>
+        <li><a href="PowerSetting.action">パワーバランス設定</a></li>
 </ul>
 
 <h2>💰　売上</h2>
