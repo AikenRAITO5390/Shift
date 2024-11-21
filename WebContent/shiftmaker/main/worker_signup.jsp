@@ -4,11 +4,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <c:import url="../../common/header.jsp"/>
 
+<body>
 <div class="body">
 
-	<c:import url="../../common/navigation.jsp"/>
+		<c:import url="../../common/navigation.jsp"/>
 
 		<!-- 画面タイトル -->
 		<h2>従業員情報登録</h2>
@@ -47,6 +49,7 @@
 			        <option value="${day}" ${day == selectedDay ? 'selected' : ''}>${day}</option>
 			    </c:forEach>
 			</select>
+			<div></div>
 
 
 			<!-- 住所入力 -->
@@ -97,5 +100,9 @@
 
 
 </div>
+
+</body>
+
+<c:import url="../../common/footer.jsp"/>
 
 </html>

@@ -6,14 +6,15 @@
 <html>
 	<c:import url="../../common/header.jsp"/>
 
-	<div class="body">
+	<body>
 
-		<c:import url="../../common/navigation.jsp"/>
+	<c:import url="../../common/navigation.jsp"/>
+
+	<div class="body">
 
 			<h2>従業員情報登録</h2>
 			<p>登録が完了しました</p>
 			<a href="ShiftConditionSignup.action">従業員シフト条件登録へ</a>
-
 
 	</div>
 

@@ -11,6 +11,7 @@
     <!-- 画面タイトル -->
     <h2>シフト条件登録</h2>
 
+	<!-- アルバイトのみ設定画面表示 -->
 	<c:if test="${not empty workers}">
 	    <form action="ShiftConditionSignupResult.action" method="post">
 	        <table border="1">
@@ -49,6 +50,12 @@
 	        </table>
 	        <input type="submit" value="登録" />
 	    </form>
+	</c:if>
+
+	<!-- 社員の場合は、すぐtopへ -->
+	<c:if test="${empty workers}">
+		<div>社員は設定不要です。</div>
+		<a href="Main.action">topへ</a>
 	</c:if>
 
 </div>
