@@ -22,8 +22,8 @@
 <h2>👬　従業員</h2>
 <ul>
         <li><a href="WorkerSignUp.action">登録</a></li>
-        <li><a href="#">編集</a></li>
-        <li><a href="WorkerList.action">閲覧</a></li>
+        <li><a href="WorkerList.action">編集</a></li>
+        <li><a href="WorkerDate.action">閲覧</a></li>
         <li><a href="#">削除</a></li>
 </ul>
 
