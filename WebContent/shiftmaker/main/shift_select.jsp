@@ -5,17 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>シフト選択</title>
 </head>
 <body>
-<c:forEach var="list" items="${shift_list}">
-	<p>${list.shiftDate}</p>
-	<p>${list.shiftScore}</p>
-	<p>${list.shiftHopeTimeId}</p>
-	<p>${list.shiftHopeTimeStart}</p>
-	<p>${list.shiftHopeTimeEnd}</p>
-	<p>${list.shiftId}</p>
-</c:forEach>
+
 <h1>シフト作成</h1>
 <%--ShiftCreateActionにボタンで飛ばす --%>
 <button onclick="location.href='ShiftCreate.action'" >作成</button>
