@@ -2,6 +2,7 @@ package tool;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -35,6 +36,7 @@ public class ShiftCreate {
         String availableTo;   // 勤務可能終了時刻
         int maxHours;         // 最大勤務時間
         List<String> assignedShifts = new ArrayList<>(); // 割り振られたシフト
+        List<String> mergedShifts = new ArrayList<>();
 
         WorkerShift(String name, String role, String availableFrom, String availableTo, int maxHours) {
             this.name = name;
@@ -91,6 +93,80 @@ public class ShiftCreate {
     }
 
 
+
+    public static List<Map<String, Object>> getWorkerMergedShifts(List<WorkerShift> workers) {
+        List<Map<String, Object>> result = new ArrayList<>();
+
+        for (WorkerShift worker : workers) {
+            Map<String, Object> workerInfo = new HashMap<>();
+            workerInfo.put("name", worker.name);
+            workerInfo.put("role", worker.role);
+            workerInfo.put("mergedShifts", worker.mergedShifts);
+            result.add(workerInfo);
+        }
+
+        return result;
+    }
+
+
+    public static Map<String, List<Map<String, String>>> createShiftSchedule(
+            ShiftRequirement requirement, List<WorkerShift> workers) {
+
+        Map<String, List<Map<String, String>>> schedule = new TreeMap<>();
+
+        int startMinutes = timeToMinutes(requirement.startTime);
+        int endMinutes = timeToMinutes(requirement.endTime);
+
+        for (int current = startMinutes; current < endMinutes; current += 60) {
+            String timeSlot = minutesToTime(current) + "-" + minutesToTime(current + 60);
+            List<Map<String, String>> assignedWorkers = new ArrayList<>();
+
+            int kitchenNeeded = requirement.requiredKitchen;
+            int hallNeeded = requirement.requiredHall;
+
+            for (WorkerShift worker : workers) {
+                int workerStart = timeToMinutes(worker.availableFrom);
+                int workerEnd = timeToMinutes(worker.availableTo);
+
+                if (worker.maxHours > 0 &&
+                        current >= workerStart &&
+                        current + 60 <= workerEnd) {
+
+                    if (worker.role.equals("Kitchen") && kitchenNeeded > 0) {
+                        Map<String, String> assignment = new HashMap<>();
+                        assignment.put("name", worker.name);
+                        assignment.put("role", worker.role);
+                        assignedWorkers.add(assignment);
+                        worker.assignedShifts.add(timeSlot);
+                        worker.maxHours--;
+                        kitchenNeeded--;
+                    } else if (worker.role.equals("Hall") && hallNeeded > 0) {
+                        Map<String, String> assignment = new HashMap<>();
+                        assignment.put("name", worker.name);
+                        assignment.put("role", worker.role);
+                        assignedWorkers.add(assignment);
+                        worker.assignedShifts.add(timeSlot);
+                        worker.maxHours--;
+                        hallNeeded--;
+                    }
+                }
+
+                if (kitchenNeeded == 0 && hallNeeded == 0) break;
+            }
+
+            schedule.put(timeSlot, assignedWorkers);
+        }
+
+        for (WorkerShift worker : workers) {
+            worker.mergedShifts = mergeShifts(worker.assignedShifts);
+        }
+
+        return schedule;
+    }
+
+
+
+
     public List<Map<String,Object>> Shiftmain(String work_time_start, String work_time_end, Shift shift,Store shift_manager, List<Shift> shift_list) {
         // 必要人数の設定（キッチンとホールで区別）
         ShiftRequirement requirement = new ShiftRequirement(work_time_start, work_time_end, 1, 1);
@@ -98,9 +174,6 @@ public class ShiftCreate {
         List<Map<String, Object>> ShiftDetail = new ArrayList<>();
         List<WorkerShift> workers = new ArrayList<>();
         StoreDao stDao = new StoreDao();//StoreDao初期化
-
-        // 社員（固定勤務、常にシフトに含まれる）
-        String manager = "Manager";
 
 
         try{
@@ -139,66 +212,21 @@ public class ShiftCreate {
         	System.out.println(e);
 		}
 
-        // シフトスケジュールを格納するマップ（時間帯 → 割り振りリスト）時系列で格納される
-        Map<String, List<String>> schedule = new TreeMap<>();
+        createShiftSchedule(requirement, workers);
 
-        // シフトを区切る時間単位（1時間単位）
-        int interval = 60; // 分単位の間隔
-        int startMinutes = timeToMinutes(requirement.startTime); // 開始時刻を分に変換
-        int endMinutes = timeToMinutes(requirement.endTime);     // 終了時刻を分に変換
+        // 各人の統合された勤務時間を取得
+        List<Map<String, Object>> workerMergedShifts = getWorkerMergedShifts(workers);
 
-        // シフト作成ループ 1時間区切りでシフトを作成
-        for (int current = startMinutes; current < endMinutes; current += interval) {
-            String timeSlot = minutesToTime(current) + "-" + minutesToTime(current + interval); // 時間帯文字列
-            List<String> assigned = new ArrayList<>(); // 割り振られる従業員リスト
-            assigned.add(manager); // 社員を追加（常に勤務）
-
-            int requiredKitchen = requirement.requiredKitchen; // 必要なキッチンスタッフ数
-            int requiredHall = requirement.requiredHall;       // 必要なホールスタッフ数
-
-            // 各バイトを確認
-            for (WorkerShift worker : workers) {
-                int workerStart = timeToMinutes(worker.availableFrom); // 勤務可能開始時刻
-                int workerEnd = timeToMinutes(worker.availableTo);     // 勤務可能終了時刻
-
-                // 勤務条件を満たし、まだ必要人数が残っている場合
-                if (current >= workerStart && current + interval <= workerEnd && worker.maxHours > 0) {
-                    if (worker.role.equals("Kitchen") && requiredKitchen > 0) {
-                        assigned.add(worker.name + " (Kitchen)");      // バイトを割り当て
-                        worker.assignedShifts.add(timeSlot);          // シフト記録
-                        worker.maxHours -= interval / 60;            // 勤務可能時間を減らす
-                        requiredKitchen--;                           // 必要キッチン人数を減らす
-                    } else if (worker.role.equals("Hall") && requiredHall > 0) {
-                        assigned.add(worker.name + " (Hall)");        // バイトを割り当て
-                        worker.assignedShifts.add(timeSlot);          // シフト記録
-                        worker.maxHours -= interval / 60;            // 勤務可能時間を減らす
-                        requiredHall--;                              // 必要ホール人数を減らす
-                    }
-                }
-            }
-            schedule.put(timeSlot, assigned); // スケジュールに現在の時間帯を追加
-        }
-
-        // シフトスケジュールの表示
-        System.out.println("=== シフトスケジュール ===");
-        for (Map.Entry<String, List<String>> entry : schedule.entrySet()) {
-            System.out.println("Time Slot: " + entry.getKey()); // 時間帯を表示
-            System.out.println("  Assigned: " + entry.getValue()); // 割り振られた従業員
-        }
-
-        // 各人の割り振られたシフトを表示
         System.out.println("\n=== 各人の勤務時間 ===");
-        for (WorkerShift worker : workers) {
-            if (!worker.assignedShifts.isEmpty()) {
-                List<String> mergedShifts = mergeShifts(worker.assignedShifts);
-                System.out.println(worker.name + " (" + worker.role + "): " + mergedShifts);
-            }
+        for (Map<String, Object> workerInfo : workerMergedShifts) {
+            System.out.println("Name: " + workerInfo.get("name"));
+            System.out.println("Role: " + workerInfo.get("role"));
+            System.out.println("Shifts: " + workerInfo.get("mergedShifts"));
+            System.out.println();
         }
 
 
-        // 社員の勤務時間を表示
-        System.out.println(manager + ": [" + requirement.startTime + "-" + requirement.endTime + "]");
 
-        return ShiftDetail;
+        return workerMergedShifts;
     }
 }

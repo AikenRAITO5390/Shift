@@ -37,7 +37,7 @@ public class ShiftDao extends Dao{
 	    	String sql = "SELECT * FROM SHIFT WHERE shift_date = ? and worker_id = ? and store_id = ?";
 	        statement = connection.prepareStatement(sql);
 	        statement.setDate(1,shift_date);
-	        statement.setString(2,worker.getWorkerId());
+	        statement.setString(2, worker.getWorkerId());
 	        statement.setString(3, store.getStoreId());
 
 		    ResultSet rSet = statement.executeQuery();

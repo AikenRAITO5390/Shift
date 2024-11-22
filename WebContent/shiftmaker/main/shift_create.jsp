@@ -9,21 +9,42 @@
 <title>Insert title here</title>
 
 <style>
-        table { border-collapse: collapse; }
-        th, td { border: 1px solid black; width: 50px; height: 50px; text-align: center; }
+         table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
 </style>
 </head>
 <body>
+	<h1>シフト情報</h1>
+	<table>
+        <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Shifts</th>
+        </tr>
+        <c:forEach var="worker" items="${workerShifts}">
+            <tr>
+                <td>${worker.name}</td>
+                <td>${worker.role}</td>
+                <td>
+                    <c:forEach var="shift" items="${worker.mergedShifts}">
+                        ${shift}<br>
+                    </c:forEach>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
 
-	<p>${shift_date}</p>
-	<p>${score}</p>
-	<p>${hope_time_id}</p>
-	<p>${hope_time_start}</p>
-	<p>${hope_time_end}</p>
-	<p>${work_time_id}</p>
-	<p>${shift_time_start}</p>
-	<p>${shift_time_end}</p>
-	<p>${shift_id}</p>
 
 
 	<h1>カレンダー</h1>
