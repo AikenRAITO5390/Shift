@@ -15,11 +15,11 @@
 
     <h3>アルバイト</h3>
 
-    <c:if test="${empty workers}">
+    <c:if test="${empty workersnot}">
         <p>従業員が見つかりませんでした。</p>
 
     </c:if>
-    <c:if test="${not empty workers}">
+    <c:if test="${not empty workersnot}">
         <table  class="table table-hover">
             <tr>
                 <th>ID</th>
@@ -32,7 +32,7 @@
                 <th></th>
                 <th></th>
             </tr>
-            <c:forEach var="worker" items="${workers}">
+            <c:forEach var="worker" items="${workersnot}">
                 <tr>
                     <td>${worker.workerId}</td>
                     <td>${worker.workerName}</td>
@@ -52,11 +52,11 @@
 
     <h3>社員</h3>
 
-    <c:if test="${empty workersnot}">
+    <c:if test="${empty workers}">
         <p>社員が見つかりませんでした。</p>
 
     </c:if>
-    <c:if test="${not empty workersnot}">
+    <c:if test="${not empty workers}">
         <table class="table table-hover">
             <tr>
                 <th>ID</th>
@@ -69,7 +69,7 @@
                 <th></th>
                 <th></th>
             </tr>
-            <c:forEach var="worker" items="${workersnot}">
+            <c:forEach var="worker" items="${workers}">
                 <tr>
                     <td>${worker.workerId}</td>
                     <td>${worker.workerName}</td>
