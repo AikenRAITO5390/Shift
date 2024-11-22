@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import tool.Action;
 
-public  class LogoutAction extends Action{
+public  class LogoutWorkerAction extends Action{
 
 
 	@Override
@@ -23,9 +23,9 @@ public  class LogoutAction extends Action{
 		//なし
 		//レスポンス値をセット 6
 		session.invalidate();
-		System.out.println("a");
+		System.out.println("b");
 		//JSPへフォワード 7
-		req.getRequestDispatcher("logout_ok.jsp").forward(req, res);
+		req.getRequestDispatcher("logout_ok2.jsp").forward(req, res);
 	}
 
 }

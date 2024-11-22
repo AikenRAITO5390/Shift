@@ -8,10 +8,10 @@
 </head>
 <body>
 
-<form action = "Logout.action" method="post">
+<form action = "WorkerLogoutExecute.action" method="post">
 
 <h2><label>
-ログアウト
+ログアウト完了
 </label></h2>
 
 <a href="Login.action">ログインページへ</a>

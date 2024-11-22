@@ -49,4 +49,5 @@
         <jsp:include page="../common/navigation_work.jsp" />
     </div>
 <h2> まるごとシフトくん</h2>
+<a href="../LogoutWorker.action">ログアウト</a>
 </div>
