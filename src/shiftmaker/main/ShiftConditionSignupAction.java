@@ -16,7 +16,7 @@ public class ShiftConditionSignupAction extends Action {
 
 		// WorkerDaoを初期化
 	    WorkerDao workerDao = new WorkerDao();
-	    //
+	    // ポジションと点数がnullのアルバイトを取得
 	    List<Worker> workers = workerDao.getWorkersWithNullPositionOrScore();
 
 	    if (!workers.isEmpty()) {

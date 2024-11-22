@@ -27,7 +27,7 @@
 	                    <td>${worker.workerName}</td>
 	                    <td>${worker.workerPosition}</td>
 	                    <td>${worker.workerScore}</td>
-	                    <td><a href="WorkerUpdate.action?workerId=${worker.workerId}">変更</a></td>
+	                    <td><a href="ShitConditionEdit.action?workerId=${worker.workerId}">変更</a></td>
 	                </tr>
                 </c:if>
             </c:forEach>
