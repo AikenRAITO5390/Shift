@@ -18,12 +18,23 @@ public class BBS implements Serializable {
 //	従業員
 	private Worker worker;
 
+//	投稿日
+	private String bbsDate;
+
 	public String getBbsText() {
 		return bbsText;
 	}
 
 	public void setBbsText(String bbsText) {
 		this.bbsText = bbsText;
+	}
+
+	public String getBbsDate() {
+		return bbsDate;
+	}
+
+	public void setBbsDate(String bbsDate) {
+		this.bbsDate = bbsDate;
 	}
 
 	public String getBbsId() {

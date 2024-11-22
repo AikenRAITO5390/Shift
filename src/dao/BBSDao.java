@@ -9,7 +9,6 @@ import java.util.List;
 
 import bean.BBS;
 import bean.Store;
-import bean.Worker;
 
 
 public class BBSDao extends Dao {
@@ -78,8 +77,8 @@ public class BBSDao extends Dao {
 
 	public List<BBS> postFilter(ResultSet rSet,Store store) throws Exception {
 		//戻り値用のリスト
-		Worker worker = new Worker();
 		List<BBS> list = new ArrayList<>();
+		WorkerDao workerDao = new WorkerDao();
 		try{
 			while(rSet.next()) {
 				//掲示板インスタンスを初期化
@@ -87,8 +86,10 @@ public class BBSDao extends Dao {
 				//掲示板インスタンスに検索結果をセット
 				bbs.setBbsId(rSet. getString("BBS_ID"));
 				bbs.setBbsText (rSet. getString("BBS_TEXT"));
+				bbs.setWorker(workerDao.get(rSet.getString("WORKER_ID")));
+				bbs.setBbsDate (rSet. getString("BBS_DATE"));
 				//初期化したworker
-				bbs.setWorker (worker);
+				//bbs.setWorker (worker);
 				//引数のstore
 				bbs.setStore(store);
 				//リストに追加
