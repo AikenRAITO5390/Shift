@@ -24,25 +24,22 @@
             </tr>
         </c:forEach>
     </table>
-    <script>
-        <c:forEach var="i" begin="0" end="6">
-            <c:choose>
-                <c:when test="${i < power_list.size() && power_list[i][1] != null}">
-                    <script>
-                        document.getElementById("WeekScore_${i}").value = "${power_list[i][1]}";
-                    </script>
-                </c:when>
-                <c:otherwise>
-                    <script>
-                        document.getElementById("WeekScore_${i}").value = "0";
-                    </script>
-                </c:otherwise>
-           </c:choose>
+
+<script>
+    // 初期値を設定
+    <c:forEach var="i" begin="0" end="6">
+        document.getElementById("WeekScore_${i}").value = "0";
+    </c:forEach>
+
+    // power_listの値を設定
+    <c:forEach var="i" begin="0" end="6">
+        <c:forEach var="power" items="${power_list}">
+            <c:if test="${power[0] == (i+1).toString()}">
+                document.getElementById("WeekScore_${i}").value = "${power[1]}";
+            </c:if>
         </c:forEach>
-    </script>
-    <c:forEach var="item" items="${power_list}">
-    <p>${item[0]}: ${item[1]}</p>
-</c:forEach>
+    </c:forEach>
+</script>
     <button type="submit">変更</button>
 </form>
 

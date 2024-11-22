@@ -29,7 +29,7 @@ public class PowerSettingResultAction extends Action {
 		int[] weekScoreInts = new int[7];
 		int[] workWeekScoreInts = new int[7];
 
-		//四つ分ゲットしてくる
+		//7sつ分ゲットしてくる
 		for (int i = 0; i < 7; i++) {
 			WeekScore[i] = req.getParameter("WeekScore_" + i);
 			WorkWeekScore[i] = req.getParameter("WorkWeekScore_" + i);
@@ -80,7 +80,7 @@ public class PowerSettingResultAction extends Action {
 		        System.out.println("★★5");
 
 		        // 学生を保存
-		        sDao.save_Time(store);
+		        sDao.save_Power(store);
 		    }
 
 		} else {
