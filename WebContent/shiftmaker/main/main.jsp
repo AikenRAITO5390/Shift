@@ -39,15 +39,14 @@
 
 <h2>💪　シフト条件</h2>
 <ul>
-        <li><a href="#">登録</a></li>
-        <li><a href="#">変更</a></li>
+        <li><a href="ShiftConditionWorkerList.action">変更</a></li>
         <li><a href="ShiftTimeSignup.action">時間設定</a></li>
         <li><a href="PowerSetting.action">パワーバランス設定</a></li>
 </ul>
 
 <h2>💰　売上</h2>
 <ul>
-        <li><a href="#">売上</a></li>
+        <li><a href="Sales.action">売上</a></li>
 
 </ul>
 </div>

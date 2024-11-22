@@ -153,6 +153,44 @@ public class WorkerDao extends Dao{
 	    return workers;
 	}
 
+	// ポジションおよび点数がnullではない従業員を取得するメソッド
+	public List<Worker> getWorkersWithPositionOrScore() throws Exception {
+		List<Worker> workers = new ArrayList<>();
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+
+		try {
+		    // SQL文を作成
+		    String sql = "SELECT * FROM worker WHERE (worker_position IS NOT NULL OR worker_score IS NOT NULL) AND  worker_judge = FALSE";
+		    statement = connection.prepareStatement(sql);
+		    resultSet = statement.executeQuery();
+
+		    while (resultSet.next()) {
+		        Worker worker = new Worker();
+		        worker.setWorkerId(resultSet.getString("worker_id"));
+		        worker.setWorkerName(resultSet.getString("worker_name"));
+		        worker.setWorkerPosition(resultSet.getString("worker_position"));
+		        worker.setWorkerScore(resultSet.getString("worker_score"));
+		        // 他の必要なフィールドもセット
+		        workers.add(worker);
+		    }
+		} catch (SQLException e) {
+		    throw e;
+		} finally {
+		    if (resultSet != null) {
+		        resultSet.close();
+		    }
+		    if (statement != null) {
+		        statement.close();
+		    }
+		    if (connection != null) {
+		        connection.close();
+		    }
+		}
+		return workers;
+	}
+
 
 	/**
 	 * baseSql:String 共通SQL文 プライベート
