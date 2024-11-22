@@ -522,7 +522,7 @@ public class StoreDao extends Dao{
 
 	    try {
 	        // SQL文を準備して店舗名に基づくフィルターを適用
-	        String sql = "SELECT work_week_score, week_score FROM STORE WHERE store_id = ? AND work_week_score BETWEEN 1 AND 7";
+	        String sql = "SELECT DISTINCT work_week_score, week_score FROM STORE WHERE store_id = ? AND work_week_score BETWEEN 1 AND 7";
 	        statement = connection.prepareStatement(sql);
 	        // プレースホルダーにstore_idをセット
 	        statement.setString(1, store_id);
