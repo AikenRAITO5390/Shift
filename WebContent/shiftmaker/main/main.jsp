@@ -29,7 +29,7 @@
 
 <h2>📝　掲示板</h2>
 <ul>
-        <li><a href="#">掲示板</a></li>
+        <li><a href="BBS.action">掲示板</a></li>
 </ul>
 
 <h2>👦　シフト作成者</h2>
