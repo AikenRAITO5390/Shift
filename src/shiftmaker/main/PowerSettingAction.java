@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Store;
+import dao.ShiftDao;
 import dao.StoreDao;
 import tool.Action;
 
@@ -18,6 +19,7 @@ public class PowerSettingAction extends Action{
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception  {
+		ShiftDao shiftDao = new ShiftDao();
 		StoreDao sDao = new StoreDao();
 		HttpSession session = req.getSession();//セッション
 		Store store_login = (Store)session.getAttribute("user");// ログインユーザーを取得
@@ -49,6 +51,7 @@ public class PowerSettingAction extends Action{
         calendar.setTime(firstDayOfNextMonth);
         while (!calendar.getTime().after(lastDayOfNextMonth)) {
             System.out.println(sdf.format(calendar.getTime()));
+            
             calendar.add(Calendar.DAY_OF_MONTH, 1);
         }
 
