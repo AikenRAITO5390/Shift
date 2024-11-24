@@ -1,5 +1,7 @@
 package shiftmaker.main;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +25,39 @@ public class PowerSettingAction extends Action{
 
 //ログイン情報でゲットする
 		List<List<String>> list = sDao.Week_filter(store_login.getStoreId());
-		//ここ直す
+
+		//月、日付を取得する方法
+        Calendar calendar = Calendar.getInstance();
+
+        // 次の月の最初の日付を設定
+        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        java.util.Date firstDayOfNextMonth = calendar.getTime();
+
+        // 次の月の最後の日付を設定
+        int lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        calendar.set(Calendar.DAY_OF_MONTH, lastDay);
+        java.util.Date lastDayOfNextMonth = calendar.getTime();
+
+        // 日付フォーマットを指定
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        // 結果を表示
+        System.out.println("次の月の最初の日付: " + sdf.format(firstDayOfNextMonth));
+        System.out.println("次の月の最後の日付: " + sdf.format(lastDayOfNextMonth));
+
+        calendar.setTime(firstDayOfNextMonth);
+        while (!calendar.getTime().after(lastDayOfNextMonth)) {
+            System.out.println(sdf.format(calendar.getTime()));
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+        }
+
+
+
+
+
+
+		//月～日の点数を取得、表示するためのもの
 
 		if (list != null) {// 店舗が存在していた場合
 			// リクエストに学生リストをセット

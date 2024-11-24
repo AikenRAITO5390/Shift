@@ -93,11 +93,11 @@ public class PowerSettingResultAction extends Action {
 			// リクエスト属性をセット
 			req.setAttribute("errors", errors);
 			req.setAttribute("time_list", list);
-			req.getRequestDispatcher("shift_time_set.jsp").forward(req, res);
+			req.getRequestDispatcher("power_setting.jsp").forward(req, res);
 			return;
 		}
 
-		req.getRequestDispatcher("shift_time_set_result.jsp").forward(req, res);
+		req.getRequestDispatcher("power_setting_result.jsp").forward(req, res);
 	}
 }
 

@@ -184,5 +184,153 @@ public class ShiftDao extends Dao{
 	    return shift_list;
 	}
 
-}
+
+	//お店シフト日付情報があるか
+	public Shift WeekScore_get(String store_id, Date StartDate) throws Exception {
+		//店舗情報インスタンスを初期化
+		Shift shift = new Shift();
+		//データベースのコネクションを確立
+		Connection connection = getConnection();
+		//プリペアードステートメント
+		PreparedStatement statement = null;
+	    // WorkerDaoの初期化
+	    WorkerDao workerDao = new WorkerDao();
+	    // StoreDaoの初期化
+	    StoreDao storeDao = new StoreDao();
+
+		try{
+			String sql = "SELECT * FROM shift WHERE store_id = ? AND shift_date =?";
+			//プリペアードステートメントにSQL文をセット
+			statement = connection.prepareStatement(sql);//後で書く
+			//プリペアードステートメントに店舗IDをバインド（？の一個めに入る）
+			statement.setString(1, store_id);
+			statement.setDate(2, StartDate);
+			//プリペアードステートメントを実行
+			ResultSet rSet = statement.executeQuery();
+
+
+			if(rSet.next()){
+				//リザルトセットが存在する場合(検索結果が存在した場合)
+				//店舗情報インスタンスに検索結果をセット
+		    	shift.setShiftDate(rSet.getDate("shift_date"));
+		    	shift.setShiftScore(rSet.getInt("shift_score"));
+		    	shift.setShiftHopeTimeId(rSet.getString("shifthope_time_id"));
+		    	shift.setShiftHopeTimeStart(rSet.getTimestamp("shifthope_time_start"));
+		    	shift.setShiftHopeTimeEnd(rSet.getTimestamp("shifthope_time_end"));
+		    	shift.setWorkTimeId(rSet.getString("work_time_id"));
+		    	shift.setShiftTimeStart(rSet.getTimestamp("shift_time_start"));
+		    	shift.setShiftTimeEnd(rSet.getTimestamp("shift_time_end"));
+		    	shift.setShiftId(rSet.getString("shift_id"));
+		    	shift.setWorker(workerDao.get(rSet.getString("worker_id")));
+		    	shift.setStore(storeDao.get(rSet.getString("store_id")));
+
+			} else {
+//				リザルトセットが存在しない場合
+//				店舗情報インスタンスにNullをセット
+				shift = null;
+			}
+		}catch (Exception e) {
+			throw e;
+		}finally {
+//			プリペアードステートメントを閉じる
+			if(statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+
+		}
+
+		//コネクションを閉じる
+		if (connection != null) {
+			try {
+				connection.close();
+			} catch (SQLException sqle) {
+				throw sqle;
+			}
+		}
+	//storeに入れた情報を返す
+	return shift;
+
+	}
+
+	public boolean save_Score(Shift shift, Date StartData, String StoreId)throws Exception{
+	//データベースへのコネクションを確立
+	Connection connection = getConnection();
+	//プリペアードステート面と
+	PreparedStatement statement = null;
+	//実行件数
+	int count = 0;
+	try{
+		//店舗IDとTIMEIDでゲットする
+		Shift old = WeekScore_get(StoreId, StartData);
+		if (old == null) {
+	//		店舗情報が存在しなかった場合
+	//		プリペアードステートメントにINSERT文をセット
+			statement = connection.prepareStatement("insert into Shift (SHIFT_DATE,WORKER_ID,SHIFTHOPE_TIME_ID,SHIFT_SCORE,SHIFTHOPE_TIME_START,"
+					+ "SHIFTHOPE_TIME_END,WORK_TIME_ID,SHIFT_TIME_START,SHIFT_TIME_END,SHIFT_ID,STORE_ID)"
+					+ "values(?,?,?,?,?,?,?,?,?,?,?)");
+
+			statement.setDate(1, shift.getShiftDate());
+			statement.setString(2, shift.getWorker().getWorkerId());
+			statement.setString(3, shift.getShiftHopeTimeId());
+			statement.setInt(4, shift.getShiftScore());
+			statement.setTimestamp(5, shift.getShiftHopeTimeStart());
+			statement.setTimestamp(6, shift.getShiftHopeTimeEnd());
+			statement.setString(7, shift.getWorkTimeId());
+			statement.setTimestamp(8, shift.getShiftTimeStart());
+			statement.setTimestamp(9, shift.getShiftTimeEnd());
+			statement.setString(10, shift.getShiftId());
+			statement.setString(11, shift.getStore().getStoreId());
+
+		}else {
+			//IDが存在した場合
+			//プリペアードステートメントにUPDATE文をセット
+			statement = connection
+					.prepareStatement("UPDATE shift SET  shift_date=?, store_id=? WHERE shift_score=? ");
+			//プリペアードステートメントに値をバインド
+			statement.setDate(1, shift.getShiftDate());
+			statement.setString(2, shift.getStore().getStoreId());
+			statement.setInt(3, shift.getShiftScore());
+		}
+		//プリペアードステートメントにを実行
+		count = statement.executeUpdate();
+	} catch (Exception e) {
+		throw e;
+	} finally {
+		//プリペアードステート面とをとじる
+		if (statement != null) {
+			try {
+				statement.close();
+			} catch (SQLException sqle) {
+				throw sqle;
+			}
+		}
+		//コネクションを閉じる
+		if (connection != null) {
+			try {
+				connection.close();
+			} catch (SQLException sqle) {
+				throw sqle;
+			}
+		}
+	}
+	if (count > 0){
+		//実行件数が1件以上ある場合
+		return true;
+	} else {
+		//実行件数が0件の場合
+		return false;
+	}
+	}
+	}
+
+
+
+
+
+
+
 
