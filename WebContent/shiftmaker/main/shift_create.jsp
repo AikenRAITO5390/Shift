@@ -47,26 +47,21 @@
 
 
 
+
+
+    <%-- 一週間分回ると<tr>で次の行へ行く
+    <c:if test="${counter % 7 == 0}">
+         <tr>
+    </c:if> --%>
+
 	<h1>カレンダー</h1>
     <table>
+    	<thead>
     	<%--曜日のヘッダー行 --%>
         <tr>
-            <th>日</th>
-            <th>月</th>
-            <th>火</th>
-            <th>水</th>
-            <th>木</th>
-            <th>金</th>
-            <th>土</th>
-        </tr>
-        <%--counterで一週間をカウントしている --%>
-        <c:set var="counter" value="0" />
-        <c:forEach var="date" items="${dates}">
-        	<%-- 一週間分回ると<tr>で次の行へ行く --%>
-            <c:if test="${counter % 7 == 0}">
-                <tr>
-            </c:if>
-            <td>
+         	<th>名前</th>
+         <c:forEach var="date" items="${dates}">
+            <th>
                 <c:choose>
                 	<%-- データが入っていた場合日にちを出力 --%>
                     <c:when test="${date != null}">
@@ -76,20 +71,26 @@
                         <!-- データが何も入っていない場合スルー -->
                     </c:otherwise>
                 </c:choose>
-            </td>
-           <c:set var="counter" value="${counter + 1}" />
-            <c:if test="${counter % 7 == 0}">
-                </tr>
-            </c:if>
+            </th>
         </c:forEach>
 
-        <!-- 最終行が7列に満たない場合に空のセルで埋める -->
-        <c:if test="${counter % 7 != 0}">
-            <c:forEach begin="0" end="${6 - (counter % 7)}">
-                <td></td>
-            </c:forEach>
+        </tr>
+        </thead>
+        <tbody>
+
+        <c:forEach var="worker" items="${workerShifts}">
+            <tr>
+               	<td>${worker.name},${worker.date}</td>
+               	<td>
+                    <c:forEach var="shift" items="${worker.mergedShifts}">
+                        ${shift}<br>
+                    </c:forEach>
+                </td>
+
             </tr>
-        </c:if>
+        </c:forEach>
+
+        </tbody>
     </table>
 </body>
 </html>

@@ -94,11 +94,12 @@ public class ShiftCreate {
 
 
 
-    public static List<Map<String, Object>> getWorkerMergedShifts(List<WorkerShift> workers) {
+    public static List<Map<String, Object>> getWorkerMergedShifts(List<WorkerShift> workers, String date) {
         List<Map<String, Object>> result = new ArrayList<>();
 
         for (WorkerShift worker : workers) {
             Map<String, Object> workerInfo = new HashMap<>();
+            workerInfo.put("date",date );
             workerInfo.put("name", worker.name);
             workerInfo.put("role", worker.role);
             workerInfo.put("mergedShifts", worker.mergedShifts);
@@ -167,11 +168,9 @@ public class ShiftCreate {
 
 
 
-    public List<Map<String,Object>> Shiftmain(String work_time_start, String work_time_end, Shift shift,Store shift_manager, List<Shift> shift_list) {
+    public List<Map<String,Object>> Shiftmain(String work_time_start, String work_time_end, Shift shift,Store shift_manager, List<Shift> shift_list, String date) {
         // 必要人数の設定（キッチンとホールで区別）
         ShiftRequirement requirement = new ShiftRequirement(work_time_start, work_time_end, 1, 1);
-        //シフトの情報を格納する
-        List<Map<String, Object>> ShiftDetail = new ArrayList<>();
         List<WorkerShift> workers = new ArrayList<>();
         StoreDao stDao = new StoreDao();//StoreDao初期化
 
@@ -215,7 +214,7 @@ public class ShiftCreate {
         createShiftSchedule(requirement, workers);
 
         // 各人の統合された勤務時間を取得
-        List<Map<String, Object>> workerMergedShifts = getWorkerMergedShifts(workers);
+        List<Map<String, Object>> workerMergedShifts = getWorkerMergedShifts(workers,date);
 
         System.out.println("\n=== 各人の勤務時間 ===");
         for (Map<String, Object> workerInfo : workerMergedShifts) {

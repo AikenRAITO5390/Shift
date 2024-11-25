@@ -30,9 +30,14 @@ public class ShiftCreateAction extends Action{
 		Shift  shift  = null;
 
 
-		List<LocalDate> dates = calende.Calender(2024, 11);
-		LocalDate localDate = LocalDate.of(2024, 11, 14);
+		List<LocalDate> dates = calende.Calender_side(2024, 11);
+		for(LocalDate date :dates){
+			Integer date_int = date.getDayOfMonth();
+			System.out.println(date_int);
+		}
 
+		LocalDate localDate = LocalDate.of(2024, 11, 14);
+		// カレンダーを生成
 	    // java.sql.Dateに変換
 	    Date shift_date = Date.valueOf(localDate);
 		HttpSession session = req.getSession();
@@ -41,11 +46,13 @@ public class ShiftCreateAction extends Action{
 		String work_time_end = stDao.TimeEndGet(manager.getStoreId());
 		List<Shift> shift_list = new ArrayList<>();
 		shift_list = shDao.filter(stDao.get(manager.getStoreId()), shift_date);
-		List<Map<String, Object>> workerShifts = shift_create.Shiftmain(work_time_start, work_time_end,shift,manager,shift_list);
+		List<Map<String, Object>> workerShifts = shift_create.Shiftmain(work_time_start, work_time_end,shift,manager,shift_list,date);
 
 
 		//リクエストにカレンダーをセット
 		req.setAttribute("dates", dates);
+        req.setAttribute("year", 2024);
+        req.setAttribute("month", 11);
 		//
 		req.setAttribute("workerShifts", workerShifts);
 		//shift_select.jspに遷移
