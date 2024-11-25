@@ -26,12 +26,12 @@
 			{"120","売上","1月"},
 			{"150","売上","2月"},
 			{"130","売上","3月"},
-			{"150","クッキー","３月"},
-            {"120","クッキー","４月"},
-            {"130","クッキー","５月"},
-            {"250","グミ","３月"},
-            {"190","グミ","４月"},
-            {"210","グミ","５月"},
+			{"150","クッキー","3月"},
+            {"120","クッキー","4月"},
+            {"130","クッキー","5月"},
+            {"250","グミ","3月"},
+            {"190","グミ","4月"},
+            {"210","グミ","5月"},
 	};
 
 	ArrayList<ArrayList<String>>ar1 = new ArrayList<ArrayList<String>>();
@@ -45,13 +45,18 @@
 	}
 	//### 元データをセッションに保持 ###
 	session.setAttribute("chart1", ar1);
+
+	//セッションに保存されているか確認
+	ArrayList<ArrayList<String>> test = (ArrayList<ArrayList<String>>) session.getAttribute("chart1");
+	System.out.println("セッションデータ: " + test);
+
 	%>
 
 
 
 
-
-	<img src="JFreeChartTest?mode=2" />
+	<!-- グラフを画像にして表示 -->
+	<img src="${pageContext.request.contextPath}/JFreeChartTest" />
 
 
 
