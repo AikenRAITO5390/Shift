@@ -8,7 +8,6 @@ public class BBS implements Serializable {
 //	投稿内容
 	private String bbsText;
 
-
 //	投稿ID
 	private String bbsId;
 
@@ -20,6 +19,20 @@ public class BBS implements Serializable {
 
 //	投稿日
 	private String bbsDate;
+
+//	シフト作成者
+	private String managerId;
+
+
+	public String getManagerId() {
+		return managerId;
+	}
+
+	public void setManagerId(String managerId) {
+		this.managerId = managerId;
+	}
+
+
 
 	public String getBbsText() {
 		return bbsText;

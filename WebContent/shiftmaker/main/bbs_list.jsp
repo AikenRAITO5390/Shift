@@ -8,7 +8,6 @@
 </head>
 <body>
     <h1>掲示板</h1>
-
     <ul>
         <c:forEach var="message" items="${messages}">
             <li>
@@ -19,6 +18,6 @@
         </c:forEach>
     </ul>
 
-    <li><a href="BbsCreate.action">投稿を作成する</a></li>
+    <a href="BbsCreate.action">投稿を作成する</a>
 </body>
 </html>

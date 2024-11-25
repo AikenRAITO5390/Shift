@@ -35,6 +35,12 @@ public class WorkerUpdateExecuteAction extends Action {
 		String WORKER_PASSWORD = req.getParameter("WORKER_PASSWORD");
 		String STORE_NAME = req.getParameter("STORE_NAME");
 
+		System.out.println(WORKER_ID);
+	    System.out.println(WORKER_NAME);
+	    System.out.println(WORKER_DATE);
+	    System.out.println(WORKER_ADDRESS);
+	    System.out.println(WORKER_TEL);
+
 
 
 		//DBからデータ取得 3
@@ -47,6 +53,8 @@ public class WorkerUpdateExecuteAction extends Action {
         worker.setWorkerTel(WORKER_TEL);
         worker.setWorkerPassword(WORKER_PASSWORD);
         store.setStoreName(STORE_NAME);
+
+
 
         // データベースの更新
         wDao.save(worker);

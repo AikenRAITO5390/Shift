@@ -148,56 +148,68 @@ public class BBSDao extends Dao {
 		return list;
 	}
 
+
+
+
 	//掲示板に変更はないので、UPDATE文は削除しました
 	public boolean save(BBS bbs) throws Exception {
-		//コネクションを確立
-		Connection connection = getConnection();
-		//プリペアードステートメント
-		PreparedStatement statement = null;
-		//実行件数
-		int count = 0;
+	    // コネクションを確立
+	    Connection connection = getConnection();
+	    // プリペアードステートメント
+	    PreparedStatement statement = null;
+	    // 実行件数
+	    int count = 0;
 
-		try{
-				//プリペアードステートメンにINSERT文をセット
-				statement = connection.prepareStatement(
-						"insert into BBS (BBS_ID, BBS_TEXT, STORE_ID, WORKER_ID) values(?, ?, ?, ?,) ");
-				//プリペアードステートメントに値をバインド
-				statement.setString(1, bbs.getBbsId());
-				statement.setString(2, bbs.getBbsText());
-				statement.setString(3, bbs.getStore().getStoreId());
-				statement.setString(4, bbs.getWorker().getWorkerId());
-			//プリペアードステートメントを実行
-			count = statement.executeUpdate();
+	    try {
+	        // プリペアードステートメントにINSERT文をセット
+	        statement = connection.prepareStatement(
+	                "INSERT INTO BBS (BBS_ID, BBS_TEXT, STORE_ID, WORKER_ID, BBS_DATE,MANAGER_ID) VALUES (?, ?, ?, ?, ?, ?)");
+	        // プリペアードステートメントに値をバインド
+	        statement.setString(1, bbs.getBbsId());
+	        statement.setString(2, bbs.getBbsText());
+	        statement.setString(3, bbs.getStore().getStoreId());
+	        statement.setString(4, bbs.getWorker().getWorkerId());
+	        statement.setString(5, bbs.getBbsDate());
+	        statement.setString(6, bbs.getStore().getManagerId());
 
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			//
-			if(statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
+	        // プリペアードステートメントを実行
+	        count = statement.executeUpdate();
 
-			if(connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-		}
+	        // コミット
+	        connection.commit();
 
-		if (count > 0) {
-			//実行件数が1以上ある場合
-			return true;
-		} else {
-			//実行件数が0件の場合
-			return false;
-		}
+	    } catch (Exception e) {
+	        // ロールバック
+	        if (connection != null) {
+	            try {
+	                connection.rollback();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	        e.printStackTrace();
+	        throw e;
+	    } finally {
+	        // ステートメントのクローズ
+	        if (statement != null) {
+	            try {
+	                statement.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
 
+	        // コネクションのクローズ
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	    }
+
+	    return count > 0;
 	}
 //掲示板削除
 	public boolean delete(BBS bbs) throws Exception {
