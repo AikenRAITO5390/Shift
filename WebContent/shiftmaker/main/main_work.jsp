@@ -17,7 +17,7 @@
 <h2><a href="#">📝　掲示板</a></h2>
 
 
-<h2><a href="#">💪　従業員情報登録</a></h2>
+<h2><a href="ShiftWorkerSignup.action">💪　従業員情報登録</a></h2>
 
 
 </div>

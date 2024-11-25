@@ -545,6 +545,36 @@ public class StoreDao extends Dao{
 	}
 
 
+	// work_time_id, work_time_start, work_time_endを取得するget
+	public List<Store> getWorkTimes(String storeId) throws Exception {
+	    List<Store> workTimes = new ArrayList<>();
+	    Connection connection = getConnection();
+	    PreparedStatement statement = null;
+	    ResultSet resultSet = null;
+
+	    try {
+	        String sql = "SELECT work_time_id, work_time_start, work_time_end FROM store WHERE store_id = ?";
+	        statement = connection.prepareStatement(sql);
+	        statement.setString(1, storeId);
+	        resultSet = statement.executeQuery();
+
+	        while (resultSet.next()) {
+	            Store store = new Store();
+	            store.setWorkTimeId(resultSet.getString("work_time_id"));
+	            store.setWorkTimeStart(resultSet.getTime("work_time_start"));
+	            store.setWorkTimeEnd(resultSet.getTime("work_time_end"));
+	            workTimes.add(store);
+	        }
+	    } finally {
+	        if (resultSet != null) resultSet.close();
+	        if (statement != null) statement.close();
+	        if (connection != null) connection.close();
+	    }
+
+	    return workTimes;
+	}
+
+
 
 
 

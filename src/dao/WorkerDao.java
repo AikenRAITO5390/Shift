@@ -27,6 +27,7 @@ public class WorkerDao extends Dao{
 
         ResultSet rs = ps.executeQuery();
 
+
         // 認証成功の場合
         if (rs.next()) {
             // Workerオブジェクトを作成して設定
@@ -34,6 +35,7 @@ public class WorkerDao extends Dao{
             worker.setWorkerId(rs.getString("worker_id"));
             worker.setWorkerPassword(rs.getString("worker_password"));
             worker.setWorkerName(rs.getString("worker_name"));
+            worker.setStoreId(rs.getString("store_id"));
         }
 
         ps.close();
