@@ -1,6 +1,9 @@
 package shiftmaker.main;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,38 +18,38 @@ import tool.Action;
 public class ShiftConditionEditAction extends Action{
 
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		// ローカル変数の宣言 1
-		// セッションを取得
-		HttpSession session = req.getSession();
-		// ログインユーザーを取得
-		Store store = (Store)session.getAttribute("user");
-		// WorkerDaoを初期化
-		WorkerDao workerDao = new WorkerDao();
-		// StoreDaoを初期化
-		StoreDao storeDao = new StoreDao();
-		Store stores = new Store();
+		// セッションからログイン情報を取得
+        HttpSession session = req.getSession();
+        Store store = (Store) session.getAttribute("user");
 
+        // WorkerDaoとStoreDaoの初期化
+        WorkerDao workerDao = new WorkerDao();
+        StoreDao storeDao = new StoreDao();
 
-		//リクエストパラメータ―の取得 2
-		String workerId = req.getParameter("workerId");
+        // リクエストパラメータからworkerIdを取得
+        String workerId = req.getParameter("workerId");
 
-		// 確認用
-		System.out.println(workerId);
+        // データベースから該当の従業員情報を取得
+        Worker worker = workerDao.get(workerId);
 
-		// DBからデータ取得 3
-		stores = storeDao.get(store.getStoreId());
-		// 従業員IDから従業員インスタンスを取得
-		Worker worker = workerDao.get(workerId);
-		List<String> list = storeDao.filter(store.getStoreId());
+        // ポジションのリスト
+        List<Map<String, String>> positions = Arrays.asList(
+        	new HashMap<String, String>() {{
+        	    put("key", "kitchen");
+        	    put("value", "キッチン");
+        	}},
+        	new HashMap<String, String>() {{
+        	    put("key", "hall");
+        	    put("value", "ホール");
+        	}}
+        );
 
-		req.setAttribute("worker", worker);
-        req.setAttribute("stores", list);
-        req.setAttribute("stores", stores);
+        // リクエストに従業員データを設定
+        req.setAttribute("worker", worker);
+        req.setAttribute("positions", positions);
 
-
-		//JSPへフォワード 7
-		req.getRequestDispatcher("shift_condition_edit.jsp").forward(req, res);
+        // JSPへフォワード
+        req.getRequestDispatcher("shift_condition_edit.jsp").forward(req, res);
 	}
-
 
 }

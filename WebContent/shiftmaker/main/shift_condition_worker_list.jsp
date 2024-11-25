@@ -25,9 +25,9 @@
 	                <tr>
 	                    <td>${worker.workerId}</td>
 	                    <td>${worker.workerName}</td>
-	                    <td>${worker.workerPosition}</td>
+	                    <td>${positionMapping[worker.workerPosition]}</td> <!-- ポジションの日本語化 -->
 	                    <td>${worker.workerScore}</td>
-	                    <td><a href="ShitConditionEdit.action?workerId=${worker.workerId}">変更</a></td>
+	                    <td><a href="ShiftConditionEdit.action?workerId=${worker.workerId}">変更</a></td>
 	                </tr>
                 </c:if>
             </c:forEach>

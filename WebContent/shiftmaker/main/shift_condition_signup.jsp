@@ -42,7 +42,7 @@
 	                        </select>
 	                    </td>
 	                    <td>
-	                        <input type="text" name="worker_score" placeholder="点数を入力" maxlength="1" required />
+	                        <input type="number" name="worker_score" placeholder="点数を入力" min="1" max="5" required />
 	                    </td>
 
 	                </tr>
