@@ -20,6 +20,12 @@ public class BBSAction extends Action {
         HttpSession session = req.getSession();
         Store store = (Store) session.getAttribute("user");
 
+        if (store == null) {
+            System.out.println("Store is null");
+            res.sendRedirect("login.jsp");
+            return;
+        }
+
         WorkerDao wDao = new WorkerDao();
         StoreDao sDao = new StoreDao();
         BBSDao bDao = new BBSDao();
@@ -38,18 +44,29 @@ public class BBSAction extends Action {
                 .collect(Collectors.toList());
 
         // 掲示板メッセージを取得
-        List<BBS> messages = bDao.filter(store); // 修正箇所
+        List<BBS> messages = bDao.filter(store);
+
+        // MANAGER_IDからMANAGER_NAMEを取得
+        String managerId = store.getManagerId(); // StoreクラスにgetManagerId()があると仮定
+        Store managerStore = sDao.manager_get(managerId);
+        String managerName = managerStore != null ? managerStore.getManagerName() : null;
+
+
 
         // リクエストにデータをセット
         req.setAttribute("workers", filteredWorkers);
         req.setAttribute("workersnot", filteredWorkersnot);
         req.setAttribute("stores", stores);
         req.setAttribute("messages", messages);
+        req.setAttribute("managerName", managerName);
+
+
 
         System.out.println("Stores: " + stores);
         System.out.println("Filtered Workers: " + filteredWorkers);
-        System.out.println("Filtered Workers: " + filteredWorkersnot);
+        System.out.println("Filtered Workers not: " + filteredWorkersnot);
         System.out.println("Messages: " + messages);
+        System.out.println("MessagesName: " + managerName);
 
         req.getRequestDispatcher("bbs_list.jsp").forward(req, res);
     }

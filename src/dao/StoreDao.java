@@ -123,6 +123,81 @@ public class StoreDao extends Dao{
 
 	}
 
+
+
+	/**
+	 * getメソッド　店舗IDを指定して店舗インスタンスを一件取得
+	 *
+	 * @param store_id
+	 * @return　店舗クラスのインスタンス　存在しない場合はNull
+	 * @throws Exception
+	 */
+	//Storeのmanager_idからmanager_nameを取得したい
+	public Store manager_get(String manager_id) throws Exception {
+		//店舗情報インスタンスを初期化
+		Store store = new Store();
+		//データベースのコネクションを確立
+		Connection connection = getConnection();
+		//プリペアードステートメント
+		PreparedStatement statement = null;
+
+		try{
+			String sql = "SELECT * FROM store WHERE manager_id = ?";
+			//プリペアードステートメントにSQL文をセット
+			statement = connection.prepareStatement(sql);//後で書く
+			//プリペアードステートメントに店舗IDをバインド（？の一個めに入る）
+			statement.setString(1, manager_id);
+			//プリペアードステートメントを実行
+			ResultSet rSet = statement.executeQuery();
+
+
+			if(rSet.next()){
+				//リザルトセットが存在する場合(検索結果が存在した場合)
+				//店舗情報インスタンスに検索結果をセット
+				store.setStoreId(rSet.getString("store_id"));
+				store.setStoreName(rSet.getString("store_name"));
+				store.setManagerId(rSet.getString("manager_id"));
+				store.setManagerName(rSet.getString("manager_name"));
+				store.setPassword(rSet.getString("password"));
+				store.setEmail(rSet.getString("email"));
+				store.setWorkTimeId(rSet.getString("work_time_id"));
+				store.setWorkTimeStart(rSet.getTime("work_time_start"));
+				store.setWorkTimeEnd(rSet.getTime("work_time_end"));
+				store.setWorkWeekScore(rSet.getInt("work_week_score"));
+				store.setWeekScore(rSet.getInt("week_score"));
+
+			} else {
+//				リザルトセットが存在しない場合
+//				店舗情報インスタンスにNullをセット
+				store = null;
+			}
+		}catch (Exception e) {
+			throw e;
+		}finally {
+//			プリペアードステートメントを閉じる
+			if(statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+
+		}
+
+		//コネクションを閉じる
+		if (connection != null) {
+			try {
+				connection.close();
+			} catch (SQLException sqle) {
+				throw sqle;
+			}
+		}
+	//storeに入れた情報を返す
+	return store;
+
+	}
+
 	//時間設定のために、店舗IDとAとかBとかで取得するやつ
 	public Store Time_get(String store_id, String store_time_id) throws Exception {
 		//店舗情報インスタンスを初期化
@@ -573,9 +648,6 @@ public class StoreDao extends Dao{
 
 	    return workTimes;
 	}
-
-
-
 
 
 

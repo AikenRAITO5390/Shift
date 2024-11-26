@@ -11,7 +11,18 @@
     <ul>
         <c:forEach var="message" items="${messages}">
             <li>
-                <strong>投稿者:</strong> ${message.worker.workerName} <br>
+                <strong>投稿者:</strong>
+
+                <c:choose>
+                    <c:when test="${not empty message.worker.workerName}">
+                        ${message.worker.workerName}
+                    </c:when>
+                    <c:when test="${not empty message.store.managerName}">
+                        ${message.store.managerName}
+                    </c:when>
+                </c:choose>
+
+                <br>
                 <strong>メッセージ:</strong> ${message.bbsText} <br>
                 <strong>投稿日:</strong> ${message.bbsDate}
             </li>

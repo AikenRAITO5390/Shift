@@ -112,7 +112,7 @@ public class BBSDao extends Dao {
 	    ResultSet rSet = null;
 	    //SQL文のソート
 	    //投稿された順にしたいので、追加順となるBBS_IDで昇順
-	    String order = " order by BBS_ID asc";
+	    String order = " order by BBS_DATE desc";
 
 	    try {
 		    //プリペアードステートメントにSQL文をセット

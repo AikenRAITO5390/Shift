@@ -21,15 +21,15 @@ public class BBS implements Serializable {
 	private String bbsDate;
 
 //	シフト作成者
-	private String managerId;
+	private String manager;
 
 
-	public String getManagerId() {
-		return managerId;
+	public String getManager() {
+		return manager;
 	}
 
-	public void setManagerId(String managerId) {
-		this.managerId = managerId;
+	public void setManager(String manager) {
+		this.manager = manager;
 	}
 
 
