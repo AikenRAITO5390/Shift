@@ -168,7 +168,7 @@ public class ShiftCreate {
 
 
 
-    public List<Map<String,Object>> Shiftmain(String work_time_start, String work_time_end, Shift shift,Store shift_manager, List<Shift> shift_list, String date) {
+    public List<Map<String,Object>> Shiftmain(String work_time_start, String work_time_end,Store shift_manager, List<Shift> shift_list, String date) {
         // 必要人数の設定（キッチンとホールで区別）
         ShiftRequirement requirement = new ShiftRequirement(work_time_start, work_time_end, 1, 1);
         List<WorkerShift> workers = new ArrayList<>();

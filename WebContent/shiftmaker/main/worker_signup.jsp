@@ -10,7 +10,6 @@
 <body>
 <div class="body">
 
-		<c:import url="../../common/navigation.jsp"/>
 
 		<!-- 画面タイトル -->
 		<h2>従業員情報登録</h2>

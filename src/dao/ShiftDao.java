@@ -314,6 +314,42 @@ public class ShiftDao extends Dao{
 	    return dateMap;
 	}
 
+	// Eの選択肢用にデータを保存するメソッド
+	public void insertCustomWorkTime(String workerId, String storeId, String startTime, String endTime) throws Exception {
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+
+		try {
+		    String sql = "INSERT INTO SHIFT (WORKER_ID, STORE_ID, SHIFTHOPE_TIME_START, SHIFTHOPE_TIME_END) VALUES (?, ?, ?, ?)";
+		    statement = connection.prepareStatement(sql);
+		    statement.setString(1, workerId);
+		    statement.setString(2, storeId);
+		    statement.setString(3, startTime);
+		    statement.setString(4, endTime);
+		    statement.executeUpdate();
+		} finally {
+		    if (statement != null) statement.close();
+		    if (connection != null) connection.close();
+		}
+	}
+
+	// Eの選択肢用にデータを保存するメソッド
+	public void insertWorkTime(String workerId, String storeId, String workTimeId) throws Exception {
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+
+		try {
+			String sql = "INSERT INTO SHIFT (WORKER_ID, STORE_ID, WORK_TIME_ID) VALUES (?, ?, ?)";
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, workerId);
+			statement.setString(2, storeId);
+			statement.setString(3, workTimeId);
+			statement.executeUpdate();
+		} finally {
+			if (statement != null) statement.close();
+			if (connection != null) connection.close();
+		}
+	}
 
 
 

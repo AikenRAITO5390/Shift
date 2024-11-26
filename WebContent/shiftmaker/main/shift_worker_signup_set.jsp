@@ -38,11 +38,51 @@
 	                        <td>${workTime.workTimeEnd}</td>
 	                    </tr>
 	                </c:forEach>
+
+	            <!-- Eの選択肢を追加 -->
+	            <tr>
+				    <td>
+				        <input type="radio" name="workTimeId" value="E" id="customWorkTime" required>
+				    </td>
+				    <td>E</td>
+				    <td>
+				        <select name="customStartTime" id="customStartTime" disabled>
+				            <c:forEach var="hour" begin="${store_time_start}" end="${store_time_end - 1}">
+				                <option value="${hour}">${hour}:00</option>
+				            </c:forEach>
+				        </select>
+				    </td>
+				    <td>
+				        <select name="customEndTime" id="customEndTime" disabled>
+				            <c:forEach var="hour" begin="${store_time_start + 1}" end="${store_time_end}">
+				                <option value="${hour}">${hour}:00</option>
+				            </c:forEach>
+				        </select>
+				    </td>
+				</tr>
 	            </tbody>
 	        </table>
+
+	        <script>
+			    document.addEventListener("DOMContentLoaded", () => {
+			        const customRadio = document.getElementById("customWorkTime");
+			        const startTimeSelect = document.getElementById("customStartTime");
+			        const endTimeSelect = document.getElementById("customEndTime");
+
+			        document.querySelectorAll('input[name="workTimeId"]').forEach(radio => {
+			            radio.addEventListener("change", () => {
+			                const isCustom = customRadio.checked;
+			                startTimeSelect.disabled = !isCustom;
+			                endTimeSelect.disabled = !isCustom;
+			            });
+			        });
+			    });
+			</script>
+
+
 	        <input type="hidden" name="workerId" value="${worker.workerId}">
 	        <input type="hidden" name="storeId" value="${param.storeId}">
-	        <input type="submit" value="送信">
+	        <input type="submit" value="決定">
 	        <a href="ShiftWorkerSignup.action">戻る</a>
 	    </form>
 
