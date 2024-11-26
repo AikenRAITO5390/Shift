@@ -14,7 +14,7 @@
 
 <h2><a href="#">📜　シフト閲覧</a></h2>
 
-<h2><a href="#">📝　掲示板</a></h2>
+<h2><a href="BBSWorker.action">📝　掲示板</a></h2>
 
 
 <h2><a href="ShiftWorkerSignup.action">💪　従業員情報登録</a></h2>

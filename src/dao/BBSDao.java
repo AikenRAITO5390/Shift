@@ -12,6 +12,14 @@ import bean.Store;
 
 
 public class BBSDao extends Dao {
+	private static int currentBbsId = 1;
+
+
+	public int generateNewBbsId() {
+        return currentBbsId++;
+    }
+
+
 
 	public BBS get(String bbsId) throws Exception{
 		BBS bbs = new BBS();

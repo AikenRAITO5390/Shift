@@ -33,6 +33,10 @@
 	<input type="password" name="WORKER_PASSWORD" maxlength="20" placeholder="20文字以内の半角英数字でご入力下さい" value=""
 	style="ime-mode: disabled" required/>
 
+	<!-- ストアＩＤ -->
+	<label>STORE_ID</label>
+	<input type="text" name="STORE_ID" placeholder="10文字以内の半角英数字でご入力下さい"value="" required/>
+
 	<!-- パスワード表示チェックボックス -->
 	<!-- <input id="inputCheckbox" type="checkbox"> -->
 	<!-- <input id="togglePassword" type="checkbox"> パスワードを表示する -->
@@ -47,6 +51,9 @@
 	<!-- シフト作成者用ログインリンク -->
 	<!-- <li><a href="LoginAction">シフト作成者用ログイン</a></li> -->
 	<li><a href="ShiftLogin.action">シフト作成者用ログインページ</a></li>
+
+
+</form>
 
 </form>
 

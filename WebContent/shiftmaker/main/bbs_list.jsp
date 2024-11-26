@@ -30,5 +30,6 @@
     </ul>
 
     <a href="BbsCreate.action">投稿を作成する</a>
+    <a href="Main.action">戻る</a>
 </body>
 </html>
