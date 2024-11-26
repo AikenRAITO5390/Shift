@@ -25,23 +25,58 @@
         </c:forEach>
     </table>
 
-<script>
-    // 初期値を設定
-    <c:forEach var="i" begin="0" end="6">
-        document.getElementById("WeekScore_${i}").value = "0";
-    </c:forEach>
-
-    // power_listの値を設定
-    <c:forEach var="i" begin="0" end="6">
-        <c:forEach var="power" items="${power_list}">
-            <c:if test="${power[0] == (i+1).toString()}">
-                document.getElementById("WeekScore_${i}").value = "${power[1]}";
-            </c:if>
+    <script>
+    console.log("ここは実行できてます➀");
+        // 初期値を設定
+        <c:forEach var="i" begin="0" end="6">
+            document.getElementById("WeekScore_${i}").value = "0";
         </c:forEach>
-    </c:forEach>
-</script>
+
+        // power_listの値を設定
+        <c:forEach var="i" begin="0" end="6">
+            <c:forEach var="power" items="${power_list}">
+                <c:if test="${power[0] == (i+1).toString()}">
+                    document.getElementById("WeekScore_${i}").value = "${power[1]}";
+                </c:if>
+            </c:forEach>
+        </c:forEach>
+    </script>
     <button type="submit">変更</button>
 </form>
+
+<form action="DayPowerSetting.action" method="post">
+	    <table class="table table-hover">
+	        <c:forEach var="dateMap" items="${dateList}" varStatus="loopStatus">
+	            <c:forEach var="entry" items="${dateMap.entrySet()}">
+	                <tr>
+	                    <td><label>${loopStatus.index + 1}</label></td>
+	                    <td>
+	                        <input type="text" name="DayScore_${loopStatus.index + 1}" maxlength="7" id="DayScore_${loopStatus.index + 1}">
+	                    </td>
+	                    <input type="hidden" name="WorkDayScore_${loopStatus.index + 1}" value="${entry.key}">
+	                </tr>
+	            </c:forEach>
+	        </c:forEach>
+	    </table>
+<script>
+
+<c:forEach var="dateMap" items="${dateList}" varStatus="loopStatus">
+	<c:forEach var="entry" items="${dateMap.entrySet()}">
+		<c:forEach var="power" items="${power_list}">
+    		<c:if test="${power[0] == entry.value.toString()}">
+        	document.getElementById("DayScore_${loopStatus.index + 1}").value = "${power[1]}";
+    	</c:if>
+    	</c:forEach>
+	</c:forEach>
+</c:forEach>
+
+
+
+</script>
+
+
+	    <button type="submit">変更</button>
+	</form>
 
 </body>
 </html>

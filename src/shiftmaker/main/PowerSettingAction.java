@@ -1,6 +1,10 @@
 package shiftmaker.main;
 
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.Shift;
 import bean.Store;
 import dao.ShiftDao;
 import dao.StoreDao;
@@ -24,6 +29,7 @@ public class PowerSettingAction extends Action{
 		HttpSession session = req.getSession();//セッション
 		Store store_login = (Store)session.getAttribute("user");// ログインユーザーを取得
 		Map<String, String> errors = new HashMap<>();
+		Shift shift = null;
 
 //ログイン情報でゲットする
 		List<List<String>> list = sDao.Week_filter(store_login.getStoreId());
@@ -49,16 +55,30 @@ public class PowerSettingAction extends Action{
         System.out.println("次の月の最後の日付: " + sdf.format(lastDayOfNextMonth));
 
         calendar.setTime(firstDayOfNextMonth);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        List<Map<String, Integer>> dateList = new ArrayList<>();
+        List<Map<String, Integer>> datepoint = new ArrayList<>();
+
         while (!calendar.getTime().after(lastDayOfNextMonth)) {
-            System.out.println(sdf.format(calendar.getTime()));
-            
-            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            java.util.Date utilDate = calendar.getTime();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            LocalDate localDate = sqlDate.toLocalDate();
+
+            DayOfWeek dayOfWeek = localDate.getDayOfWeek();
+            int dayValue = dayOfWeek.getValue(); // 1 (月曜日) から 7 (日曜日) の数値を取得
+
+            Map<String, Integer> dateMap = new HashMap<>();
+            dateMap.put(sdf.format(utilDate), dayValue);
+            dateList.add(dateMap);
+
+            // 修正部分: java.util.Dateをjava.sql.Dateに変換して渡す
+            Map<String, Integer> datePoi = shiftDao.Powerfilter(store_login.getStoreId(), sqlDate);
+            datepoint.add(datePoi);
+
+            calendar.add(Calendar.DAY_OF_MONTH, 1); // 次の日に進む
         }
-
-
-
-
-
+        req.setAttribute("dateList", dateList);
+        req.setAttribute("datePoint", datepoint);
 
 		//月～日の点数を取得、表示するためのもの
 

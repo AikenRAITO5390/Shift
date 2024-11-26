@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import bean.Shift;
 import bean.Store;
@@ -256,6 +258,66 @@ public class ShiftDao extends Dao{
 
 	}
 
+	//パワー設定filter
+	public Map<String, Integer> Powerfilter(String store_id, Date StartDate) throws Exception {
+	    // 空のリストを作成して、結果を格納する
+		Map<String, Integer> dateMap = new HashMap<>();
+	    // コネクションを確立
+	    Connection connection = getConnection();
+	    PreparedStatement statement = null;
+	    ResultSet rSet = null;
+
+	    try {
+	        // SQL文を準備して店舗名に基づくフィルターを適用
+	        String sql = "SELECT shift_date, shift_score FROM SHIFT WHERE store_id = ? and shift_date=?";
+	        statement = connection.prepareStatement(sql);
+	        // プレースホルダーにstoreNameをセット
+	        statement.setString(1, store_id);
+	        statement.setDate(2, StartDate);
+
+	        // クエリを実行
+	        rSet = statement.executeQuery();
+
+	        while(rSet.next()){
+	        	dateMap.put(rSet.getString("shift_date"), rSet.getInt("shift_score"));
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        throw e;
+	    } finally {
+	        // リソースを閉じる
+	        if (rSet != null) {
+	            try {
+	                rSet.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (statement != null) {
+	            try {
+	                statement.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+
+	    return dateMap;
+	}
+
+
+
+
+
+	//パワー作成save
 	public boolean save_Score(Shift shift, Date StartData, String StoreId)throws Exception{
 	//データベースへのコネクションを確立
 	Connection connection = getConnection();
