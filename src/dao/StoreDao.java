@@ -332,6 +332,7 @@ public class StoreDao extends Dao{
 
 	}
 
+
 	/**
 	 * postFilterメソッド DB情報の一覧をリストへの格納処理。filterで使う
 	 *
