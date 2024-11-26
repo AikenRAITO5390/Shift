@@ -496,7 +496,7 @@ public class StoreDao extends Dao{
 
 		try{
 //			プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement("select work_time_start from STORE where STORE_ID=? and WORK_TIME_ID='A' ");//後で書く
+			statement = connection.prepareStatement("select store_time_start from STORE where STORE_ID=? and WORK_TIME_ID='A' ");//後で書く
 			//
 
 			statement.setString(1, store_id);
@@ -506,7 +506,7 @@ public class StoreDao extends Dao{
 //			リストへの格納処理を実行
 
 			if(rSet.next()){
-				work_time_start = rSet.getString("work_time_start");
+				work_time_start = rSet.getString("store_time_start");
 			}
 		} catch (Exception e) {
 			throw e;
@@ -551,7 +551,7 @@ public class StoreDao extends Dao{
 
 		try{
 //			プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement("select work_time_end from STORE where STORE_ID=? and WORK_TIME_ID='D'");
+			statement = connection.prepareStatement("select store_time_end from STORE where STORE_ID=? and WORK_TIME_ID='D'");
 			//
 
 			statement.setString(1, store_id);
@@ -561,7 +561,7 @@ public class StoreDao extends Dao{
 //			リストへの格納処理を実行
 
 			if(rSet.next()){
-				work_time_end = rSet.getString("work_time_end");
+				work_time_end = rSet.getString("store_time_end");
 			}
 		} catch (Exception e) {
 			throw e;
@@ -745,8 +745,8 @@ public boolean save_Time(Store store)throws Exception{
 //			店舗情報が存在しなかった場合
 //			プリペアードステートメントにINSERT文をセット
 			statement = connection.prepareStatement("insert into STORE (STORE_ID,STORE_NAME,MANAGER_ID,MANAGER_NAME,PASSWORD,EMAIL,WORK_TIME_ID,"
-					+ "WORK_TIME_START,WORK_TIME_END,WORK_WEEK_SCORE,WEEK_SCORE)"
-					+ "values(?,?,?,?,?,?,?,?,?,?,?)");
+					+ "WORK_TIME_START,WORK_TIME_END,WORK_WEEK_SCORE,WEEK_SCORE,STORE_TIME_START,STORE_TIME_END)"
+					+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
 //			プリペアードステートメントに値をバウンド
 			statement.setString(1, store.getStoreId());
 			statement.setString(2, store.getStoreName());
@@ -760,18 +760,22 @@ public boolean save_Time(Store store)throws Exception{
 			statement.setTime(9, (Time) store.getWorkTimeEnd());
 			statement.setInt(10, store.getWorkWeekScore());
 			statement.setInt(11, store.getWeekScore());
+			statement.setTime(12, store.getStoreTimeStart());
+			statement.setTime(13, store.getStoreTimeEnd());
 
 
 		}else {
 			//IDが存在した場合
 			//プリペアードステートメントにUPDATE文をセット
 			statement = connection
-					.prepareStatement("UPDATE store SET  work_time_start=?, work_time_end=? WHERE store_id=? AND work_time_id=?");
+					.prepareStatement("UPDATE store SET  work_time_start=?, work_time_end=?, store_time_start=?, store_time_end=? WHERE store_id=? AND work_time_id=?");
 			//プリペアードステートメントに値をバインド
 			statement.setTime(1, store.getWorkTimeStart());
 			statement.setTime(2, store.getWorkTimeEnd());
-			statement.setString(3, store.getStoreId());
-			statement.setString(4, store.getWorkTimeId());
+			statement.setTime(3, store.getStoreTimeStart());
+			statement.setTime(4, store.getStoreTimeEnd());
+			statement.setString(5, store.getStoreId());
+			statement.setString(6, store.getWorkTimeId());
 		}
 		//プリペアードステートメントにを実行
 		count = statement.executeUpdate();

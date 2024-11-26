@@ -35,6 +35,14 @@ public class ShiftTimeSettingAction extends Action {
 		    workTimeEnd[i] = req.getParameter("workTimeEnd_" + i);
 		}
 
+		// 営業時間取得
+		String storeTimeStart = req.getParameter("storeTimeStart");
+		String storeTimeEnd = req.getParameter("storeTimeEnd");
+
+		// Time型変換
+		Time storeTimeStarts = Time.valueOf(storeTimeStart);
+		Time storeTimeEnds = Time.valueOf(storeTimeEnd);
+
 
 //String型でもってきてるのでTime型に変更する
 			Time[] workTimeEndTimes = new Time[workTimeEnd.length];
@@ -77,10 +85,12 @@ public class ShiftTimeSettingAction extends Action {
 		        store.setWorkTimeEnd(workTimeEndTimes[i]);
 		        store.setWorkWeekScore(store_login.getWorkWeekScore());
 		        store.setWeekScore(store_login.getWeekScore());
+		        store.setStoreTimeStart(storeTimeStarts);
+		        store.setStoreTimeEnd(storeTimeEnds);
 
 		        System.out.println("★★5");
 
-		        // 学生を保存
+		        // 保存
 		        sDao.save_Time(store);
 		    }
 
