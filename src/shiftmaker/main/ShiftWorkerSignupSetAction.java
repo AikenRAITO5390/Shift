@@ -34,6 +34,10 @@ public class ShiftWorkerSignupSetAction extends Action{
         String storeId = req.getParameter("storeId");
         // ログインユーザーを取得
      	Worker manager = (Worker)session.getAttribute("user");
+     	
+     	// 最初の
+     	String work_time_start = storeDao.TimeStartGet(manager.getStoreId());
+		String work_time_end = storeDao.TimeEndGet(manager.getStoreId());
 
         // 店舗の勤務時間を取得
         List<Store> workTimes = storeDao.getWorkTimes(manager.getStoreId());

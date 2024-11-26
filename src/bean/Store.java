@@ -35,9 +35,31 @@ public class Store extends User implements Serializable {
 //	曜日別シフト点数
 	private int workWeekScore;
 
-//　シフト点数
+//	シフト点数
 	private int weekScore;
 
+//	営業開始時間
+	private Time storeTimeStart;
+
+//	営業終了時間
+	private Time storeTimeEnd;
+
+
+	public Time getStoreTimeStart() {
+		return storeTimeStart;
+	}
+
+	public void setStoreTimeStart(Time storeTimeStart) {
+		this.storeTimeStart = storeTimeStart;
+	}
+
+	public Time getStoreTimeEnd() {
+		return storeTimeEnd;
+	}
+
+	public void setStoreTimeEnd(Time storeTimeEnd) {
+		this.storeTimeEnd = storeTimeEnd;
+	}
 
 	public String getStoreId() {
 		return storeId;
