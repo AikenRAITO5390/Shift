@@ -551,7 +551,7 @@ public class StoreDao extends Dao{
 
 		try{
 //			プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement("select store_time_end from STORE where STORE_ID=? and WORK_TIME_ID='D'");
+			statement = connection.prepareStatement("select store_time_end from STORE where STORE_ID=? and WORK_TIME_ID='A'");
 			//
 
 			statement.setString(1, store_id);
