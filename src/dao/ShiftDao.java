@@ -188,7 +188,7 @@ public class ShiftDao extends Dao{
 
 
 	//お店シフト日付情報があるか
-	public Shift WeekScore_get(String store_id, Date StartDate) throws Exception {
+	public Shift WeekScore_get(String store_id, Date StartDate, String worker_id) throws Exception {
 		//店舗情報インスタンスを初期化
 		Shift shift = new Shift();
 		//データベースのコネクションを確立
@@ -201,12 +201,13 @@ public class ShiftDao extends Dao{
 	    StoreDao storeDao = new StoreDao();
 
 		try{
-			String sql = "SELECT * FROM shift WHERE store_id = ? AND shift_date =?";
+			String sql = "SELECT * FROM shift WHERE store_id = ? AND shift_date =? AND worker_id = ?";
 			//プリペアードステートメントにSQL文をセット
 			statement = connection.prepareStatement(sql);//後で書く
 			//プリペアードステートメントに店舗IDをバインド（？の一個めに入る）
 			statement.setString(1, store_id);
 			statement.setDate(2, StartDate);
+			statement.setString(3, worker_id);
 			//プリペアードステートメントを実行
 			ResultSet rSet = statement.executeQuery();
 
@@ -318,7 +319,7 @@ public class ShiftDao extends Dao{
 
 
 	//パワー作成save
-	public boolean save_Score(Shift shift, Date StartData, String StoreId)throws Exception{
+	public boolean save_Score(Shift shift)throws Exception{
 	//データベースへのコネクションを確立
 	Connection connection = getConnection();
 	//プリペアードステート面と
@@ -327,8 +328,10 @@ public class ShiftDao extends Dao{
 	int count = 0;
 	try{
 		//店舗IDとTIMEIDでゲットする
-		Shift old = WeekScore_get(StoreId, StartData);
+		Shift old = WeekScore_get(shift.getStore().getStoreId(), shift.getShiftDate(),shift.getWorker().getWorkerId());
+
 		if (old == null) {
+			System.out.println("ここに来ました");
 	//		店舗情報が存在しなかった場合
 	//		プリペアードステートメントにINSERT文をセット
 			statement = connection.prepareStatement("insert into Shift (SHIFT_DATE,WORKER_ID,SHIFTHOPE_TIME_ID,SHIFT_SCORE,SHIFTHOPE_TIME_START,"
@@ -350,12 +353,11 @@ public class ShiftDao extends Dao{
 		}else {
 			//IDが存在した場合
 			//プリペアードステートメントにUPDATE文をセット
-			statement = connection
-					.prepareStatement("UPDATE shift SET  shift_date=?, store_id=? WHERE shift_score=? ");
+			statement = connection.prepareStatement("UPDATE shift SET  shift_score=? WHERE shift_date=? AND store_id=? ");
 			//プリペアードステートメントに値をバインド
-			statement.setDate(1, shift.getShiftDate());
-			statement.setString(2, shift.getStore().getStoreId());
-			statement.setInt(3, shift.getShiftScore());
+			statement.setDate(2, shift.getShiftDate());
+			statement.setString(3, shift.getStore().getStoreId());
+			statement.setInt(1, shift.getShiftScore());
 		}
 		//プリペアードステートメントにを実行
 		count = statement.executeUpdate();

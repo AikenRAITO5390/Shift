@@ -44,7 +44,7 @@
     <button type="submit">変更</button>
 </form>
 
-<form action="DayPowerSetting.action" method="post">
+<form action="DayPowerSettingResult.action" method="post">
 	    <table class="table table-hover">
 	        <c:forEach var="dateMap" items="${dateList}" varStatus="loopStatus">
 	            <c:forEach var="entry" items="${dateMap.entrySet()}">
@@ -58,21 +58,31 @@
 	            </c:forEach>
 	        </c:forEach>
 	    </table>
-<script>
+	<script>
 
-<c:forEach var="dateMap" items="${dateList}" varStatus="loopStatus">
-	<c:forEach var="entry" items="${dateMap.entrySet()}">
-		<c:forEach var="power" items="${power_list}">
-    		<c:if test="${power[0] == entry.value.toString()}">
-        	document.getElementById("DayScore_${loopStatus.index + 1}").value = "${power[1]}";
-    	</c:if>
-    	</c:forEach>
+	<c:forEach var="dateMap" items="${dateList}" varStatus="loopStatus">
+		<c:forEach var="entry" items="${dateMap.entrySet()}">
+			<c:forEach var="power" items="${power_list}">
+	    		<c:if test="${power[0] == entry.value.toString()}">
+	        	document.getElementById("DayScore_${loopStatus.index + 1}").value = "${power[1]}";
+	    		</c:if>
+	    	</c:forEach>
+		</c:forEach>
 	</c:forEach>
-</c:forEach>
 
+	<c:forEach var="dateMap" items="${dateList}" varStatus="loopStatus">
+		<c:forEach var="entry" items="${dateMap.entrySet()}">
+			<c:forEach var="dateMap" items="${datePoint}" varStatus="pointStatus">
+				<c:forEach var="pointy" items="${dateMap.entrySet()}">
+    				<c:if test="${pointy.key == entry.key}">
+        				document.getElementById("DayScore_${loopStatus.index + 1}").value = "${pointy.value}";
+    				</c:if>
+    			</c:forEach>
+    		</c:forEach>
+		</c:forEach>
+	</c:forEach>
 
-
-</script>
+	</script>
 
 
 	    <button type="submit">変更</button>
