@@ -10,7 +10,6 @@
 <body>
 <div class="body">
 
-	<c:import url="../../common/navigation.jsp"/>
 
 	<!-- 画面タイトル -->
 	<h2>シフト条件変更完了</h2>

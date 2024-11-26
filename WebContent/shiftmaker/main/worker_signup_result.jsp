@@ -8,8 +8,6 @@
 
 	<body>
 
-	<c:import url="../../common/navigation.jsp"/>
-
 	<div class="body">
 
 			<h2>従業員情報登録</h2>

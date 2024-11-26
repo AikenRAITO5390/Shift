@@ -8,7 +8,6 @@
 <c:import url="../../common/header.jsp"/>
 <body>
 
-	<c:import url="../../common/navigation.jsp"/>
 
     <h2>シフト条件変更</h2>
 

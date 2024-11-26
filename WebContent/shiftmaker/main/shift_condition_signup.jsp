@@ -6,7 +6,7 @@
 <c:import url="../../common/header.jsp"/>
 
 <div class="body">
-    <c:import url="../../common/navigation.jsp"/>
+
 
     <!-- 画面タイトル -->
     <h2>シフト条件登録</h2>
