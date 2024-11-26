@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.StandardChartTheme;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
@@ -30,7 +31,7 @@ public class SalesTableCreateAction extends HttpServlet {
 	                drawLineGraph(request,response);
 	        }
 
-////	         Line Chart/折れ線グラフ
+//	         Line Chart/折れ線グラフ
 	        protected void drawLineGraph(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	                response.setContentType("image/png");
 
@@ -49,12 +50,58 @@ public class SalesTableCreateAction extends HttpServlet {
 //	                データセットの作成処理
 	                DefaultCategoryDataset ds_cat = jfc.createDS_LineChart(ar1,ar2,ar3);
 
+	                ChartFactory.setChartTheme(StandardChartTheme.createLegacyTheme());
+
 //	                チャートの作成
-	                JFreeChart chart=ChartFactory.createLineChart("お菓子の売上数", "月", "売れた数", ds_cat, PlotOrientation.VERTICAL, true, false, false);
+	                JFreeChart chart=ChartFactory.createLineChart("売上の変動", "日付", "売上金額", ds_cat, PlotOrientation.VERTICAL, true, false, false);
+
 
 //	                PNG画像生成
 	                ServletOutputStream objSos=response.getOutputStream();
 	                ChartUtilities.writeChartAsJPEG(objSos, chart, 600, 400);
 	        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//
+//
+//	        protected void drawLineGraph(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//	            response.setContentType("image/png; charset=UTF-8"); // 文字コードを設定// 元データの取得
+//	            ArrayList<ArrayList<String>> ar = (ArrayList<ArrayList<String>>) request.getSession().getAttribute("chart1");
+//
+//	            // データセットの作成    ArrayList<Number> ar1 = new ArrayList<>();
+//	            ArrayList<String> ar2 = new ArrayList<>();
+//	            ArrayList<String> ar3 = new ArrayList<>();
+//	            for (int i = 0; i < ar.size(); i++) {
+//	                ar1.add(Integer.parseInt(ar.get(i).get(0)));
+//	                ar2.add(ar.get(i).get(1));
+//	                ar3.add(ar.get(i).get(2));
+//	            }
+//	            // データセットの作成処理DefaultCategoryDataset ds_cat = jfc.createDS_LineChart(ar1, ar2, ar3);
+//
+//	            // チャートの作成JFreeChart chart = ChartFactory.createLineChart("お菓子の売上数", "月", "売れた数", ds_cat, PlotOrientation.VERTICAL, true, false, false);
+//
+//	            // フォントの設定Font titleFont = new Font("MS Gothic", Font.BOLD, 18);
+//	            chart.getTitle().setFont(titleFont);
+//
+//	            // PNG画像生成ServletOutputStream objSos = response.getOutputStream();
+//	            ChartUtilities.writeChartAsPNG(objSos, chart, 600, 400); // PNGとして出力
+//	        }
+//
+
 
 }

@@ -18,18 +18,3 @@ public class JFreeChartFunctions {
 
 
 }
-
-
-
-
-////(1) Create Dataset for "createPieChart3D"
-//public DefaultPieDataset createDS_PieChart(ArrayList<ArrayList> ar1) {
-//
-//      //### ⑤データセットの作成処理 ###
-//      DefaultPieDataset defpie = new DefaultPieDataset();
-//      for(int i=0; i<ar1.size(); i++) {
-//              defpie.setValue(ar1.get(i).get(0),Integer.parseInt(ar1.get(i).get(1)));
-//      }
-//      return defpie;
-//}
-////(2) Create DataSet for "createLineChart"
