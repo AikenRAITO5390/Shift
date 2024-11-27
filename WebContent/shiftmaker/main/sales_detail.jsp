@@ -66,7 +66,7 @@
 
 
 	<!-- 戻るボタン -->
-	<form action="SalesInput.action" method="post">
+	<form action="Sales.action" method="post">
 	<button>戻る</button>
 	</form>
 
