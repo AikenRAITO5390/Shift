@@ -8,9 +8,10 @@
 </head>
 <body>
 <h2>Worker</h2>
-    <form action="BbsCreateExecute.action" method="post">
+    <form action="BbsCreateExecuteWorker.action" method="post">
         <label for="worker_id">投稿者ID:</label>
-        <input type="text" name="WORKER_ID" value="${UserName}"  readonly required><br><br>
+        <input type="text" name="WORKER_NAME" value="${UserName}"  readonly required><br><br>
+        <input type="hidden" name="WORKER_ID" value="${WorkerId}"  readonly required><br><br>
 
         <label for="bbs_id">BBS ID:</label>
         <input type="text" name="BBS_ID" value="${BbsId}"  readonly required><br><br>

@@ -35,6 +35,7 @@ public class LoginAction extends Action {
         if (worker != null) {
             session.setAttribute("worker", worker);
         }
+        System.out.println("○★★★★★★★★★★");
 
         if (store != null || worker != null) {
             res.sendRedirect("bbs_list.jsp");

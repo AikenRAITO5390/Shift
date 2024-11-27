@@ -81,7 +81,7 @@ public class BBSWorkerAction extends Action {
         req.setAttribute("messages", messages);
         req.setAttribute("managerName", managerName);
 
-
+        session.setAttribute("store", store);
 
 
         // デバッグ用のログ出力

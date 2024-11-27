@@ -25,7 +25,7 @@ public class BbsCreateAction extends Action {
 
         HttpSession session = req.getSession();
 
-        Store store = (Store) session.getAttribute("user");
+        Store store = (Store) session.getAttribute("store");
         System.out.println("②★★★★★★★★★★");
         System.out.println("Store: " + store);
 
@@ -55,9 +55,12 @@ public class BbsCreateAction extends Action {
 
 
         // 今日の日付
+        System.out.println("④★★★★★★★★★★★★★" );
         Date today = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-        String formattedDate = sdf.format(today);
+        System.out.println("sdf :"+sdf);
+        //String formattedDate = sdf.format(today);
+
 
         // 連番のBBS_IDを生成
         int BbsId = generateNewBbsId();
@@ -68,7 +71,7 @@ public class BbsCreateAction extends Action {
 
         // リクエストにユーザー名、日付、BBS_IDを設定
         req.setAttribute("UserName", UserName);
-        req.setAttribute("today", formattedDate);
+        req.setAttribute("today", sdf);
         req.setAttribute("BbsId", BbsId);
         req.setAttribute("StoreId", StoreId);
 
