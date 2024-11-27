@@ -67,6 +67,85 @@ public class SalesDao extends Dao {
 		return sales;
 
 	}
+
+
+
+
+
+
+//	saveメソッド
+	public boolean save(Sales sales)throws Exception{
+//		データベースへのコネクションを確立
+		Connection connection=getConnection();
+//		プリペアードステートメント
+		PreparedStatement statement = null;
+		// 実行件数
+		int count = 0;
+
+
+		try{
+//			データベースから売上情報を取得
+			Sales sStore = get(sales.getStore(), sales.getDate());
+//			売上が登録されていない場合は追加
+			if (sStore == null){
+
+//				プリペアードステートメントにインサートSQLをセット
+				statement = connection.prepareStatement("insert into sales (store_id, sales, date) values (?,?,?)");
+//				プリペアードステートメントに店舗情報、売上、日付をバインド
+				statement.setString(1, sales.getStore().getStoreId());
+				statement.setInt(2, sales.getDaySales());
+				statement.setDate(3, sales.getDate());
+
+//			売上が登録されている場合は更新
+			}else{
+
+//				プリペアードステートメントにアップデートSQLをセット
+				statement = connection.prepareStatement("update sales set sales=? where store_id=?, date=?");
+//				プリペアードステートメントに売上、店舗情報、日付をバインド
+				statement.setInt(1, sales.getDaySales());
+				statement.setString(2, sales.getStore().getStoreId());
+				statement.setDate(3, sales.getDate());
+			}
+
+
+			//プリペアードステートメントを実行
+			count = statement.executeUpdate ();
+
+
+		} catch (Exception e){
+			throw e;
+		} finally {
+//			プリペアードステートメントを閉じる
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+//			コネクションを閉じる
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		if (count > 0) {
+			//実行件数が1件以上ある場合
+			return true;
+		}else{
+		    //実行件数が0件の場合
+		    return false;
+		}
+
+	}
+
+
+
+
+
 }
 
 

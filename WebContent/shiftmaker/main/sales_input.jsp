@@ -19,34 +19,15 @@
 
 	<h2>売上入力</h2>
 
-	<label>日付を選択してください</label>
 
-	<form action="SalesSignupResult">
+	<form action="SalesInputResult.action">
 
-		<!-- 年の表示 -->
-		<%
-	    	SimpleDateFormat formatter = new SimpleDateFormat("yyyy年");
-	    	String formattedDate = formatter.format(new Date());
-		%>
 
-		<!-- 月日の選択 -->
-		<select name="months" required>
-			<option value="">月を選択</option>
-			<c:forEach var="month" items="${month_list}">
-				<option value="${month}" ${month == selectedMonth ? 'selected' : ''}>${month}</option>
-			</c:forEach>
-		</select>
-
-		<select name="days" required>
-			<option value="">日を選択</option>
-			<c:forEach var="day" items="${day_list}">
-				<option value="${day}" ${day == selectedDay ? 'selected' : ''}>${day}</option>
-			</c:forEach>
-		</select>
-
+		<label>日付を選択してください</label>
+		<!-- 入力したい売上の日付選択 -->
+		<input type="date" name="sales_date" />
 
 		<label>売上金額を選択してください</label>
-
 		<!-- 売上金額入力 -->
 		<input type="text" name="sales" placeholder="売上金額を入力" maxlength="8" value="${sales}" required />
 		<div>${errors.get("sales")}</div>
@@ -54,12 +35,11 @@
 
 		<!-- 登録ボタン -->
 	    <input type="submit" value="登録" />
+
 	    <!-- 戻るリンク -->
 	    <a href="Main.action">TOPへ</a>
 
-
 	</form>
-
 
 </div>
 
