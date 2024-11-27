@@ -33,7 +33,8 @@
             <td>
                 <c:choose>
                     <c:when test="${date != null}">
-                        <a href="ShiftWorkerSignupSet.action">${date.dayOfMonth}</a>
+                    	<!-- ShiftDayとして選択した日を送る -->
+                        <a href="ShiftWorkerSignupSet.action?shiftDay=${date.dayOfMonth}">${date.dayOfMonth}</a>
                     </c:when>
                     <c:otherwise>
                         <!-- 空セル -->

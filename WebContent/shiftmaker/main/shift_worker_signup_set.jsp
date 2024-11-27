@@ -10,14 +10,19 @@
 <body>
 <div class="body">
 
-		<c:import url="../../common/navigation.jsp"/>
-
 		<!-- 画面タイトル -->
 		<h2>従業員希望シフト登録</h2>
 
 		<div>シフトの希望時間を選択してください。</div>
 
 		<form action="ShiftWorkerSignupResult.action" method="post">
+
+			<c:if test="${not empty shiftDate}">
+		        <h3>選択された日付:
+		            ${shiftDate}
+		        </h3>
+		    </c:if>
+
 	        <table>
 	            <thead>
 	                <tr>
