@@ -27,6 +27,7 @@ function hideLinks(id) {
 .navigation_work ul li a {
     color: white !important;
     text-decoration: none;
+    font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
 }
 .navigation_work ul li a:hover, .navigation ul li a:focus {
     color: blue !important;

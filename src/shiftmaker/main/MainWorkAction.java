@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.Store;
 import bean.Worker;
 import dao.WorkerDao;
 import tool.Action;
@@ -22,6 +23,8 @@ public class MainWorkAction extends Action{
 		Map<String, String> errors = new HashMap<>();
 
 		Worker worker = wDao.get(worker_login.getWorkerId());
+		Store store = worker.getStore();
+		System.out.println(store);
 		if (worker != null) {// ゲットした社員のID,名前、パスワード、メール、店舗名を渡す
 			req.setAttribute("WorkerName", worker.getWorkerName());
 		} else {// 学生が存在していなかった場合

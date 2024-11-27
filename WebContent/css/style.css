@@ -7,21 +7,69 @@ body {
 
 
 .main-content {
+    display: flex;
+    justify-content: space-between; /* 子要素を左右に均等に配置 */
+    align-items: stretch; /* 子要素の高さを揃える */
     margin-top: 50px; /* ヘッダーの高さ分だけ下に配置 */
 }
 
-/* styles.css に追加 */
-h2 {
-    color: black ;
+.left-content, .center-content, .right-content {
+    flex: 1; /* 各カラムが均等に幅を取る */
+    padding: 0 5px; /* 各カラムに左右のパディングを追加 */
+
 }
-ul, .main-content li {
-    color: black ;
+
+.main-content h2{
+    margin: 0; /* デフォルトのマージンをリセット */
+    color: white;
+    padding: 10px 0; /* 上下のパディングを設定 */
+    margin-top: 10px;
+    border: 2px solid black; /* 青い枠線を設定 */
+    background-color: #75A9FF;
+    padding: 10px; /* 枠線と内容の間にスペースを追加 */
+    border-radius: 5px;
+    text-align: center; /* テキストを中央揃えにする */
+
+    width: 240px; /* 幅を固定 */
+    height: 50px; /* 高さを固定 */
+    box-sizing: border-box;
 }
+
+.h2top-content > h2 {
+    margin-top: 30px !important; /* !importantを使用して強制的に適用 */
+    color: white;
+    border: 2px solid black; /* 青い枠線を設定 */
+    background-color: #75A9FF;
+    padding: 10px; /* 枠線と内容の間にスペースを追加 */
+    border-radius: 5px;
+    text-align: center; /* テキストを中央揃えにする */
+
+    width: 240px; /* 幅を固定 */
+    height: 50px; /* 高さを固定 */
+    box-sizing: border-box;
+}
+
+.left-content ul, .center-content ul, .right-content ul {
+    margin: 0; /* デフォルトのマージンをリセット */
+	margin-top: 5px;
+    list-style: none; /* リストスタイルをリセット */
+}
+
+
 ul li a {
     color: black ;
 }
-ul li a:hover, .main-content ul li a:focus {
+.main-content ul li {
     color: red ;
+    border: 2px solid black; /* 青い枠線を設定 */
+    padding: 1px; /* 枠線と内容の間にスペースを追加 */
+    border-radius: 5px;
+    text-align: center; /* テキストを中央揃えにする */
+
+    width: 150px; /* 幅を固定 */
+    height: 25px; /* 高さを固定 */
+    box-sizing: border-box;
+    margin-left: 5px;
 }
 
 form {
@@ -30,6 +78,10 @@ form {
     border-radius: 8px;
     max-width: 400px;
     width: 100%;
+}
+
+h2 {
+    font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
 }
 
 label {
@@ -75,5 +127,28 @@ input[type="submit"]:hover {
     border-radius: 8px; /* 角を丸くする（任意） */
 }
 
+.right-content {
+    float: right; /* 右側に配置 */
+    width: 200px; /* 必要に応じて幅を設定 */
+}
 
 
+.left-content {
+    float: left; /* 右側に配置 */
+    padding-left: 40px;
+    width: 200px; /* 必要に応じて幅を設定 */
+}
+
+
+.right-content ul li {
+    margin-bottom: 100px; /* 4行分のスペースを追加 */
+    border: 2px solid black; /* 青い枠線を設定 */
+    padding: 1px; /* 枠線と内容の間にスペースを追加 */
+    border-radius: 5px;
+    text-align: center; /* テキストを中央揃えにする */
+
+    width: 150px; /* 幅を固定 */
+    height: 25px; /* 高さを固定 */
+    box-sizing: border-box;
+    margin-top: 10px;
+}
