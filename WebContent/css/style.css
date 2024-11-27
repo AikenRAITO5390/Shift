@@ -1,4 +1,5 @@
 /* styles.css */
+/* メイン画面 */
 body {
     margin-top: 50px; /* ヘッダーの高さ分だけ下に配置 */
     background-color: #ffffff; /* メインページの背景色 */
@@ -116,17 +117,6 @@ input[type="submit"]:hover {
   }
 
 
-.Login {
-    display: flex;
-    flex-direction: column; /* 縦方向に配置 */
-    align-items: center; /* 中央揃え */
-    justify-content: center; /* 中央揃え */
-    background-color: #f9f9f9; /* 背景色を設定（任意） */
-    padding: 20px; /* パディングを設定（任意） */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* ボックスシャドウを設定（任意） */
-    border-radius: 8px; /* 角を丸くする（任意） */
-}
-
 .right-content {
     float: right; /* 右側に配置 */
     width: 200px; /* 必要に応じて幅を設定 */
@@ -153,7 +143,7 @@ input[type="submit"]:hover {
     margin-top: 10px;
 }
 
-
+/* 従業員メイン画面 */
 .main_worker-content {
     display: flex; /* フレックスボックスを使用 */
     flex-direction: column; /* 縦方向に配置 */

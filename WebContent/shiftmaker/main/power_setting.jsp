@@ -20,13 +20,12 @@
                 <td>
                     <input type="text" name="WeekScore_${i}" maxlength="7" id="WeekScore_${i}">
                 </td>
-                <input type="hidden" name="WorkWeekScore_${i}" value="${fn:substring('1234567', i, i+1)}">
+                <input type="hidden" name="WorkWeekScore_${i}" value="${fn:substring('1234567', i, i+1)}"　required>
             </tr>
         </c:forEach>
     </table>
 
     <script>
-    console.log("ここは実行できてます➀");
         // 初期値を設定
         <c:forEach var="i" begin="0" end="6">
             document.getElementById("WeekScore_${i}").value = "0";
@@ -51,7 +50,7 @@
 	                <tr>
 	                    <td><label>${loopStatus.index + 1}</label></td>
 	                    <td>
-	                        <input type="text" name="DayScore_${loopStatus.index + 1}" maxlength="7" id="DayScore_${loopStatus.index + 1}">
+	                        <input type="text" name="DayScore_${loopStatus.index + 1}" maxlength="7" id="DayScore_${loopStatus.index + 1}"　required>
 	                    </td>
 	                    <input type="hidden" name="WorkDayScore_${loopStatus.index + 1}" value="${entry.key}">
 	                </tr>
