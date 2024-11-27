@@ -27,13 +27,20 @@ public class ShiftWorkerSignupAction extends Action{
 		// カレンダーを初期化
 		CalendeCreate calende = new CalendeCreate();
 		// カレンダーを作成
-		List<LocalDate> dates = calende.Calender(2024, 11);
+		List<LocalDate> dates = calende.Calender(2024, 12);
+
+		LocalDate todaysDate = LocalDate.now();// LcalDateインスタンスを取得
+		int year = todaysDate.getYear();// 現在の年を取得
+		int month = todaysDate.getMonthValue();// 現在の月を取得
 
 
 		// リクエストにカレンダーをセット
 		req.setAttribute("dates", dates);
 		// リクエストに従業員データをセット
 		req.setAttribute("worker", worker);
+
+		req.setAttribute("year", year);
+		req.setAttribute("month", month);
 
         // 6. JSPへフォワード
         req.getRequestDispatcher("shift_worker_signup.jsp").forward(req, res);

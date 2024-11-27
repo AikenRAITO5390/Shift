@@ -1,5 +1,8 @@
 package shiftmaker.main;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +38,39 @@ public class ShiftWorkerSignupSetAction extends Action{
         // ログインユーザーを取得
      	Worker manager = (Worker)session.getAttribute("user");
 
-     	// 営業時間の取得
+     	LocalDate todaysDate = LocalDate.now();// LcalDateインスタンスを取得
+		Integer year = todaysDate.getYear();// 現在の年を取得
+		Integer month = todaysDate.getMonthValue();// 現在の月を取得
+
+		String yearstr = year.toString();
+		String monthstr = month.toString();
+
+     	// リクエストパラメータから日付を取得
+		// "shiftDay" パラメータで日付を取得
+        String shiftDateString = req.getParameter("shiftDay");
+
+        String shiftDate = yearstr + "-" + monthstr + "-" + "0" + shiftDateString;
+
+        System.out.println("選択した日:" + shiftDateString);
+
+        // 日付が選択されている場合は、Date型に変換してリクエストにセット
+        if (shiftDateString != null && !shiftDateString.isEmpty()) {
+
+        	// 日付のフォーマットを指定
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            // 文字列をjava.util.Date型に変換
+            Date utilDate = sdf.parse(shiftDate);
+
+            // java.sql.Dateに変換
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+            // java.sql.Date型でリクエスト属性にセット
+            req.setAttribute("shiftDate", sqlDate);
+            System.out.println("取得した日:" + sqlDate);
+        }
+
+
+     	// 営業時間の取得（Eの選択肢のため）
      	String store_time_start = storeDao.TimeStartGet(manager.getStoreId());
 		String store_time_end = storeDao.TimeEndGet(manager.getStoreId());
 
@@ -47,14 +82,17 @@ public class ShiftWorkerSignupSetAction extends Action{
         List<Store> workTimes = storeDao.getWorkTimes(manager.getStoreId());
 
         // 確認用
-        System.out.print(workTimes);
-        System.out.print(manager.getStoreId());
+        System.out.println(workTimes);
+        System.out.println("店舗ID" + manager.getStoreId());
 
 		// リクエストにデータをセット
 		req.setAttribute("worker", worker);
 		req.setAttribute("workTimes", workTimes);
 		req.setAttribute("store_time_start", startHour);
 		req.setAttribute("store_time_end", endHour);
+
+		req.setAttribute("year", year);
+		req.setAttribute("month", month);
 
         // 6. JSPへフォワード
         req.getRequestDispatcher("shift_worker_signup_set.jsp").forward(req, res);
