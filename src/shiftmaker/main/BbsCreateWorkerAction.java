@@ -11,8 +11,8 @@ import bean.Store;
 import bean.Worker;
 import tool.Action;
 
-public class BbsCreateAction extends Action {
-	//manager用のやつ！！
+public class BbsCreateWorkerAction extends Action {
+	//worker用のやつ！！
     // 連番のBBS_IDを生成するメソッド
     private static int currentBbsId = 1;
 
@@ -25,11 +25,11 @@ public class BbsCreateAction extends Action {
 
         HttpSession session = req.getSession();
 
-        Store store = (Store) session.getAttribute("user");
+        Store store = (Store) session.getAttribute("store");
         System.out.println("②★★★★★★★★★★");
         System.out.println("Store: " + store);
 
-        Worker worker = (Worker) session.getAttribute("worker");
+        Worker worker = (Worker) session.getAttribute("user");
         System.out.println("Worker: " + worker);
 
 

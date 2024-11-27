@@ -21,6 +21,14 @@ public class BBSWorkerAction extends Action {
 
         System.out.println("①▲▲▲▲▲▲▲▲▲▲▲▲▲▲");
 
+
+        WorkerDao wDao = new WorkerDao();
+        StoreDao sDao = new StoreDao();
+        BBSDao bDao = new BBSDao();
+
+
+
+        // セッションからWorkerオブジェクトを取得
         Worker worker = (Worker) session.getAttribute("user");
         if (worker == null) {
             System.out.println("Worker is null");
@@ -29,23 +37,20 @@ public class BBSWorkerAction extends Action {
         }
         System.out.println("worker: " + worker);
 
-        Store store = worker.getStore();
 
 
+        // WorkerオブジェクトからStoreを取得
+        Worker worker_login = wDao.get(worker.getWorkerId());
+        Store store = worker_login.getStore(); //storeに何も入っていない
 
-        String store_id =worker.getStoreId();
-
-        System.out.println("store_id: " + store_id);
-
-
-
-
-        WorkerDao wDao = new WorkerDao();
-        StoreDao sDao = new StoreDao();
-        BBSDao bDao = new BBSDao();
+        System.out.println("store: " + store);
 
 
-        List<Worker> workers = wDao.filter(store);
+        // Store IDを使用してStoreオブジェクトを取得
+        Store stores = sDao.get(store.getStoreId());
+        List<Worker> workers = wDao.filterByStoreId(store.getStoreId());
+
+
 
         // TRUE
         List<Worker> filteredWorkers = workers.stream()
@@ -54,8 +59,12 @@ public class BBSWorkerAction extends Action {
 
         // FALSE
         List<Worker> filteredWorkersnot = workers.stream()
-                .filter(w -> !w.isWorkerJudge()) // isWorkerJudge()はWORKER_JUDGEを返すメソッド
-                .collect(Collectors.toList());
+                                                 .filter(w -> !w.isWorkerJudge()) // isWorkerJudge()はWORKER_JUDGEを返すメソッド
+                                                 .collect(Collectors.toList());
+
+
+
+
 
         // 掲示板メッセージを取得
         List<BBS> messages = bDao.filter(store);
@@ -68,16 +77,21 @@ public class BBSWorkerAction extends Action {
         // リクエストにデータをセット
         req.setAttribute("workers", filteredWorkers);
         req.setAttribute("workersnot", filteredWorkersnot);
-        req.setAttribute("stores", store);
+        req.setAttribute("stores", stores);
         req.setAttribute("messages", messages);
         req.setAttribute("managerName", managerName);
 
-        System.out.println("Stores: " + store);
+
+
+
+        // デバッグ用のログ出力
+        System.out.println("Stores: " + stores);
         System.out.println("Filtered Workers: " + filteredWorkers);
         System.out.println("Filtered Workers not: " + filteredWorkersnot);
         System.out.println("Messages: " + messages);
-        System.out.println("MessagesName: " + managerName);
+        System.out.println("Manager Name: " + managerName);
 
-        req.getRequestDispatcher("bbs_list.jsp").forward(req, res);
+        // bbs_list.jspにフォワード
+        req.getRequestDispatcher("bbs_list_worker.jsp").forward(req, res);
     }
 }

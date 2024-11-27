@@ -25,7 +25,7 @@
         <textarea id="bbs_text" name="BBS_TEXT" rows="4" cols="50" required></textarea><br><br>
 
         <input type="submit" value="投稿">
-        <a href="BBS.action">戻る</a>
+        <a href="BBSWorker.action">戻る</a>
     </form>
 </body>
 </html>

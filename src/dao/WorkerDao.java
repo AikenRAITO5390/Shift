@@ -301,6 +301,57 @@ public class WorkerDao extends Dao{
         return list;
 	}
 
+	public List<Worker> filterByStoreId(String storeId) throws Exception {
+        List<Worker> list = new ArrayList<>();
+        Connection connection = getConnection();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            //connection  = Database.getConnection();
+            String sql = "SELECT * FROM worker WHERE store_id = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, storeId);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Worker worker = new Worker();
+                worker.setWorkerId(resultSet.getString("worker_id"));
+                worker.setWorkerName(resultSet.getString("worker_name"));
+                worker.setStoreId(resultSet.getString("store_id"));
+                worker.setWorkerJudge(resultSet.getBoolean("worker_judge"));
+                // 他のフィールドも必要に応じて設定
+                list.add(worker);
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return list;
+    }
+
 
 
 	public List<Worker> getWorkersByStoreId(String storeId)throws Exception {

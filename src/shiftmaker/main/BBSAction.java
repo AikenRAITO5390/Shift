@@ -17,8 +17,12 @@ import tool.Action;
 
 public class BBSAction extends Action {
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        HttpSession session = req.getSession();
+
+    	System.out.println("①◆◆◆◆◆◆◆◆◆◆◆◆◆");
+    	HttpSession session = req.getSession();
         Store store = (Store) session.getAttribute("user");
+
+        System.out.println("store");
 
         if (store == null) {
             System.out.println("Store is null");
