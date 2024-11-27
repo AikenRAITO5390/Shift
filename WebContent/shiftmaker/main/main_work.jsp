@@ -5,13 +5,13 @@
 <html>
 <head>
 <link rel="stylesheet" href="../../css/style.css">
-<jsp:include page="../../common/header.jsp" />
+<jsp:include page="../../common/header_work.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>まるごとシフトくん</title>
 </head>
 <body>
 <c:import url="../../common/header_work.jsp"/>
-<div class="main-content">
+<div class="main_worker-content">
 
 <h2><a href="#">📜　シフト閲覧</a></h2>
 

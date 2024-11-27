@@ -152,3 +152,27 @@ input[type="submit"]:hover {
     box-sizing: border-box;
     margin-top: 10px;
 }
+
+
+.main_worker-content {
+    display: flex; /* フレックスボックスを使用 */
+    flex-direction: column; /* 縦方向に配置 */
+    justify-content: center; /* 子要素を上下中央に配置 */
+    align-items: center; /* 子要素を左右中央に配置 */
+    margin-top: 50px; /* ヘッダーの高さ分だけ下に配置 */
+}
+
+.main_worker-content h2 a {
+    margin: 0; /* デフォルトのマージンをリセット */
+    color: white;
+    padding: 10px 0; /* 上下のパディングを設定 */
+    margin-top: 10px;
+    border: 2px solid black; /* 枠線を設定 */
+    background-color: #75A9FF;
+    border-radius: 5px;
+    text-align: center; /* テキストを中央揃えにする */
+    width: 240px; /* 幅を固定 */
+    height: 50px; /* 高さを固定 */
+    box-sizing: border-box;
+    display: inline-block; /* ブロックレベルの動作を確保 */
+}
