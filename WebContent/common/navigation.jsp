@@ -56,7 +56,7 @@ function hideLinks(id) {
 </ul>
 <div id="Maneger" class="links" style="display:none;">
     <ul>
-        <li><a href="#">変更</a></li>
+         <li><a href="ShiftManagerSignUp.action">変更</a></li>
     </ul>
 </div>
 
@@ -65,9 +65,9 @@ function hideLinks(id) {
 </ul>
 <div id="Shift_conditions" class="links" style="display:none;">
     <ul>
-        <li><a href="#">変更</a></li>
-        <li><a href="#">時間設定</a></li>
-        <li><a href="#">パワーバランス設定</a></li>
+        <li><a href="ShiftConditionWorkerList.action">変更</a></li>
+        <li><a href="ShiftTimeSignup.action">時間設定</a></li>
+        <li><a href="PowerSetting.action">パワーバランス設定</a></li>
     </ul>
 </div>
 
@@ -76,10 +76,10 @@ function hideLinks(id) {
 </ul>
 <div id="Worker" class="links" style="display:none;">
    <ul>
-        <li><a href="#">作成</a></li>
-        <li><a href="#">編集</a></li>
+        <li><a href="WorkerSignUp.action">登録</a></li>
+        <li><a href="WorkerList.action">編集</a></li>
         <li><a href="WorkerList.action">閲覧</a></li>
-        <li><a href="#">削除</a></li>
+        <li><a href="WorkerList.action">削除</a></li>
     </ul>
 </div>
 
@@ -89,7 +89,7 @@ function hideLinks(id) {
 </ul>
 <div id="BBS" class="links" style="display:none;">
    <ul>
-        <li><a href="#">登録</a></li>
+        <li><a href="BBS.action">登録</a></li>
     </ul>
 </div>
 
@@ -98,7 +98,7 @@ function hideLinks(id) {
 </ul>
 <div id="Salse" class="links" style="display:none;">
    <ul>
-        <li><a href="#">売上</a></li>
+        <li><a href="Sales.action">売上</a></li>
     </ul>
 </div>
 </div>

@@ -26,8 +26,27 @@
     color: white;
     z-index: 1000;
     flex-direction: row; /* 横方向に配置 */
-    justify-content: flex-start; /* 左側に配置 */
+    justify-content: space-between; /* 左右に配置 */
 }
+.header h2{
+color: white;}
+
+.ushiro {
+    display: flex;
+    flex-direction: column; /* 縦方向に配置 */
+    align-items: flex-end; /* 右端に配置 */
+    justify-content: center; /* 垂直方向に中央揃え */
+    height: 100%; /* 親要素の高さを継承 */
+     padding-right: 15px;
+}
+
+.ushiro a,
+.ushiro p {
+    margin: 0; /* デフォルトのマージンをリセット */
+    padding: 2px 0; /* 上下のパディングを設定 */
+
+}
+
 </style>
 <script>
     function toggleSidebar() {
@@ -41,12 +60,18 @@
 </script>
 
 <div class="header">
-    <button onclick="toggleSidebar()">三</button>
-    <div id="sidebar" class="sidebar">
+    <div style="display: flex; align-items: center;">
+        <button onclick="toggleSidebar()">三</button>
+        <div id="sidebar" class="sidebar">
         <jsp:include page="../common/navigation.jsp" />
     </div>
-<h2> まるごとシフトくん</h2>
-<a href="../Logout.action">ログアウト</a>
+        <h2>まるごとシフトくん</h2>
+    </div>
+    <div class="ushiro">
+        <a href="../Logout.action">ログアウト</a>
+        <p>${managerName}さん</p>
+    </div>
 </div>
+
 
 

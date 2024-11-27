@@ -5,6 +5,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="../../css/style.css">
+<jsp:include page="../../common/header.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>まるごとシフトくん</title>
 </head>

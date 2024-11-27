@@ -26,10 +26,25 @@
     color: white;
     z-index: 1000;
     flex-direction: row; /* 横方向に配置 */
-    justify-content: flex-start; /* 左側に配置 */
+    justify-content: space-between; /* 左右に配置 */
 }
-.header_work h2{
-    color: white;
+.header h2{
+color: white;}
+
+.ushiro {
+    display: flex;
+    flex-direction: column; /* 縦方向に配置 */
+    align-items: flex-end; /* 右端に配置 */
+    justify-content: center; /* 垂直方向に中央揃え */
+    height: 100%; /* 親要素の高さを継承 */
+     padding-right: 15px;
+}
+
+.ushiro a,
+.ushiro p {
+    margin: 0; /* デフォルトのマージンをリセット */
+    padding: 2px 0; /* 上下のパディングを設定 */
+
 }
 </style>
 <script>
@@ -49,5 +64,8 @@
         <jsp:include page="../common/navigation_work.jsp" />
     </div>
 <h2> まるごとシフトくん</h2>
-<a href="../LogoutWorker.action">ログアウト</a>
+    <div class="ushiro">
+        <a href="../Logout.action">ログアウト</a>
+        <p>${WorkerName}さん</p>
+    </div>
 </div>
