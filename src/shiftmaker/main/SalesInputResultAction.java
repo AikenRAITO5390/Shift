@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import bean.Sales;
 import bean.Store;
 import dao.SalesDao;
-import dao.StoreDao;
 import tool.Action;
 
 public class SalesInputResultAction extends Action {
@@ -22,7 +21,6 @@ public class SalesInputResultAction extends Action {
 		//ローカル変数の宣言 1
 		HttpSession session = req.getSession();// セッションを取得
 		SalesDao salesDao = new SalesDao();//売上DAOを初期化
-		StoreDao storeDao = new StoreDao();// StoreDaoを初期化
 		Store manager = (Store) session.getAttribute("user");// ログインユーザーを取得
 		int money = 0;//売上
 		String sales_date = "";//年月日

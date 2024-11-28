@@ -5,7 +5,6 @@
 <html>
 	<c:import url="../../common/header.jsp"/>
 
-	<c:import url="../../common/navigation.jsp"/>
 <div class="body">
 	    <h2>売上登録完了</h2>
 

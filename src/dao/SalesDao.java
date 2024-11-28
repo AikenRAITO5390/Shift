@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import bean.Sales;
 import bean.Store;
@@ -72,6 +74,64 @@ public class SalesDao extends Dao {
 
 
 
+//	filterメソッド
+	public List<Sales> filter(Store store)throws Exception{
+//		日商売上をインスタンス化
+		List<Sales> sales=new ArrayList<>();
+//		データベースへのコネクションを確立
+		Connection connection=getConnection();
+//		プリペアードステートメント
+		PreparedStatement statement = null;
+
+		try{
+//			プリペアードステートメントにSQLをセット
+			statement = connection.prepareStatement("select * from sales where store_id=? order by date ASC");
+//			プリペアードステートメントに店舗IDをバインド
+			statement.setString(1, store.getStoreId());
+//			プリペアードステートメントを実行
+			ResultSet rSet = statement.executeQuery();
+//			店舗DAOを初期化
+			StoreDao storeDao= new StoreDao();
+
+
+			while (rSet.next()) {
+				Sales sale = new Sales();
+//				リザルトセットが存在する場合
+//				日商売上のリストに結果をセット
+				sale.setDaySales(rSet.getInt("sales"));
+				sale.setDate(rSet.getDate("date"));
+				sale.setStore(storeDao.get(rSet.getString("store_id")));
+				// 他の必要なフィールドもセット
+	            sales.add(sale);
+			}
+
+		} catch (Exception e){
+			throw e;
+		} finally {
+//			プリペアードステートメントを閉じる
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+//			コネクションを閉じる
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		return sales;
+
+	}
+
+
+
+
 
 //	saveメソッド
 	public boolean save(Sales sales)throws Exception{
@@ -100,7 +160,7 @@ public class SalesDao extends Dao {
 			}else{
 
 //				プリペアードステートメントにアップデートSQLをセット
-				statement = connection.prepareStatement("update sales set sales=? where store_id=?, date=?");
+				statement = connection.prepareStatement("update sales set sales=? where store_id=? and date=?");
 //				プリペアードステートメントに売上、店舗情報、日付をバインド
 				statement.setInt(1, sales.getDaySales());
 				statement.setString(2, sales.getStore().getStoreId());

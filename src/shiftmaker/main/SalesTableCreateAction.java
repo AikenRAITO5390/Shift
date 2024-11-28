@@ -38,6 +38,8 @@ public class SalesTableCreateAction extends HttpServlet {
 //	                元データの取得
 	                ArrayList<ArrayList<String>> ar = (ArrayList<ArrayList<String>>) request.getSession().getAttribute("chart1");
 
+	                System.out.println("動的に生成されたセッションデータ: " + ar);//デバッグ用
+
 //	                データセットの作成
 	                ArrayList<Number> ar1 = new ArrayList<>();
 	                ArrayList<String> ar2 = new ArrayList<>();
@@ -47,6 +49,14 @@ public class SalesTableCreateAction extends HttpServlet {
 	                        ar2.add(ar.get(i).get(1));
 	                        ar3.add(ar.get(i).get(2));
 	                }
+
+//	                データが順番に入っているかの確認
+	                System.out.println("動的に生成されたセッションデータ: " + ar1);
+	                System.out.println("動的に生成されたセッションデータ: " + ar2);
+	                System.out.println("動的に生成されたセッションデータ: " + ar3);
+
+
+
 //	                データセットの作成処理
 	                DefaultCategoryDataset ds_cat = jfc.createDS_LineChart(ar1,ar2,ar3);
 
@@ -58,7 +68,7 @@ public class SalesTableCreateAction extends HttpServlet {
 
 //	                PNG画像生成
 	                ServletOutputStream objSos=response.getOutputStream();
-	                ChartUtilities.writeChartAsJPEG(objSos, chart, 600, 400);
+	                ChartUtilities.writeChartAsJPEG(objSos, chart, 800, 600);
 	        }
 
 

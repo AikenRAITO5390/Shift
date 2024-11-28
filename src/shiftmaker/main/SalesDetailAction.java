@@ -1,8 +1,16 @@
 package shiftmaker.main;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import bean.Sales;
+import bean.Store;
+import dao.SalesDao;
 import tool.Action;
 
 
@@ -11,29 +19,49 @@ public class SalesDetailAction extends Action {
 	@Override
 	public void execute(HttpServletRequest req,HttpServletResponse res)throws Exception{
 
-//		StoreDao sDao = new StoreDao(); //店舗DAO
-//		SalesDao saDao = new SalesDao(); // 売上DAO
-//		HttpSession session = req.getSession();//セッション
-//		Store store_login = (Store)session.getAttribute("user");// ログインユーザーを取得
-//		Map<String, String> errors = new HashMap<>();
-//
-//
-//		// ゲットでログインしている社員の店IDより絞り込んでゲット
-//			Store store = sDao.get(store_login.getStoreId());
-//
-//			if (store != null) {// ゲットした社員のID,名前、パスワード、メール、店舗名を渡す
-//				req.setAttribute("storeId", store.getStoreId());
-//				req.setAttribute("managerName", store.getManagerName());
-//				req.setAttribute("password", store.getPassword());
-//				req.setAttribute("email", store.getEmail());
-//				req.setAttribute("storeName", store.getStoreName());
-//			} else {// 学生が存在していなかった場合
-//				errors.put("storeId", "社員情報が存在していません");
-//				req.setAttribute("errors", errors);
-//			}
+
+		//ローカル変数の宣言 1
+				HttpSession session = req.getSession();// セッションを取得
+				Sales sales = new Sales();
+				SalesDao salesDao = new SalesDao();//売上DAOを初期化
+				Store manager = (Store) session.getAttribute("user");// ログインユーザーを取得
+//				String sales_date = "";//年月日
+
+//				店舗の日付ごとの売上情報を取得
+				List<Sales> salelist = salesDao.filter(manager);
 
 
 
+				//### 元データの作成 ###
+				// ArrayList<ArrayList<String>> を作成
+				ArrayList<ArrayList<String>> ar1 = new ArrayList<>();
+
+				// salelist をループしてデータを変換
+				for (Sales sale : salelist) {
+				    ArrayList<String> tmp = new ArrayList<>();
+
+				    tmp.add(String.valueOf(sale.getDaySales())); // 売上
+				    tmp.add("日商売上");// 店舗名
+			        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");// フォーマッタの作成
+			        String dateString = formatter.format(sale.getDate());// Date → String に変換
+				    tmp.add(dateString);// 日付
+				    ar1.add(tmp);//一行目にデータを追加
+				}
+
+
+
+				//### 元データをセッションに保持 ###
+				session.setAttribute("chart1", ar1);
+				//セッションに保存されているか確認
+				System.out.println("動的に生成されたセッションデータ: " + ar1);// デバッグ用の出力
+
+
+
+
+		        // リクエストにデータをセット
+		        req.setAttribute("salelist", salelist);
+
+		        System.out.println("salelist: " + salelist);// デバッグ用の出力
 
 
 		req.getRequestDispatcher("sales_detail.jsp").forward(req, res);

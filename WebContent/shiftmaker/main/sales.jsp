@@ -11,7 +11,6 @@
 <c:import url="../../common/header.jsp"/>
 
 <div class="tmain">
-<c:import url="../../common/navigation.jsp"/>
 
 	<h2>売上</h2>
 
