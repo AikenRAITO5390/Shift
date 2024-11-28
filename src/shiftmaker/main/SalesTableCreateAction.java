@@ -1,5 +1,6 @@
 package shiftmaker.main;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -65,6 +66,8 @@ public class SalesTableCreateAction extends HttpServlet {
 //	                チャートの作成
 	                JFreeChart chart=ChartFactory.createLineChart("売上の変動", "日付", "売上金額", ds_cat, PlotOrientation.VERTICAL, true, false, false);
 
+//	                背景色の設定
+	                chart.setBackgroundPaint(new Color(153, 223, 255));
 
 //	                PNG画像生成
 	                ServletOutputStream objSos=response.getOutputStream();
