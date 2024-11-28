@@ -168,6 +168,13 @@ public class BBSDao extends Dao {
 	    // 実行件数
 	    int count = 0;
 
+        System.out.println("⑧★★★★★★★★★★★");
+
+        System.out.println(bbs.getWorker().getWorkerId());
+        System.out.println(bbs.getStore().getManagerId());
+
+
+
 	    try {
 	        // プリペアードステートメントにINSERT文をセット
 	        statement = connection.prepareStatement(
@@ -178,7 +185,12 @@ public class BBSDao extends Dao {
 	        statement.setString(3, bbs.getStore().getStoreId());
 	        statement.setString(4, bbs.getWorker().getWorkerId());
 	        statement.setString(5, bbs.getBbsDate());
-	        statement.setString(6, bbs.getStore().getManagerId());
+
+	        if(bbs.getWorker().getWorkerId() == null){
+		        statement.setString(6, bbs.getStore().getManagerId());
+	        }else{
+		        statement.setString(6, null);
+	        }
 
 	        // プリペアードステートメントを実行
 	        count = statement.executeUpdate();

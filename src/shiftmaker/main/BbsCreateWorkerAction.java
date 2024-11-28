@@ -43,11 +43,14 @@ public class BbsCreateWorkerAction extends Action {
         String ManagerName = store != null ? store.getManagerName() : null;
         String StoreId = store != null ? store.getStoreId() : null;
         String WorkerName = worker != null ? worker.getWorkerName() : null;
+        String WorkerId = worker != null ? worker.getWorkerId() : null;
+
 
         // デバッグメッセージを追加
         System.out.println("③★★★★★★★★★★★★★" );
         System.out.println("ManagerName :" + ManagerName);
         System.out.println("WorkerName :" + WorkerName);
+        System.out.println("WorkerId :" + WorkerId);
 
         System.out.println("投稿者 :" + (WorkerName != null ? WorkerName : ManagerName));
         System.out.println("STORE_ID :" + StoreId);
@@ -55,7 +58,9 @@ public class BbsCreateWorkerAction extends Action {
 
 
         // 今日の日付
+        System.out.println("④★★★★★★★★★★★★★" );
         Date today = new Date();
+        System.out.println("Today (Date): " + today);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         String formattedDate = sdf.format(today);
 
@@ -67,6 +72,7 @@ public class BbsCreateWorkerAction extends Action {
         String UserName = WorkerName != null ? WorkerName : ManagerName;
 
         // リクエストにユーザー名、日付、BBS_IDを設定
+        req.setAttribute("WorkerId", WorkerId);
         req.setAttribute("UserName", UserName);
         req.setAttribute("today", formattedDate);
         req.setAttribute("BbsId", BbsId);

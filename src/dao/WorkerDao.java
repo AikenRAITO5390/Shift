@@ -54,7 +54,7 @@ public class WorkerDao extends Dao{
 	 * @return 従業員クラスのインスタンス 存在しない場合はnull
 	 * @throws Exception
 	 */
-	public Worker get(String worker_id) throws Exception {
+	public Worker get(String workerId) throws Exception {
 
 		// Workerの初期化
 		Worker worker = new Worker();
@@ -68,7 +68,7 @@ public class WorkerDao extends Dao{
 	    	// SQL文を作成
 	    	String sql = "SELECT * FROM worker WHERE worker_id = ?";
 	        statement = connection.prepareStatement(sql);
-	        statement.setString(1, worker_id);
+	        statement.setString(1, workerId);
 
 		    ResultSet rSet = statement.executeQuery();
 
