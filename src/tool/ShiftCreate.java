@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.TreeMap;
 
 import bean.Shift;
 import bean.Store;
+import bean.Worker;
 import dao.StoreDao;
 
 public class ShiftCreate {
@@ -35,7 +37,13 @@ public class ShiftCreate {
         String availableFrom; // 勤務可能開始時刻
         String availableTo;   // 勤務可能終了時刻
         int maxHours;         // 最大勤務時間
-        List<String> assignedShifts = new ArrayList<>(); // 割り振られたシフト
+        int priority;       // 優先度
+
+        public void setPriority(int priority) {
+			this.priority = priority;
+		}
+
+		List<String> assignedShifts = new ArrayList<>(); // 割り振られたシフト
         List<String> mergedShifts = new ArrayList<>();//開始と終了時間が入るリスト
 
         WorkerShift(String name, String role, String availableFrom, String availableTo, int maxHours) {
@@ -113,8 +121,12 @@ public class ShiftCreate {
     }
 
 
-    public static Map<String, List<Map<String, String>>> createShiftSchedule(ShiftRequirement requirement, List<WorkerShift> workers) {
+    public static Map<String, List<Map<String, String>>> createShiftSchedule(
+    		ShiftRequirement requirement, List<WorkerShift> workers,List<Worker> worker_list,PriorityQueue<Map.Entry<String, Integer>> priorityQueue)
+    {
 
+    	// 優先度でソート（降順: 優先度が高い順）
+        workers.sort((w1, w2) -> Integer.compare(w1.priority,w2.priority));
         Map<String, List<Map<String, String>>> schedule = new TreeMap<>();
         //開店時間を設定
         int startMinutes = timeToMinutes(requirement.startTime);
@@ -123,51 +135,48 @@ public class ShiftCreate {
 
         //開店から閉店まで１時間ごとにシフトを作成する
         for (int current = startMinutes; current < endMinutes; current += 60) {
-        	//今設定する時間が入っている例：１２：００－１３：００
-            String timeSlot = minutesToTime(current) + "-" + minutesToTime(current + 60);
-            List<Map<String, String>> assignedWorkers = new ArrayList<>();
-            //キッチンかホールの必要数を取得
-            int kitchenNeeded = requirement.requiredKitchen;
-            int hallNeeded = requirement.requiredHall;
+	        //今設定する時間が入っている例：１２：００－１３：００
+	        String timeSlot = minutesToTime(current) + "-" + minutesToTime(current + 60);
+	        List<Map<String, String>> assignedWorkers = new ArrayList<>();
+	        //キッチンかホールの必要数を取得
+	        int kitchenNeeded = requirement.requiredKitchen;
+	        int hallNeeded = requirement.requiredHall;
+			//従業員の数だけ回る
+			for (WorkerShift worker : workers) {
+				//従業員の勤務可能開始時間と終了時間を取得
+				int workerStart = timeToMinutes(worker.availableFrom);
+				int workerEnd = timeToMinutes(worker.availableTo);
 
-            //従業員の数だけ回る
-            for (WorkerShift worker : workers) {
-            	//従業員の勤務可能開始時間と終了時間を取得
-                int workerStart = timeToMinutes(worker.availableFrom);
-                int workerEnd = timeToMinutes(worker.availableTo);
+				//従業員の最大勤務可脳時間が０でないかつ勤務可能開始、終了時間内の場合通過
+				if (worker.maxHours > 0 &&
+					current >= workerStart &&
+					current + 60 <= workerEnd) {
+					//従業員の役割がキッチンの場合
+					if (worker.role.equals("Kitchen") && kitchenNeeded > 0) {
+						Map<String, String> assignment = new HashMap<>();
+						assignment.put("name", worker.name);
+						assignment.put("role", worker.role);
+						assignedWorkers.add(assignment);
+						worker.assignedShifts.add(timeSlot);
+						//最大勤務可能時間からー１
+						worker.maxHours--;
+						kitchenNeeded--;
+						//従業員の役割がホールの場合
+					} else if (worker.role.equals("Hall") && hallNeeded > 0) {
+						Map<String, String> assignment = new HashMap<>();
+						assignment.put("name", worker.name);
+						assignment.put("role", worker.role);
+						assignedWorkers.add(assignment);
+						worker.assignedShifts.add(timeSlot);
+						worker.maxHours--;
+						hallNeeded--;
+					}
+				}
 
-                //従業員の最大勤務可脳時間が０でないかつ勤務可能開始、終了時間内の場合通過
-                if (worker.maxHours > 0 &&
-                        current >= workerStart &&
-                        current + 60 <= workerEnd) {
-                	//従業員の役割がキッチンの場合
-                    if (worker.role.equals("Kitchen") && kitchenNeeded > 0) {
-                        Map<String, String> assignment = new HashMap<>();
-                        assignment.put("name", worker.name);
-                        assignment.put("role", worker.role);
-                        assignedWorkers.add(assignment);
-                        worker.assignedShifts.add(timeSlot);
-                        //最大勤務可能時間からー１
-                        worker.maxHours--;
-                        kitchenNeeded--;
-                    //従業員の役割がホールの場合
-                    } else if (worker.role.equals("Hall") && hallNeeded > 0) {
-                        Map<String, String> assignment = new HashMap<>();
-                        assignment.put("name", worker.name);
-                        assignment.put("role", worker.role);
-                        assignedWorkers.add(assignment);
-                        worker.assignedShifts.add(timeSlot);
-                        worker.maxHours--;
-                        hallNeeded--;
-                    }
-                }
-
-                if (kitchenNeeded == 0 && hallNeeded == 0) break;
-            }
-
-            schedule.put(timeSlot, assignedWorkers);
-        }
-
+				if (kitchenNeeded == 0 && hallNeeded == 0) break;
+			}
+			schedule.put(timeSlot, assignedWorkers);
+		}
         for (WorkerShift worker : workers) {
             worker.mergedShifts = mergeShifts(worker.assignedShifts);
         }
@@ -178,7 +187,10 @@ public class ShiftCreate {
 
 
 
-    public List<Map<String,Object>> Shiftmain(String work_time_start, String work_time_end,Store shift_manager, List<Shift> shift_list, String date) {
+    public List<Map<String,Object>> Shiftmain(
+    		String work_time_start, String work_time_end,Store shift_manager, List<Shift> shift_list,
+    		String date,PriorityQueue<Map.Entry<String, Integer>> priorityQueue,List<Worker> worker_list)
+    {
         // 必要人数の設定（キッチンとホールで区別）
         ShiftRequirement requirement = new ShiftRequirement(work_time_start, work_time_end, 1, 1);
         List<WorkerShift> workers = new ArrayList<>();
@@ -221,7 +233,20 @@ public class ShiftCreate {
         	System.out.println(e);
 		}
 
-        createShiftSchedule(requirement, workers);
+        for(int j =0; j< worker_list.size(); j++) {
+        	Map.Entry<String, Integer> entry = priorityQueue.poll();
+        		for(WorkerShift worker: workers){
+        		System.out.println("workerName"+worker.name+"queueName"+entry.getKey()+"priority"+entry.getValue());
+        			if(worker.name.equals(entry.getKey())){
+        			   worker.setPriority(entry.getValue());
+        			   break;
+        			}
+        		}
+        }
+        for(WorkerShift worker: workers){
+        	System.out.println("Name:"+worker.name+"priority"+worker.priority);
+        }
+        createShiftSchedule(requirement, workers,worker_list,priorityQueue);
 
         // 各人の統合された勤務時間を取得
         List<Map<String, Object>> workerMergedShifts = getWorkerMergedShifts(workers,date);

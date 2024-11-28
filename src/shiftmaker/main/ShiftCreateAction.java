@@ -54,13 +54,12 @@ public class ShiftCreateAction extends Action{
 		//優先度付きキューの型指定
 		Comparator<Map.Entry<String, Integer>> comparetor = Comparator.comparing(Map.Entry::getValue);
 		PriorityQueue<Map.Entry<String, Integer>> priorityQueue = new PriorityQueue<>(comparetor);
+		PriorityQueue<Map.Entry<String, Integer>> createShiftQueue = new PriorityQueue<>(comparetor);
 		for(Worker worker:worker_list){
 			priorityQueue.add(new AbstractMap.SimpleEntry<>(worker.getWorkerName(), 1));
+			createShiftQueue.add(new AbstractMap.SimpleEntry<>(worker.getWorkerName(), 1));
 		}
-		while (!priorityQueue.isEmpty()) {
-			Map.Entry<String, Integer> entry = priorityQueue.poll();
-			System.out.println("Name: " + entry.getKey() + ", Priority: " + entry.getValue());
-		}
+
 		//３０日分のシフト情報を入れるためのリスト
 		List<Map<String, Object>> innerList = new ArrayList<>();
 		//３０日分回す
@@ -77,12 +76,52 @@ public class ShiftCreateAction extends Action{
 			//入った日にちのシフト希望を出している従業員情報一覧を取得
 			shift_list = shDao.filter(stDao.get(manager.getStoreId()), shift_date);
 			//開店時間、閉店時間、シフト作成者情報、従業員情報一覧、日時をいれシフトを作成する関数
-			List<Map<String, Object>> workerShift = shift_create.Shiftmain(work_time_start, work_time_end,manager,shift_list,date);
-			innerList.addAll(workerShift);
-			for(Map<String, Object> workerInfo :workerShift){
+			List<Map<String, Object>> workerShift = shift_create.Shiftmain(
+					work_time_start, work_time_end,manager,shift_list,date,createShiftQueue,worker_list);
 
+			innerList.addAll(workerShift);
+
+			//優先度管理
+			for(Map<String, Object> workerInfo :workerShift){
+				List<String> priorityList = new ArrayList<>();
+				for(int j =0; j< worker_list.size(); j++) {
+					Map.Entry<String, Integer> entry = priorityQueue.poll();
+					@SuppressWarnings("unchecked")
+					List<String> mergedShifts = (List<String>) workerInfo.get("mergedShifts");
+					System.out.println("名前:"+workerInfo.get("name")+"queue名前"+entry.getKey()+"優先度"+entry.getValue());
+					if(workerInfo.get("name").equals(entry.getKey())){
+						if(mergedShifts.isEmpty()){
+							priorityQueue.add(new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue()));
+							createShiftQueue.removeIf(e -> e.getKey().equals(entry.getKey()));
+							createShiftQueue.add(new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue()));
+							System.out.println("休み名前:"+workerInfo.get("name")+"queue名前"+entry.getKey()+"優先度"+entry.getValue());
+							break;
+						}else{
+							priorityQueue.add(new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue()+1));
+							createShiftQueue.removeIf(e -> e.getKey().equals(entry.getKey()));
+							createShiftQueue.add(new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue()+1));
+							System.out.println("シフト名前:"+workerInfo.get("name")+"queue名前"+entry.getKey()+"優先度"+entry.getValue());
+							break;
+						}
+					}else{
+						priorityList.add(entry.getKey());
+						System.out.println("名無し。名前:"+workerInfo.get("name"));
+					}
+				}
+
+				for(String add_name:priorityList){
+					//ここの改良をする！例：Mapに名前と点数をもらって現状維持
+					priorityQueue.add(new AbstractMap.SimpleEntry<>(add_name,1));
+					createShiftQueue.removeIf(e -> e.getKey().equals(add_name));
+					createShiftQueue.add(new AbstractMap.SimpleEntry<>(add_name,1));
+				}
 			}
 			day = day + 1;
+		}
+
+		while (!priorityQueue.isEmpty()) {
+			Map.Entry<String, Integer> entry = priorityQueue.poll();
+		    System.out.println("Name"+entry.getKey()+"Priority"+ entry.getValue());
 		}
 
 
