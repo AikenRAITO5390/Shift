@@ -315,7 +315,7 @@ public class ShiftDao extends Dao{
 	}
 
 	// Eの選択肢用にデータを保存するメソッド
-	public void insertCustomWorkTime(Date shiftDate, String workerId, String storeId, String startTime, String endTime) throws Exception {
+	public void insertCustomWorkTime(Date shiftDate, String workerId, String storeId, String startTime, String endTime, String shiftScore) throws Exception {
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
 
@@ -325,24 +325,26 @@ public class ShiftDao extends Dao{
 
 			if(old == null){
 
-				String sql = "INSERT INTO SHIFT (SHIFT_DATE, WORKER_ID, STORE_ID, SHIFTHOPE_TIME_START, SHIFTHOPE_TIME_END) VALUES (?, ?, ?, ?, ?)";
+				String sql = "INSERT INTO SHIFT (SHIFT_DATE, WORKER_ID, STORE_ID, SHIFTHOPE_TIME_START, SHIFTHOPE_TIME_END, SHIFT_SCORE) VALUES (?, ?, ?, ?, ?, ?)";
 			    statement = connection.prepareStatement(sql);
 			    statement.setDate(1, shiftDate);
 			    statement.setString(2, workerId);
 			    statement.setString(3, storeId);
 			    statement.setString(4, startTime);
 			    statement.setString(5, endTime);
+			    statement.setString(6, shiftScore);
 			    statement.executeUpdate();
 			}  else {
 
 				//プリペアードステートメントにUPDATE文をセット
-				statement = connection.prepareStatement("UPDATE shift SET shifthope_time_start=?, shifthope_time_end=? WHERE shift_date=? AND worker_id=? AND store_id=? ");
+				statement = connection.prepareStatement("UPDATE shift SET shifthope_time_start=?, shifthope_time_end=? WHERE shift_date=? AND worker_id=? AND store_id=? AND shift_score=?");
 				//プリペアードステートメントに値をバインド
 				statement.setString(1, startTime);
 				statement.setString(2, endTime);
 				statement.setDate(3, shiftDate);
 				statement.setString(4, workerId);
 				statement.setString(5, storeId);
+				statement.setString(6, shiftScore);
 			}
 
 		} finally {
@@ -352,7 +354,7 @@ public class ShiftDao extends Dao{
 	}
 
 	// A~Dの選択肢用にデータを保存するメソッド
-	public void insertWorkTime(Date shiftDate, String workerId, String storeId, String workTimeId) throws Exception {
+	public void insertWorkTime(Date shiftDate, String workerId, String storeId, String workTimeId, String shiftScore) throws Exception {
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
 
@@ -361,28 +363,124 @@ public class ShiftDao extends Dao{
 		try {
 
 			if(old == null){
-				String sql = "INSERT INTO SHIFT (SHIFT_DATE, WORKER_ID, STORE_ID, WORK_TIME_ID) VALUES (?, ?, ?, ?)";
+				String sql = "INSERT INTO SHIFT (SHIFT_DATE, WORKER_ID, STORE_ID, WORK_TIME_ID, SHIFT_SCORE) VALUES (?, ?, ?, ?, ?)";
 				statement = connection.prepareStatement(sql);
 				statement.setDate(1, shiftDate);
 				statement.setString(2, workerId);
 				statement.setString(3, storeId);
 				statement.setString(4, workTimeId);
+				statement.setString(5, shiftScore);
 				statement.executeUpdate();
 			} else {
 
 				//プリペアードステートメントにUPDATE文をセット
-				statement = connection.prepareStatement("UPDATE shift SET work_time_id=? WHERE shift_date=? AND worker_id=? AND store_id=? ");
+				statement = connection.prepareStatement("UPDATE shift SET work_time_id=? WHERE shift_date=? AND worker_id=? AND store_id=? AND shift_score=?");
 				//プリペアードステートメントに値をバインド
 				statement.setString(1, workTimeId);
 				statement.setDate(2, shiftDate);
 				statement.setString(3, workerId);
 				statement.setString(4, storeId);
+				statement.setString(5, shiftScore);
 			}
 
 		} finally {
 			if (statement != null) statement.close();
 			if (connection != null) connection.close();
 		}
+	}
+
+	// 追加メソッドを作成して、登録済みのシフトを取得
+	public Map<String, String> getSelectedShifts(String workerId) throws Exception {
+	    Connection connection = getConnection();
+	    PreparedStatement statement = null;
+	    ResultSet resultSet = null;
+	    Map<String, String> shifts = new HashMap<>();
+
+	    try {
+	        String sql = "SELECT SHIFT_DATE, SHIFTHOPE_TIME_ID FROM SHIFT WHERE WORKER_ID = ?";
+	        statement = connection.prepareStatement(sql);
+	        statement.setString(1, workerId);
+	        resultSet = statement.executeQuery();
+
+	        while (resultSet.next()) {
+	            String date = resultSet.getString("SHIFT_DATE");
+	            String shiftHope = resultSet.getString("SHIFTHOPE_TIME_ID");
+	            shifts.put(date, shiftHope);
+	        }
+	    } finally {
+	        if (resultSet != null) resultSet.close();
+	        if (statement != null) statement.close();
+	        if (connection != null) connection.close();
+	    }
+
+	    return shifts;
+	}
+
+	/**
+	 * getメソッド worker,shift_date,storeを指定してshiftscoreを1件取得する
+	 *
+	 * @param worker:Worker  shift_date:Date   store:Store
+ 	 *           従業員ID        年月日           店舗ID
+	 * @return シフトクラスのインスタンス 存在しない場合はnull
+	 * @throws Exception
+	 */
+	public Shift getShiftScore(Worker worker, Date shift_date, Store store) throws Exception {
+
+		// Shiftの初期化
+		Shift shift = new Shift();
+
+		Connection connection = getConnection();
+	    PreparedStatement statement = null;
+//	    ResultSet rSet = null;
+
+	    try {
+
+	    	// SQL文を作成
+	    	String sql = "SELECT shift_score FROM SHIFT WHERE shift_date = ? and worker_id = ? and store_id = ?";
+	        statement = connection.prepareStatement(sql);
+	        statement.setDate(1,shift_date);
+	        statement.setString(2, worker.getWorkerId());
+	        statement.setString(3, store.getStoreId());
+
+		    ResultSet rSet = statement.executeQuery();
+
+		    // WorkerDaoの初期化
+		    WorkerDao workerDao = new WorkerDao();
+		    // StoreDaoの初期化
+		    StoreDao storeDao = new StoreDao();
+
+		    // リザルトセットからシフトインスタンスを作成
+		    if(rSet.next()) {
+		    	shift.setShiftScore(rSet.getInt("shift_score"));
+		    } else {
+		    	shift = null;
+		    }
+
+
+	    } catch (SQLException e) {
+//	        e.printStackTrace();
+	        throw e;
+	    } finally {
+	        // リソースを閉じる
+	        if (statement != null) {
+	            try {
+	                statement.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+
+
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	    }
+
+	    return shift;
 	}
 
 
