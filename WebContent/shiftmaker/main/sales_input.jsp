@@ -24,11 +24,16 @@
 
 		<label>日付を選択してください</label>
 		<!-- 入力したい売上の日付選択 -->
-		<input type="date" name="sales_date" />
+		<%
+    		java.time.LocalDate today = java.time.LocalDate.now();
+    		String formattedDate = today.toString(); // YYYY-MM-DD 形式
+		%>
+		<input type="date" name="sales_date" value="<%= formattedDate %>" />
+
 
 		<label>売上金額を選択してください</label>
 		<!-- 売上金額入力 -->
-		<input type="text" name="sales" placeholder="売上金額を入力" maxlength="8" value="${sales}" required />
+		<input type="number" name="sales" placeholder="売上金額を入力" maxlength="8" value="${sales}" min="0" required />
 		<div>${errors.get("sales")}</div>
 
 

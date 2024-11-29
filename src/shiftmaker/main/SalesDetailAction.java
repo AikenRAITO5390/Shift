@@ -21,19 +21,21 @@ public class SalesDetailAction extends Action {
 
 
 		//ローカル変数の宣言 1
-				HttpSession session = req.getSession();// セッションを取得
-				Sales sales = new Sales();
-				SalesDao salesDao = new SalesDao();//売上DAOを初期化
-				Store manager = (Store) session.getAttribute("user");// ログインユーザーを取得
-//				String sales_date = "";//年月日
+			HttpSession session = req.getSession();// セッションを取得
+			SalesDao salesDao = new SalesDao();//売上DAOを初期化
+			Store manager = (Store) session.getAttribute("user");// ログインユーザーを取得
 
-//				店舗の日付ごとの売上情報を取得
+			try {
+
+				//店舗の日付ごとの売上情報を取得
 				List<Sales> salelist = salesDao.filter(manager);
 
-
+				//売上情報がなかった場合、メッセージを返す
+				if (salelist == null || salelist.isEmpty()) {
+				    req.setAttribute("message", "売上データがありません。");
+				}
 
 				//### 元データの作成 ###
-				// ArrayList<ArrayList<String>> を作成
 				ArrayList<ArrayList<String>> ar1 = new ArrayList<>();
 
 				// salelist をループしてデータを変換
@@ -49,21 +51,25 @@ public class SalesDetailAction extends Action {
 				}
 
 
-
 				//### 元データをセッションに保持 ###
 				session.setAttribute("chart1", ar1);
 				//セッションに保存されているか確認
 				System.out.println("動的に生成されたセッションデータ: " + ar1);// デバッグ用の出力
 
 
-
-
-		        // リクエストにデータをセット
-		        req.setAttribute("salelist", salelist);
-
+				//正しい売上情報が入っているか確認
 		        System.out.println("salelist: " + salelist);// デバッグ用の出力
 
 
+		        //エラーが発生した場合、sale.jspへ戻る
+			} catch (Exception e) {
+		        e.printStackTrace();
+		        req.setAttribute("error", "データの取得中にエラーが発生しました。");
+		        req.getRequestDispatcher("sales.jsp").forward(req, res);
+		        return;
+		    }
+
+				//jspへフォワード
 		req.getRequestDispatcher("sales_detail.jsp").forward(req, res);
 	}
 
