@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ja">
 <head>
@@ -26,20 +27,20 @@
         </tr>
 
         <c:set var="counter" value="0" />
-        <c:forEach var="date" items="${dates}">
+        <c:forEach var="date" items="${stringDates}">
             <c:if test="${counter % 7 == 0}">
                 <tr>
             </c:if>
             <td>
                 <c:choose>
                     <c:when test="${date != null}">
-                        <a href="ShiftWorkerSignupSet.action?shiftDay=${date.dayOfMonth}">${date.dayOfMonth}</a>
-                        <!-- シフト情報を表示 -->
-                        <c:forEach var="shift" items="${shifts}">
-                            <c:if test="${shift.date == date}">
-                                <p>${shift.workTime}</p>
-                            </c:if>
-                        </c:forEach>
+                        <%-- 日付リンクを生成 --%>
+	                    <a href="ShiftWorkerSignupSet.action??shiftDay=${date}">${fn:substring(date.toString(), 8, 10)}</a>
+
+	                    <%-- 勤務時間情報を表示 --%>
+	                    <c:if test="${stringDates[status.index] != ''}">
+	                        <p>${stringDates[status.index]}</p>
+	                    </c:if>
                     </c:when>
                     <c:otherwise>
                         <!-- 空セル -->
@@ -59,5 +60,9 @@
             </tr>
         </c:if>
     </table>
+
+    <form action="ShiftWorkerSignupResult.action" method="get">
+	    <button type="submit">送信</button>
+	</form>
 </body>
 </html>

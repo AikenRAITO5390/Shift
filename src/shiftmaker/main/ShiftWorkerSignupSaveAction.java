@@ -2,6 +2,7 @@ package shiftmaker.main;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +19,8 @@ import dao.WorkerDao;
 import tool.Action;
 import tool.CalendeCreate;
 
+
+// 選択されたものを保存しながら、カレンダーに反映させる
 public class ShiftWorkerSignupSaveAction extends Action {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -54,10 +57,20 @@ public class ShiftWorkerSignupSaveAction extends Action {
     	CalendeCreate calende = new CalendeCreate();
     	// カレンダーを作成
     	List<LocalDate> dates = calende.Calender(year, nextmonth);
+    	// 確認用
+    	System.out.println("dates：" + dates);
 
-
-
-    	req.setAttribute("dates", dates);
+    	// LocalDateリストをString型に変換
+    	List<String> stringDates = new ArrayList<>();
+    	for (LocalDate date : dates) {
+    	    if (date != null) {
+    	        stringDates.add(date.toString()); // ISO形式で文字列化 (例: "2024-11-29")
+    	    } else {
+    	        stringDates.add(null); // null値を保持
+    	    }
+    	}
+    	// 確認用
+    	System.out.println("stringDates：" + stringDates);
 
     	// リクエストパラメータを取得
     	String shiftDateString = req.getParameter("shiftDate");  // String型として取得
@@ -100,10 +113,42 @@ public class ShiftWorkerSignupSaveAction extends Action {
     		// java.util.Date を java.sql.Date に変換
     		java.sql.Date sqlShiftDate = new java.sql.Date(shiftDate.getTime());
 
+    		// LocalDate型に変換
+    		LocalDate selectedDate = sqlShiftDate.toLocalDate();
+
     		// SHIFTデータを取得
     		Shift shift = shiftDao.getShiftScore(worker, sqlShiftDate, store);
     		// 確認用
         	System.out.println("shift：" + shift);
+
+        	// カレンダー作成後、null を除外
+        	stringDates.removeIf(date -> date == null);
+
+        	// 選択された日付を文字列形式に変換
+        	String selectedDateString = selectedDate.toString();
+
+        	// stringDates を更新：勤務時間情報のみ格納
+        	for (int i = 0; i < dates.size(); i++) {
+        	    if (dates.get(i) != null && dates.get(i).equals(selectedDateString)) {
+        	        if ("E".equals(workTimeId)) {
+        	            // カスタム時間を取得
+        	            String customStartTime = req.getParameter("customStartTime");
+        	            String customEndTime = req.getParameter("customEndTime");
+        	            // 勤務時間としてカスタム時間を設定
+        	            stringDates.set(i, customStartTime + " - " + customEndTime);
+        	        } else {
+        	            // 通常の勤務時間 ID を設定
+        	            stringDates.set(i, workTimeId);
+        	        }
+        	    } else if (stringDates.get(i) == null) {
+        	        // 勤務がない日を空白にする
+        	        stringDates.set(i, "");
+        	    }
+        	}
+
+
+        	// 確認用
+        	System.out.println("更新後の stringDates：" + stringDates);
 
     		// NULLチェックを追加
     		if (shift == null) {
@@ -127,6 +172,10 @@ public class ShiftWorkerSignupSaveAction extends Action {
     		    // 通常の勤務時間IDをSHIFTテーブルに登録
     		    shiftDao.insertWorkTime(sqlShiftDate, workerId, storeId, workTimeId, shiftScore);
     		}
+
+
+    	req.setAttribute("stringDates", stringDates);
+
 
         // 保存後にカレンダー画面を再度表示する
         req.getRequestDispatcher("shift_worker_singup_save.jsp").forward(req, res);

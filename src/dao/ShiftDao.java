@@ -484,8 +484,6 @@ public class ShiftDao extends Dao{
 	}
 
 
-
-
 	//パワー作成save
 	public boolean save_Score(Shift shift)throws Exception{
 	//データベースへのコネクションを確立

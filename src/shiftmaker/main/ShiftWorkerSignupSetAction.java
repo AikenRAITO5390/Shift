@@ -16,6 +16,8 @@ import dao.StoreDao;
 import dao.WorkerDao;
 import tool.Action;
 
+
+// 希望選択
 public class ShiftWorkerSignupSetAction extends Action{
 
 	@Override

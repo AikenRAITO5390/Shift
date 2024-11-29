@@ -15,6 +15,8 @@ import dao.WorkerDao;
 import tool.Action;
 import tool.CalendeCreate;
 
+
+// 最初のカレンダーを出す
 public class ShiftWorkerSignupAction extends Action{
 
 	@Override
