@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -54,6 +55,7 @@ public class ShiftCreateAction extends Action{
 		//優先度付きキューの型指定
 		Comparator<Map.Entry<String, Integer>> comparetor = Comparator.comparing(Map.Entry::getValue);
 		PriorityQueue<Map.Entry<String, Integer>> priorityQueue = new PriorityQueue<>(comparetor);
+		PriorityQueue<Map.Entry<String, Integer>> priorityQueuesub = new PriorityQueue<>(comparetor);
 		PriorityQueue<Map.Entry<String, Integer>> createShiftQueue = new PriorityQueue<>(comparetor);
 		for(Worker worker:worker_list){
 			priorityQueue.add(new AbstractMap.SimpleEntry<>(worker.getWorkerName(), 1));
@@ -81,39 +83,50 @@ public class ShiftCreateAction extends Action{
 
 			innerList.addAll(workerShift);
 
+			while (!priorityQueuesub.isEmpty()) {
+				Map.Entry<String, Integer> entry = priorityQueuesub.poll();
+				priorityQueue.add(new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue()));
+			}
+
 			//優先度管理
-			for(Map<String, Object> workerInfo :workerShift){
-				List<String> priorityList = new ArrayList<>();
-				for(int j =0; j< worker_list.size(); j++) {
-					Map.Entry<String, Integer> entry = priorityQueue.poll();
+			for(int j =0; j< worker_list.size(); j++) {
+				List<String> priorityList1 = new ArrayList<>();
+				Map.Entry<String, Integer> entry = priorityQueue.poll();
+				for(Map<String, Object> workerInfo :workerShift){
 					@SuppressWarnings("unchecked")
 					List<String> mergedShifts = (List<String>) workerInfo.get("mergedShifts");
 					System.out.println("名前:"+workerInfo.get("name")+"queue名前"+entry.getKey()+"優先度"+entry.getValue());
 					if(workerInfo.get("name").equals(entry.getKey())){
 						if(mergedShifts.isEmpty()){
-							priorityQueue.add(new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue()));
+							priorityQueuesub.add(new AbstractMap.SimpleEntry<>(entry.getKey(), 1));
 							createShiftQueue.removeIf(e -> e.getKey().equals(entry.getKey()));
-							createShiftQueue.add(new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue()));
+							createShiftQueue.add(new AbstractMap.SimpleEntry<>(entry.getKey(), 1));
 							System.out.println("休み名前:"+workerInfo.get("name")+"queue名前"+entry.getKey()+"優先度"+entry.getValue());
 							break;
 						}else{
-							priorityQueue.add(new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue()+1));
+							priorityQueuesub.add(new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue()+1));
 							createShiftQueue.removeIf(e -> e.getKey().equals(entry.getKey()));
 							createShiftQueue.add(new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue()+1));
 							System.out.println("シフト名前:"+workerInfo.get("name")+"queue名前"+entry.getKey()+"優先度"+entry.getValue());
 							break;
 						}
 					}else{
-						priorityList.add(entry.getKey());
+						priorityList1.add(entry.getKey());
 						System.out.println("名無し。名前:"+workerInfo.get("name"));
 					}
 				}
-
-				for(String add_name:priorityList){
+				List<String> priorityListCheck = new ArrayList<String>(new HashSet<>(priorityList1));
+				for(String add_name:priorityListCheck){
+					// キー "Bob" が存在するか確認
+			        String targetKey = add_name;
+			        boolean containsKey = priorityQueuesub.stream().anyMatch(e -> e.getKey().equals(targetKey));
 					//ここの改良をする！例：Mapに名前と点数をもらって現状維持
-					priorityQueue.add(new AbstractMap.SimpleEntry<>(add_name,1));
-					createShiftQueue.removeIf(e -> e.getKey().equals(add_name));
-					createShiftQueue.add(new AbstractMap.SimpleEntry<>(add_name,1));
+			        if(containsKey){
+			        	break;
+			        }else{
+			        	priorityQueuesub.add(new AbstractMap.SimpleEntry<>(add_name,1));
+			        	createShiftQueue.add(new AbstractMap.SimpleEntry<>(add_name,1));
+			        }
 				}
 			}
 			day = day + 1;
