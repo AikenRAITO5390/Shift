@@ -24,7 +24,8 @@
 
                 <br>
                 <strong>メッセージ:</strong> ${message.bbsText} <br>
-                <strong>投稿日:</strong> ${message.bbsDate}
+                <strong>投稿日:</strong> ${message.bbsDate}<br>
+                <td><a href="BbsDelete.action?MANAGER_ID=${store.managerId}&BBS_ID=${message.bbsId}">削除</a></td>
             </li>
         </c:forEach>
     </ul>

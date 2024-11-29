@@ -19,7 +19,7 @@ public class BBSWorkerAction extends Action {
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
         HttpSession session = req.getSession();
 
-        System.out.println("①▲▲▲▲▲▲▲▲▲▲▲▲▲▲");
+        System.out.println("①▲▲▲▲▲▲workerスタート▲▲▲▲▲▲");
 
 
         WorkerDao wDao = new WorkerDao();

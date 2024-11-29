@@ -16,10 +16,11 @@ import dao.WorkerDao;
 import tool.Action;
 
 public class BbsCreateExecuteWorkerAction extends Action {
-    @Override
+	//worker用のやつ！！！！
+	@Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
-        System.out.println("④★★★★★★★★★★★★★");
+        System.out.println("⑤★★★★★★worker★★★★★★");
         WorkerDao wDao = new WorkerDao();
         StoreDao sDao = new StoreDao();
         BBSDao bDao = new BBSDao();
@@ -43,7 +44,7 @@ public class BbsCreateExecuteWorkerAction extends Action {
         String MANAGER_ID = req.getParameter("MANAGER_ID");
 
 
-        System.out.println("⑤★★★★★★★★★★★★★");
+        System.out.println("⑥★★★★★★worker★★★★★★");
         System.out.println("WORKER_ID :" + WORKER_ID);
         System.out.println("BBS_TEXT :" + BBS_TEXT);
         System.out.println("BBS_ID :" + BBS_ID);
@@ -58,7 +59,7 @@ public class BbsCreateExecuteWorkerAction extends Action {
         } else if (MANAGER_ID != null && !MANAGER_ID.isEmpty()) {
             worker = wDao.get(MANAGER_ID);
         }
-        System.out.println("⑥★★★★★★★★★★★★★");
+        System.out.println("⑦★★★★★★worker★★★★★★★");
         System.out.println("worker :" + worker);
 
         System.out.println("workerId :" +(worker != null ? worker.getWorkerId() : "null"));
@@ -75,7 +76,7 @@ public class BbsCreateExecuteWorkerAction extends Action {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = dateFormat.parse(BBS_DATE1);
 
-        System.out.println("⑦★★★★★★★★★★★");
+        System.out.println("⑧★★★★★★worker★★★★★★");
         System.out.println(date);
 
 

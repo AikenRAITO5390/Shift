@@ -9,8 +9,9 @@
 <body>
 <h2>Manager</h2>
     <form action="BbsCreateExecute.action" method="post">
-        <label for="worker_id">投稿者ID:</label>
-        <input type="text" name="WORKER_ID" value="${UserName}"  readonly required><br><br>
+        <label for="manager_id">投稿者ID:</label>
+        <input type="text" name="WORKER_NAME" value="${UserName}"  readonly required><br><br>
+        <input type="hidden" name="MANAGER_ID" value="${ManagerId}"  readonly required><br><br>
 
         <label for="bbs_id">BBS ID:</label>
         <input type="text" name="BBS_ID" value="${BbsId}"  readonly required><br><br>

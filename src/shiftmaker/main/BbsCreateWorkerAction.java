@@ -26,7 +26,7 @@ public class BbsCreateWorkerAction extends Action {
         HttpSession session = req.getSession();
 
         Store store = (Store) session.getAttribute("store");
-        System.out.println("②★★★★★★★★★★");
+        System.out.println("②★★★★★★worker★★★★★★");
         System.out.println("Store: " + store);
 
         Worker worker = (Worker) session.getAttribute("user");
@@ -47,7 +47,7 @@ public class BbsCreateWorkerAction extends Action {
 
 
         // デバッグメッセージを追加
-        System.out.println("③★★★★★★★★★★★★★" );
+        System.out.println("③★★★★★★worker★★★★★★" );
         System.out.println("ManagerName :" + ManagerName);
         System.out.println("WorkerName :" + WorkerName);
         System.out.println("WorkerId :" + WorkerId);
@@ -58,7 +58,7 @@ public class BbsCreateWorkerAction extends Action {
 
 
         // 今日の日付
-        System.out.println("④★★★★★★★★★★★★★" );
+        System.out.println("④★★★★★★worker★★★★★★" );
         Date today = new Date();
         System.out.println("Today (Date): " + today);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");

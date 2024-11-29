@@ -26,40 +26,38 @@ public class BbsCreateAction extends Action {
         HttpSession session = req.getSession();
 
         Store store = (Store) session.getAttribute("store");
-        System.out.println("②★★★★★★★★★★");
+        System.out.println("②★★★★★★manager★★★★★★");
         System.out.println("Store: " + store);
 
         Worker worker = (Worker) session.getAttribute("worker");
         System.out.println("Worker: " + worker);
 
 
-        if (store == null && worker == null) {
-            System.out.println("Store and Worker are null");
-            res.sendRedirect("login.jsp");
-            return;
-        }
 
         // ログインユーザーの情報を取得
         String ManagerName = store != null ? store.getManagerName() : null;
         String StoreId = store != null ? store.getStoreId() : null;
         String WorkerName = worker != null ? worker.getWorkerName() : null;
+        String WorkerId = worker != null ? worker.getWorkerId() : null;
+        String ManagerId = store != null ? store.getManagerId() : null;
 
         // デバッグメッセージを追加
-        System.out.println("③★★★★★★★★★★★★★" );
+        System.out.println("③★★★★★★manager★★★★★★" );
         System.out.println("ManagerName :" + ManagerName);
         System.out.println("WorkerName :" + WorkerName);
 
-        System.out.println("投稿者 :" + (WorkerName != null ? WorkerName : ManagerName));
+        System.out.println("WorkerId :" + WorkerId);
+        System.out.println("投稿者 :" + ManagerName);
         System.out.println("STORE_ID :" + StoreId);
         System.out.println("WorkerName :" + WorkerName);
 
 
         // 今日の日付
-        System.out.println("④★★★★★★★★★★★★★" );
+        System.out.println("④★★★★★★manager★★★★★★" );
         Date today = new Date();
+        System.out.println("Today (Date): " + today);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-        System.out.println("sdf :"+sdf);
-        //String formattedDate = sdf.format(today);
+        String formattedDate = sdf.format(today);
 
 
         // 連番のBBS_IDを生成
@@ -67,11 +65,12 @@ public class BbsCreateAction extends Action {
 
         System.out.println("BbsId: " + BbsId);
 
-        String UserName = WorkerName != null ? WorkerName : ManagerName;
+        String UserName = ManagerName;
 
         // リクエストにユーザー名、日付、BBS_IDを設定
+        req.setAttribute("ManagerId", ManagerId);
         req.setAttribute("UserName", UserName);
-        req.setAttribute("today", sdf);
+        req.setAttribute("today", formattedDate);
         req.setAttribute("BbsId", BbsId);
         req.setAttribute("StoreId", StoreId);
 

@@ -17,25 +17,29 @@ import tool.Action;
 
 public class BBSAction extends Action {
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-
-    	System.out.println("①◆◆◆◆◆◆◆◆◆◆◆◆◆");
     	HttpSession session = req.getSession();
-        Store store = (Store) session.getAttribute("user");
 
-        System.out.println("store");
+    	System.out.println("①◆◆◆◆◆◆managerスタート◆◆◆◆◆◆");
 
-        if (store == null) {
+    	WorkerDao wDao = new WorkerDao();
+        StoreDao sDao = new StoreDao();
+        BBSDao bDao = new BBSDao();
+
+
+    	Store store = (Store) session.getAttribute("user");
+    	if (store == null) {
             System.out.println("Store is null");
             res.sendRedirect("login.jsp");
             return;
         }
+        System.out.println("store :"+ store);
 
-        WorkerDao wDao = new WorkerDao();
-        StoreDao sDao = new StoreDao();
-        BBSDao bDao = new BBSDao();
 
-        Store stores = sDao.get(store.getStoreId());
+        Store store_login = sDao.get(store.getStoreId());
         List<Worker> workers = wDao.filter(store);
+
+
+
 
         // TRUE
         List<Worker> filteredWorkers = workers.stream()
@@ -46,6 +50,8 @@ public class BBSAction extends Action {
         List<Worker> filteredWorkersnot = workers.stream()
                 .filter(worker -> !worker.isWorkerJudge()) // isWorkerJudge()はWORKER_JUDGEを返すメソッド
                 .collect(Collectors.toList());
+
+
 
         // 掲示板メッセージを取得
         List<BBS> messages = bDao.filter(store);
@@ -60,13 +66,15 @@ public class BBSAction extends Action {
         // リクエストにデータをセット
         req.setAttribute("workers", filteredWorkers);
         req.setAttribute("workersnot", filteredWorkersnot);
-        req.setAttribute("stores", stores);
+        req.setAttribute("store_login", store_login);
         req.setAttribute("messages", messages);
         req.setAttribute("managerName", managerName);
+        req.setAttribute("managerId", managerId);
 
 
+        session.setAttribute("store", store);
 
-        System.out.println("Stores: " + stores);
+        System.out.println("store_login: " + store_login);
         System.out.println("Filtered Workers: " + filteredWorkers);
         System.out.println("Filtered Workers not: " + filteredWorkersnot);
         System.out.println("Messages: " + messages);

@@ -5,20 +5,84 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<style>
+.h2 h2{
+	margin-top : 60px;
+	text-align : center;
+
+}
+.h3 h3{
+	text-align : left;
+
+}
+.table{
+	border-collapse: collapse;
+    width: 85%;
+
+}
+.tr ,th {
+    border: 1px solid #000;
+    padding: 4px;
+    text-align: center;
+    background-color: #6495ED;
+    color: white;
+
+}
+.tr ,td {
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: center;
+
+}
+.tr ,a1 {
+	margin-left : 900px;
+
+
+
+
+}
+.tr ,a {
+	margin-left : 950px;
+
+
+
+}
+
+.managertable a{
+	margin-bottom: 20px;
+
+}
+
+</style>
+
+
+
+
+
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>まるごとシフトくん</title>
 </head>
+
+<c:import url="../../common/header.jsp"/>
+
 <body>
 
+<div class="h2">
     <h2>従業員一覧</h2>
+</div>
 
+<div class="h3">
     <h3>アルバイト</h3>
+</div>
 
     <c:if test="${empty workersnot}">
         <p>従業員が見つかりませんでした。</p>
 
     </c:if>
+
+    <div class="workertable">
     <c:if test="${not empty workersnot}">
         <table  class="table table-hover">
             <tr>
@@ -29,8 +93,7 @@
                 <th>電話番号</th>
                 <th>パスワード</th>
                 <th>店情報</th>
-                <th></th>
-                <th></th>
+
             </tr>
             <c:forEach var="worker" items="${workersnot}">
                 <tr>
@@ -41,12 +104,14 @@
                     <td>${worker.workerTel}</td>
                     <td>${worker.workerPassword}</td>
                     <td>${stores.storeName}</td>
-                    <td><a href="WorkerUpdate.action?workerId=${worker.workerId}">変更</a></td>
-                    <td><a href="WorkerDelete.action?WORKER_ID=${worker.workerId}">削除</a></td>
+                    <a1 href="WorkerUpdate.action?workerId=${worker.workerId}">変更</a1>
+                    <a href="WorkerDelete.action?WORKER_ID=${worker.workerId}">削除</a>
+
                 </tr>
             </c:forEach>
         </table>
     </c:if>
+    </div>
 
 
 
@@ -66,8 +131,7 @@
                 <th>電話番号</th>
                 <th>パスワード</th>
                 <th>店情報</th>
-                <th></th>
-                <th></th>
+
             </tr>
             <c:forEach var="worker" items="${workers}">
                 <tr>
@@ -78,14 +142,14 @@
                     <td>${worker.workerTel}</td>
                     <td>${worker.workerPassword}</td>
                     <td>${stores.storeName}</td>
-                    <td><a href="WorkerUpdate.action?workerId=${worker.workerId}">変更</a></td>
-                    <td><a href="WorkerDelete.action?WORKER_ID=${worker.workerId}">削除</a></td>
+                    <a1 href="WorkerUpdate.action?workerId=${worker.workerId}">変更</a1>
+                    <a href="WorkerDelete.action?WORKER_ID=${worker.workerId}">削除</a>
                 </tr>
             </c:forEach>
         </table>
     </c:if>
 
     <a href="Main.action">メインへ戻る</a>
-
+<c:import url="../../common/footer.jsp"/>
 </body>
 </html>

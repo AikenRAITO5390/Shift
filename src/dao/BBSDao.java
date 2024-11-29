@@ -12,8 +12,9 @@ import bean.Store;
 
 
 public class BBSDao extends Dao {
-	private static int currentBbsId = 1;
 
+
+	private static int currentBbsId = 1;
 
 	public int generateNewBbsId() {
         return currentBbsId++;
@@ -120,7 +121,7 @@ public class BBSDao extends Dao {
 	    ResultSet rSet = null;
 	    //SQL文のソート
 	    //投稿された順にしたいので、追加順となるBBS_IDで昇順
-	    String order = " order by BBS_DATE desc";
+	    String order = " order by BBS_DATE desc, CAST(BBS_ID AS INT) desc";
 
 	    try {
 		    //プリペアードステートメントにSQL文をセット
@@ -168,10 +169,7 @@ public class BBSDao extends Dao {
 	    // 実行件数
 	    int count = 0;
 
-        System.out.println("⑧★★★★★★★★★★★");
-
-        System.out.println(bbs.getWorker().getWorkerId());
-        System.out.println(bbs.getStore().getManagerId());
+        System.out.println("⑧★★★★★★save★★★★★★");
 
 
 
@@ -180,12 +178,23 @@ public class BBSDao extends Dao {
 	        statement = connection.prepareStatement(
 	                "INSERT INTO BBS (BBS_ID, BBS_TEXT, STORE_ID, WORKER_ID, BBS_DATE,MANAGER_ID) VALUES (?, ?, ?, ?, ?, ?)");
 	        // プリペアードステートメントに値をバインド
+
+
+
 	        statement.setString(1, bbs.getBbsId());
 	        statement.setString(2, bbs.getBbsText());
 	        statement.setString(3, bbs.getStore().getStoreId());
 	        statement.setString(4, bbs.getWorker().getWorkerId());
 	        statement.setString(5, bbs.getBbsDate());
 
+	        //managerのときつかう
+	        if(bbs.getWorker().getWorkerId() == null){
+		        statement.setString(4, null);
+	        }else{
+	        	statement.setString(4, bbs.getWorker().getWorkerId());
+	        }
+
+	        //workerのときつかう
 	        if(bbs.getWorker().getWorkerId() == null){
 		        statement.setString(6, bbs.getStore().getManagerId());
 	        }else{
@@ -231,38 +240,115 @@ public class BBSDao extends Dao {
 
 	    return count > 0;
 	}
+
+
+	public boolean savemanager(BBS bbs) throws Exception {
+	    // コネクションを確立
+	    Connection connection = getConnection();
+	    // プリペアードステートメント
+	    PreparedStatement statement = null;
+	    // 実行件数
+	    int count = 0;
+
+        System.out.println("⑧★★★★★★savemanager★★★★★★");
+
+
+
+	    try {
+	        // プリペアードステートメントにINSERT文をセット
+	        statement = connection.prepareStatement(
+	                "INSERT INTO BBS (BBS_ID, BBS_TEXT, STORE_ID, WORKER_ID, BBS_DATE,MANAGER_ID) VALUES (?, ?, ?, ?, ?, ?)");
+	        // プリペアードステートメントに値をバインド
+
+
+
+	        statement.setString(1, bbs.getBbsId());
+	        statement.setString(2, bbs.getBbsText());
+	        statement.setString(3, bbs.getStore().getStoreId());
+	        statement.setString(4, null);
+	        statement.setString(5, bbs.getBbsDate());
+	        statement.setString(6, bbs.getStore().getManagerId());
+
+
+	        // プリペアードステートメントを実行
+	        count = statement.executeUpdate();
+
+	        // コミット
+	        connection.commit();
+
+	    } catch (Exception e) {
+	        // ロールバック
+	        if (connection != null) {
+	            try {
+	                connection.rollback();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	        e.printStackTrace();
+	        throw e;
+	    } finally {
+	        // ステートメントのクローズ
+	        if (statement != null) {
+	            try {
+	                statement.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+
+	        // コネクションのクローズ
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	    }
+
+	    return count > 0;
+	}
+
+
+
+
+
+
 //掲示板削除
-	public boolean delete(BBS bbs) throws Exception {
+	public boolean delete(String BBS_ID) throws Exception {
+	    // コネクションを確立
+	    Connection connection = getConnection();
+	    // プリペアードステートメント
+	    PreparedStatement statement = null;
+	    // 実行件数
+	    int count = 0;
 
-		//コネクションを確立
-				Connection connection = getConnection();
-				//プリペアードステートメント
-				PreparedStatement statement = null;
-				//実行件数
-				int count = 0;
+	    try {
+	        // 選ばれた掲示板投稿（BBS_IDで管理）を削除
+	        statement = connection.prepareStatement("DELETE FROM BBS WHERE BBS_ID = ?");
+	        statement.setString(1, BBS_ID);
+	        count = statement.executeUpdate();
+	    } catch (Exception e) {
+	        throw e;
+	    } finally {
+	        if (statement != null) {
+	            try {
+	                statement.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	    }
 
-				try{   //選ばれた掲示板投稿（BBSIDで管理）を削除
-					BBS old = get(bbs.getBbsId());
-					statement=connection.prepareStatement("delete from BBS where BBS_ID = ?");
-					statement.setString(1, bbs.getBbsId());
-					count = statement.executeUpdate();
-				}catch(Exception e){
-					throw e;
-				}finally{
-					if(statement !=null){
-						try{
-							connection.close();
-						}catch(SQLException sqle){
-							throw sqle;
-						}
-					}
-				}
-
-				if(count > 0){
-					return true;
-				}else{
-					return false;
-				}
+	    return count > 0;
 	}
 }
 
