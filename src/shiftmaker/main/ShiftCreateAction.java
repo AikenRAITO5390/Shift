@@ -54,9 +54,13 @@ public class ShiftCreateAction extends Action{
 		worker_list = wDao.filter(manager);
 		//優先度付きキューの型指定
 		Comparator<Map.Entry<String, Integer>> comparetor = Comparator.comparing(Map.Entry::getValue);
+		//優先度付きキューの作成：数字が小さいほど優先度が高くなる
 		PriorityQueue<Map.Entry<String, Integer>> priorityQueue = new PriorityQueue<>(comparetor);
+		//priorityqueueのコピーをとるためのキュー
 		PriorityQueue<Map.Entry<String, Integer>> priorityQueuesub = new PriorityQueue<>(comparetor);
+		//シフト作成に優先度を反映させるためのキュー
 		PriorityQueue<Map.Entry<String, Integer>> createShiftQueue = new PriorityQueue<>(comparetor);
+		//キューの初期値を入れる
 		for(Worker worker:worker_list){
 			priorityQueue.add(new AbstractMap.SimpleEntry<>(worker.getWorkerName(), 1));
 			createShiftQueue.add(new AbstractMap.SimpleEntry<>(worker.getWorkerName(), 1));
@@ -80,9 +84,10 @@ public class ShiftCreateAction extends Action{
 			//開店時間、閉店時間、シフト作成者情報、従業員情報一覧、日時をいれシフトを作成する関数
 			List<Map<String, Object>> workerShift = shift_create.Shiftmain(
 					work_time_start, work_time_end,manager,shift_list,date,createShiftQueue,worker_list);
-
+			//シフト情報を格納
 			innerList.addAll(workerShift);
 
+			//priorityqueueのコピーから値を戻す
 			while (!priorityQueuesub.isEmpty()) {
 				Map.Entry<String, Integer> entry = priorityQueuesub.poll();
 				priorityQueue.add(new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue()));
@@ -90,20 +95,28 @@ public class ShiftCreateAction extends Action{
 
 			//優先度管理
 			for(int j =0; j< worker_list.size(); j++) {
+				//シフト希望を入れてない人を格納する
 				List<String> priorityList1 = new ArrayList<>();
+				//entryに優先度順に取り出す
 				Map.Entry<String, Integer> entry = priorityQueue.poll();
+				//シフト表に入っている人の数だけ回す
 				for(Map<String, Object> workerInfo :workerShift){
 					@SuppressWarnings("unchecked")
+					//シフト時間表をリスト化
 					List<String> mergedShifts = (List<String>) workerInfo.get("mergedShifts");
 					System.out.println("名前:"+workerInfo.get("name")+"queue名前"+entry.getKey()+"優先度"+entry.getValue());
+					//シフト希望に入っている名前とentryに入っている人が同じか判別
 					if(workerInfo.get("name").equals(entry.getKey())){
+						//entryに入っていた人にシフトが割り当てられているか判別
 						if(mergedShifts.isEmpty()){
+							//シフトが割り当てられていなかった場合休みだったとして優先度を上げる
 							priorityQueuesub.add(new AbstractMap.SimpleEntry<>(entry.getKey(), 1));
 							createShiftQueue.removeIf(e -> e.getKey().equals(entry.getKey()));
 							createShiftQueue.add(new AbstractMap.SimpleEntry<>(entry.getKey(), 1));
 							System.out.println("休み名前:"+workerInfo.get("name")+"queue名前"+entry.getKey()+"優先度"+entry.getValue());
 							break;
 						}else{
+							//シフトが割り当てられていた場合優先度を下げる
 							priorityQueuesub.add(new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue()+1));
 							createShiftQueue.removeIf(e -> e.getKey().equals(entry.getKey()));
 							createShiftQueue.add(new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue()+1));
@@ -111,30 +124,29 @@ public class ShiftCreateAction extends Action{
 							break;
 						}
 					}else{
+						//シフト希望が入っていない場合
 						priorityList1.add(entry.getKey());
 						System.out.println("名無し。名前:"+workerInfo.get("name"));
 					}
 				}
+				//シフト希望が入っていなかった人をキューに格納する
 				List<String> priorityListCheck = new ArrayList<String>(new HashSet<>(priorityList1));
 				for(String add_name:priorityListCheck){
-					// キー "Bob" が存在するか確認
+					// キー が存在するか確認
 			        String targetKey = add_name;
+			        //キューの中にキーと同じ名前が入っているか確認
 			        boolean containsKey = priorityQueuesub.stream().anyMatch(e -> e.getKey().equals(targetKey));
-					//ここの改良をする！例：Mapに名前と点数をもらって現状維持
+			        //キューの中に値があるか判別
 			        if(containsKey){
 			        	break;
 			        }else{
+			        	//キューの中に値が入っていない場合格納
 			        	priorityQueuesub.add(new AbstractMap.SimpleEntry<>(add_name,1));
 			        	createShiftQueue.add(new AbstractMap.SimpleEntry<>(add_name,1));
 			        }
 				}
 			}
 			day = day + 1;
-		}
-
-		while (!priorityQueue.isEmpty()) {
-			Map.Entry<String, Integer> entry = priorityQueue.poll();
-		    System.out.println("Name"+entry.getKey()+"Priority"+ entry.getValue());
 		}
 
 

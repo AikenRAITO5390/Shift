@@ -2,6 +2,7 @@ package tool;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,10 +76,11 @@ public class ShiftCreate {
     }
 
  // 勤務時間帯を連続して統合
-    private static List<String> mergeShifts(List<String> shifts) {
+    private static List<String> mergeShifts(List<String> shifts,Store shift_manager) {
         List<String> merged = new ArrayList<>();
         if (shifts.isEmpty()) return merged;
-
+        StoreDao stDao = new StoreDao();
+        List<String>  store_time_id = Arrays.asList("A","B","C","D");
         //currentに開始時間を格納
         String[] current = shifts.get(0).split("-");
         int start = timeToMinutes(current[0]);
@@ -99,7 +101,25 @@ public class ShiftCreate {
                 end = nextEnd;
             }
         }
-        merged.add(minutesToTime(start) + "-" + minutesToTime(end)); // 最後のシフトを追加
+        for(String time_id:store_time_id){
+        	try {
+        		Store Time = new Store();
+				Time = stDao.Time_get(shift_manager.getStoreId(), time_id);
+				String time_id_start = Time.getWorkTimeStart().toString();
+				String time_id_end = Time.getWorkTimeEnd().toString();
+				int time_start =timeToMinutes(time_id_start);
+				int time_end =timeToMinutes(time_id_end);
+				if(time_start == start && time_end == end){
+					merged.add(time_id);
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+        }
+        if(merged.isEmpty()){
+        	merged.add(minutesToTime(start) + "-" + minutesToTime(end)); // 最後のシフトを追加
+        }
         return merged;
     }
 
@@ -122,7 +142,8 @@ public class ShiftCreate {
 
 
     public static Map<String, List<Map<String, String>>> createShiftSchedule(
-    		ShiftRequirement requirement, List<WorkerShift> workers,List<Worker> worker_list,PriorityQueue<Map.Entry<String, Integer>> priorityQueue)
+    		ShiftRequirement requirement,List<WorkerShift> workers,List<Worker> worker_list,
+    		PriorityQueue<Map.Entry<String, Integer>> priorityQueue,Store shift_manager)
     {
 
     	// 優先度でソート（降順: 優先度が高い順）
@@ -178,13 +199,11 @@ public class ShiftCreate {
 			schedule.put(timeSlot, assignedWorkers);
 		}
         for (WorkerShift worker : workers) {
-            worker.mergedShifts = mergeShifts(worker.assignedShifts);
+            worker.mergedShifts = mergeShifts(worker.assignedShifts,shift_manager);
         }
 
         return schedule;
     }
-
-
 
 
     public List<Map<String,Object>> Shiftmain(
@@ -232,7 +251,7 @@ public class ShiftCreate {
         }catch (Exception e) {
         	System.out.println(e);
 		}
-
+        //従業員の優先度登録
         for(int j =0; j< worker_list.size(); j++) {
         	Map.Entry<String, Integer> entry = priorityQueue.poll();
         		for(WorkerShift worker: workers){
@@ -246,7 +265,7 @@ public class ShiftCreate {
         for(WorkerShift worker: workers){
         	System.out.println("Name:"+worker.name+"priority"+worker.priority);
         }
-        createShiftSchedule(requirement, workers,worker_list,priorityQueue);
+        createShiftSchedule(requirement, workers,worker_list,priorityQueue,shift_manager);
 
         // 各人の統合された勤務時間を取得
         List<Map<String, Object>> workerMergedShifts = getWorkerMergedShifts(workers,date);
