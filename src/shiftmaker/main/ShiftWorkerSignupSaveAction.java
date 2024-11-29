@@ -123,13 +123,15 @@ public class ShiftWorkerSignupSaveAction extends Action {
 
         	// カレンダー作成後、null を除外
         	stringDates.removeIf(date -> date == null);
+        	// カレンダー作成後、null を除外
+        	dates.removeIf(date -> date == null);
 
         	// 選択された日付を文字列形式に変換
         	String selectedDateString = selectedDate.toString();
 
-        	// stringDates を更新：勤務時間情報のみ格納
-        	for (int i = 0; i < dates.size(); i++) {
-        	    if (dates.get(i) != null && dates.get(i).equals(selectedDateString)) {
+        	// stringDatesを更新：勤務時間情報のみ格納
+        	for (int i = 0; i < stringDates.size(); i++) {
+        	    if (stringDates.get(i) != null && stringDates.get(i).equals(selectedDateString)) {
         	        if ("E".equals(workTimeId)) {
         	            // カスタム時間を取得
         	            String customStartTime = req.getParameter("customStartTime");
@@ -175,6 +177,11 @@ public class ShiftWorkerSignupSaveAction extends Action {
 
 
     	req.setAttribute("stringDates", stringDates);
+
+    	String countStr = req.getParameter("count");
+		int count = Integer.parseInt(countStr);
+		System.out.println("count：" + count);
+		req.setAttribute("count", count);
 
 
         // 保存後にカレンダー画面を再度表示する

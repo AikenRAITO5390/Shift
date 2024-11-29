@@ -15,7 +15,7 @@
 
 		<div>シフトの希望時間を選択してください。</div>
 
-		<form action="ShiftWorkerSignupSave.action?shiftDate=${shiftDate}" method="post">
+		<form action="ShiftWorkerSignupSave.action?shiftDate=${shiftDate}&count=${count}" method="post">
 
 			<c:if test="${not empty shiftDate}">
 		        <h3>選択された日付:

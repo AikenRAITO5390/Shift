@@ -35,12 +35,12 @@
                 <c:choose>
                     <c:when test="${date != null}">
                         <%-- 日付リンクを生成 --%>
-	                    <a href="ShiftWorkerSignupSet.action??shiftDay=${date}">${fn:substring(date.toString(), 8, 10)}</a>
+	                    <a href="ShiftWorkerSignupSet.action?shiftDay=${date}&count=${count}">${fn:substring(date.toString(), 8, 10)}</a>
 
-	                    <%-- 勤務時間情報を表示 --%>
-	                    <c:if test="${stringDates[status.index] != ''}">
-	                        <p>${stringDates[status.index]}</p>
-	                    </c:if>
+	                    <!-- 勤務時間情報を表示 -->
+		                <c:if test="${date != ''}">
+		                    <p>${date}</p>
+		                </c:if>
                     </c:when>
                     <c:otherwise>
                         <!-- 空セル -->

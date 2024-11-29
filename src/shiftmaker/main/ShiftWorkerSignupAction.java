@@ -27,6 +27,8 @@ public class ShiftWorkerSignupAction extends Action{
 		// セッションを取得
 		HttpSession session = req.getSession();
 
+		int count = 1;
+
 		// ログインユーザーを取得
      	Worker loginuser = (Worker)session.getAttribute("user");
      	// 確認用
@@ -77,6 +79,7 @@ public class ShiftWorkerSignupAction extends Action{
 		req.setAttribute("worker", worker);
 		req.setAttribute("year", year);
 		req.setAttribute("nextmonth", nextmonth);
+		req.setAttribute("count", count);
 
         // JSPへフォワード
         req.getRequestDispatcher("shift_worker_signup.jsp").forward(req, res);

@@ -28,6 +28,10 @@ public class ShiftWorkerSignupSetAction extends Action{
 		// セッションを取得
 		HttpSession session = req.getSession();
 
+		String countStr = req.getParameter("count");
+		int count = Integer.parseInt(countStr);
+		System.out.println("count：" + count);
+
 		// ログインユーザーを取得
      	Worker loginuser = (Worker)session.getAttribute("user");
      	// 確認用
@@ -74,8 +78,7 @@ public class ShiftWorkerSignupSetAction extends Action{
      	// リクエストパラメータから日付を取得
 		// "shiftDay" パラメータで日付を取得
         String shiftDateString = req.getParameter("shiftDay");
-
-        String shiftDate = yearstr + "-" + nextmonthstr + "-" + "0" + shiftDateString;
+        System.out.println("shiftDay:" + shiftDateString);
 
         System.out.println("選択した日:" + shiftDateString);
 
@@ -85,14 +88,29 @@ public class ShiftWorkerSignupSetAction extends Action{
         	// 日付のフォーマットを指定
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             // 文字列をjava.util.Date型に変換
-            Date utilDate = sdf.parse(shiftDate);
+            if(count == 1){
+            	String shiftDate = yearstr + "-" + nextmonthstr + "-" + "0" + shiftDateString;
+                System.out.println("shiftDate:" + shiftDate);
+            	Date utilDate = sdf.parse(shiftDate);
+            	System.out.println("utilDate:" + utilDate);
+            	// java.sql.Dateに変換
+                java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+                System.out.println("sqlDate:" + sqlDate);
 
-            // java.sql.Dateに変換
-            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+                // java.sql.Date型でリクエスト属性にセット
+                req.setAttribute("shiftDate", sqlDate);
+                System.out.println("取得した日:" + sqlDate);
+            } else {
+            	Date utilDate = sdf.parse(shiftDateString);
+            	System.out.println("utilDate:" + utilDate);
+            	// java.sql.Dateに変換
+                java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+                System.out.println("sqlDate:" + sqlDate);
+                // java.sql.Date型でリクエスト属性にセット
+                req.setAttribute("shiftDate", sqlDate);
+                System.out.println("取得した日:" + sqlDate);
+            }
 
-            // java.sql.Date型でリクエスト属性にセット
-            req.setAttribute("shiftDate", sqlDate);
-            System.out.println("取得した日:" + sqlDate);
         }
 
 
@@ -119,6 +137,11 @@ public class ShiftWorkerSignupSetAction extends Action{
 		req.setAttribute("year", year);
 		req.setAttribute("month", month);
 		req.setAttribute("nextmonth", nextmonth);
+
+		count += 1;
+
+		req.setAttribute("count", count);
+
 
         // JSPへフォワード
         req.getRequestDispatcher("shift_worker_signup_set.jsp").forward(req, res);
