@@ -13,6 +13,7 @@
     padding: 10px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
 }
+
 .header {
     position: fixed;
     top: 0;
@@ -45,6 +46,19 @@ color: white;}
     margin: 0; /* デフォルトのマージンをリセット */
     padding: 2px 0; /* 上下のパディングを設定 */
 
+}
+
+button {
+    background-color:  #75A9FF; /* ボタンの背景色を設定 */
+    color: white; /* ボタンのテキスト色を設定 */
+    padding: 10px 10px; /* ボタンの内側の余白を設定 */
+    border: none; /* ボタンの枠線をなしに設定 */
+    border-radius: 5px; /* ボタンの角を丸くする */
+    cursor: pointer; /* カーソルをポインタに変更 */
+}
+
+button:hover {
+    background-color: #005FFF; /* ホバー時の背景色を設定 */
 }
 
 </style>

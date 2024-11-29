@@ -10,17 +10,22 @@
 </head>
 <c:import url="../../common/header.jsp"/>
 <body>
+<div class = "power_Setting">
 
-<h2>シフト時間設定</h2>
-<form action="PowerSettingResult.action" method="post">
+<h1>シフト時間設定</h1>
+<p>"${toDay}分"</p>
+<div class = "Point_Setting">
+<div class = "week_Setting">
+<form action="PowerSettingResult.action" method="post" onsubmit="return validateForm()">
     <table class="table table-hover">
         <c:forEach var="i" begin="0" end="6">
             <tr>
                 <td><label>${fn:substring('月火水木金土日', i, i+1)}</label></td>
                 <td>
-                    <input type="text" name="WeekScore_${i}" maxlength="7" id="WeekScore_${i}">
+                  <input type="number" min="1" max="${pointMax}" name="WeekScore_${i}" maxlength="7" id="WeekScore_${i}" style="ime-mode: disabled" required>
+
                 </td>
-                <input type="hidden" name="WorkWeekScore_${i}" value="${fn:substring('1234567', i, i+1)}"　required>
+                <input type="hidden" name="WorkWeekScore_${i}" value="${fn:substring('1234567', i, i+1)}">
             </tr>
         </c:forEach>
     </table>
@@ -28,7 +33,7 @@
     <script>
         // 初期値を設定
         <c:forEach var="i" begin="0" end="6">
-            document.getElementById("WeekScore_${i}").value = "0";
+            document.getElementById("WeekScore_${i}").value = "";
         </c:forEach>
 
         // power_listの値を設定
@@ -39,20 +44,43 @@
                 </c:if>
             </c:forEach>
         </c:forEach>
+
+        function validateForm() {
+            var isValid = true;
+            for (var i = 0; i <= 6; i++) {
+                var input = document.getElementById("WeekScore_" + i);
+                var value = input.value;
+                if (value === "") {
+                    input.setCustomValidity("入力されてない日があります");
+                    isValid = false;
+                } else if (value < 1) {
+                    input.setCustomValidity("下限を超えている日があります");
+                    isValid = false;
+                } else if (value > 30) {
+                    input.setCustomValidity("上限を超えている日があります");
+                    isValid = false;
+                } else {
+                    var input = document.getElementById("WeekScore_" + i);
+                    input.reportValidity(); // ここでエラーメッセージを表示
+                }
+            }
+            return isValid;
+        }
     </script>
     <button type="submit">変更</button>
 </form>
-
-<form action="DayPowerSettingResult.action" method="post">
+</div>
+<dic class = point_conetnt>
+<form action="DayPowerSettingResult.action" method="post" onsubmit="return validateInput()">
 	    <table class="table table-hover">
 	        <c:forEach var="dateMap" items="${dateList}" varStatus="loopStatus">
 	            <c:forEach var="entry" items="${dateMap.entrySet()}">
 	                <tr>
 	                    <td><label>${loopStatus.index + 1}</label></td>
 	                    <td>
-	                        <input type="text" name="DayScore_${loopStatus.index + 1}" maxlength="7" id="DayScore_${loopStatus.index + 1}"　required>
+	                        <input type="number" min="1" max="${pointMax}" name="DayScore_${loopStatus.index + 1}" maxlength="7" id="DayScore_${loopStatus.index + 1}" required>
 	                    </td>
-	                    <input type="hidden" name="WorkDayScore_${loopStatus.index + 1}" value="${entry.key}">
+	                    	<input type="hidden" name="WorkDayScore_${loopStatus.index + 1}" value="${entry.key}">
 	                </tr>
 	            </c:forEach>
 	        </c:forEach>
@@ -74,18 +102,39 @@
 			<c:forEach var="dateMap" items="${datePoint}" varStatus="pointStatus">
 				<c:forEach var="pointy" items="${dateMap.entrySet()}">
     				<c:if test="${pointy.key == entry.key}">
-        				document.getElementById("DayScore_${loopStatus.index + 1}").value = "${pointy.value}";
+        	 			document.getElementById("DayScore_${loopStatus.index + 1}").value = "${pointy.value}";
     				</c:if>
     			</c:forEach>
     		</c:forEach>
 		</c:forEach>
 	</c:forEach>
 
-	</script>
+	 function validateInput() {
+		<c:forEach var="dateMap" items="${dateList}" varStatus="loopStatus">
+			<c:forEach var="entry" items="${dateMap.entrySet()}">
+         var input = document.getElementById("DayScore_${loopStatus.index + 1}");
+         var value = input.value;
+         if (value === "") {
+             input.setCustomValidity("入力されてない日があります");
+         } else if (value < 1) {
+             input.setCustomValidity("下限を超えている日があります");
+         } else if (value > 10) {
+             input.setCustomValidity("上限を超えている日があります");
+         } else {
+             input.setCustomValidity("");
+         }
+         return input.reportValidity();
+ 			</c:forEach>
+ 		</c:forEach>
+     }
+	 console.log('あいうえお');
 
+	</script>
 
 	    <button type="submit">変更</button>
 	</form>
-
+	</div>
+</div>
+</div>
 </body>
 </html>

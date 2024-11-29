@@ -16,8 +16,10 @@ import javax.servlet.http.HttpSession;
 
 import bean.Shift;
 import bean.Store;
+import bean.Worker;
 import dao.ShiftDao;
 import dao.StoreDao;
+import dao.WorkerDao;
 import tool.Action;
 
 public class PowerSettingAction extends Action{
@@ -30,9 +32,14 @@ public class PowerSettingAction extends Action{
 		Store store_login = (Store)session.getAttribute("user");// ログインユーザーを取得
 		Map<String, String> errors = new HashMap<>();
 		Shift shift = null;
+		WorkerDao wDao = new WorkerDao();
 
 //ログイン情報でゲットする
 		List<List<String>> list = sDao.Week_filter(store_login.getStoreId());
+		List<Worker> worker = wDao.filterByStoreId(store_login.getStoreId());
+		Store store = sDao.get(store_login.getStoreId());
+
+		int PointMax = (worker.size()*5);
 
 		//月、日付を取得する方法
         Calendar calendar = Calendar.getInstance();
@@ -49,7 +56,7 @@ public class PowerSettingAction extends Action{
 
         // 日付フォーマットを指定
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
+        SimpleDateFormat sdi = new SimpleDateFormat("yyyy年MM月");
         // 結果を表示
         System.out.println("次の月の最初の日付: " + sdf.format(firstDayOfNextMonth));
         System.out.println("次の月の最後の日付: " + sdf.format(lastDayOfNextMonth));
@@ -77,8 +84,12 @@ public class PowerSettingAction extends Action{
 
             calendar.add(Calendar.DAY_OF_MONTH, 1); // 次の日に進む
         }
+        String ToDay = sdi.format(firstDayOfNextMonth);
+        req.setAttribute("toDay", ToDay);
         req.setAttribute("dateList", dateList);
         req.setAttribute("datePoint", datepoint);
+        req.setAttribute("pointMax",PointMax );
+        req.setAttribute("managerName",store.getManagerName());
 
 		//月～日の点数を取得、表示するためのもの
 
