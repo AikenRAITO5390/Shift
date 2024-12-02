@@ -66,6 +66,6 @@ color: white;}
 <h2> まるごとシフトくん</h2>
     <div class="ushiro">
         <a href="../Logout.action">ログアウト</a>
-        <p>${user.WorkerName}さん</p>
+        <p>${WorkerName}さん</p>
     </div>
 </div>
