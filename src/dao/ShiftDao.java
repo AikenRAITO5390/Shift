@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -223,7 +224,6 @@ public class ShiftDao extends Dao{
 		    	shift.setWorkTimeId(rSet.getString("work_time_id"));
 		    	shift.setShiftTimeStart(rSet.getTimestamp("shift_time_start"));
 		    	shift.setShiftTimeEnd(rSet.getTimestamp("shift_time_end"));
-		    	shift.setShiftId(rSet.getString("shift_id"));
 		    	shift.setWorker(workerDao.get(rSet.getString("worker_id")));
 		    	shift.setStore(storeDao.get(rSet.getString("store_id")));
 
@@ -315,7 +315,7 @@ public class ShiftDao extends Dao{
 	}
 
 	// Eの選択肢用にデータを保存するメソッド
-	public void insertCustomWorkTime(Date shiftDate, String workerId, String storeId, String startTime, String endTime, String shiftScore) throws Exception {
+	public void insertCustomWorkTime(Date shiftDate, String workerId, String storeId, Timestamp customStartTime, Timestamp customEndTime, String shiftScore, String shift_hope_time_id, String work_time_id, String shift_time_start, String shift_time_end) throws Exception {
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
 
@@ -325,27 +325,32 @@ public class ShiftDao extends Dao{
 
 			if(old == null){
 
-				String sql = "INSERT INTO SHIFT (SHIFT_DATE, WORKER_ID, STORE_ID, SHIFTHOPE_TIME_START, SHIFTHOPE_TIME_END, SHIFT_SCORE) VALUES (?, ?, ?, ?, ?, ?)";
+				String sql = "INSERT INTO SHIFT (SHIFT_DATE, WORKER_ID, STORE_ID, SHIFTHOPE_TIME_START, SHIFTHOPE_TIME_END, SHIFT_SCORE, SHIFT_HOPE_TIME_ID, WORK_TIME_ID, SHIFT_TIME_START, SHIFT_TIME_END) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			    statement = connection.prepareStatement(sql);
 			    statement.setDate(1, shiftDate);
 			    statement.setString(2, workerId);
 			    statement.setString(3, storeId);
-			    statement.setString(4, startTime);
-			    statement.setString(5, endTime);
+			    statement.setTimestamp(4, customStartTime);
+			    statement.setTimestamp(5, customEndTime);
 			    statement.setString(6, shiftScore);
-			    statement.executeUpdate();
+			    statement.setString(7, shift_hope_time_id);
+			    statement.setString(8, work_time_id);
+			    statement.setString(9, shift_time_start);
+			    statement.setString(10, shift_time_end);
 			}  else {
 
 				//プリペアードステートメントにUPDATE文をセット
 				statement = connection.prepareStatement("UPDATE shift SET shifthope_time_start=?, shifthope_time_end=? WHERE shift_date=? AND worker_id=? AND store_id=? AND shift_score=?");
 				//プリペアードステートメントに値をバインド
-				statement.setString(1, startTime);
-				statement.setString(2, endTime);
+				statement.setTimestamp(1, customStartTime);
+				statement.setTimestamp(2, customEndTime);
 				statement.setDate(3, shiftDate);
 				statement.setString(4, workerId);
 				statement.setString(5, storeId);
 				statement.setString(6, shiftScore);
 			}
+
+			statement.executeUpdate();
 
 		} finally {
 		    if (statement != null) statement.close();
@@ -354,7 +359,7 @@ public class ShiftDao extends Dao{
 	}
 
 	// A~Dの選択肢用にデータを保存するメソッド
-	public void insertWorkTime(Date shiftDate, String workerId, String storeId, String workTimeId, String shiftScore) throws Exception {
+	public void insertWorkTime(Date shiftDate, String workerId, String storeId, String workTimeId, String shiftScore, String shift_hope_time_id, String shift_time_start, String shift_time_end, Timestamp customStartTime, Timestamp customEndTime) throws Exception {
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
 
@@ -363,14 +368,18 @@ public class ShiftDao extends Dao{
 		try {
 
 			if(old == null){
-				String sql = "INSERT INTO SHIFT (SHIFT_DATE, WORKER_ID, STORE_ID, WORK_TIME_ID, SHIFT_SCORE) VALUES (?, ?, ?, ?, ?)";
+				String sql = "INSERT INTO SHIFT (SHIFT_DATE, WORKER_ID, STORE_ID, WORK_TIME_ID, SHIFT_SCORE, SHIFT_HOPE_TIME_ID, SHIFT_TIME_START, SHIFT_TIME_END, SHIFTHOPE_TIME_START, SHIFTHOPE_TIME_END) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				statement = connection.prepareStatement(sql);
 				statement.setDate(1, shiftDate);
 				statement.setString(2, workerId);
 				statement.setString(3, storeId);
 				statement.setString(4, workTimeId);
 				statement.setString(5, shiftScore);
-				statement.executeUpdate();
+			    statement.setString(6, shift_hope_time_id);
+			    statement.setString(7, shift_time_start);
+			    statement.setString(8, shift_time_end);
+			    statement.setTimestamp(9, customStartTime);
+				statement.setTimestamp(10, customEndTime);
 			} else {
 
 				//プリペアードステートメントにUPDATE文をセット
@@ -382,6 +391,8 @@ public class ShiftDao extends Dao{
 				statement.setString(4, storeId);
 				statement.setString(5, shiftScore);
 			}
+
+			statement.executeUpdate();
 
 		} finally {
 			if (statement != null) statement.close();

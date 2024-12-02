@@ -1,5 +1,6 @@
 package shiftmaker.main;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -43,6 +44,20 @@ public class ShiftWorkerSignupSaveAction extends Action {
     	LocalDate todaysDate = LocalDate.now();// LcalDateインスタンスを取得
 		Integer year = todaysDate.getYear();// 現在の年を取得
 		Integer month = todaysDate.getMonthValue();// 現在の月を取得
+
+		// insert用宣言
+		String shift_hope_time_id = null;
+		String work_time_id = null;
+		String shift_time_start = null;
+		String shift_time_end = null;
+		String customStartTime = null;
+        String customEndTime = null;
+		// 日時フォーマットを指定（例: "yyyy-MM-dd HH:mm:ss"）
+		SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+		Timestamp timestampCustomStartTime = null;
+		Timestamp timestampCustomEndTime = null;
+
 
 		// 次の月のもの
 		Integer nextmonth = month + 1;
@@ -118,6 +133,9 @@ public class ShiftWorkerSignupSaveAction extends Action {
 
     		// SHIFTデータを取得
     		Shift shift = shiftDao.getShiftScore(worker, sqlShiftDate, store);
+    		System.out.println("worker：" + worker);
+    		System.out.println("sqlShiftDate：" + sqlShiftDate);
+    		System.out.println("store：" + store);
     		// 確認用
         	System.out.println("shift：" + shift);
 
@@ -134,8 +152,8 @@ public class ShiftWorkerSignupSaveAction extends Action {
         	    if (stringDates.get(i) != null && stringDates.get(i).equals(selectedDateString)) {
         	        if ("E".equals(workTimeId)) {
         	            // カスタム時間を取得
-        	            String customStartTime = req.getParameter("customStartTime");
-        	            String customEndTime = req.getParameter("customEndTime");
+        	            customStartTime = req.getParameter("customStartTime");
+        	            customEndTime = req.getParameter("customEndTime");
         	            // 勤務時間としてカスタム時間を設定
         	            stringDates.set(i, customStartTime + " - " + customEndTime);
         	        } else {
@@ -165,14 +183,23 @@ public class ShiftWorkerSignupSaveAction extends Action {
 
     		if ("E".equals(workTimeId)) {
     		    // カスタム時間を取得
-    		    String customStartTime = req.getParameter("customStartTime");
-    		    String customEndTime = req.getParameter("customEndTime");
+    			customStartTime = req.getParameter("customStartTime");
+    			customEndTime = req.getParameter("customEndTime");
+
+    			try {
+    			    // リクエストから取得したカスタム時間をパースして Timestamp 型に変換
+    			    timestampCustomStartTime = new Timestamp(dateTimeFormat.parse(customStartTime).getTime());
+    			    timestampCustomEndTime = new Timestamp(dateTimeFormat.parse(customEndTime).getTime());
+    			} catch (Exception e) {
+    			    e.printStackTrace();
+    			    throw new Exception("Invalid custom time format. Please provide time in 'yyyy-MM-dd HH:mm:ss' format.");
+    			}
 
     		    // SHIFTテーブルにカスタム時間を登録
-    		    shiftDao.insertCustomWorkTime(sqlShiftDate, workerId, storeId, customStartTime, customEndTime, shiftScore);
+    		    shiftDao.insertCustomWorkTime(sqlShiftDate, workerId, storeId, timestampCustomStartTime, timestampCustomEndTime, shiftScore, shift_hope_time_id, work_time_id, shift_time_start, shift_time_end);
     		} else {
     		    // 通常の勤務時間IDをSHIFTテーブルに登録
-    		    shiftDao.insertWorkTime(sqlShiftDate, workerId, storeId, workTimeId, shiftScore);
+    		    shiftDao.insertWorkTime(sqlShiftDate, workerId, storeId, workTimeId, shiftScore, shift_hope_time_id, shift_time_start, shift_time_end, timestampCustomStartTime, timestampCustomEndTime);
     		}
 
 
