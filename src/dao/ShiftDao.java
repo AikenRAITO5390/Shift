@@ -340,14 +340,15 @@ public class ShiftDao extends Dao{
 			}  else {
 
 				//プリペアードステートメントにUPDATE文をセット
-				statement = connection.prepareStatement("UPDATE shift SET shifthope_time_start=?, shifthope_time_end=? WHERE shift_date=? AND worker_id=? AND store_id=? AND shift_score=?");
+				statement = connection.prepareStatement("UPDATE shift SET shifthope_time_id=?, shifthope_time_start=?, shifthope_time_end=? WHERE shift_date=? AND worker_id=? AND store_id=? AND shift_score=?");
 				//プリペアードステートメントに値をバインド
-				statement.setTimestamp(1, customStartTime);
-				statement.setTimestamp(2, customEndTime);
-				statement.setDate(3, shiftDate);
-				statement.setString(4, workerId);
-				statement.setString(5, storeId);
-				statement.setString(6, shiftScore);
+				statement.setString(1, shift_hope_time_id);
+				statement.setTimestamp(2, customStartTime);
+				statement.setTimestamp(3, customEndTime);
+				statement.setDate(4, shiftDate);
+				statement.setString(5, workerId);
+				statement.setString(6, storeId);
+				statement.setString(7, shiftScore);
 			}
 
 			statement.executeUpdate();
@@ -383,7 +384,7 @@ public class ShiftDao extends Dao{
 			} else {
 
 				//プリペアードステートメントにUPDATE文をセット
-				statement = connection.prepareStatement("UPDATE shift SET work_time_id=? WHERE shift_date=? AND worker_id=? AND store_id=? AND shift_score=?");
+				statement = connection.prepareStatement("UPDATE shift SET shifthope_time_id=? WHERE shift_date=? AND worker_id=? AND store_id=? AND shift_score=?");
 				//プリペアードステートメントに値をバインド
 				statement.setString(1, workTimeId);
 				statement.setDate(2, shiftDate);

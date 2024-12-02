@@ -184,12 +184,23 @@ public class ShiftWorkerSignupSaveAction extends Action {
     		if ("E".equals(workTimeId)) {
     		    // カスタム時間を取得
     			customStartTime = req.getParameter("customStartTime");
+    			// 確認用
+	        	System.out.println("customStartTime：" + customStartTime);
     			customEndTime = req.getParameter("customEndTime");
 
+    			String customStartTime2 = selectedDateString + " " + customStartTime + ":00:00";
+    			// 確認用
+	        	System.out.println("customStartTime2：" + customStartTime2);
+
+	        	String customEndTime2 = selectedDateString + " " + customEndTime + ":00:00";
+	        	// 確認用
+	        	System.out.println("customEndTime2：" + customEndTime2);
+
     			try {
+    				shift_hope_time_id = null;
     			    // リクエストから取得したカスタム時間をパースして Timestamp 型に変換
-    			    timestampCustomStartTime = new Timestamp(dateTimeFormat.parse(customStartTime).getTime());
-    			    timestampCustomEndTime = new Timestamp(dateTimeFormat.parse(customEndTime).getTime());
+    			    timestampCustomStartTime = new Timestamp(dateTimeFormat.parse(customStartTime2).getTime());
+    			    timestampCustomEndTime = new Timestamp(dateTimeFormat.parse(customEndTime2).getTime());
     			} catch (Exception e) {
     			    e.printStackTrace();
     			    throw new Exception("Invalid custom time format. Please provide time in 'yyyy-MM-dd HH:mm:ss' format.");
