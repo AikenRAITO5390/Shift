@@ -34,24 +34,12 @@
     text-align: center;
 
 }
-.tr ,a1 {
-	margin-left : 900px;
-
-
-
-
-}
-.tr ,a {
-	margin-left : 950px;
-
-
+.td ,a {
+	margin-left : 50px;
+	color: red;
 
 }
 
-.managertable a{
-	margin-bottom: 20px;
-
-}
 
 </style>
 
@@ -104,8 +92,9 @@
                     <td>${worker.workerTel}</td>
                     <td>${worker.workerPassword}</td>
                     <td>${stores.storeName}</td>
-                    <a1 href="WorkerUpdate.action?workerId=${worker.workerId}">変更</a1>
-                    <a href="WorkerDelete.action?WORKER_ID=${worker.workerId}">削除</a>
+                    <td><a href="WorkerUpdate.action?workerId=${worker.workerId}">変更</a></td>
+                    <td><a href="WorkerDelete.action?WORKER_ID=${worker.workerId}">削除</a></td>
+
 
                 </tr>
             </c:forEach>
@@ -142,8 +131,13 @@
                     <td>${worker.workerTel}</td>
                     <td>${worker.workerPassword}</td>
                     <td>${stores.storeName}</td>
-                    <a1 href="WorkerUpdate.action?workerId=${worker.workerId}">変更</a1>
-                    <a href="WorkerDelete.action?WORKER_ID=${worker.workerId}">削除</a>
+                    <div class="update">
+                    	<a href="WorkerUpdate.action?workerId=${worker.workerId}">変更</a>
+                    </div>
+
+                    <div class="delete">
+                    	<a href="WorkerDelete.action?WORKER_ID=${worker.workerId}">削除</a>
+                    </div>
                 </tr>
             </c:forEach>
         </table>
