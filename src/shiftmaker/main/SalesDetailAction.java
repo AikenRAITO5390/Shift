@@ -35,7 +35,9 @@ public class SalesDetailAction extends Action {
 				    req.setAttribute("message", "売上データがありません。");
 				}
 
-				//### 元データの作成 ###
+
+
+				//### 売上グラフの元データの作成 ###
 				ArrayList<ArrayList<String>> ar1 = new ArrayList<>();
 
 				// salelist をループしてデータを変換
@@ -44,14 +46,15 @@ public class SalesDetailAction extends Action {
 
 				    tmp.add(String.valueOf(sale.getDaySales())); // 売上
 				    tmp.add("日商売上");// 店舗名
-			        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");// フォーマッタの作成
+			        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日");// フォーマッタの作成
 			        String dateString = formatter.format(sale.getDate());// Date → String に変換
 				    tmp.add(dateString);// 日付
 				    ar1.add(tmp);//一行目にデータを追加
 				}
 
 
-				//### 元データをセッションに保持 ###
+				//
+				//### 売上グラフの元データをセッションに保持 ###
 				session.setAttribute("chart1", ar1);
 				//セッションに保存されているか確認
 				System.out.println("動的に生成されたセッションデータ: " + ar1);// デバッグ用の出力
