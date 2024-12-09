@@ -39,6 +39,7 @@ public class ShiftCreate {
         String availableTo;   // 勤務可能終了時刻
         int maxHours;         // 最大勤務時間
         int priority;       // 優先度
+        boolean judge;		//社員判別
 
         public void setPriority(int priority) {
 			this.priority = priority;
@@ -47,12 +48,13 @@ public class ShiftCreate {
 		List<String> assignedShifts = new ArrayList<>(); // 割り振られたシフト
         List<String> mergedShifts = new ArrayList<>();//開始と終了時間が入るリスト
 
-        WorkerShift(String name, String role, String availableFrom, String availableTo, int maxHours) {
+        WorkerShift(String name, String role, String availableFrom, String availableTo, int maxHours, boolean judge) {
             this.name = name;
             this.role = role;
             this.availableFrom = availableFrom;
             this.availableTo = availableTo;
             this.maxHours = maxHours;
+            this.judge	= judge;
         }
     }
 
@@ -76,8 +78,12 @@ public class ShiftCreate {
     }
 
  // 勤務時間帯を連続して統合
-    private static List<String> mergeShifts(List<String> shifts,Store shift_manager) {
+    private static List<String> mergeShifts(List<String> shifts,Store shift_manager,WorkerShift worker) {
         List<String> merged = new ArrayList<>();
+        if(worker.judge) {
+        	merged.add("○");
+        	return merged;
+        }
         if (shifts.isEmpty()) return merged;
         StoreDao stDao = new StoreDao();
         List<String>  store_time_id = Arrays.asList("A","B","C","D");
@@ -91,7 +97,6 @@ public class ShiftCreate {
             String[] next = shifts.get(i).split("-");
             int nextStart = timeToMinutes(next[0]);
             int nextEnd = timeToMinutes(next[1]);
-
             if (nextStart == end) {
                 end = nextEnd;
             } else {
@@ -129,6 +134,13 @@ public class ShiftCreate {
         List<Map<String, Object>> result = new ArrayList<>();
         //日にち、名前、役割、シフトを格納する
         for (WorkerShift worker : workers) {
+        	if(worker.judge){
+        		Map<String, Object> workerInfo = new HashMap<>();
+                workerInfo.put("date",date );
+                workerInfo.put("name", worker.name);
+                workerInfo.put("role", worker.role);
+                workerInfo.put("mergedShifts", worker.mergedShifts);
+        	}
             Map<String, Object> workerInfo = new HashMap<>();
             workerInfo.put("date",date );
             workerInfo.put("name", worker.name);
@@ -192,6 +204,12 @@ public class ShiftCreate {
 						worker.maxHours--;
 						hallNeeded--;
 					}
+				}else if(worker.judge){
+					Map<String, String> assignment = new HashMap<>();
+					assignment.put("name", worker.name);
+					assignment.put("role", worker.role);
+					assignedWorkers.add(assignment);
+					worker.assignedShifts.add(timeSlot);
 				}
 
 				if (kitchenNeeded == 0 && hallNeeded == 0) break;
@@ -199,7 +217,7 @@ public class ShiftCreate {
 			schedule.put(timeSlot, assignedWorkers);
 		}
         for (WorkerShift worker : workers) {
-            worker.mergedShifts = mergeShifts(worker.assignedShifts,shift_manager);
+            worker.mergedShifts = mergeShifts(worker.assignedShifts,shift_manager,worker);
         }
 
         return schedule;
@@ -232,7 +250,7 @@ public class ShiftCreate {
         			availableFrom = work_time.getWorkTimeStart().toString();
         			availableTo   = work_time.getWorkTimeEnd().toString();
         			maxHours =minutesToHour(timeToMinutes(availableTo)-timeToMinutes(availableFrom));
-        			workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(), "Kitchen", availableFrom, availableTo, maxHours));
+        			workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(), "Kitchen", availableFrom, availableTo, maxHours,false));
 
 
         			//シフト希望時間がその他の場合
@@ -240,12 +258,16 @@ public class ShiftCreate {
         			String availableFrom = null;
         			String availableTo	= null;
         			int maxHours = 0;
-        			LocalTime timeFrom =shift_lists.getShiftHopeTimeStart().toLocalDateTime().toLocalTime();
-        			LocalTime timeTo =shift_lists.getShiftHopeTimeEnd().toLocalDateTime().toLocalTime();
-        			availableFrom = timeFrom.toString();
-        			availableTo   = timeTo.toString();
-        			maxHours =minutesToHour(timeToMinutes(availableTo)-timeToMinutes(availableFrom));
-        			workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(), "Hall", availableFrom, availableTo, maxHours));
+        			if(shift_lists.getWorker().isWorkerJudge()){
+        				workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(), "Hall", work_time_start, work_time_end, 9,true));
+        			}else{
+        				LocalTime timeFrom =shift_lists.getShiftHopeTimeStart().toLocalDateTime().toLocalTime();
+        				LocalTime timeTo =shift_lists.getShiftHopeTimeEnd().toLocalDateTime().toLocalTime();
+        				availableFrom = timeFrom.toString();
+        				availableTo   = timeTo.toString();
+        				maxHours =minutesToHour(timeToMinutes(availableTo)-timeToMinutes(availableFrom));
+        				workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(), "Hall", availableFrom, availableTo, maxHours,false));
+        			}
         		}
 			}
         }catch (Exception e) {
@@ -277,8 +299,6 @@ public class ShiftCreate {
             System.out.println("Shifts: " + workerInfo.get("mergedShifts"));
             System.out.println();
         }
-
-
 
         return workerMergedShifts;
     }
