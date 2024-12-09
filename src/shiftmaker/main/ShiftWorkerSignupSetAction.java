@@ -89,6 +89,7 @@ public class ShiftWorkerSignupSetAction extends Action{
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             // 文字列をjava.util.Date型に変換
             if(count == 1){
+            	System.out.println("count==1のif通ってます");
             	String shiftDate = yearstr + "-" + nextmonthstr + "-" + "0" + shiftDateString;
                 System.out.println("shiftDate:" + shiftDate);
             	Date utilDate = sdf.parse(shiftDate);
