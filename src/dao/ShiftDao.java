@@ -384,13 +384,15 @@ public class ShiftDao extends Dao{
 			} else {
 
 				//プリペアードステートメントにUPDATE文をセット
-				statement = connection.prepareStatement("UPDATE shift SET shifthope_time_id=? WHERE shift_date=? AND worker_id=? AND store_id=? AND shift_score=?");
+				statement = connection.prepareStatement("UPDATE shift SET shifthope_time_id=?, shifthope_time_start=?, shifthope_time_end=? WHERE shift_date=? AND worker_id=? AND store_id=? AND shift_score=?");
 				//プリペアードステートメントに値をバインド
 				statement.setString(1, workTimeId);
-				statement.setDate(2, shiftDate);
-				statement.setString(3, workerId);
-				statement.setString(4, storeId);
-				statement.setString(5, shiftScore);
+				statement.setTimestamp(2, customStartTime);
+				statement.setTimestamp(3, customEndTime);
+				statement.setDate(4, shiftDate);
+				statement.setString(5, workerId);
+				statement.setString(6, storeId);
+				statement.setString(7, shiftScore);
 			}
 
 			statement.executeUpdate();
