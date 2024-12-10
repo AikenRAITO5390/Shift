@@ -28,6 +28,7 @@ public class ShiftWorkerSignupSaveAction extends Action {
 
     	System.out.println("★★★★★★③★★★★★★");
 
+    	/*** ---------- 取得、初期化、宣言 ---------- ***/
     	// セッションを取得
     	HttpSession session = req.getSession();
 
@@ -35,6 +36,16 @@ public class ShiftWorkerSignupSaveAction extends Action {
      	Worker loginuser = (Worker)session.getAttribute("user");
      	// 確認用
     	System.out.println("loginuser：" + loginuser);
+
+    	// loginuserからworkerIdを取得
+	    String workerId = loginuser.getWorkerId();
+        // 確認用
+    	System.out.println("workerId：" + workerId);
+
+    	// loginuserからstoreIdを取得
+    	String storeId = loginuser.getStoreId();
+    	// 確認用
+    	System.out.println("storeId：" + storeId);
 
     	// 初期化
     	ShiftDao shiftDao = new ShiftDao();
@@ -44,6 +55,13 @@ public class ShiftWorkerSignupSaveAction extends Action {
     	LocalDate todaysDate = LocalDate.now();// LcalDateインスタンスを取得
 		Integer year = todaysDate.getYear();// 現在の年を取得
 		Integer month = todaysDate.getMonthValue();// 現在の月を取得
+		// 次の月のもの
+		Integer nextmonth = month + 1;
+		// 次の年用
+		if(nextmonth == 13){
+			nextmonth = 1;
+			year = year + 1;
+		}
 
 		// insert用宣言
 		String shift_hope_time_id = null;
@@ -54,24 +72,33 @@ public class ShiftWorkerSignupSaveAction extends Action {
         String customEndTime = null;
 		// 日時フォーマットを指定（例: "yyyy-MM-dd HH:mm:ss"）
 		SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
 		Timestamp timestampCustomStartTime = null;
 		Timestamp timestampCustomEndTime = null;
 
+		// リクエストパラメータを取得
+    	String shiftDateString = req.getParameter("shiftDate");  // String型として取得
+    	// 確認用
+    	System.out.println("shiftDateString：" + shiftDateString);
 
-		// 次の月のもの
-		Integer nextmonth = month + 1;
+    	String workTimeId = req.getParameter("workTimeId");
 
-		// 次の年用
-		if(nextmonth == 13){
-			nextmonth = 1;
-			year = year + 1;
-		}
+    	// Worker オブジェクトを取得
+        Worker worker = workerDao.get(workerId);
+        if (worker == null) {
+            throw new Exception("Worker not found for workerId: " + workerId);
+        }
+
+        // Store オブジェクトを取得
+    	Store store = storeDao.get(loginuser.getStoreId());
+    	// 確認用
+    	System.out.println("store：" + store);
+
+    	/*** ----------------------------------------------------------------------------- ***/
 
     	// カレンダーを初期化
     	CalendeCreate calende = new CalendeCreate();
     	// カレンダーを作成
-    	List<LocalDate> dates = calende.Calender(year, nextmonth);
+    	List<LocalDate> dates = calende.generateCalendarWithDBInfo(year, nextmonth, storeId, workerId);
     	// 確認用
     	System.out.println("dates：" + dates);
 
@@ -85,35 +112,7 @@ public class ShiftWorkerSignupSaveAction extends Action {
     	    }
     	}
     	// 確認用
-    	System.out.println("stringDates：" + stringDates);
-
-    	// リクエストパラメータを取得
-    	String shiftDateString = req.getParameter("shiftDate");  // String型として取得
-    	// 確認用
-    	System.out.println("shiftDateString：" + shiftDateString);
-
-    	String workTimeId = req.getParameter("workTimeId");
-
-    	// loginuserからworkerIdを取得
-	    String workerId = loginuser.getWorkerId();
-        // 確認用
-    	System.out.println("workerId：" + workerId);
-
-    	// loginuserからstoreIdを取得
-    	String storeId = loginuser.getStoreId();
-    	// 確認用
-    	System.out.println("storeId：" + storeId);
-
-    	// Worker オブジェクトを取得
-        Worker worker = workerDao.get(workerId);
-        if (worker == null) {
-            throw new Exception("Worker not found for workerId: " + workerId);
-        }
-
-        // Store オブジェクトを取得
-    	Store store = storeDao.get(loginuser.getStoreId());
-    	// 確認用
-    	System.out.println("store：" + store);
+    	System.out.println("更新前のstringDates：" + stringDates);
 
     	// 文字列をDate型に変換
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  // 日付のフォーマットを指定
@@ -133,9 +132,6 @@ public class ShiftWorkerSignupSaveAction extends Action {
 
     		// SHIFTデータを取得
     		Shift shift = shiftDao.getShiftScore(worker, sqlShiftDate, store);
-    		System.out.println("worker：" + worker);
-    		System.out.println("sqlShiftDate：" + sqlShiftDate);
-    		System.out.println("store：" + store);
     		// 確認用
         	System.out.println("shift：" + shift);
 
@@ -170,17 +166,11 @@ public class ShiftWorkerSignupSaveAction extends Action {
         	// 確認用
         	System.out.println("更新後の stringDates：" + stringDates);
 
-    		// NULLチェックを追加
-    		if (shift == null) {
-    		    throw new Exception("Shift not found for workerId: " + workerId + ", date: " + sqlShiftDate + ", storeId: " + store.getStoreId());
-    		}
-
     		String shiftScore = String.valueOf(shift.getShiftScore());
-
         	// 確認用
         	System.out.println("shiftScore：" + shiftScore);
 
-
+        	// Eに設定された時間をDBに保存するための変換など + 通常の保存（else側）
     		if ("E".equals(workTimeId)) {
     		    // カスタム時間を取得
     			customStartTime = req.getParameter("customStartTime");

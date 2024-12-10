@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
@@ -12,7 +11,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CalendeCreate {
+import dao.Dao;
+
+public class CalendeCreate extends Dao{
 
 	public List<LocalDate> Calender_side(int year, int month)throws Exception{
 
@@ -46,7 +47,7 @@ public class CalendeCreate {
 
 	    // 使うかも？byもりや
 	    // DBに基づいたカレンダーを生成するメソッド
-	    public List<String> generateCalendarWithDBInfo(int year, int month, String storeId, String workerId) throws Exception {
+	    public List<LocalDate> generateCalendarWithDBInfo(int year, int month, String storeId, String workerId) throws Exception {
 	        // 月の最初の日と最後の日を取得
 	        YearMonth yearMonth = YearMonth.of(year, month);
 	        LocalDate firstDayOfMonth = yearMonth.atDay(1);
@@ -63,20 +64,16 @@ public class CalendeCreate {
 	            dates.add(yearMonth.atDay(i));
 	        }
 
-	        // カレンダー用のエントリを格納するリスト
-	        List<String> calendarEntries = new ArrayList<>();
-	        Map<LocalDate, String> shiftData = new HashMap<>();
+	        // シフトデータを格納するマップ
+	        Map<LocalDate, LocalDate> shiftData = new HashMap<>();
 
-	        Connection connection = null;
+	        Connection connection = getConnection();
 	        PreparedStatement statement = null;
 	        ResultSet resultSet = null;
 
 	        try {
-	            connection = getConnection(); // 必要に応じて接続管理を実装
-
 	            // 期間内のシフト情報をDBから取得
-	            String sql = "SELECT shift_date, shifthope_time_id, shifthope_time_start, shifthope_time_end "
-	                    + "FROM shift WHERE store_id = ? AND worker_id = ? AND shift_date BETWEEN ? AND ?";
+	            String sql = "SELECT shift_date FROM shift WHERE store_id = ? AND worker_id = ? AND shift_date BETWEEN ? AND ?";
 	            statement = connection.prepareStatement(sql);
 	            statement.setString(1, storeId);
 	            statement.setString(2, workerId);
@@ -88,46 +85,29 @@ public class CalendeCreate {
 	            // DBの結果を日付ごとにマッピング
 	            while (resultSet.next()) {
 	                Date shiftDate = resultSet.getDate("shift_date");
-	                String shiftHopeTimeId = resultSet.getString("shifthope_time_id");
-	                Timestamp shiftStartTime = resultSet.getTimestamp("shifthope_time_start");
-	                Timestamp shiftEndTime = resultSet.getTimestamp("shifthope_time_end");
 
-	                // シフトの情報をエントリとして作成
-	                String entry = (shiftHopeTimeId != null ? shiftHopeTimeId : "") +
-	                        (shiftStartTime != null && shiftEndTime != null
-	                                ? " (" + shiftStartTime + " - " + shiftEndTime + ")"
-	                                : "");
-
-	                // LocalDateに対応するシフト情報をマップに追加
-	                shiftData.put(shiftDate.toLocalDate(), entry);
+	                // LocalDateに対応する情報をマップに追加
+	                shiftData.put(shiftDate.toLocalDate(), shiftDate.toLocalDate());
 	            }
 
 	            // カレンダーにシフト情報を挿入
+	            List<LocalDate> calendarWithShifts = new ArrayList<>();
 	            for (LocalDate date : dates) {
 	                if (date == null) {
-	                    calendarEntries.add(""); // 空のセル
+	                    calendarWithShifts.add(null); // 空のセル
 	                } else {
-	                    // もしその日にシフト情報があれば、それを追加。なければ空の文字列を追加
-	                    calendarEntries.add(shiftData.getOrDefault(date, date.toString()));
+	                    // もしその日にシフト情報があればその日付、なければnullを追加
+	                    calendarWithShifts.add(shiftData.getOrDefault(date, null));
 	                }
 	            }
+	            return calendarWithShifts;
 
 	        } finally {
 	            if (resultSet != null) resultSet.close();
 	            if (statement != null) statement.close();
 	            if (connection != null) connection.close();
 	        }
-
-	        return calendarEntries;
 	    }
-
-	    // DB接続取得メソッド（実装例）
-	    private Connection getConnection() throws Exception {
-	        // 実際のDB接続ロジックをここに記載
-	        return null; // ダミー値
-	    }
-
-
 
 
 }
