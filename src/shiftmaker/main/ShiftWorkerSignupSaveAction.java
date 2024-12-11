@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -98,13 +99,15 @@ public class ShiftWorkerSignupSaveAction extends Action {
     	// カレンダーを初期化
     	CalendeCreate calende = new CalendeCreate();
     	// カレンダーを作成
-    	List<LocalDate> dates = calende.generateCalendarWithDBInfo(year, nextmonth, storeId, workerId);
+    	Map<LocalDate, String> dates = calende.generateCalendarWithDBInfo(year, nextmonth, storeId, workerId);
     	// 確認用
     	System.out.println("dates：" + dates);
 
     	// LocalDateリストをString型に変換
     	List<String> stringDates = new ArrayList<>();
-    	for (LocalDate date : dates) {
+    	for (Map.Entry<LocalDate, String> entry : dates.entrySet()) {
+    	    LocalDate date = entry.getKey();  // Mapのキー（LocalDate）
+    	    String value = entry.getValue();  // Mapの値（String）
     	    if (date != null) {
     	        stringDates.add(date.toString()); // ISO形式で文字列化 (例: "2024-11-29")
     	    } else {
@@ -135,10 +138,14 @@ public class ShiftWorkerSignupSaveAction extends Action {
     		// 確認用
         	System.out.println("shift：" + shift);
 
-        	// カレンダー作成後、null を除外
-        	stringDates.removeIf(date -> date == null);
-        	// カレンダー作成後、null を除外
-        	dates.removeIf(date -> date == null);
+        	String shiftScore = String.valueOf(shift.getShiftScore());
+        	// 確認用
+        	System.out.println("shiftScore：" + shiftScore);
+
+//        	// カレンダー作成後、null を除外
+//        	stringDates.removeIf(date -> date == null);
+//        	// カレンダー作成後、null を除外
+//        	dates.removeIf(date -> date == null);
 
         	// 選択された日付を文字列形式に変換
         	String selectedDateString = selectedDate.toString();
@@ -166,9 +173,7 @@ public class ShiftWorkerSignupSaveAction extends Action {
         	// 確認用
         	System.out.println("更新後の stringDates：" + stringDates);
 
-    		String shiftScore = String.valueOf(shift.getShiftScore());
-        	// 確認用
-        	System.out.println("shiftScore：" + shiftScore);
+
 
         	// Eに設定された時間をDBに保存するための変換など + 通常の保存（else側）
     		if ("E".equals(workTimeId)) {
@@ -205,6 +210,7 @@ public class ShiftWorkerSignupSaveAction extends Action {
 
 
     	req.setAttribute("stringDates", stringDates);
+    	req.setAttribute("dates", dates);
 
     	String countStr = req.getParameter("count");
 		int count = Integer.parseInt(countStr);
