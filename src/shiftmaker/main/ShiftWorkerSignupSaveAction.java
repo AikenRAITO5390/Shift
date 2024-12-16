@@ -102,6 +102,9 @@ public class ShiftWorkerSignupSaveAction extends Action {
     	Map<LocalDate, String> dates = calende.generateCalendarWithDBInfo(year, nextmonth, storeId, workerId);
     	// 確認用
     	System.out.println("dates：" + dates);
+    	// datesのリストのvalues側を取得
+    	List<String> values = new ArrayList<>(dates.values());
+    	System.out.println("values：" + values);
 
     	// LocalDateリストをString型に変換
     	List<String> stringDates = new ArrayList<>();
@@ -116,6 +119,7 @@ public class ShiftWorkerSignupSaveAction extends Action {
     	}
     	// 確認用
     	System.out.println("更新前のstringDates：" + stringDates);
+    	req.setAttribute("stringDates", stringDates);
 
     	// 文字列をDate型に変換
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  // 日付のフォーマットを指定
@@ -209,8 +213,9 @@ public class ShiftWorkerSignupSaveAction extends Action {
     		}
 
 
-    	req.setAttribute("stringDates", stringDates);
+
     	req.setAttribute("dates", dates);
+    	req.setAttribute("values", values);
 
     	String countStr = req.getParameter("count");
 		int count = Integer.parseInt(countStr);

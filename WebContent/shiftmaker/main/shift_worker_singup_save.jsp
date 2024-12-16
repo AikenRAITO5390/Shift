@@ -27,7 +27,7 @@
         </tr>
 
         <c:set var="counter" value="0" />
-        <c:forEach var="date" items="${stringDates}">
+        <c:forEach var="date" items="${stringDates}" varStatus="status">
             <c:if test="${counter % 7 == 0}">
                 <tr>
             </c:if>
@@ -37,9 +37,9 @@
                         <%-- 日付リンクを生成 --%>
 	                    <a href="ShiftWorkerSignupSet.action?shiftDay=${date}&count=${count}">${fn:substring(date.toString(), 8, 10)}</a>
 
-	                    <!-- 勤務時間情報を表示 -->
-		                <c:if test="${date != ''}">
-		                    <p>${date}</p>
+	                    <%-- 勤務時間情報を表示 (valuesのインデックスに対応する値を取得) --%>
+		                <c:if test="${values[status.index] != ''}">
+		                    <p>${values[status.index]}</p>
 		                </c:if>
                     </c:when>
                     <c:otherwise>
