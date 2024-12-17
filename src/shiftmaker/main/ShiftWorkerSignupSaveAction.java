@@ -102,9 +102,6 @@ public class ShiftWorkerSignupSaveAction extends Action {
     	Map<LocalDate, String> dates = calende.generateCalendarWithDBInfo(year, nextmonth, storeId, workerId);
     	// 確認用
     	System.out.println("dates：" + dates);
-    	// datesのリストのvalues側を取得
-    	List<String> values = new ArrayList<>(dates.values());
-    	System.out.println("values：" + values);
 
     	// LocalDateリストをString型に変換
     	List<String> stringDates = new ArrayList<>();
@@ -146,11 +143,6 @@ public class ShiftWorkerSignupSaveAction extends Action {
         	// 確認用
         	System.out.println("shiftScore：" + shiftScore);
 
-//        	// カレンダー作成後、null を除外
-//        	stringDates.removeIf(date -> date == null);
-//        	// カレンダー作成後、null を除外
-//        	dates.removeIf(date -> date == null);
-
         	// 選択された日付を文字列形式に変換
         	String selectedDateString = selectedDate.toString();
 
@@ -176,8 +168,6 @@ public class ShiftWorkerSignupSaveAction extends Action {
 
         	// 確認用
         	System.out.println("更新後の stringDates：" + stringDates);
-
-
 
         	// Eに設定された時間をDBに保存するための変換など + 通常の保存（else側）
     		if ("E".equals(workTimeId)) {
@@ -212,10 +202,66 @@ public class ShiftWorkerSignupSaveAction extends Action {
     		    shiftDao.insertWorkTime(sqlShiftDate, workerId, storeId, workTimeId, shiftScore, shift_hope_time_id, shift_time_start, shift_time_end, timestampCustomStartTime, timestampCustomEndTime);
     		}
 
+    		// nullとカスタム時間のみを格納するリスト
+    		// nullAndTimeリストを初期化
+    		List<String> nullAndTime = new ArrayList<>();
+
+    		// カレンダーの日付ごとに勤務時間データを取得
+    		for (Map.Entry<LocalDate, String> entry : dates.entrySet()) {
+    		    LocalDate date = entry.getKey();
+
+    		    if (date != null) {
+    		        // DBから勤務時間を取得
+    		        String workTime = shiftDao.getWorkTime(workerId, java.sql.Date.valueOf(date));
+
+    		        // 勤務時間が存在する場合、その値をnullAndTimeにセット
+    		        if (workTime != null) {
+    		            nullAndTime.add(workTime);
+    		        } else {
+    		            nullAndTime.add(null); // 勤務時間がない場合はnull
+    		        }
+    		    } else {
+    		        nullAndTime.add(null); // 日付がない場合はnull
+    		    }
+    		}
+
+    		// 確認用
+    		System.out.println("nullAndTime：" + nullAndTime);
+
+    		// カレンダーの日付ごとにshift_hope_time_idを取得
+    		List<String> shiftHopeTimeIds = new ArrayList<>();
+
+    		for (Map.Entry<LocalDate, String> entry : dates.entrySet()) {
+    		    LocalDate date = entry.getKey();
+
+    		    if (date != null) {
+    		        // DBからshift_hope_time_idを取得
+    		        String shiftHopeTimeId = shiftDao.getShiftHopeTimeId(workerId, java.sql.Date.valueOf(date));
+
+    		        // shift_hope_time_idが存在する場合、その値をリストにセット
+    		        if (shiftHopeTimeId != null) {
+    		            shiftHopeTimeIds.add(shiftHopeTimeId);
+    		        } else {
+    		            shiftHopeTimeIds.add(null); // shift_hope_time_idが存在しない場合はnull
+    		        }
+    		    } else {
+    		        shiftHopeTimeIds.add(null); // 日付がない場合はnull
+    		    }
+    		}
+
+    		// 確認用
+    		System.out.println("shiftHopeTimeIds：" + shiftHopeTimeIds);
 
 
+    	// datesマップのキー（LocalDate）をリストに格納
+    	List<LocalDate> dateKeys = new ArrayList<>(dates.keySet());
+
+
+
+    	req.setAttribute("dateKeys", dateKeys);
     	req.setAttribute("dates", dates);
-    	req.setAttribute("values", values);
+    	req.setAttribute("nullAndTime", nullAndTime);
+    	req.setAttribute("shiftHopeTimeIds", shiftHopeTimeIds);
 
     	String countStr = req.getParameter("count");
 		int count = Integer.parseInt(countStr);

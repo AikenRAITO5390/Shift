@@ -497,6 +497,70 @@ public class ShiftDao extends Dao{
 	    return shift;
 	}
 
+	// Eの時間とるためのget
+	public String getWorkTime(String workerId, Date shiftDate) throws Exception {
+        String workTime = null;
+
+        // SQL文: シフトテーブルから勤務時間を取得
+        String sql = "SELECT shifthope_time_start, shifthope_time_end FROM shift WHERE worker_id = ? AND shift_date = ?";
+
+        try (Connection con = getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, workerId);
+            ps.setDate(2, new java.sql.Date(shiftDate.getTime()));
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    String startTime = rs.getString("shifthope_time_start");
+                    String endTime = rs.getString("shifthope_time_end");
+
+                    // shifthope_time_start または shifthope_time_end が null の場合
+                    if (startTime == null || endTime == null) {
+                        workTime = null;
+                    } else {
+                    	// 時間部分だけを抽出して "HH:mm - HH:mm" の形式に整形
+                        String startHour = startTime.substring(11, 13); // 08 (時部分)
+                        String endHour = endTime.substring(11, 13);     // 17 (時部分)
+                        workTime = startHour + " - " + endHour;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Error retrieving work time from DB", e);
+        }
+        return workTime; // 勤務時間 (例: "09:00 - 17:00")
+    }
+
+	public String getShiftHopeTimeId(String workerId, Date shiftDate) throws Exception {
+        String shiftHopeTimeId = null;
+
+        // SQLクエリ
+        String sql = "SELECT shifthope_time_id FROM shift WHERE worker_id = ? AND shift_date = ?";
+
+        // データベース接続
+        try (Connection con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)) {
+
+            // SQLのパラメータを設定
+            ps.setString(1, workerId);
+            ps.setDate(2, new java.sql.Date(shiftDate.getTime()));
+
+            // SQLを実行
+            try (ResultSet resultSet = ps.executeQuery()) {
+                if (resultSet.next()) {
+                    // shift_hope_time_idを取得
+                    shiftHopeTimeId = resultSet.getString("shifthope_time_id");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Error retrieving shifthope_time_id: " + e.getMessage());
+        }
+
+        return shiftHopeTimeId;
+    }
+
 
 	//パワー作成save
 	public boolean save_Score(Shift shift)throws Exception{

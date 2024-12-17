@@ -27,31 +27,37 @@
         </tr>
 
         <c:set var="counter" value="0" />
-        <c:forEach var="date" items="${stringDates}" varStatus="status">
-            <c:if test="${counter % 7 == 0}">
-                <tr>
-            </c:if>
-            <td>
-                <c:choose>
-                    <c:when test="${date != null}">
-                        <%-- 日付リンクを生成 --%>
-	                    <a href="ShiftWorkerSignupSet.action?shiftDay=${date}&count=${count}">${fn:substring(date.toString(), 8, 10)}</a>
+		<c:forEach var="dateKey" items="${dateKeys}" varStatus="status">
+		    <c:if test="${counter % 7 == 0}">
+		        <tr>
+		    </c:if>
+		    <td>
+		        <c:choose>
+		            <c:when test="${dateKey != null}">
+		                <%-- 日付リンクを生成 --%>
+		                <a href="ShiftWorkerSignupSet.action?shiftDay=${dateKey}&count=${count}">
+		                    ${fn:substring(dateKey.toString(), 8, 10)}
+		                </a>
 
-	                    <%-- 勤務時間情報を表示 (valuesのインデックスに対応する値を取得) --%>
-		                <c:if test="${values[status.index] != ''}">
-		                    <p>${values[status.index]}</p>
+		                <%-- 勤務時間情報を表示（datesマップから値を取得） --%>
+		                <c:if test="${shiftHopeTimeIds[status.index] != ''}">
+		                    <p>${shiftHopeTimeIds[status.index]}</p>
 		                </c:if>
-                    </c:when>
-                    <c:otherwise>
-                        <!-- 空セル -->
-                    </c:otherwise>
-                </c:choose>
-            </td>
-            <c:set var="counter" value="${counter + 1}" />
-            <c:if test="${counter % 7 == 0}">
-                </tr>
-            </c:if>
-        </c:forEach>
+
+		                <c:if test="${nullAndTime[status.index] != null}">
+		                    <p>${nullAndTime[status.index]}</p>
+		                </c:if>
+		            </c:when>
+		            <c:otherwise>
+		                <!-- 空セル -->
+		            </c:otherwise>
+		        </c:choose>
+		    </td>
+		    <c:set var="counter" value="${counter + 1}" />
+		    <c:if test="${counter % 7 == 0}">
+		        </tr>
+		    </c:if>
+		</c:forEach>
 
         <c:if test="${counter % 7 != 0}">
             <c:forEach begin="0" end="${6 - (counter % 7)}">
