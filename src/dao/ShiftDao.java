@@ -561,6 +561,18 @@ public class ShiftDao extends Dao{
         return shiftHopeTimeId;
     }
 
+	public void updatenullShifthope(String workerId, Date shiftDate) throws Exception {
+        String sql;
+        sql = "UPDATE shift SET shifthope_time_id = NULL, shifthope_time_start = NULL, shifthope_time_end = NULL WHERE worker_id = ? AND shift_date = ?";
+
+
+        try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setString(1, workerId);
+            stmt.setDate(2, shiftDate);
+            stmt.executeUpdate();
+        }
+    }
+
 
 	//パワー作成save
 	public boolean save_Score(Shift shift)throws Exception{

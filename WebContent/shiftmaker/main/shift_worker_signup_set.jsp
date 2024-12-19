@@ -65,6 +65,14 @@
 				        </select>
 				    </td>
 				</tr>
+				<!-- なしにする -->
+				<tr>
+				    <td>
+				        <input type="radio" name="workTimeId" value="NONE" required>
+				    </td>
+					<td>なし</td>
+				    <td colspan="2">希望なし</td>
+				</tr>
 	            </tbody>
 	        </table>
 

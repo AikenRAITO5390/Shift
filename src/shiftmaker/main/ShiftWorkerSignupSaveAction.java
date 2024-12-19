@@ -197,6 +197,9 @@ public class ShiftWorkerSignupSaveAction extends Action {
 
     		    // SHIFTテーブルにカスタム時間を登録
     		    shiftDao.insertCustomWorkTime(sqlShiftDate, workerId, storeId, timestampCustomStartTime, timestampCustomEndTime, shiftScore, shift_hope_time_id, work_time_id, shift_time_start, shift_time_end);
+    		} else if ("NONE".equals(workTimeId)){
+    			// なしが選ばれた場合、nullをDBに保存する
+    			shiftDao.updatenullShifthope(workerId, new java.sql.Date(shiftDate.getTime()));
     		} else {
     		    // 通常の勤務時間IDをSHIFTテーブルに登録
     		    shiftDao.insertWorkTime(sqlShiftDate, workerId, storeId, workTimeId, shiftScore, shift_hope_time_id, shift_time_start, shift_time_end, timestampCustomStartTime, timestampCustomEndTime);
@@ -256,7 +259,9 @@ public class ShiftWorkerSignupSaveAction extends Action {
     	// datesマップのキー（LocalDate）をリストに格納
     	List<LocalDate> dateKeys = new ArrayList<>(dates.keySet());
 
-
+    	// 参考時間表示のため
+    	List<Store> workTimeDetails = storeDao.getWorkTimes(loginuser.getStoreId());
+    	req.setAttribute("workTimeDetails", workTimeDetails);
 
     	req.setAttribute("dateKeys", dateKeys);
     	req.setAttribute("dates", dates);
