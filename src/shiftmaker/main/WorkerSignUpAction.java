@@ -1,7 +1,9 @@
 package shiftmaker.main;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -31,9 +33,10 @@ public class WorkerSignUpAction extends Action{
 
 		// DBからデータ取得 3
 		// ログインユーザーのIDをもとに店舗名の一覧を取得
-		List<String> list = storeDao.filter(manager.getManagerId());
+        List<String> rawStoreList = storeDao.filter(manager.getManagerId());
 
-
+        // 重複を排除した店舗名リストを作成
+        Set<String> uniqueStoreNames = new LinkedHashSet<>(rawStoreList);
 
 		// ビジネスロジック 4
 
@@ -52,7 +55,7 @@ public class WorkerSignUpAction extends Action{
 
 		// レスポンス値をセット 6
 		// 店舗名のlistをセット
-		req.setAttribute("store_name_set", list);
+	    req.setAttribute("store_name_set", uniqueStoreNames);
 		// 年、月、日のlistをセット
 		req.setAttribute("year_list", years);
 		req.setAttribute("month_list", months);
