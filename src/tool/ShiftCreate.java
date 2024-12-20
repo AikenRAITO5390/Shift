@@ -40,6 +40,7 @@ public class ShiftCreate {
         int maxHours;         // 最大勤務時間
         int priority;       // 優先度
         boolean judge;		//社員判別
+        int power;          //バイトパワー
 
         public void setPriority(int priority) {
 			this.priority = priority;
@@ -48,13 +49,14 @@ public class ShiftCreate {
 		List<String> assignedShifts = new ArrayList<>(); // 割り振られたシフト
         List<String> mergedShifts = new ArrayList<>();//開始と終了時間が入るリスト
 
-        WorkerShift(String name, String role, String availableFrom, String availableTo, int maxHours, boolean judge) {
+        WorkerShift(String name, String role, String availableFrom, String availableTo, int maxHours, boolean judge,int power) {
             this.name = name;
             this.role = role;
             this.availableFrom = availableFrom;
             this.availableTo = availableTo;
             this.maxHours = maxHours;
             this.judge	= judge;
+            this.power = power;
         }
     }
 
@@ -106,6 +108,7 @@ public class ShiftCreate {
                 end = nextEnd;
             }
         }
+
         for(String time_id:store_time_id){
         	try {
         		Store Time = new Store();
@@ -185,7 +188,7 @@ public class ShiftCreate {
 					current >= workerStart &&
 					current + 60 <= workerEnd) {
 					//従業員の役割がキッチンの場合
-					if (worker.role.equals("Kitchen") && kitchenNeeded > 0) {
+					if (worker.role.equals("kitchen") && kitchenNeeded > 0) {
 						Map<String, String> assignment = new HashMap<>();
 						assignment.put("name", worker.name);
 						assignment.put("role", worker.role);
@@ -193,16 +196,16 @@ public class ShiftCreate {
 						worker.assignedShifts.add(timeSlot);
 						//最大勤務可能時間からー１
 						worker.maxHours--;
-						kitchenNeeded--;
+						kitchenNeeded = kitchenNeeded-worker.power;
 						//従業員の役割がホールの場合
-					} else if (worker.role.equals("Hall") && hallNeeded > 0) {
+					} else if (worker.role.equals("hole") && hallNeeded > 0) {
 						Map<String, String> assignment = new HashMap<>();
 						assignment.put("name", worker.name);
 						assignment.put("role", worker.role);
 						assignedWorkers.add(assignment);
 						worker.assignedShifts.add(timeSlot);
 						worker.maxHours--;
-						hallNeeded--;
+						hallNeeded = hallNeeded-worker.power;
 					}
 				}else if(worker.judge){
 					Map<String, String> assignment = new HashMap<>();
@@ -212,7 +215,7 @@ public class ShiftCreate {
 					worker.assignedShifts.add(timeSlot);
 				}
 
-				if (kitchenNeeded == 0 && hallNeeded == 0) break;
+				if (kitchenNeeded <= 0 && hallNeeded <= 0) break;
 			}
 			schedule.put(timeSlot, assignedWorkers);
 		}
@@ -226,10 +229,11 @@ public class ShiftCreate {
 
     public List<Map<String,Object>> Shiftmain(
     		String work_time_start, String work_time_end,Store shift_manager, List<Shift> shift_list,
-    		String date,PriorityQueue<Map.Entry<String, Integer>> priorityQueue,List<Worker> worker_list)
+    		String date,PriorityQueue<Map.Entry<String, Integer>> priorityQueue,List<Worker> worker_list,int shift_date)
     {
+    	int shift_score_set = shift_date/2;
         // 必要人数の設定（キッチンとホールで区別）
-        ShiftRequirement requirement = new ShiftRequirement(work_time_start, work_time_end, 1, 1);
+        ShiftRequirement requirement = new ShiftRequirement(work_time_start, work_time_end, shift_score_set, shift_score_set);
         List<WorkerShift> workers = new ArrayList<>();
         StoreDao stDao = new StoreDao();//StoreDao初期化
 
@@ -250,7 +254,9 @@ public class ShiftCreate {
         			availableFrom = work_time.getWorkTimeStart().toString();
         			availableTo   = work_time.getWorkTimeEnd().toString();
         			maxHours =minutesToHour(timeToMinutes(availableTo)-timeToMinutes(availableFrom));
-        			workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(), "Kitchen", availableFrom, availableTo, maxHours,false));
+        			int power = Integer.parseInt(shift_lists.getWorker().getWorkerScore());
+        			workers.add(new WorkerShift(
+        					shift_lists.getWorker().getWorkerName(),shift_lists.getWorker().getWorkerPosition(), availableFrom, availableTo, maxHours,false,power));
 
 
         			//シフト希望時間がその他の場合
@@ -258,15 +264,16 @@ public class ShiftCreate {
         			String availableFrom = null;
         			String availableTo	= null;
         			int maxHours = 0;
+        			int power = Integer.parseInt(shift_lists.getWorker().getWorkerScore());
         			if(shift_lists.getWorker().isWorkerJudge()){
-        				workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(), "Hall", work_time_start, work_time_end, 9,true));
+        				workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(), shift_lists.getWorker().getWorkerPosition(), work_time_start, work_time_end, 9,true,power));
         			}else{
         				LocalTime timeFrom =shift_lists.getShiftHopeTimeStart().toLocalDateTime().toLocalTime();
         				LocalTime timeTo =shift_lists.getShiftHopeTimeEnd().toLocalDateTime().toLocalTime();
         				availableFrom = timeFrom.toString();
         				availableTo   = timeTo.toString();
         				maxHours =minutesToHour(timeToMinutes(availableTo)-timeToMinutes(availableFrom));
-        				workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(), "Hall", availableFrom, availableTo, maxHours,false));
+        				workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(),shift_lists.getWorker().getWorkerPosition(), availableFrom, availableTo, maxHours,false,power));
         			}
         		}
 			}

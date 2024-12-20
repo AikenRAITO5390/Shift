@@ -65,7 +65,6 @@ public class ShiftCreateAction extends Action{
 			priorityQueue.add(new AbstractMap.SimpleEntry<>(worker.getWorkerName(), 1));
 			createShiftQueue.add(new AbstractMap.SimpleEntry<>(worker.getWorkerName(), 1));
 		}
-
 		//３０日分のシフト情報を入れるためのリスト
 		List<Map<String, Object>> innerList = new ArrayList<>();
 		//３０日分回す
@@ -81,9 +80,13 @@ public class ShiftCreateAction extends Action{
 			List<Shift> shift_list = new ArrayList<>();
 			//入った日にちのシフト希望を出している従業員情報一覧を取得
 			shift_list = shDao.filter(stDao.get(manager.getStoreId()), shift_date);
+			//その日のパワーバランスを取得
+			String shift_score = shDao.shiftScoreGet(shift_date, manager.getStoreId());
+			Integer shift_score_int = Integer.parseInt(shift_score);
+			System.out.println("点数"+shift_score);
 			//開店時間、閉店時間、シフト作成者情報、従業員情報一覧、日時をいれシフトを作成する関数
 			List<Map<String, Object>> workerShift = shift_create.Shiftmain(
-					work_time_start, work_time_end,manager,shift_list,date,createShiftQueue,worker_list);
+					work_time_start, work_time_end,manager,shift_list,date,createShiftQueue,worker_list,shift_score_int);
 			//シフト情報を格納
 			innerList.addAll(workerShift);
 
