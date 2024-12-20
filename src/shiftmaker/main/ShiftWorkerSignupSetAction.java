@@ -114,6 +114,22 @@ public class ShiftWorkerSignupSetAction extends Action{
 
         }
 
+        // リクエストパラメータからカスタム時間を取得
+        String customStartTime = req.getParameter("customStartTime");
+        String customEndTime = req.getParameter("customEndTime");
+
+        // カスタム時間の検証（エラー処理）
+        if (customStartTime != null && customEndTime != null) {
+            int startHour = Integer.parseInt(customStartTime);
+            int endHour = Integer.parseInt(customEndTime);
+
+            if (startHour >= endHour) {
+                req.setAttribute("errorMessage", "正確に時間を選択してください。");
+                req.getRequestDispatcher("shift_worker_signup_set.jsp").forward(req, res);
+                return; // 処理を中断
+            }
+        }
+
 
      	// 営業時間の取得（Eの選択肢のため）
      	String store_time_start = storeDao.TimeStartGet(loginuser.getStoreId());

@@ -64,6 +64,11 @@
 				            </c:forEach>
 				        </select>
 				    </td>
+
+				    <!-- Eの時間設定エラー処理（アラート） -->
+				    <c:if test="${not empty errorMessage}">
+					    <div style="color: red;">${errorMessage}</div>
+					</c:if>
 				</tr>
 				<!-- なしにする -->
 				<tr>
@@ -81,6 +86,7 @@
 			        const customRadio = document.getElementById("customWorkTime");
 			        const startTimeSelect = document.getElementById("customStartTime");
 			        const endTimeSelect = document.getElementById("customEndTime");
+			        const form = document.querySelector("form");
 
 			        document.querySelectorAll('input[name="workTimeId"]').forEach(radio => {
 			            radio.addEventListener("change", () => {
@@ -88,6 +94,18 @@
 			                startTimeSelect.disabled = !isCustom;
 			                endTimeSelect.disabled = !isCustom;
 			            });
+			        });
+
+			        form.addEventListener("submit", (event) => {
+			            if (customRadio.checked) {
+			                const startTime = parseInt(startTimeSelect.value, 10);
+			                const endTime = parseInt(endTimeSelect.value, 10);
+
+			                if (startTime >= endTime) {
+			                    event.preventDefault(); // フォーム送信をキャンセル
+			                    alert("正確に時間を選択してください。");
+			                }
+			            }
 			        });
 			    });
 			</script>
