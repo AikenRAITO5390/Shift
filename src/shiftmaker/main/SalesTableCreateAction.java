@@ -40,18 +40,20 @@ public class SalesTableCreateAction extends HttpServlet {
 	                response.setContentType("image/png");
 
 //	                元データの取得
-	                ArrayList<ArrayList<String>> ar = (ArrayList<ArrayList<String>>) request.getSession().getAttribute("chart1");
+	                ArrayList<ArrayList<String>> ar_1 = (ArrayList<ArrayList<String>>) request.getSession().getAttribute("chart1");
 
-	                System.out.println("動的に生成されたセッションデータ: " + ar);//デバッグ用
+
+	                System.out.println("動的に生成されたセッションデータ: " + ar_1);//デバッグ用
 
 //	                データセットの作成
 	                ArrayList<Number> ar1 = new ArrayList<>();
 	                ArrayList<String> ar2 = new ArrayList<>();
 	                ArrayList<String> ar3 = new ArrayList<>();
-	                for(int i=0; i<ar.size(); i++) {
-	                        ar1.add(Integer.parseInt(ar.get(i).get(0)));
-	                        ar2.add(ar.get(i).get(1));
-	                        ar3.add(ar.get(i).get(2));
+	                for(int i=0; i<ar_1.size(); i++) {
+	                        ar1.add(Integer.parseInt(ar_1.get(i).get(0)));
+	                        ar2.add(ar_1.get(i).get(1));
+	                        ar3.add(ar_1.get(i).get(2));
+
 	                }
 
 //	                データが順番に入っているかの確認
@@ -78,9 +80,10 @@ public class SalesTableCreateAction extends HttpServlet {
 	                LineAndShapeRenderer renderer = (LineAndShapeRenderer)plot.getRenderer();
 //	                点の設定
 	                renderer.setSeriesShapesVisible(0, true);
+	                renderer.setSeriesShapesVisible(1, true);
 //	                折れ線の太さ設定
 	                chart.getCategoryPlot().getRenderer().setSeriesStroke(0,new BasicStroke(4));
-
+	                chart.getCategoryPlot().getRenderer().setSeriesStroke(1,new BasicStroke(4));
 
 
 //	                PNG画像生成
