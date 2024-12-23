@@ -1,7 +1,9 @@
 package shiftmaker.main;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -72,6 +74,23 @@ public class ShiftWorkerSignupAction extends Action{
 		CalendeCreate calende = new CalendeCreate();
 		// カレンダーを作成
 		List<LocalDate> dates = calende.Calender(year, nextmonth);
+
+		dates.removeIf(Objects::isNull);
+
+		System.out.println("dates: " + dates);
+
+		// ShiftDBにデータが存在するか確認
+        boolean shiftExists = shiftDao.checkIfShiftExists(workerId, year, nextmonth);
+
+		// シフトデータが存在しない場合、新規作成
+        if (!shiftExists) {
+            System.out.println("シフトデータが存在しないため、新規作成します。");
+            for (LocalDate localDate : dates) {
+            	Date sqlDate = Date.valueOf(localDate); // 変換処理
+                System.out.println("処理中の日付: " + sqlDate);
+                shiftDao.createShift(workerId, sqlDate, 1, null, null, null, null, null, null, loginuser.getStoreId());
+            }
+        }
 
 
 		// リクエストにデータをセット

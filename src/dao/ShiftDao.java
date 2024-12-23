@@ -532,6 +532,7 @@ public class ShiftDao extends Dao{
         return workTime; // 勤務時間 (例: "09:00 - 17:00")
     }
 
+	// shifthope_time_idをgetする
 	public String getShiftHopeTimeId(String workerId, Date shiftDate) throws Exception {
         String shiftHopeTimeId = null;
 
@@ -561,6 +562,7 @@ public class ShiftDao extends Dao{
         return shiftHopeTimeId;
     }
 
+	// 希望シフト選択でなしを選んだ際に、DB上をnullにする
 	public void updatenullShifthope(String workerId, Date shiftDate) throws Exception {
         String sql;
         sql = "UPDATE shift SET shifthope_time_id = NULL, shifthope_time_start = NULL, shifthope_time_end = NULL WHERE worker_id = ? AND shift_date = ?";
@@ -573,7 +575,7 @@ public class ShiftDao extends Dao{
         }
     }
 
-
+	// shift_scoreのget
 	public String shiftScoreGet(Date shift_date, String store_id) throws Exception{
 
 		Connection connection = getConnection();
@@ -618,6 +620,49 @@ public class ShiftDao extends Dao{
     	}
 		return shift_score;
 
+	}
+
+	// shiftDBにworker_idに対応したシフトデータがあるかどうかを調べる
+	public boolean checkIfShiftExists(String workerId, int year, int month) throws Exception{
+
+		Connection connection = getConnection();
+	    // SQLクエリ例
+	    String sql = "SELECT COUNT(*) FROM shift WHERE worker_id = ? AND YEAR(shift_date) = ? AND MONTH(shift_date) = ?";
+	    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+	        stmt.setString(1, workerId);
+	        stmt.setInt(2, year);
+	        stmt.setInt(3, month);
+	        ResultSet rs = stmt.executeQuery();
+	        if (rs.next() && rs.getInt(1) > 0) {
+	            return true;
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return false;
+	}
+
+	// shiftDBにworkerIdに対応したカレンダーがなかった場合、シフトを作成
+	public void createShift(String workerId, Date shiftDate, int shiftScore, String shifthopeTimeId, String shifthopeTimeStart, String shifthopeTimeEnd, String workTimeId, String shiftTimeStart, String shiftTimeEnd, String storeId) throws Exception{
+
+		Connection connection = getConnection();
+
+		String sql = "INSERT INTO shift (worker_id, shift_date, shift_score, shifthope_time_id, shifthope_time_start, shifthope_time_end, work_time_id, shift_time_start, shift_time_end, store_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+	        stmt.setString(1, workerId);
+	        stmt.setDate(2, shiftDate);
+	        stmt.setInt(3, shiftScore);
+	        stmt.setString(4, shifthopeTimeId);
+	        stmt.setString(5, shifthopeTimeStart);
+	        stmt.setString(6, shifthopeTimeEnd);
+	        stmt.setString(7, workTimeId);
+	        stmt.setString(8, shiftTimeStart);
+	        stmt.setString(9, shiftTimeEnd);
+	        stmt.setString(10, storeId);
+	        stmt.executeUpdate();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
 
 
