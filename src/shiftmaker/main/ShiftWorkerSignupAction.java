@@ -89,6 +89,7 @@ public class ShiftWorkerSignupAction extends Action{
             	Date sqlDate = Date.valueOf(localDate); // 変換処理
                 System.out.println("処理中の日付: " + sqlDate);
                 shiftDao.createShift(workerId, sqlDate, 1, null, null, null, null, null, null, loginuser.getStoreId());
+                System.out.println(sqlDate + "越えた");
             }
         }
 

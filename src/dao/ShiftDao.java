@@ -369,7 +369,7 @@ public class ShiftDao extends Dao{
 		try {
 
 			if(old == null){
-				String sql = "INSERT INTO SHIFT (SHIFT_DATE, WORKER_ID, STORE_ID, WORK_TIME_ID, SHIFT_SCORE, SHIFT_HOPE_TIME_ID, SHIFT_TIME_START, SHIFT_TIME_END, SHIFTHOPE_TIME_START, SHIFTHOPE_TIME_END) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				String sql = "INSERT INTO SHIFT (SHIFT_DATE, WORKER_ID, STORE_ID, WORK_TIME_ID, SHIFT_SCORE, SHIFTHOPE_TIME_ID, SHIFT_TIME_START, SHIFT_TIME_END, SHIFTHOPE_TIME_START, SHIFTHOPE_TIME_END) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				statement = connection.prepareStatement(sql);
 				statement.setDate(1, shiftDate);
 				statement.setString(2, workerId);
@@ -659,8 +659,10 @@ public class ShiftDao extends Dao{
 	        stmt.setString(8, shiftTimeStart);
 	        stmt.setString(9, shiftTimeEnd);
 	        stmt.setString(10, storeId);
+	        System.out.println("Daoのset通ったよ");
 	        stmt.executeUpdate();
 	    } catch (Exception e) {
+	    	System.out.println("Daoのcatchのほうきた");
 	        e.printStackTrace();
 	    }
 	}
