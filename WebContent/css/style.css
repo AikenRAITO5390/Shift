@@ -5,7 +5,9 @@ body {
     background-color: #ffffff; /* メインページの背景色 */
     color: #000000; /* メインページのテキスト色 */
 }
-
+.error{
+    color: red; /* プレースホルダーの色を赤に設定 */
+}
 
 .main-content {
     display: flex;
@@ -241,9 +243,10 @@ input[type="submit"]:hover {
 
 }
 
+
 .shift_manager input[type="text"]{
     width: 500px; /* 必要に応じて調整 */
-    max-width: 700px; /* 最大幅を700pxに設定 */
+    max-width: 700px; /*  最大幅を700pxに設定 */
     padding: 10px; /* 内側の余白を追加してボックスを大きく見せる */
     margin-right: 40px;
     box-sizing: border-box;
