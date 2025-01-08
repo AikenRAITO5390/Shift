@@ -266,3 +266,16 @@ input[type="submit"]:hover {
 .managert_submit a {
     margin-top: 10px;
 }
+
+.tmain {
+	font-family: arial;
+  font-size: 24px;
+  margin: 25px;
+  width: 350px;
+  height: 200px;
+  outline: dashed 1px black;
+  /* 水平・垂直方向の中央揃え */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

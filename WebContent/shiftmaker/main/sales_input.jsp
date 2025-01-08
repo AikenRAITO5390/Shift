@@ -8,6 +8,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" href="../../css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>売上入力</title>
 </head>
@@ -30,7 +31,7 @@
 		%>
 		<input type="date" name="sales_date" value="<%= formattedDate %>" />
 
-
+		<br>
 		<label>売上金額を選択してください</label>
 		<!-- 売上金額入力 -->
 		<input type="number" name="sales" placeholder="売上金額を入力" maxlength="8" value="${sales}" min="0" required />
