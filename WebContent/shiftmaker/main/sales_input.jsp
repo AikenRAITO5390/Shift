@@ -41,7 +41,7 @@
 	    <input type="submit" value="登録" />
 
 	    <!-- 戻るリンク -->
-	    <a href="Main.action">TOPへ</a>
+	    <a href="Sales.action">戻る</a>
 
 	</form>
 

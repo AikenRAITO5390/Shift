@@ -28,6 +28,8 @@
 
 	<button>売上予測</button>
 
+	<!-- 戻るリンク -->
+	    <a href="Main.action">TOPへ</a>
 	</form>
 
 </div>

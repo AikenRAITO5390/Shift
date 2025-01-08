@@ -11,6 +11,8 @@
 	<p>売上の登録が完了しました</p>
 
 
+	<a href="Sales.action">売上へ</a>
+
 	<a href="Main.action">メインメニューへ</a>
 
 
