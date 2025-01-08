@@ -35,11 +35,19 @@ public class ShiftCreateAction extends Action{
 		WorkerDao wDao  = new WorkerDao();
 		ShiftCreate shift_create = new ShiftCreate();
 
+		LocalDate todaysDate = LocalDate.now();
+		int year = todaysDate.getYear();
+		int month = todaysDate.getMonthValue();
 
-		Integer day = 14;
-		String date = null;
+		int nextmonth = month +1;
+
+		if(nextmonth == 13){
+			nextmonth = 1;
+			year = year+1;
+		}
+
 		// カレンダーを生成
-		List<LocalDate> dates = calende.Calender_side(2024, 11);
+		List<LocalDate> dates = calende.Calender(year, nextmonth);
 		//セッションの作成
 		HttpSession session = req.getSession();
 		//ログインユーザーの情報取得
@@ -67,15 +75,14 @@ public class ShiftCreateAction extends Action{
 		}
 		//３０日分のシフト情報を入れるためのリスト
 		List<Map<String, Object>> innerList = new ArrayList<>();
+
 		//３０日分回す
-		for(int i = 0; i<7 ;i++){
-			date =day.toString();
-			System.out.println("日時:"+date);
-			//日にちを取得
-			LocalDate localDates = LocalDate.of(2024, 11,day);
-			System.out.println("年月日:"+localDates);
+		for(LocalDate localDate : dates){
+			Integer day =localDate.getDayOfMonth();
+			String date = day.toString();
+			System.out.println("年月日:"+localDate);
 			//日にちをDate型に変換
-			Date shift_date = Date.valueOf(localDates);
+			Date shift_date = Date.valueOf(localDate);
 			//入った日にちのシフト希望を出している従業員情報一覧を格納するリスト
 			List<Shift> shift_list = new ArrayList<>();
 			//入った日にちのシフト希望を出している従業員情報一覧を取得

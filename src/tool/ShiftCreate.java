@@ -82,10 +82,7 @@ public class ShiftCreate {
  // 勤務時間帯を連続して統合
     private static List<String> mergeShifts(List<String> shifts,Store shift_manager,WorkerShift worker) {
         List<String> merged = new ArrayList<>();
-        if(worker.judge) {
-        	merged.add("○");
-        	return merged;
-        }
+
         if (shifts.isEmpty()) return merged;
         StoreDao stDao = new StoreDao();
         List<String>  store_time_id = Arrays.asList("A","B","C","D");
