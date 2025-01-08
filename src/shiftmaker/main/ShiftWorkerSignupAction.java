@@ -1,6 +1,5 @@
 package shiftmaker.main;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -82,16 +81,18 @@ public class ShiftWorkerSignupAction extends Action{
 		// ShiftDBにデータが存在するか確認
         boolean shiftExists = shiftDao.checkIfShiftExists(workerId, year, nextmonth);
 
-		// シフトデータが存在しない場合、新規作成
-        if (!shiftExists) {
-            System.out.println("シフトデータが存在しないため、新規作成します。");
-            for (LocalDate localDate : dates) {
-            	Date sqlDate = Date.valueOf(localDate); // 変換処理
-                System.out.println("処理中の日付: " + sqlDate);
-                shiftDao.createShift(workerId, sqlDate, 1, null, null, null, null, null, null, loginuser.getStoreId());
-                System.out.println(sqlDate + "越えた");
+        try{
+        	// シフトデータが存在しない場合、新規作成
+            if (!shiftExists) {
+                System.out.println("シフトデータが存在しないため、新規作成します。");
+                System.out.println(dates);
+                shiftDao.createShift(workerId, 1, null, null, null, null, null, null, loginuser.getStoreId(), dates);
             }
+        } catch (Exception e){
+        	System.out.println("エラー");
+	        e.printStackTrace();
         }
+
 
 
 		// リクエストにデータをセット

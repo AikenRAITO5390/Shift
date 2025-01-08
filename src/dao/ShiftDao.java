@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -643,9 +644,41 @@ public class ShiftDao extends Dao{
 	}
 
 	// shiftDBにworkerIdに対応したカレンダーがなかった場合、シフトを作成
-	public void createShift(String workerId, Date shiftDate, int shiftScore, String shifthopeTimeId, String shifthopeTimeStart, String shifthopeTimeEnd, String workTimeId, String shiftTimeStart, String shiftTimeEnd, String storeId) throws Exception{
+		public void createShift(String workerId, int shiftScore, String shifthopeTimeId, String shifthopeTimeStart, String shifthopeTimeEnd, String workTimeId, String shiftTimeStart, String shiftTimeEnd, String storeId, List<LocalDate> dates) throws Exception{
+
+			Connection connection = getConnection();
+
+			String sql = "INSERT INTO shift (shift_date, worker_id, shift_score, shifthope_time_id, shifthope_time_start, shifthope_time_end, work_time_id, shift_time_start, shift_time_end, store_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			for(LocalDate localDate : dates){
+				Date date = Date.valueOf(localDate);
+				try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+					stmt.setDate(1, date);
+				    stmt.setString(2, workerId);
+				    stmt.setInt(3, shiftScore);
+				    stmt.setString(4, shifthopeTimeId);
+				    stmt.setString(5, shifthopeTimeStart);
+				    stmt.setString(6, shifthopeTimeEnd);
+				    stmt.setString(7, workTimeId);
+				    stmt.setString(8, shiftTimeStart);
+				    stmt.setString(9, shiftTimeEnd);
+				    stmt.setString(10, storeId);
+				    stmt.executeUpdate();
+					System.out.println("Daoのset通ったよ");
+			        stmt.executeUpdate();
+			    } catch (Exception e) {
+			    	System.out.println("Daoのcatchのほうきた");
+			        e.printStackTrace();
+			    }
+			}
+
+		}
+
+	// shiftDBにworkerIdに対応したカレンダーがなかった場合、シフトを作成
+	public void createShift2(String workerId, Date shiftDate, int shiftScore, String shifthopeTimeId, String shifthopeTimeStart, String shifthopeTimeEnd, String workTimeId, String shiftTimeStart, String shiftTimeEnd, String storeId) throws Exception{
 
 		Connection connection = getConnection();
+
+		System.out.println("SQLに渡されるパラメータ: " + workerId + ", " + shiftDate + ", " + shiftScore + ", " + storeId);
 
 		String sql = "INSERT INTO shift (worker_id, shift_date, shift_score, shifthope_time_id, shifthope_time_start, shifthope_time_end, work_time_id, shift_time_start, shift_time_end, store_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
