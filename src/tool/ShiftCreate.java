@@ -173,6 +173,7 @@ public class ShiftCreate {
 	        List<Map<String, String>> assignedWorkers = new ArrayList<>();
 	        //キッチンかホールの必要数を取得
 	        int kitchenNeeded = requirement.requiredKitchen;
+
 	        int hallNeeded = requirement.requiredHall;
 			//従業員の数だけ回る
 			for (WorkerShift worker : workers) {
@@ -252,28 +253,40 @@ public class ShiftCreate {
         			availableTo   = work_time.getWorkTimeEnd().toString();
         			maxHours =minutesToHour(timeToMinutes(availableTo)-timeToMinutes(availableFrom));
         			int power = Integer.parseInt(shift_lists.getWorker().getWorkerScore());
+        			if(shift_lists.getWorker().isWorkerJudge()){
+        				maxHours = minutesToHour(timeToMinutes(work_time_start)-timeToMinutes(work_time_end));
+        				workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(), shift_lists.getWorker().getWorkerPosition(), work_time_start, work_time_end, maxHours,true,power));
+
+        			}else{
         			workers.add(new WorkerShift(
         					shift_lists.getWorker().getWorkerName(),shift_lists.getWorker().getWorkerPosition(), availableFrom, availableTo, maxHours,false,power));
-
+        			}
 
         			//シフト希望時間がその他の場合
         		}else{
-        			String availableFrom = null;
-        			String availableTo	= null;
-        			int maxHours = 0;
-        			int power = Integer.parseInt(shift_lists.getWorker().getWorkerScore());
-        			if(shift_lists.getWorker().isWorkerJudge()){
-        				workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(), shift_lists.getWorker().getWorkerPosition(), work_time_start, work_time_end, 9,true,power));
+
+        			}if(shift_lists.getShiftHopeTimeStart() == null){
+        				continue;
         			}else{
-        				LocalTime timeFrom =shift_lists.getShiftHopeTimeStart().toLocalDateTime().toLocalTime();
-        				LocalTime timeTo =shift_lists.getShiftHopeTimeEnd().toLocalDateTime().toLocalTime();
-        				availableFrom = timeFrom.toString();
-        				availableTo   = timeTo.toString();
-        				maxHours =minutesToHour(timeToMinutes(availableTo)-timeToMinutes(availableFrom));
-        				workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(),shift_lists.getWorker().getWorkerPosition(), availableFrom, availableTo, maxHours,false,power));
+        				String availableFrom = null;
+            			String availableTo	= null;
+            			int maxHours = 0;
+            			int power = Integer.parseInt(shift_lists.getWorker().getWorkerScore());
+        				if(shift_lists.getWorker().isWorkerJudge()){
+            				maxHours = minutesToHour(timeToMinutes(work_time_start)-timeToMinutes(work_time_end));
+            				workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(), shift_lists.getWorker().getWorkerPosition(), work_time_start, work_time_end, maxHours,true,power));
+        				}else{
+        					LocalTime timeFrom =shift_lists.getShiftHopeTimeStart().toLocalDateTime().toLocalTime();
+            				LocalTime timeTo =shift_lists.getShiftHopeTimeEnd().toLocalDateTime().toLocalTime();
+            				availableFrom = timeFrom.toString();
+            				availableTo   = timeTo.toString();
+        					maxHours =minutesToHour(timeToMinutes(availableTo)-timeToMinutes(availableFrom));
+        					workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(),shift_lists.getWorker().getWorkerPosition(), availableFrom, availableTo, maxHours,false,power));
+
+        				}
         			}
         		}
-			}
+
         }catch (Exception e) {
         	System.out.println(e);
 		}

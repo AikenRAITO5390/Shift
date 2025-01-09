@@ -9,6 +9,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.PriorityQueue;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,6 +49,8 @@ public class ShiftCreateAction extends Action{
 
 		// カレンダーを生成
 		List<LocalDate> dates = calende.Calender(year, nextmonth);
+
+		dates.removeIf(Objects::isNull);
 		//セッションの作成
 		HttpSession session = req.getSession();
 		//ログインユーザーの情報取得
@@ -156,14 +159,14 @@ public class ShiftCreateAction extends Action{
 			        }
 				}
 			}
-			day = day + 1;
+
 		}
 
 
 		//リクエストにカレンダーをセット
 		req.setAttribute("dates", dates);
-        req.setAttribute("year", 2024);
-        req.setAttribute("month", 11);
+        req.setAttribute("year", year);
+        req.setAttribute("month", nextmonth);
         req.setAttribute("innerList",innerList);
 		req.setAttribute("worker_list", worker_list);
 		//shift_select.jspに遷移

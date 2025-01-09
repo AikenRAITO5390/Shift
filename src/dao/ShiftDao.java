@@ -119,7 +119,6 @@ public class ShiftDao extends Dao{
 		    	shift.setWorkTimeId(rSet.getString("work_time_id"));
 		    	shift.setShiftTimeStart(rSet.getTimestamp("shift_time_start"));
 		    	shift.setShiftTimeEnd(rSet.getTimestamp("shift_time_end"));
-		    	shift.setShiftId(rSet.getString("shift_id"));
 		    	shift.setStore(stDao.get(rSet.getString("store_id")));
 		    	shift.setWorker(wDao.get(rSet.getString("worker_id")));
 //				リストに追加
@@ -718,8 +717,8 @@ public class ShiftDao extends Dao{
 	//		店舗情報が存在しなかった場合
 	//		プリペアードステートメントにINSERT文をセット
 			statement = connection.prepareStatement("insert into Shift (SHIFT_DATE,WORKER_ID,SHIFTHOPE_TIME_ID,SHIFT_SCORE,SHIFTHOPE_TIME_START,"
-					+ "SHIFTHOPE_TIME_END,WORK_TIME_ID,SHIFT_TIME_START,SHIFT_TIME_END,SHIFT_ID,STORE_ID)"
-					+ "values(?,?,?,?,?,?,?,?,?,?,?)");
+					+ "SHIFTHOPE_TIME_END,WORK_TIME_ID,SHIFT_TIME_START,SHIFT_TIME_END,STORE_ID)"
+					+ "values(?,?,?,?,?,?,?,?,?,?)");
 
 			statement.setDate(1, shift.getShiftDate());
 			statement.setString(2, shift.getWorker().getWorkerId());
@@ -730,8 +729,7 @@ public class ShiftDao extends Dao{
 			statement.setString(7, shift.getWorkTimeId());
 			statement.setTimestamp(8, shift.getShiftTimeStart());
 			statement.setTimestamp(9, shift.getShiftTimeEnd());
-			statement.setString(10, shift.getShiftId());
-			statement.setString(11, shift.getStore().getStoreId());
+			statement.setString(10, shift.getStore().getStoreId());
 
 		}else {
 			//IDが存在した場合
