@@ -1,0 +1,32 @@
+/* css（森谷） */
+/* ------------------------------------------------------------ */
+/* 従業員新規登録 */
+h2 {
+	text-align: center;   /* 中央寄せ */
+}
+
+label {
+    width: 150px;   /* 幅の調節 */
+    vertical-align: top;
+    font-weight: bold;   /* 文字を太く */
+    text-align: left;   /* 左寄せ */
+}
+
+.center {
+    width: fit-content;
+    margin: auto;
+}
+
+.btn {
+	position: relative; /* relativeを指定 */
+	top: 10px; /* 上から10px移動 */
+	left: 450px; /* 左から450px移動 */
+}
+
+.link1 {
+	position: relative; /* relativeを指定 */
+	top: 10px; /* 上から10px移動 */
+	left: 460px; /* 左から460px移動 */
+}
+
+/* ------------------------------------------------------------ */
