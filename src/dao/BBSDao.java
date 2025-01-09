@@ -13,16 +13,70 @@ import bean.Store;
 
 public class BBSDao extends Dao {
 
+	//連番
+	public BBS get(String storeId) throws Exception{
+		BBS bbs = new BBS();
+		//データエースへのコネクションを確立
+		Connection connection = getConnection();
+		//プリペアードステートメント
+		PreparedStatement statement = null;
 
-	private static int currentBbsId = 1;
+		try{
+			//プリペアードステートメントにSQL文をセット
+			statement = connection.prepareStatement("select bbs_id from BBS where store_id=? ");
+			//値はBBS_IDでゲットしてくる
+			statement.setString(1,storeId);
+			//プリペアードステートメントを実行
+			ResultSet rSet = statement.executeQuery();
 
-	public int generateNewBbsId() {
-        return currentBbsId++;
-    }
+			//workerDaoを初期化
+			WorkerDao workerDao = new WorkerDao();
+
+			//storeDaoを初期化
+			StoreDao storeDao = new StoreDao();
+
+			if (rSet.next()) {
+				//リザルトセットが存在する場合
+				//BBSインスタンスに検索結果をセット
+				//bbs.setBbsText(rSet.getString("BBS_TEXT"));
+				bbs.setBbsId(rSet.getInt("BBS_ID"));
+				//WORKERはworker_idコードで検索したworkerインスタンスをセット
+				//bbs.setWorker(workerDao.get(rSet.getString("WORKER_ID")));
+				//STOREはworker_idコードで検索したworkerインスタンスをセット
+				//bbs.setStore(storeDao.get(rSet.getString("STORE_ID")));
+
+			} else {
+				//リザルトセットが存在しない場合
+				//掲示板にnullをセット
+				bbs = null;
+			}
+
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			//
+			if(statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		//listを返す
+		return bbs;
+	}
 
 
-
-	public BBS get(String bbsId) throws Exception{
+	public BBS get(int bbsId) throws Exception{
 		BBS bbs = new BBS();
 		//データエースへのコネクションを確立
 		Connection connection = getConnection();
@@ -33,7 +87,7 @@ public class BBSDao extends Dao {
 			//プリペアードステートメントにSQL文をセット
 			statement = connection.prepareStatement("select * from BBS where bbs_id=? ");
 			//値はBBS_IDでゲットしてくる
-			statement.setString(1, bbsId);
+			statement.setInt(1, bbsId);
 			//プリペアードステートメントを実行
 			ResultSet rSet = statement.executeQuery();
 
@@ -47,7 +101,7 @@ public class BBSDao extends Dao {
 				//リザルトセットが存在する場合
 				//BBSインスタンスに検索結果をセット
 				bbs.setBbsText(rSet.getString("BBS_TEXT"));
-				bbs.setBbsId(rSet.getString("BBS_ID"));
+				bbs.setBbsId(rSet.getInt("BBS_ID"));
 				//WORKERはworker_idコードで検索したworkerインスタンスをセット
 				bbs.setWorker(workerDao.get(rSet.getString("WORKER_ID")));
 				//STOREはworker_idコードで検索したworkerインスタンスをセット
@@ -93,7 +147,7 @@ public class BBSDao extends Dao {
 				//掲示板インスタンスを初期化
 				BBS bbs = new BBS();
 				//掲示板インスタンスに検索結果をセット
-				bbs.setBbsId(rSet. getString("BBS_ID"));
+				bbs.setBbsId(rSet. getInt("BBS_ID"));
 				bbs.setBbsText (rSet. getString("BBS_TEXT"));
 				bbs.setWorker(workerDao.get(rSet.getString("WORKER_ID")));
 				bbs.setBbsDate (rSet. getString("BBS_DATE"));
@@ -176,29 +230,29 @@ public class BBSDao extends Dao {
 	    try {
 	        // プリペアードステートメントにINSERT文をセット
 	        statement = connection.prepareStatement(
-	                "INSERT INTO BBS (BBS_ID, BBS_TEXT, STORE_ID, WORKER_ID, BBS_DATE,MANAGER_ID) VALUES (?, ?, ?, ?, ?, ?)");
+	                "INSERT INTO BBS (BBS_TEXT, STORE_ID, WORKER_ID, BBS_DATE,MANAGER_ID) VALUES (?, ?, ?, ?, ?)");
 	        // プリペアードステートメントに値をバインド
 
 
 
-	        statement.setString(1, bbs.getBbsId());
-	        statement.setString(2, bbs.getBbsText());
-	        statement.setString(3, bbs.getStore().getStoreId());
-	        statement.setString(4, bbs.getWorker().getWorkerId());
-	        statement.setString(5, bbs.getBbsDate());
+	        //statement.setInt(1, bbs.getBbsId());
+	        statement.setString(1, bbs.getBbsText());
+	        statement.setString(2, bbs.getStore().getStoreId());
+	        statement.setString(3, bbs.getWorker().getWorkerId());
+	        statement.setString(4, bbs.getBbsDate());
 
 	        //managerのときつかう
 	        if(bbs.getWorker().getWorkerId() == null){
-		        statement.setString(4, null);
+		        statement.setString(3, null);
 	        }else{
-	        	statement.setString(4, bbs.getWorker().getWorkerId());
+	        	statement.setString(3, bbs.getWorker().getWorkerId());
 	        }
 
 	        //workerのときつかう
 	        if(bbs.getWorker().getWorkerId() == null){
-		        statement.setString(6, bbs.getStore().getManagerId());
+		        statement.setString(5, bbs.getStore().getManagerId());
 	        }else{
-		        statement.setString(6, null);
+		        statement.setString(5, null);
 	        }
 
 	        // プリペアードステートメントを実行
@@ -257,17 +311,17 @@ public class BBSDao extends Dao {
 	    try {
 	        // プリペアードステートメントにINSERT文をセット
 	        statement = connection.prepareStatement(
-	                "INSERT INTO BBS (BBS_ID, BBS_TEXT, STORE_ID, WORKER_ID, BBS_DATE,MANAGER_ID) VALUES (?, ?, ?, ?, ?, ?)");
+	                "INSERT INTO BBS (BBS_TEXT, STORE_ID, WORKER_ID, BBS_DATE,MANAGER_ID) VALUES (?, ?, ?, ?, ?)");
 	        // プリペアードステートメントに値をバインド
 
 
-
-	        statement.setString(1, bbs.getBbsId());
-	        statement.setString(2, bbs.getBbsText());
-	        statement.setString(3, bbs.getStore().getStoreId());
-	        statement.setString(4, null);
-	        statement.setString(5, bbs.getBbsDate());
-	        statement.setString(6, bbs.getStore().getManagerId());
+	        // 1/9 bbsidコメントにした
+	        //statement.setInt(1, bbs.getBbsId());
+	        statement.setString(1, bbs.getBbsText());
+	        statement.setString(2, bbs.getStore().getStoreId());
+	        statement.setString(3, null);
+	        statement.setString(4, bbs.getBbsDate());
+	        statement.setString(5, bbs.getStore().getManagerId());
 
 
 	        // プリペアードステートメントを実行

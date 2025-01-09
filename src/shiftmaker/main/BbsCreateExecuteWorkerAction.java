@@ -38,7 +38,7 @@ public class BbsCreateExecuteWorkerAction extends Action {
         // リクエストパラメータの取得
         String WORKER_ID = req.getParameter("WORKER_ID");
         String BBS_TEXT = req.getParameter("BBS_TEXT");
-        String BBS_ID = req.getParameter("BBS_ID");
+        //String BBS_ID = req.getParameter("BBS_ID");
         String STORE_ID = req.getParameter("STORE_ID");
         String BBS_DATE = req.getParameter("BBS_DATE");
         String MANAGER_ID = req.getParameter("MANAGER_ID");
@@ -47,7 +47,7 @@ public class BbsCreateExecuteWorkerAction extends Action {
         System.out.println("⑥★★★★★★worker★★★★★★");
         System.out.println("WORKER_ID :" + WORKER_ID);
         System.out.println("BBS_TEXT :" + BBS_TEXT);
-        System.out.println("BBS_ID :" + BBS_ID);
+        //System.out.println("BBS_ID :" + BBS_ID);
         System.out.println("STORE_ID :" + STORE_ID);
         System.out.println("BBS_DATE :" + BBS_DATE);
         System.out.println("MANAGER_ID :" + MANAGER_ID);
@@ -80,11 +80,20 @@ public class BbsCreateExecuteWorkerAction extends Action {
         System.out.println(date);
 
 
+        //連番のやつほしい
+        System.out.println("⑤★★★★★★manager★★連番★★★★");
+        BBSDao dao = new BBSDao();
+        BBS bbsid = dao.get(store.getStoreId());
+
+        int BbsId = bbsid != null ? bbsid.getBbsId() : 0;
+        System.out.println("取得したBbsIdは: " + BbsId);
+
+
         // 新しいBBSインスタンスを作成
         BBS bbs = new BBS();
         bbs.setWorker(worker);
         bbs.setBbsText(BBS_TEXT);
-        bbs.setBbsId(BBS_ID);
+        //bbs.setBbsId(BBS_ID);
         bbs.setStore(storeFromDb);
         bbs.setBbsDate(BBS_DATE1);
 

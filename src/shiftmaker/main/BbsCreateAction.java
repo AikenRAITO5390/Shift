@@ -7,18 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.BBS;
 import bean.Store;
 import bean.Worker;
+import dao.BBSDao;
 import tool.Action;
 
 public class BbsCreateAction extends Action {
-	//manager用のやつ！！
-    // 連番のBBS_IDを生成するメソッド
-    private static int currentBbsId = 1;
 
-    public int generateNewBbsId() {
-        return currentBbsId++;
-    }
 
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
         System.out.println("動いてますよー！");
@@ -32,8 +28,6 @@ public class BbsCreateAction extends Action {
         Worker worker = (Worker) session.getAttribute("worker");
         System.out.println("Worker: " + worker);
 
-
-
         // ログインユーザーの情報を取得
         String ManagerName = store != null ? store.getManagerName() : null;
         String StoreId = store != null ? store.getStoreId() : null;
@@ -42,28 +36,38 @@ public class BbsCreateAction extends Action {
         String ManagerId = store != null ? store.getManagerId() : null;
 
         // デバッグメッセージを追加
-        System.out.println("③★★★★★★manager★★★★★★" );
+        System.out.println("③★★★★★★manager★★★★★★");
         System.out.println("ManagerName :" + ManagerName);
         System.out.println("WorkerName :" + WorkerName);
-
         System.out.println("WorkerId :" + WorkerId);
         System.out.println("投稿者 :" + ManagerName);
         System.out.println("STORE_ID :" + StoreId);
         System.out.println("WorkerName :" + WorkerName);
 
-
         // 今日の日付
-        System.out.println("④★★★★★★manager★★★★★★" );
+        System.out.println("④★★★★★★manager★★★★★★");
         Date today = new Date();
         System.out.println("Today (Date): " + today);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         String formattedDate = sdf.format(today);
 
 
-        // 連番のBBS_IDを生成
-        int BbsId = generateNewBbsId();
+        //連番やるやつ
+        System.out.println("⑤★★★★★★manager★★連番★★★★");
+        BBSDao dao = new BBSDao();
+        BBS bbsid = dao.get(store.getStoreId());
 
-        System.out.println("BbsId: " + BbsId);
+        //
+        int BbsId = bbsid != null ? bbsid.getBbsId() : 0;
+
+
+        System.out.println("取得したBbsIdは: " + BbsId);
+
+        // 取得したBBS_IDをリクエストに設定する
+        req.setAttribute("BbsId", BbsId);
+
+
+
 
         String UserName = ManagerName;
 

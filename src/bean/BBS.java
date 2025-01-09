@@ -9,7 +9,7 @@ public class BBS implements Serializable {
 	private String bbsText;
 
 //	投稿ID
-	private String bbsId;
+	private int bbsId;
 
 //	店舗
 	private Store store;
@@ -50,11 +50,11 @@ public class BBS implements Serializable {
 		this.bbsDate = bbsDate;
 	}
 
-	public String getBbsId() {
+	public int getBbsId() {
 		return bbsId;
 	}
 
-	public void setBbsId(String bbsId) {
+	public void setBbsId(int bbsId) {
 		this.bbsId = bbsId;
 	}
 

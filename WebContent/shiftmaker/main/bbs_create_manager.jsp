@@ -13,9 +13,6 @@
         <input type="text" name="WORKER_NAME" value="${UserName}"  readonly required><br><br>
         <input type="hidden" name="MANAGER_ID" value="${ManagerId}"  readonly required><br><br>
 
-        <label for="bbs_id">BBS ID:</label>
-        <input type="text" name="BBS_ID" value="${BbsId}"  readonly required><br><br>
-
         <label for="store_id">店舗ID:</label>
         <input type="text" name="STORE_ID" value="${StoreId}" readonly required><br><br>
 
