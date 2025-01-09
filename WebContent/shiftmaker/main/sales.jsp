@@ -7,7 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>売上</title>
 </head>
-
+<body>
+<link rel="stylesheet" href="../../css/sales.css">
 <c:import url="../../common/header.jsp"/>
 
 <div class="tmain">
@@ -36,4 +37,5 @@
 
 <c:import url="../../common/footer.jsp"/>
 
+</body>
 </html>
