@@ -4,12 +4,18 @@
 <!-- 下記の一文の宣言がないとJSTLを使用できない -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- bootstrapと繋げる -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<!-- css -->
+<link rel="stylesheet" href="../../css/style_k.css">
+
 <html>
 <c:import url="../../common/header.jsp"/>
 <body>
 
 
-    <h2>シフト条件変更</h2>
+    <h2 class="mt-5">シフト条件変更</h2>
 
     <c:if test="${not empty workers}">
         <table  class="table table-hover">
@@ -34,7 +40,7 @@
     </c:if>
 
 
-    <a href="Main.action">メインへ戻る</a>
+    <a class="link3" href="Main.action">メインへ戻る</a>
 
 </body>
 
