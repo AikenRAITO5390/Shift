@@ -15,13 +15,14 @@
 <body>
 
 <c:import url="../../common/header.jsp"/>
+<h2>売上入力</h2>
 
 <div class="tmain">
 
-	<h2>売上入力</h2>
 
 
-	<form action="SalesInputResult.action">
+
+	<form action="SalesInputResult.action" class="sales_input">
 
 
 		<label>日付を選択してください</label>

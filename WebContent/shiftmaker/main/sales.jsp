@@ -4,35 +4,42 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" href="../../css/sales.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>売上</title>
 </head>
 <body>
-<link rel="stylesheet" href="../../css/sales.css">
+
 <c:import url="../../common/header.jsp"/>
 
 <div class="tmain">
 
 	<h2>売上</h2>
 
+	<h3>売上の操作したい項目を選択してください</h3>
 
 
-	<form action="SalesInput.action" method="post">
 
-	<button>売上入力</button>
+	<form action="SalesInput.action" method="post" class="form1">
+
+	<button class="button1">売上入力</button>
 
 	</form>
 
 
 
-	<form action="SalesDetail.action" method="post">
+	<form action="SalesDetail.action" method="post" class="form1">
 
-	<button>売上予測</button>
+	<button class="button1">売上予測</button>
 
-	<!-- 戻るリンク -->
+	</form>
+
+
+</div>
+
+<!-- 戻るリンク -->
+<div class="tmain">
 	    <a href="Main.action">TOPへ</a>
-	</form>
-
 </div>
 
 <c:import url="../../common/footer.jsp"/>

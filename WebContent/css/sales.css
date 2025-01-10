@@ -1,274 +1,47 @@
-/* styles.css */
-/* メイン画面 */
+/* sales.css (売上用のcss)*/
+
 body {
     margin-top: 50px; /* ヘッダーの高さ分だけ下に配置 */
     background-color: #ffffff; /* メインページの背景色 */
     color: #000000; /* メインページのテキスト色 */
 }
+
 .error{
     color: red; /* プレースホルダーの色を赤に設定 */
 }
 
-.main-content {
-    display: flex;
-    justify-content: space-between; /* 子要素を左右に均等に配置 */
-    align-items: stretch; /* 子要素の高さを揃える */
-    margin-top: 50px; /* ヘッダーの高さ分だけ下に配置 */
+.tmain{
+	text-align: center;/* 中央に揃える */
 }
 
-.left-content, .center-content, .right-content {
-    flex: 1; /* 各カラムが均等に幅を取る */
-    padding: 0 5px; /* 各カラムに左右のパディングを追加 */
+/*------------------------ 売上操作選択画面 -------------------------*/
 
+
+
+/*-------------------------- 売上入力画面 ---------------------------*/
+
+/* 左に整列させる */
+form.sales_input {
+	display: inline-block;
+	text-align: left;
+	background-color:  #ccc;
 }
 
-.main-content h2{
-    margin: 0; /* デフォルトのマージンをリセット */
-    color: white;
-    padding: 10px 0; /* 上下のパディングを設定 */
-    margin-top: 10px;
-    border: 2px solid black; /* 青い枠線を設定 */
-    background-color: #75A9FF;
-    padding: 10px; /* 枠線と内容の間にスペースを追加 */
-    border-radius: 5px;
-    text-align: center; /* テキストを中央揃えにする */
-
-    width: 240px; /* 幅を固定 */
-    height: 50px; /* 高さを固定 */
-    box-sizing: border-box;
+/* 売上入力,予測ボタン */
+form.form1 {
+	display: inline-block;
+	padding:  20px;
+	background-color:  #ccc;
 }
 
-.h2top-content > h2 {
-    margin-top: 30px !important; /* !importantを使用して強制的に適用 */
-    color: white;
-    border: 2px solid black; /* 青い枠線を設定 */
-    background-color: #75A9FF;
-    padding: 10px; /* 枠線と内容の間にスペースを追加 */
-    border-radius: 5px;
-    text-align: center; /* テキストを中央揃えにする */
-
-    width: 240px; /* 幅を固定 */
-    height: 50px; /* 高さを固定 */
-    box-sizing: border-box;
-}
-
-.left-content ul, .center-content ul, .right-content ul {
-    margin: 0; /* デフォルトのマージンをリセット */
-	margin-top: 5px;
-    list-style: none; /* リストスタイルをリセット */
+button.button1 {
+	width: 10em;
+  height:5em;
 }
 
 
-ul li a {
-    color: black ;
-}
-.main-content ul li {
-    color: red ;
-    border: 2px solid black; /* 青い枠線を設定 */
-    padding: 1px; /* 枠線と内容の間にスペースを追加 */
-    border-radius: 5px;
-    text-align: center; /* テキストを中央揃えにする */
-
-    width: 150px; /* 幅を固定 */
-    height: 25px; /* 高さを固定 */
-    box-sizing: border-box;
-    margin-left: 5px;
-}
-
-form {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 700px;
-    width: 100%;
-}
-
-h2 {
-    font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
-}
-
-a {
-    color: #2C7CFF; /* テキストの色を設定 */
-    text-decoration: none; /* 下線を消す */
-}
-
-a:hover {
-    color: #0000CD; /* ホバー時のテキストの色を設定 */
-    text-decoration: underline; /* ホバー時に下線を追加（必要に応じて） */
-}
-
-input[type="submit"] {
-    background-color: #2C7CFF;
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding: 10px 20px; /* ボタンの内側の余白を調整 */
-    font-size: 16px; /* フォントサイズを調整 */
-    border-radius: 4px; /* 角を丸くする */
-    width: auto; /* 幅を自動調整 */
-    max-width: 200px; /* 最大幅を設定 */
-}
-
-input[type="submit"]:hover {
-    background-color: #005FFF;
-}
-
-
-.right-content {
-    float: right; /* 右側に配置 */
-    width: 200px; /* 必要に応じて幅を設定 */
-}
-
-
-.left-content {
-    float: left; /* 右側に配置 */
-    padding-left: 40px;
-    width: 200px; /* 必要に応じて幅を設定 */
-}
-
-
-.right-content ul li {
-    margin-bottom: 100px; /* 4行分のスペースを追加 */
-    border: 2px solid black; /* 青い枠線を設定 */
-    padding: 1px; /* 枠線と内容の間にスペースを追加 */
-    border-radius: 5px;
-    text-align: center; /* テキストを中央揃えにする */
-
-    width: 150px; /* 幅を固定 */
-    height: 25px; /* 高さを固定 */
-    box-sizing: border-box;
-    margin-top: 10px;
-}
-
-/* 従業員メイン画面 */
-.main_worker-content {
-    display: flex; /* フレックスボックスを使用 */
-    flex-direction: column; /* 縦方向に配置 */
-    justify-content: center; /* 子要素を上下中央に配置 */
-    align-items: center; /* 子要素を左右中央に配置 */
-    margin-top: 50px; /* ヘッダーの高さ分だけ下に配置 */
-}
-
-.main_worker-content h2 a {
-    margin: 0; /* デフォルトのマージンをリセット */
-    color: white;
-    padding: 10px 0; /* 上下のパディングを設定 */
-    margin-top: 10px;
-    border: 2px solid black; /* 枠線を設定 */
-    background-color: #75A9FF;
-    border-radius: 5px;
-    text-align: center; /* テキストを中央揃えにする */
-    width: 240px; /* 幅を固定 */
-    height: 50px; /* 高さを固定 */
-    box-sizing: border-box;
-    display: inline-block; /* ブロックレベルの動作を確保 */
-}
-
-/* PointSetting.jspの設定*/
-
-.Point_Setting {
-    display: flex;
-    justify-content: left; /* 子要素を左右に均等に配置 */
-    align-items: stretch; /* 子要素の高さを揃える */
-    margin-top: 20px; /* ヘッダーの高さ分だけ下に配置 */
-}
-
-.power_Setting h1{
-	text-align: center;
-	margin-top: 70px;
-}
-.power_Setting p{
-	text-align: center;
-	margin-top: 30px;
-
-}
-
-.week_Setting, .point_conetnt {
-    padding: 0 5px; /* 各カラムに左右のパディングを追加 */
-}
-
-.week_Setting {
-    width: 300px; /* 必要に応じて幅を設定 */
-}
-
-.power_Setting button{
-		text-align: center;
-}
-
-.shift_manager {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-.shift_manager h2 {
-    margin-top: 30px;
-}
-
-.shift_manager {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100% !important;
-}
-
-.shift_manager .form-group {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: 700px; /* 必要に応じて調整 */
-    margin-bottom: 20px;
-}
-
-.shift_manager label {
-	 margin: 0; /* デフォルトのマージンをリセット */
-    color: white;
-    padding: 10px 0; /* 上下のパディングを設定 */
-    margin-top: 10px;
-    border: 0.5px solid black; /* 青い枠線を設定 */
-    background-color: #75A9FF;
-    padding: 5px; /* 枠線と内容の間にスペースを追加 */
-    border-radius: 5px;
-    text-align: center; /* テキストを中央揃えにする */
-
-    width: 120px; /* 幅を固定 */
-    height: 35px; /* 高さを固定 */
-    box-sizing: border-box;
-    margin-right: 15px;
-    text-align: right;
-    margin-top: -5px;
-    text-align: center;
-
-
-}
-
-
-.shift_manager input[type="text"]{
-    width: 500px; /* 必要に応じて調整 */
-    max-width: 700px; /*  最大幅を700pxに設定 */
-    padding: 10px; /* 内側の余白を追加してボックスを大きく見せる */
-    margin-right: 40px;
-    box-sizing: border-box;
-}
-
-.managert_submit {
-    display: flex;
-    justify-content: space-between; /* 子要素を左右に配置 */
-    width: 100%;
-}
-
-.managert_submit input[type="submit"] {
-    margin-top: -10px;
-    margin-right: -40px;
-}
-
-.managert_submit a {
-    margin-top: 10px;
-}
-
-
-
+/*--------------------------- 売上予測画面 --------------------------*/
+/* 売上予測の画像を中央に */
 IMG.imgGraph {
     display: block;
     margin-left: auto;
