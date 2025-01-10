@@ -133,6 +133,7 @@ public class ShiftCreateAction extends Action{
 							priorityQueuesub.add(new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue()+1));
 							createShiftQueue.removeIf(e -> e.getKey().equals(entry.getKey()));
 							createShiftQueue.add(new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue()+1));
+							shDao.ShiftUpdate(wDao.GetworkerId(workerInfo.get("name").toString()), workerInfo, shift_date);
 							System.out.println("シフト名前:"+workerInfo.get("name")+"queue名前"+entry.getKey()+"優先度"+entry.getValue());
 							break;
 						}

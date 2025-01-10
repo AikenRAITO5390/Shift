@@ -248,11 +248,15 @@ public class ShiftCreate {
         			String availableTo	= null;
         			int maxHours = 0;
         			Store work_time = new Store();
+        			//A,B,C,DのいずれかのIDを取得している
         			work_time = stDao.Time_get(shift_manager.getStoreId(), shift_lists.getShiftHopeTimeId());
+        			//A,B,C,Dの開始時間と終了時間を取得
         			availableFrom = work_time.getWorkTimeStart().toString();
         			availableTo   = work_time.getWorkTimeEnd().toString();
+        			//勤務可能最大時間を計算
         			maxHours =minutesToHour(timeToMinutes(availableTo)-timeToMinutes(availableFrom));
         			int power = Integer.parseInt(shift_lists.getWorker().getWorkerScore());
+        			//社員の場合
         			if(shift_lists.getWorker().isWorkerJudge()){
         				maxHours = minutesToHour(timeToMinutes(work_time_start)-timeToMinutes(work_time_end));
         				workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(), shift_lists.getWorker().getWorkerPosition(), work_time_start, work_time_end, maxHours,true,power));

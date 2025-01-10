@@ -380,6 +380,50 @@ public class WorkerDao extends Dao{
     }
 }
 
+	public String GetworkerId(String workerName)throws Exception{
+		Connection connection = getConnection();
+        PreparedStatement statement = null;
+        ResultSet rs= null;
+        String worker = null;
+		try {
+			String sql = "SELECT worker_id FROM worker WHERE worker_name LIKE ?";
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, "%"+workerName+"%");
+			rs = statement.executeQuery();
+			if (rs.next()) {
+	            // 結果がある場合は値を取得
+	            worker = rs.getString("worker_id");
+	            System.out.println("Worker ID: " + worker);
+	        } else {
+	            // 結果がない場合の処理
+	            System.out.println("有効なデータがありません。");
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+	        throw e;
+	    } finally {
+	        // リソースを閉じる
+	        if (statement != null) {
+	            try {
+	                statement.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+
+
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	    }
+
+	    return worker;
+	}
+
 
 
 	public boolean delete(Worker worker) throws Exception {

@@ -7,7 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -574,6 +577,55 @@ public class ShiftDao extends Dao{
             stmt.executeUpdate();
         }
     }
+
+	public void ShiftUpdate(String workerId, Map<String, Object> workerInfo,Date shift_date) throws Exception{
+		String sql;
+		String work_id = null;
+		String result =  (workerInfo.get("mergedShifts").toString()).replaceAll("[\\[\\]]", "");
+		sql = "UPDATE shift Set work_time_id = ?, shift_time_start = ?, shift_time_end = ? WHERE worker_id = ? AND shift_date = ?";
+
+		List<String>  store_time_id = Arrays.asList("A","B","C","D");
+		for(String time_id:store_time_id){
+			System.out.println("timeid"+time_id+":"+result);
+			if(time_id.equals(result)){
+				work_id = time_id;
+				break;
+			}
+		}
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+
+
+		if(work_id == null){
+			String [] parts = result.toString().split("-");
+			String start =shift_date.toString()+"T"+parts[0]+":00";
+			String end = shift_date.toString()+"T"+parts[1]+":00";
+			LocalDateTime StartTime = LocalDateTime.parse(start, formatter);
+			LocalDateTime EndTime = LocalDateTime.parse(end, formatter);
+			Timestamp timestamp_start = Timestamp.valueOf(StartTime);
+			Timestamp timestamp_end = Timestamp.valueOf(EndTime);
+			System.out.println(timestamp_start);
+			try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
+	            stmt.setString(1, null);
+	            stmt.setTimestamp(2, timestamp_start);
+	            stmt.setTimestamp(3, timestamp_end);
+	            stmt.setString(4, workerId);
+	            stmt.setDate(5, shift_date);
+	            stmt.executeUpdate();
+			}
+
+		}else{
+			try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
+
+	            stmt.setString(1, result);
+	            stmt.setTimestamp(2, null);
+	            stmt.setTimestamp(3, null);
+	            stmt.setString(4, workerId);
+	            stmt.setDate(5, shift_date);
+	            stmt.executeUpdate();
+			}
+		}
+
+	}
 
 	// shift_scoreのget
 	public String shiftScoreGet(Date shift_date, String store_id) throws Exception{
