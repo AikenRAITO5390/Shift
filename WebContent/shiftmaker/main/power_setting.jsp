@@ -16,13 +16,14 @@
 <p>"${toDay}分"</p>
 <div class = "Point_Setting">
 <div class = "week_Setting">
-<form action="PowerSettingResult.action" method="post" onsubmit="return validateForm()">
+<form id="myForm" action="PowerSettingResult.action" method="post">
     <table class="table table-hover">
         <c:forEach var="i" begin="0" end="6">
             <tr>
                 <td><label>${fn:substring('月火水木金土日', i, i+1)}</label></td>
                 <td>
-                  <input type="number" min="1" max="${pointMax}" name="WeekScore_${i}" maxlength="7" id="WeekScore_${i}" style="ime-mode: disabled" required>
+                  <input type="number" name="WeekScore_${i}" id="WeekScore_${i}" />
+                   <span class="error" id="WeekScore_${i}Error"></span>
 
                 </td>
                 <input type="hidden" name="WorkWeekScore_${i}" value="${fn:substring('1234567', i, i+1)}">
@@ -37,56 +38,47 @@
         </c:forEach>
 
         // power_listの値を設定
+        // power_list[曜日を数字にしたもの][曜日の点数]
         <c:forEach var="i" begin="0" end="6">
             <c:forEach var="power" items="${power_list}">
+            // もし曜日を数字にしたものと数字が同じなら
                 <c:if test="${power[0] == (i+1).toString()}">
+           // WeekScoreに元々張っている数字を入れる
                     document.getElementById("WeekScore_${i}").value = "${power[1]}";
                 </c:if>
             </c:forEach>
         </c:forEach>
 
-        function validateForm() {
-            var isValid = true;
-            for (var i = 0; i <= 6; i++) {
-                var input = document.getElementById("WeekScore_" + i);
-                var value = input.value;
-                if (value === "") {
-                    input.setCustomValidity("入力されてない日があります");
-                    isValid = false;
-                } else if (value < 1) {
-                    input.setCustomValidity("下限を超えている日があります");
-                    isValid = false;
-                } else if (value > 30) {
-                    input.setCustomValidity("上限を超えている日があります");
-                    isValid = false;
-                } else {
-                    var input = document.getElementById("WeekScore_" + i);
-                    input.reportValidity(); // ここでエラーメッセージを表示
-                }
-            }
-            return isValid;
-        }
     </script>
     <button type="submit">変更</button>
 </form>
 </div>
-<dic class = point_conetnt>
-<form action="DayPowerSettingResult.action" method="post" onsubmit="return validateInput()">
+
+
+<div class = point_conetnt>
+<form id = 'dayForm' action="DayPowerSettingResult.action" method="post">
 	    <table class="table table-hover">
 	        <c:forEach var="dateMap" items="${dateList}" varStatus="loopStatus">
 	            <c:forEach var="entry" items="${dateMap.entrySet()}">
 	                <tr>
 	                    <td><label>${loopStatus.index + 1}</label></td>
 	                    <td>
-	                        <input type="number" min="1" max="${pointMax}" name="DayScore_${loopStatus.index + 1}" maxlength="7" id="DayScore_${loopStatus.index + 1}" required>
+	                        <input type="number" name="DayScore_${loopStatus.index + 1}" id="DayScore_${loopStatus.index + 1}" >
+	                         <span class="error" id="DayScore_${loopStatus.index + 1}Error"></span>
 	                    </td>
 	                    	<input type="hidden" name="WorkDayScore_${loopStatus.index + 1}" value="${entry.key}">
 	                </tr>
 	            </c:forEach>
 	        </c:forEach>
 	    </table>
+	    <button type="submit">変更</button>
+	</form>
+	</div>
+</div>
+
 	<script>
 
+	 //　dateList[日付][その時の点数]
 	<c:forEach var="dateMap" items="${dateList}" varStatus="loopStatus">
 		<c:forEach var="entry" items="${dateMap.entrySet()}">
 			<c:forEach var="power" items="${power_list}">
@@ -109,32 +101,58 @@
 		</c:forEach>
 	</c:forEach>
 
-	 function validateInput() {
-		<c:forEach var="dateMap" items="${dateList}" varStatus="loopStatus">
-			<c:forEach var="entry" items="${dateMap.entrySet()}">
-         var input = document.getElementById("DayScore_${loopStatus.index + 1}");
-         var value = input.value;
-         if (value === "") {
-             input.setCustomValidity("入力されてない日があります");
-         } else if (value < 1) {
-             input.setCustomValidity("下限を超えている日があります");
-         } else if (value > 10) {
-             input.setCustomValidity("上限を超えている日があります");
-         } else {
-             input.setCustomValidity("");
-         }
-         return input.reportValidity();
- 			</c:forEach>
- 		</c:forEach>
-     }
-	 console.log('あいうえお');
 
+	document.addEventListener('DOMContentLoaded', function() {
+	    console.log("ページが読み込まれました");
+	    document.getElementById('myForm').addEventListener('submit', function(event) {
+	        var isValid = true;
+
+	        for( var i=0; i<7; i++){
+
+		        // メールアドレスの検証
+		        var weekScore = document.getElementById('WeekScore_'+i);
+		        var weekScoreError = document.getElementById('WeekScore_'+i+'Error');
+		        if (weekScore.value.trim() === "") {
+		        	weekScore.value = ""; // 入力値をクリア
+		        	weekScore.placeholder = "数字を入力してください";
+		        	weekScore.classList.add('error-placeholder');
+		        	weekScore.style.color = "red";
+		            isValid = false;
+		        } else {
+		        	weekScore.placeholder = "";
+		        	weekScore.classList.remove('error-placeholder');
+		        }
+		        } if (!isValid) {
+		            event.preventDefault();
+		        }
+		    });
+
+	    document.getElementById('dayForm').addEventListener('submit', function(event) {
+	        var isValiDay = true;
+	        for (var L = 1; L < 32; L++) {
+	            var dayScore = document.getElementById('DayScore_' + L);
+	            var dayScoreError = document.getElementById('DayScore_' + L + 'Error');
+	            if (dayScore.value.trim() === "") {
+	            	dayScore.value = ""; // 入力値をクリア
+	            	dayScore.placeholder = "消える4⃣";
+	            	dayScore.classList.add('error-placeholder');
+	            	dayScore.style.color = "red";
+		            isValiDay = false;
+		        } else {
+		        	dayScore.placeholder = "";
+		        	dayScore.classList.remove('error-placeholder');
+		        }
+	        }
+	        console.log("DayScore isValid: " + isValiDay);
+
+	        if (!isValiDay) {
+	        	console.log("フォーム送信を防止します");
+	            event.preventDefault();
+	        }
+	    });
+	});
 	</script>
 
-	    <button type="submit">変更</button>
-	</form>
-	</div>
-</div>
-</div>
+
 </body>
 </html>
