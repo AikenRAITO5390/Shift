@@ -19,7 +19,9 @@
 	<div class="body">
 
 		<!-- 画面タイトル -->
-		<h2 class="mt-5">従業員情報登録</h2>
+		<div class="h2">
+			<h2>従業員情報登録</h2>
+		</div>
 		<!-- 余白 -->
 		<div class="mt-3"></div>
 
@@ -35,6 +37,7 @@
 					<td>
 						<input type="text" name="worker_id" placeholder="従業員IDを入力してください" size="30" maxlength="10" value="${worker_id}" required />
 						<div>${errors.get("worker_id")}</div>
+						<!-- 余白 -->
 						<div class="mt-3"></div>
 					</td>
 				</tr>

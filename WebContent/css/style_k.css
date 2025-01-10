@@ -1,8 +1,9 @@
 /* css（森谷） */
 /* ------------------------------------------------------------ */
 /* 従業員情報登録 */
-h2 {
-	text-align: center;   /* 中央寄せ */
+.h2 h2{
+	margin-top : 60px;
+	text-align : center;
 }
 
 label {
@@ -47,7 +48,28 @@ label {
 .link3 {
 	position: relative;   /* relativeを指定 */
 	top: 10px;   /* 上から10px移動 */
-	left: 1000px;   /* 左から1000px移動 */
+	left: 1250px;   /* 左から1250px移動 */
+}
+
+.table-container {
+    display: flex;
+    justify-content: center; /* 水平方向の中央揃え */
+    align-items: center;    /* 垂直方向の中央揃え */
+
+}
+
+.table {
+    width: 80%;    /* テーブル幅の調整 */
+    max-width: 1200px;    /* 最大幅を設定 */
+}
+
+/* テーブルのセルに縦線を追加 */
+.table th, .table td {
+    border-right: 1px solid #dee2e6;    /* テーブルボーダーカラー */
+}
+
+.table th:last-child, .table td:last-child {
+    border-right: none;    /* 最後のセルには右側の線を除外 */
 }
 
 /* ------------------------------------------------------------ */
@@ -60,7 +82,44 @@ label {
 
 /* ------------------------------------------------------------ */
 /* 従業員シフト条件変更 */
+.label1 {
+    display: inline-block;    /* ブロック要素に変換 */
+    padding: 5px 10px;    /* 内側の余白を設定 */
+    border: 2px solid #add8e6;    /* 薄い青色の枠線 */
+    border-radius: 5px;    /* 枠線の角を丸くする */
+    background-color: #f0f8ff;    /* 背景色を薄い青色に */
+    text-align: center;    /* 文字を中央揃えに */
+    line-height: 1.5;    /* 行の高さを調整して中央に配置 */
+    font-weight: bold;    /* ラベルの文字を強調 */
+    margin-bottom: 10px;    /* 下部に余白を追加 */
+}
 
+.edit_table {
+	border-spacing: 10px;    /* thとtdの間に10pxのスペースを設定 */
+    border-collapse: separate;    /* セルを分離モードに */
+}
+
+.edit_td {
+	 font-size: 20px;    /* フォントサイズを18pxに設定 */
+}
+
+/* 星型アイコンのデザイン */
+.star-rating {
+    display: flex; /* 星を横に並べる */
+    direction: row; /* 左から右に表示 */
+    justify-content: flex-start; /* 左揃え */
+}
+
+.star {
+    font-size: 30px; /* 星のサイズ */
+    color: #ccc; /* 未選択時の色 */
+    cursor: pointer; /* カーソルをポインタに */
+}
+
+/* 左から順に選択された星に色を付ける */
+.star.selected {
+    color: #99CCFF; /* 選択された星の色 */
+}
 
 /* ------------------------------------------------------------ */
 /* 従業員シフト条件変更完了 */

@@ -16,7 +16,9 @@
 
 	<div class="body">
 
-			<h2 class="mt-5">従業員情報登録</h2>
+			<div class="h2">
+				<h2>従業員情報登録</h2>
+			</div>
 			<!-- 余白 -->
 			<div class="mt-5"></div>
 

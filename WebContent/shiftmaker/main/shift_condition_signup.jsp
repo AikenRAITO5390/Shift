@@ -15,12 +15,12 @@
 
 
     <!-- 画面タイトル -->
-    <h2 class="mt-5">シフト条件登録</h2>
+    <h2>シフト条件登録</h2>
 
 	<!-- アルバイトのみ設定画面表示 -->
 	<c:if test="${not empty workers}">
 	    <form action="ShiftConditionSignupResult.action" method="post">
-	        <table border="1">
+	        <table>
 	            <tr>
 	                <th>ID</th>
 	                <th>名前</th>
