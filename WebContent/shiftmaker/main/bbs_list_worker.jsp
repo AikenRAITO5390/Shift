@@ -9,7 +9,7 @@
     <title>掲示板</title>
 </head>
 
-<c:import url="../../common/header.jsp"/>
+
 
 <body>
 
@@ -49,7 +49,7 @@
     <a href="MainWork.action">戻る</a>
 
 
-<c:import url="../../common/footer.jsp"/>
+
 
 </body>
 </html>

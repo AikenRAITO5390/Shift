@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
+<!--
 <style>
 .date1{
     margin-top : -50px;
@@ -29,21 +30,21 @@
     height: 400px;
 }
 </style>
-
+-->
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>まるごとシフトくん</title>
 </head>
 
-<c:import url="../../common/header.jsp"/>
+
 <body>
 
     <form action="BbsCreateExecuteWorker.action" method="post">
 
-    <div class="create1">
 
-    	<div class="name1">
+
+
         <label for="worker_id">投稿者ID:</label>
         <input type="text" name="WORKER_NAME" value="${UserName}"  readonly required><br><br>
         <input type="hidden" name="WORKER_ID" value="${WorkerId}"  readonly required><br><br>
@@ -62,12 +63,12 @@
         <textarea id="bbs_text" name="BBS_TEXT" rows="4" cols="50" required></textarea><br><br>
         </div>
 
-     </div>
+
         <input type="submit" value="投稿">
         <a href="BBSWorker.action">戻る</a>
     </form>
 
-<c:import url="../../common/footer.jsp"/>
+
 
 </body>
 </html>

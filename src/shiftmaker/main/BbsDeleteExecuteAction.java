@@ -26,16 +26,16 @@ public class BbsDeleteExecuteAction extends Action {
         System.out.println("取得したsachikoBBS_ID：" + Sachiko_Bbs);
 
         // デバッグ情報の追加
-        if (BBS_ID == null) {
+        if ( Sachiko_Bbs == null) {
             System.out.println("BBS_IDがnullです。パラメータ名を確認してください。");
             res.sendRedirect("bbs_delete_error.jsp");
         } else {
             try {
-                int bbsIdInt = Integer.parseInt(BBS_ID);
-                System.out.println("変換後のBBS_ID: " + bbsIdInt);
+                //int bbsIdInt = Integer.parseInt(BBS_ID);
+                System.out.println("変換後のBBS_ID: " +  Sachiko_Bbs);
 
                 // 投稿の削除処理を実行
-                bDao.delete(bbsIdInt);
+                bDao.delete(Sachiko_Bbs);
 
                 // 削除完了後に一覧画面へリダイレクト
                 res.sendRedirect("bbs_delete_ok.jsp");
