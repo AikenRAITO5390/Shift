@@ -5,6 +5,47 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<style>
+.h2 {
+	margin-top : 60px;
+	text-align : center;
+}
+.time label{
+	margin-left: 290px;
+    width: 200px; /* 幅を設定 */
+    height: 100px; /* 高さを設定 */
+    top: 50px; /* 上からの位置を設定 */
+    left: 50px; /* 左からの位置を設定 */
+}
+.time select{
+	margin-left : 80px;
+}
+.time p{
+	/*position: absolute; /* 要素の位置を絶対位置に設定 */
+    z-index: 10; /* z-indexを設定して最前面に表示 */
+    width: 100px; /* 幅を設定 */
+    height: 10px; /* 高さを設定 */
+    margin-left : 480px;
+    margin-top : 4px;
+}
+.time_time {
+	margin-top : 60px;
+	text-align : center;
+}
+.time_time select{
+	margin-left : 30px;
+}
+.ok{
+	margin-top : 60px;
+	margin-left : 750px;
+}
+.no{
+	margin-top : -30px;
+	margin-left : 220px;
+}
+
+</style>
+
 <head>
 <%-- cssの取得 --%>
 <link rel="stylesheet" href="../../css/style.css">
@@ -14,8 +55,12 @@
 <c:import url="../../common/header.jsp"/>
 <body>
 
-<h2>シフト時間設定</h2>
+<div class="h2">
+	<h2>シフト時間設定</h2>
+</div>
 <%--次とぶやつ--%>
+
+<div class="time">
 <form action="ShiftTimeSetting.action" method="post">
     <table class="table table-hover">
     <%--四回繰り返す（A～D)　--%>
@@ -23,6 +68,9 @@
             <tr>
             <%--A~Dの表示　--%>
                 <td><label>${fn:substring('ABCD', i, i+1)}</label></td>
+
+
+
                 <td>
                 <%--スタート時間の表示--%>
                 <%--初期値timeSelectStart(下で設定）、nameはAのworkTimeStartでわたす　--%>
@@ -74,9 +122,14 @@
             </tr>
         </c:forEach>
     </table>
+</div>
+
 
     <!-- 営業時間設定 -->
-    <div>営業時間設定</div>
+<div class="time_time">
+    <h2>営業時間設定</h2>
+
+
     <select name="storeTimeStart">
     	<option value="00:00:00">00:00</option>
 		<option value="01:00:00">01:00</option>
@@ -131,7 +184,7 @@
 	    <option value="23:00:00">23:00</option>
 	 	<option value="24:00:00">24:00</option>
      </select>
-
+</div>
      <script>
         <c:forEach var="i" begin="0" end="3">
             <c:choose>
@@ -159,7 +212,15 @@
         </c:forEach>
     </script>
     <br>
-    <button type="submit">変更</button>
+
+    <div class="ok">
+    <button type="submit">決定</button>
+    </div>
+
+    <div class="no">
+    <a href="Main.action">戻る</a>
+    </div>
+
 </form>
 
 </body>
