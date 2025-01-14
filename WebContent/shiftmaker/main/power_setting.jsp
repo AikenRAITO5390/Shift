@@ -7,6 +7,7 @@
 <head>
 <link rel="stylesheet" href="../../css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 </head>
 <c:import url="../../common/header.jsp"/>
 <body>
@@ -53,7 +54,6 @@
     <button type="submit">変更</button>
 </form>
 </div>
-
 
 <div class = point_conetnt>
 <form id = 'dayForm' action="DayPowerSettingResult.action" method="post">
@@ -104,49 +104,50 @@
 
 	document.addEventListener('DOMContentLoaded', function() {
 	    console.log("ページが読み込まれました");
+
 	    document.getElementById('myForm').addEventListener('submit', function(event) {
 	        var isValid = true;
 
-	        for( var i=0; i<7; i++){
 
-		        // メールアドレスの検証
-		        var weekScore = document.getElementById('WeekScore_'+i);
-		        var weekScoreError = document.getElementById('WeekScore_'+i+'Error');
-		        if (weekScore.value.trim() === "") {
-		        	weekScore.value = ""; // 入力値をクリア
-		        	weekScore.placeholder = "数字を入力してください";
-		        	weekScore.classList.add('error-placeholder');
-		        	weekScore.style.color = "red";
-		            isValid = false;
-		        } else {
-		        	weekScore.placeholder = "";
-		        	weekScore.classList.remove('error-placeholder');
-		        }
-		        } if (!isValid) {
-		            event.preventDefault();
-		        }
-		    });
+	        for (var i = 0; i < 7; i++) {
+	            var weekScore = document.getElementById('WeekScore_' + i);
+	            var weekScoreError = document.getElementById('WeekScore_' + i + 'Error');
+	            if (weekScore.value.trim() === "") {
+	                weekScore.value = ""; // 入力値をクリア
+	                weekScore.placeholder = "数字を入力してください";
+	                weekScore.classList.add('error-placeholder');
+	                weekScore.style.color = "red";
+	                isValid = false;
+	            } else {
+	                weekScore.placeholder = "";
+	                weekScore.classList.remove('error-placeholder');
+	            }
+	        }
+	        if (!isValid) {
+	            event.preventDefault();
+	        }
+	    });
 
 	    document.getElementById('dayForm').addEventListener('submit', function(event) {
 	        var isValiDay = true;
-	        for (var L = 1; L < 32; L++) {
-	            var dayScore = document.getElementById('DayScore_' + L);
-	            var dayScoreError = document.getElementById('DayScore_' + L + 'Error');
+	    	<c:forEach var="dateMap" items="${dateList}" varStatus="loopStatus">
+	            var dayScore = document.getElementById('DayScore_${loopStatus.index + 1}');
+	            var dayScoreError = document.getElementById('DayScore_${loopStatus.index + 1}Error');
 	            if (dayScore.value.trim() === "") {
-	            	dayScore.value = ""; // 入力値をクリア
-	            	dayScore.placeholder = "消える4⃣";
-	            	dayScore.classList.add('error-placeholder');
-	            	dayScore.style.color = "red";
-		            isValiDay = false;
-		        } else {
-		        	dayScore.placeholder = "";
-		        	dayScore.classList.remove('error-placeholder');
-		        }
-	        }
+	                dayScore.value = ""; // 入力値をクリア
+	                dayScore.placeholder = "数字を入力してください";
+	                dayScore.classList.add('error-placeholder');
+	                dayScore.style.color = "red";
+	                isValiDay = false;
+	            } else {
+	                dayScore.placeholder = "";
+	                dayScore.classList.remove('error-placeholder');
+	            }
+	            </c:forEach>
 	        console.log("DayScore isValid: " + isValiDay);
 
 	        if (!isValiDay) {
-	        	console.log("フォーム送信を防止します");
+	            console.log("フォーム送信を防止します");
 	            event.preventDefault();
 	        }
 	    });
