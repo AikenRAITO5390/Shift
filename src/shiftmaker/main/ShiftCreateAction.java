@@ -161,11 +161,8 @@ public class ShiftCreateAction extends Action{
 				}
 				//もしシフトに誰も入っていない場合優先度付きキューをリセット
 				if(workerShift.isEmpty()){
-					while (!priorityQueue.isEmpty()) {
-						Map.Entry<String, Integer> entrySub = priorityQueue.poll();
-						priorityQueuesub.add(new AbstractMap.SimpleEntry<>(entrySub.getKey(), 1));
-						createShiftQueue.add(new AbstractMap.SimpleEntry<>(entrySub.getKey(), 1));
-					}
+						priorityQueuesub.add(new AbstractMap.SimpleEntry<>(entry.getKey(), 1));
+						createShiftQueue.add(new AbstractMap.SimpleEntry<>(entry.getKey(), 1));
 				}
 			}
 
