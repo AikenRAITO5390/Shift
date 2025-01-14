@@ -24,28 +24,38 @@
 
 	<form action="SalesInputResult.action" class="sales_input">
 
+		<div class="hiduke">
 
-		<label>日付を選択してください</label>
-		<!-- 入力したい売上の日付選択 -->
-		<%
-    		java.time.LocalDate today = java.time.LocalDate.now();
-    		String formattedDate = today.toString(); // YYYY-MM-DD 形式
-		%>
-		<input type="date" name="sales_date" value="<%= formattedDate %>" />
+			<label class="label1">日付を選択してください</label>
+			<!-- 入力したい売上の日付選択 -->
+			<%
+	    		java.time.LocalDate today = java.time.LocalDate.now();
+	    		String formattedDate = today.toString(); // YYYY-MM-DD 形式
+			%>
+			<input type="date" name="sales_date" class="input_date" value="<%= formattedDate %>" />
+
+		</div>
 
 		<br>
-		<label>売上金額を選択してください</label>
+
+		<div class="money">
+
+		<label class="label1">売上金額を選択してください</label>
 		<!-- 売上金額入力 -->
 		<input type="number" name="sales" placeholder="売上金額を入力" maxlength="8" value="${sales}" min="0" required />
 		<div>${errors.get("sales")}</div>
 
+		</div>
 
+		<div class="touroku">
 		<!-- 登録ボタン -->
 	    <input type="submit" value="登録" />
+
 
 	    <!-- 戻るリンク -->
 	    <a href="Sales.action">戻る</a>
 
+		</div>
 	</form>
 
 </div>

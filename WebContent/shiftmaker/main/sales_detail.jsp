@@ -14,7 +14,6 @@
 
 <div class="tmain">
 
-	<h2>売上予測</h2>
 
 
 	<!-- グラフを画像にして表示 -->
@@ -22,8 +21,8 @@
 
 
 	<!-- 戻るボタン -->
-	<form action="Sales.action" method="post">
-	<button>戻る</button>
+	<form action="Sales.action" method="post" class="form2">
+	<button class="button2">戻る</button>
 	</form>
 
 </div>

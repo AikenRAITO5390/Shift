@@ -11,33 +11,70 @@ body {
 }
 
 .tmain{
-	text-align: center;/* 中央に揃える */
+	width: fit-content;
+    margin: 100px auto;/* 中央に揃える */
+}
+
+.center {
+    width: fit-content;
+    margin: auto;
+
 }
 
 /*------------------------ 売上操作選択画面 -------------------------*/
 
 
-
-/*-------------------------- 売上入力画面 ---------------------------*/
-
-/* 左に整列させる */
-form.sales_input {
-	display: inline-block;
-	text-align: left;
-	background-color:  #ccc;
-}
-
 /* 売上入力,予測ボタン */
 form.form1 {
 	display: inline-block;
-	padding:  20px;
+	padding:  30px;
 	background-color:  #ccc;
 }
 
+/*-------------------------- 売上入力画面 ---------------------------*/
+
+
+form.sales_input {
+
+
+
+}
+
+/* 売上金額 */
+.money {
+	position: relative;
+	top: 20px
+}
+
+/* 登録と戻るボタン */
+.touroku {
+	position: relative;
+	top: 20px
+}
+
+.input_date {
+	position: relative;
+	left: 35px
+}
+
+
+form.form2 {
+	display: inline-block;
+	background-color:  #ccc;
+}
+
+/* 売上入力,予測ボタンの大きさ */
 button.button1 {
 	width: 10em;
   height:5em;
 }
+
+
+button.button2 {
+	display: inline-block;
+	text-align: right;
+}
+
 
 
 /*--------------------------- 売上予測画面 --------------------------*/
@@ -46,5 +83,5 @@ IMG.imgGraph {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 75%;
+    width: 70%;
     }
