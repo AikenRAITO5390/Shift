@@ -13,6 +13,7 @@ public  class LogoutAction extends Action{
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		//ローカル変数の宣言 1
 		HttpSession session=req.getSession();
+		System.out.println("★★★★★★manager★★★★★★");
 		//リクエストパラメータ―の取得 2
 		//なし
 		//DBからデータ取得 3
