@@ -17,6 +17,8 @@
                     <c:if test="${post.userId == loggedInUserId}">
                         <form action="BbsDeleteExecute.action" method="post">
                             <input type="hidden" name="bbsId" value="${post.bbsId}">
+                            <!-- 中江つけたしてみる一行 -->
+                             <input type="hidden" name="id_id" value="${BBS_ID}">
                             <p>この投稿を削除しますか？</p>
                             <input type="submit" name="action" value="削除">
                             <input type="button" value="戻る" onclick="history.back()">

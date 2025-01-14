@@ -32,10 +32,12 @@ public class BbsDeleteAction extends Action {
         System.out.println("取得したWORKER_ID: " + WORKER_ID);
         System.out.println("取得したMANAGER_ID: " + MANAGER_ID);
 
-        req.setAttribute("BBS_ID:", BBS_ID);
+        req.setAttribute("BBS_ID", BBS_ID);
         req.setAttribute("bbs", bbs);
 
         // 削除完了後に一覧画面へリダイレクト
-        res.sendRedirect("bbs_delete.jsp");
+       // res.sendRedirect("bbs_delete.jsp");
+
+        req.getRequestDispatcher("bbs_delete.jsp").forward(req, res);
     }
 }

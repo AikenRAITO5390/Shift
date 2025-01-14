@@ -21,6 +21,10 @@ public class BbsDeleteExecuteAction extends Action {
         String BBS_ID = req.getParameter("bbsId");
         System.out.println("取得したBBS_ID：" + BBS_ID);
 
+        //中江つけたし
+        String Sachiko_Bbs = req.getParameter("id_id");
+        System.out.println("取得したsachikoBBS_ID：" + Sachiko_Bbs);
+
         // デバッグ情報の追加
         if (BBS_ID == null) {
             System.out.println("BBS_IDがnullです。パラメータ名を確認してください。");
@@ -41,5 +45,6 @@ public class BbsDeleteExecuteAction extends Action {
             }
             //BBS_IDの変換に失敗しましたってでる！！なんで！！どこが違うんだ！！！
         }
+
     }
 }

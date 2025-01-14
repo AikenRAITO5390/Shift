@@ -37,7 +37,7 @@
 }
 .create{
   position: fixed; /* 要素を固定 */
-  top: 510px; /* 画面の上部に配置 */
+  top: 400px; /* 画面の上部に配置 */
   left: 805px; /* 画面の左端に配置 */
   width: 11%; /* 画面の幅いっぱいに広げる */
   border: 1px solid ; /* 枠線を設定 */
@@ -50,7 +50,7 @@
 }
 .modoru{
   position: fixed; /* 要素を固定 */
-  top: 510px; /* 画面の上部に配置 */
+  top: 400px; /* 画面の上部に配置 */
   left: 929px; /* 画面の左端に配置 */
   width: 3%; /* 画面の幅いっぱいに広げる */
   border: 1px solid ; /* 枠線を設定 */
