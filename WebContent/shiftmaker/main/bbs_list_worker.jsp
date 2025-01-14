@@ -2,16 +2,26 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
+
+
 <head>
     <meta charset="UTF-8">
     <title>掲示板</title>
 </head>
+
+<c:import url="../../common/header.jsp"/>
+
 <body>
-    <h1>掲示板</h1>
+
+
+    	<h1>掲示板</h1>
+
+
+
     <ul>
         <c:forEach var="message" items="${messages}">
-            <li>
-                <strong>投稿者:</strong>
+
+                <!-- <strong>投稿者:</strong> -->
 
                 <c:choose>
                     <c:when test="${not empty message.worker.workerName}">
@@ -22,14 +32,24 @@
                     </c:when>
                 </c:choose>
 
+
                 <br>
-                <strong>メッセージ:</strong> ${message.bbsText} <br>
-                <strong>投稿日:</strong> ${message.bbsDate}
-            </li>
+                <div class="text">${message.bbsText} <br></div>
+                <div class="date"> ${message.bbsDate}</div>
+
         </c:forEach>
     </ul>
 
+
+
     <a href="BbsCreateWorker.action">投稿を作成する</a>
+
+
+
     <a href="MainWork.action">戻る</a>
+
+
+<c:import url="../../common/footer.jsp"/>
+
 </body>
 </html>

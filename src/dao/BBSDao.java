@@ -404,6 +404,19 @@ public class BBSDao extends Dao {
 
 	    return count > 0;
 	}
+
+
+//削除の時に使う！
+	public void delete(int bbsId) throws Exception {
+        Connection con = getConnection();
+
+        PreparedStatement st = con.prepareStatement("DELETE FROM posts WHERE bbsId = ?");
+        st.setInt(1, bbsId);
+        st.executeUpdate();
+
+        st.close();
+        con.close();
+    }
 }
 
 
