@@ -107,18 +107,31 @@
 
 	    document.getElementById('myForm').addEventListener('submit', function(event) {
 	        var isValid = true;
-
+	        var pointMax = ${pointMax};
 
 	        for (var i = 0; i < 7; i++) {
 	            var weekScore = document.getElementById('WeekScore_' + i);
 	            var weekScoreError = document.getElementById('WeekScore_' + i + 'Error');
+	            var value = weekScore.value.trim();
 	            if (weekScore.value.trim() === "") {
 	                weekScore.value = ""; // 入力値をクリア
 	                weekScore.placeholder = "数字を入力してください";
 	                weekScore.classList.add('error-placeholder');
 	                weekScore.style.color = "red";
 	                isValid = false;
-	            } else {
+	            } else if (isNaN(Number(value))) {
+	                weekScore.value = ""; // 入力値をクリア
+	                weekScore.placeholder = "数字のみ入力してください";
+	                weekScore.classList.add('error-placeholder');
+	                weekScore.style.color = "red";
+	                isValid = false;
+	            } else if (Number(value) < 0 || Number(value) >pointMax) {
+	                weekScore.value = ""; // 入力値をクリア
+	                weekScore.placeholder = "0以上"+ pointMax +"以下の数字を入力してください";
+	                weekScore.classList.add('error-placeholder');
+	                weekScore.style.color = "red";
+	                isValid = false;
+	            }else {
 	                weekScore.placeholder = "";
 	                weekScore.classList.remove('error-placeholder');
 	            }
@@ -130,16 +143,31 @@
 
 	    document.getElementById('dayForm').addEventListener('submit', function(event) {
 	        var isValiDay = true;
+	        var Maxpo = ${pointMax};
 	    	<c:forEach var="dateMap" items="${dateList}" varStatus="loopStatus">
 	            var dayScore = document.getElementById('DayScore_${loopStatus.index + 1}');
 	            var dayScoreError = document.getElementById('DayScore_${loopStatus.index + 1}Error');
+
+	            var value = dayScore.value.trim();
 	            if (dayScore.value.trim() === "") {
 	                dayScore.value = ""; // 入力値をクリア
 	                dayScore.placeholder = "数字を入力してください";
 	                dayScore.classList.add('error-placeholder');
 	                dayScore.style.color = "red";
 	                isValiDay = false;
-	            } else {
+	            } else if (isNaN(Number(value))) {
+	            	dayScore.value = ""; // 入力値をクリア
+	            	dayScore.placeholder = "数字のみ入力してください";
+	            	dayScore.classList.add('error-placeholder');
+	            	dayScore.style.color = "red";
+	            	isValiDay = false;
+	            } else if (Number(value) < 0 || Number(value) > Maxpo) {
+	            	dayScore.value = ""; // 入力値をクリア
+	            	dayScore.placeholder = "0以上"+ Maxpo +"以下の数字を入力してください";
+	            	dayScore.classList.add('error-placeholder');
+	            	dayScore.style.color = "red";
+	            	isValiDay = false;
+	            }else {
 	                dayScore.placeholder = "";
 	                dayScore.classList.remove('error-placeholder');
 	            }
