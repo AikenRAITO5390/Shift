@@ -31,9 +31,16 @@
                         ${message.store.managerName}
                     </c:when>
                 </c:choose>
+                			<c:choose>
+				<c:when test="${message.worker.workerId == WorkerLogin_Name}">
+   					<a href="BbsDeleteWorker.action?Worker_ID=${WorkerLogin_Name}&BBS_ID=${message.bbsId}">削除</a>
+				</c:when>
+			</c:choose>
+
 
 
                 <br>
+
                 <div class="text">${message.bbsText} <br></div>
                 <div class="date"> ${message.bbsDate}</div>
 

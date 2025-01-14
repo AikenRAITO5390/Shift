@@ -82,7 +82,6 @@ public class DayPowerSettingResultAction extends Action{
 		    		shift.setWorkTimeId(null);
 		    		shift.setShiftTimeStart(null);
 		    		shift.setShiftTimeEnd(null);
-		    		shift.setShiftId(store_login.getStoreId()+"_"+(i+1));
 		    		shift.setStore(storelist.get(0));
 
 		    		shiftDao.save_Score(shift);

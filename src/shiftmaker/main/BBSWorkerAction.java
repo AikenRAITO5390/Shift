@@ -19,12 +19,15 @@ public class BBSWorkerAction extends Action {
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
         HttpSession session = req.getSession();
 
+
+
         System.out.println("①▲▲▲▲▲▲workerスタート▲▲▲▲▲▲");
 
 
         WorkerDao wDao = new WorkerDao();
         StoreDao sDao = new StoreDao();
         BBSDao bDao = new BBSDao();
+
 
 
 
@@ -43,7 +46,8 @@ public class BBSWorkerAction extends Action {
         Worker worker_login = wDao.get(worker.getWorkerId());
         Store store = worker_login.getStore(); //storeに何も入っていない
 
-        System.out.println("store: " + store);
+
+
 
 
         // Store IDを使用してStoreオブジェクトを取得
@@ -73,6 +77,7 @@ public class BBSWorkerAction extends Action {
         String managerId = store.getManagerId(); // StoreクラスにgetManagerId()があると仮定
         Store managerStore = sDao.manager_get(managerId);
         String managerName = managerStore != null ? managerStore.getManagerName() : null;
+        String Worker_Id = worker.getWorkerId();
 
         // リクエストにデータをセット
         req.setAttribute("workers", filteredWorkers);
@@ -80,6 +85,8 @@ public class BBSWorkerAction extends Action {
         req.setAttribute("stores", stores);
         req.setAttribute("messages", messages);
         req.setAttribute("managerName", managerName);
+        req.setAttribute("WorkerLogin_Name", Worker_Id);
+
 
         session.setAttribute("store", store);
 
@@ -90,6 +97,7 @@ public class BBSWorkerAction extends Action {
         System.out.println("Filtered Workers not: " + filteredWorkersnot);
         System.out.println("Messages: " + messages);
         System.out.println("Manager Name: " + managerName);
+        System.out.println("WorkerLogin_Name: " + Worker_Id);
 
         // bbs_list.jspにフォワード
         req.getRequestDispatcher("bbs_list_worker.jsp").forward(req, res);
