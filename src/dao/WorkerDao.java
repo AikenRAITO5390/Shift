@@ -264,7 +264,7 @@ public class WorkerDao extends Dao{
 
 
         try {
-            statement = connection.prepareStatement("select * from worker where store_id=?");
+            statement = connection.prepareStatement("select * from worker where store_id=? order by worker_id asc");
             statement.setString(1, store.getStoreId());
 
             rSet = statement.executeQuery();

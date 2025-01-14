@@ -16,7 +16,7 @@
 <h2>📜　シフト</h2>
 <ul>
         <li><a href="ShiftSelect.action">作成</a></li>
-        <li><a href="#">編集</a></li>
+        <li><a href="ShiftEdit.action">編集</a></li>
         <li><a href="#">閲覧</a></li>
         <li><a href="#">削除</a></li>
 </ul>

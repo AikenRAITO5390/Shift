@@ -751,6 +751,30 @@ public class ShiftDao extends Dao{
 	    }
 	}
 
+	// store_idを条件にシフト情報を取得
+    public List<Shift> getShiftsByStoreId(String storeId) throws Exception {
+        List<Shift> shifts = new ArrayList<>();
+
+        String sql = "SELECT work_time_id, shift_time_start, shift_time_end " +
+                     "FROM shift WHERE store_id = ? order by worker_id asc";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, storeId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Shift shift = new Shift();
+                    shift.setWorkTimeId(resultSet.getString("work_time_id"));
+                    shift.setShiftTimeStart(resultSet.getTimestamp("shift_time_start"));
+                    shift.setShiftTimeEnd(resultSet.getTimestamp("shift_time_end"));
+                    shifts.add(shift);
+                }
+            }
+        }
+
+        return shifts;
+    }
+
 
 	//パワー作成save
 	public boolean save_Score(Shift shift)throws Exception{
