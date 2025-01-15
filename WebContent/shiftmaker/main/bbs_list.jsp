@@ -85,6 +85,7 @@
 
 
 			<div class="toukou">
+
                 <!-- <strong>投稿者:</strong> -->
                <div class="name">
                 <c:choose>

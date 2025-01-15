@@ -9,12 +9,12 @@
 	text-align : center;
 }
 .date{
-	margin-top: -62px;
+	margin-top: -45px;
 	margin-left: 460px;
 	margin-right: 20px;
 }
 .delete{
-	margin-top : 30px;
+	margin-top : 25px;
 	margin-left: 480px;
 	margin-bottom : 10px;
 }
@@ -62,6 +62,68 @@
   padding: 5px; /* 内側の余白を設定 */
   z-index: 1000; /* 他の要素の上に表示 */
 }
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    background: #7d7d7d;
+    color: white;
+    z-index: 1000;
+}
+.footer p {
+    font-size: 12px; /* 文字サイズを12pxに設定 */
+    margin: 0; /* デフォルトのマージンをリセット */
+    padding: 0; /* デフォルトのパディングをリセット */
+    line-height: 15px; /* 行の高さを15pxに設定 */
+    text-align: center;
+}
+.sidebar {
+    display: none;
+    width: 200px;
+    height: 100%;
+    background-color: #7d7d7d;
+    position: fixed;
+    left: 0;
+    top: 50px;
+    padding: 10px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+.header_work {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: #7d7d7d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    z-index: 1000;
+    flex-direction: row; /* 横方向に配置 */
+    justify-content: space-between; /* 左右に配置 */
+}
+.header h2{
+	color: white;
+}
+
+.ushiro {
+    display: flex;
+    flex-direction: column; /* 縦方向に配置 */
+    align-items: flex-end; /* 右端に配置 */
+    justify-content: center; /* 垂直方向に中央揃え */
+    height: 100%; /* 親要素の高さを継承 */
+     padding-right: 15px;
+}
+
+.ushiro a,
+.ushiro p {
+    margin: 0; /* デフォルトのマージンをリセット */
+    padding: 2px 0; /* 上下のパディングを設定 */
+
+}
 </style>
 
 
@@ -70,7 +132,17 @@
     <title>掲示板</title>
 </head>
 
-
+<div class="header_work">
+    <button onclick="toggleSidebar()">三</button>
+    <div id="sidebar" class="sidebar">
+        <jsp:include page="../../common/navigation_work.jsp" />
+    </div>
+<h2> まるごとシフトくん</h2>
+    <div class="ushiro">
+        <a href="../Logout.action">ログアウト</a>
+        <p>${WorkerName}さん</p>
+    </div>
+</div>
 
 <body>
 
@@ -82,7 +154,7 @@
     <ul>
         <c:forEach var="message" items="${messages}">
 
-				<div class="toukou">
+			<div class="toukou">
                 <!-- <strong>投稿者:</strong> -->
 
 				<div class="name">
@@ -96,21 +168,17 @@
                 </c:choose>
                 </div>
 
-                <div class="delete">
-                			<c:choose>
 
-				<c:when test="${message.worker.workerId == WorkerLogin_Name}">
-   					<a href="BbsDeleteWorker.action?Worker_ID=${WorkerLogin_Name}&BBS_ID=${message.bbsId}">削除</a>
-				</c:when>
-			</c:choose>
-			</div>
+				<div class="text">${message.bbsText} <br></div>
+                <div class="date"> ${message.bbsDate}<br></div>
+				<div class="delete">
+                	<c:choose>
+						<c:when test="${message.worker.workerId == WorkerLogin_Name}">
+   							<a href="BbsDeleteWorker.action?Worker_ID=${WorkerLogin_Name}&BBS_ID=${message.bbsId}">削除</a>
+						</c:when>
+					</c:choose>
+				</div>
 
-
-
-                <br>
-
-                <div class="text">${message.bbsText} <br></div>
-                <div class="date"> ${message.bbsDate}</div>
 			</div>
         </c:forEach>
     </ul>
@@ -124,7 +192,9 @@
     <a href="MainWork.action">戻る</a>
 </div>
 
-
+<div class="footer">
+	<p>ＴＥＡＭ Ⅽ   Bug Busters</p>
+</div>
 
 </body>
 </html>
