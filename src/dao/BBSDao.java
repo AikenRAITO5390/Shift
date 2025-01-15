@@ -76,6 +76,68 @@ public class BBSDao extends Dao {
 	}
 
 
+	public BBS get_BbsId(String bbsId) throws Exception{
+		BBS bbs = new BBS();
+		//データエースへのコネクションを確立
+		Connection connection = getConnection();
+		//プリペアードステートメント
+		PreparedStatement statement = null;
+
+		try{
+			//プリペアードステートメントにSQL文をセット
+			statement = connection.prepareStatement("select * from BBS where bbs_id=? ");
+			//値はBBS_IDでゲットしてくる
+			statement.setString(1,bbsId);
+			//プリペアードステートメントを実行
+			ResultSet rSet = statement.executeQuery();
+
+			//workerDaoを初期化
+			WorkerDao workerDao = new WorkerDao();
+
+			//storeDaoを初期化
+			StoreDao storeDao = new StoreDao();
+
+			if (rSet.next()) {
+				//リザルトセットが存在する場合
+				//BBSインスタンスに検索結果をセット
+				bbs.setBbsText(rSet.getString("BBS_TEXT"));
+				bbs.setBbsId(rSet.getInt("BBS_ID"));
+				//WORKERはworker_idコードで検索したworkerインスタンスをセット
+				bbs.setWorker(workerDao.get(rSet.getString("WORKER_ID")));
+				//STOREはworker_idコードで検索したworkerインスタンスをセット
+				bbs.setStore(storeDao.get(rSet.getString("STORE_ID")));
+
+			} else {
+				//リザルトセットが存在しない場合
+				//掲示板にnullをセット
+				bbs = null;
+			}
+
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			//
+			if(statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		//listを返す
+		return bbs;
+	}
+
+
 	public BBS get(int bbsId) throws Exception{
 		BBS bbs = new BBS();
 		//データエースへのコネクションを確立

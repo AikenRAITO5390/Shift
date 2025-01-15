@@ -67,7 +67,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>掲示板</title>
+    <title>シフト作成者掲示板</title>
 </head>
 
 <c:import url="../../common/header.jsp"/>

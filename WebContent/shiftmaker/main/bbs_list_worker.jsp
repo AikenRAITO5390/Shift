@@ -129,7 +129,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>掲示板</title>
+    <title>従業員掲示板</title>
 </head>
 
 <div class="header_work">

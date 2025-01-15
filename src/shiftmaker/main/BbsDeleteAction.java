@@ -24,7 +24,7 @@ public class BbsDeleteAction extends Action {
         String WORKER_ID = req.getParameter("WORKER_ID");
         String MANAGER_ID = req.getParameter("MANAGER_ID");
 
-        BBS bbs = bDao.get(BBS_ID);
+        BBS bbs = bDao.get_BbsId(BBS_ID);
         System.out.println("取得したbbs: " + bbs);
 
         // コンソールで確認
@@ -32,9 +32,22 @@ public class BbsDeleteAction extends Action {
         System.out.println("取得したWORKER_ID: " + WORKER_ID);
         System.out.println("取得したMANAGER_ID: " + MANAGER_ID);
 
+        //投稿者とコメントを表示
+        String user = bbs.getManager(); // 投稿者を取得
+
+
+
+
+        String text = bbs.getBbsText(); // コメントを取得
+
         req.setAttribute("BBS_ID", BBS_ID);
         req.setAttribute("bbs", bbs);
+        req.setAttribute("user", user);
+        req.setAttribute("text", text);
 
+
+        System.out.println("取得したuser: " + user);
+        System.out.println("取得したtext: " + text);
         // 削除完了後に一覧画面へリダイレクト
        // res.sendRedirect("bbs_delete.jsp");
 
