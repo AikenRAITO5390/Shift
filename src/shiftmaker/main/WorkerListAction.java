@@ -23,6 +23,10 @@ public class WorkerListAction extends Action {
         Store stores = new Store();
 
         stores = sDao.get(store.getStoreId());
+
+    	//ログイン情報から名前を取得して"managerName"として渡す
+		req.setAttribute("managerName", stores.getManagerName());
+
         List<Worker> workers = wDao.filter(store);
 
         //TRUE

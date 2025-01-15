@@ -2,8 +2,11 @@ package shiftmaker.main;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import bean.Store;
 import bean.Worker;
+import dao.StoreDao;
 import dao.WorkerDao;
 import tool.Action;
 
@@ -15,6 +18,14 @@ public class ShiftConditionSignupResultAction extends Action {
         String workerId = req.getParameter("worker_id");
         String workerPosition = req.getParameter("worker_position");
         String workerScore = req.getParameter("worker_score");
+
+		HttpSession session = req.getSession();//セッション
+		StoreDao sDao = new StoreDao();
+
+		Store store_login = (Store)session.getAttribute("user");
+
+		Store store = sDao.get(store_login.getStoreId());
+		req.setAttribute("managerName", store.getManagerName());
 
         // 2. DBから対象の従業員情報を取得
         WorkerDao workerDao = new WorkerDao();

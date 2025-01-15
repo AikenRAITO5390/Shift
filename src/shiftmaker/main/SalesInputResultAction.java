@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import bean.Sales;
 import bean.Store;
 import dao.SalesDao;
+import dao.StoreDao;
 import tool.Action;
 
 public class SalesInputResultAction extends Action {
@@ -24,6 +25,15 @@ public class SalesInputResultAction extends Action {
 		Store manager = (Store) session.getAttribute("user");// ログインユーザーを取得
 		int money = 0;//売上
 		String sales_date = "";//年月日
+
+		//ログイン情報から名前を取得ヘッダーに表示
+		StoreDao sDao = new StoreDao();
+
+		Store store_login = (Store)session.getAttribute("user");
+
+		Store store = sDao.get(store_login.getStoreId());
+		req.setAttribute("managerName", store.getManagerName());
+		//ここまでヘッダーの為の追記
 
 		System.out.println("１１１１１１１１１１１１１１１１１１１１１１１１１１");
 

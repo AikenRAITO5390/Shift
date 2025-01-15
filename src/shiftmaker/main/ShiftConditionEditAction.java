@@ -22,6 +22,11 @@ public class ShiftConditionEditAction extends Action{
         HttpSession session = req.getSession();
         Store store = (Store) session.getAttribute("user");
 
+      //ログイン情報から名前を取得して"managerName"として渡す
+      		StoreDao sDao = new StoreDao();
+      		Store store_name = sDao.get(store.getStoreId());
+      		req.setAttribute("managerName", store_name.getManagerName());
+
         // WorkerDaoとStoreDaoの初期化
         WorkerDao workerDao = new WorkerDao();
         StoreDao storeDao = new StoreDao();

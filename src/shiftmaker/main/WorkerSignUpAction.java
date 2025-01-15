@@ -28,6 +28,13 @@ public class WorkerSignUpAction extends Action{
 		// ログインユーザーを取得
 		Store manager = (Store)session.getAttribute("user");
 
+    	//ログイン情報から名前を取得して"managerName"として渡す
+		StoreDao sDao = new StoreDao();
+
+		Store store = sDao.get(manager.getStoreId());
+		req.setAttribute("managerName", store.getManagerName());
+
+
 		//リクエストパラメータ―の取得 2
 		//なし
 

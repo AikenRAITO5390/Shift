@@ -60,6 +60,7 @@ public class ShiftManagerSignupResultAction extends Action {
 			return;
 		}
 //完了画面へ飛ぶ
+		req.setAttribute("managerName", manager_name);
 		req.getRequestDispatcher("shiftmanager_edit_disp_result.jsp").forward(req, res);
 	}
 }

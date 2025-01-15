@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import bean.Sales;
 import bean.Store;
 import dao.SalesDao;
+import dao.StoreDao;
 import tool.Action;
 
 
@@ -25,6 +26,14 @@ public class SalesDetailAction extends Action {
 			HttpSession session = req.getSession();// セッションを取得
 			SalesDao salesDao = new SalesDao();//売上DAOを初期化
 			Store manager = (Store) session.getAttribute("user");// ログインユーザーを取得
+
+			//ヘッダーに名前を出すためのコード
+			//ログイン情報から名前を取得して"managerName"として渡す
+			StoreDao sDao = new StoreDao();
+
+			Store store = sDao.get(manager.getStoreId());
+			req.setAttribute("managerName", store.getManagerName());
+
 
 			try {
 

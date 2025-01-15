@@ -6,8 +6,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import bean.Store;
 import bean.Worker;
+import dao.StoreDao;
 import dao.WorkerDao;
 import tool.Action;
 
@@ -15,6 +18,15 @@ public class ShiftConditionWorkerListAction extends Action{
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+
+		//ログイン情報から名前を取得して"managerName"として渡す
+				HttpSession session = req.getSession();//セッション
+				StoreDao sDao = new StoreDao();
+
+				Store store_login = (Store)session.getAttribute("user");
+
+				Store store = sDao.get(store_login.getStoreId());
+				req.setAttribute("managerName", store.getManagerName());
 
         // Dao初期化
         WorkerDao workerDao = new WorkerDao();

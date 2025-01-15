@@ -33,6 +33,10 @@ public class WorkerUpdateAction extends Action {
 
 		//DBからデータ取得 3
 		stores = sDao.get(store.getStoreId());
+
+		Store store_login = sDao.get(stores.getStoreId());
+		req.setAttribute("managerName", store_login.getManagerName());
+
 		Worker worker = wDao.get(workerId);//学生番号から学生インスタンスを取得
 		List<String> list = sDao.filter(store.getStoreId());//ログインユーザーの学校コードをもとにクラス番号の一覧を取得
 

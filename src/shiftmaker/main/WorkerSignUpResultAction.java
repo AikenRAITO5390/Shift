@@ -23,6 +23,13 @@ public class WorkerSignUpResultAction extends Action{
 
 		// セッションを取得
 		HttpSession session = req.getSession();
+		//ログイン情報から名前を取得ヘッダーの為に
+		StoreDao sDao = new StoreDao();
+
+		Store store_login = (Store)session.getAttribute("user");
+
+		Store store = sDao.get(store_login.getStoreId());
+		req.setAttribute("managerName", store.getManagerName());
 
 		// リクエストパラメータの取得
 		String year = req.getParameter("year");

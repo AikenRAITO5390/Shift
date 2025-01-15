@@ -28,6 +28,10 @@ public class DayPowerSettingResultAction extends Action{
 		Store store_login = (Store)session.getAttribute("user");// ログインユーザーを取得
 		Map<String, String> errors = new HashMap<>();
 
+		Store store_managerName = sDao.get(store_login.getStoreId());
+		req.setAttribute("managerName", store_managerName.getManagerName());
+
+
 		        // ArrayListを作成
 		        ArrayList<String> dayScoreList = new ArrayList<>();
 		        ArrayList<String> weekdayScoreList = new ArrayList<>();

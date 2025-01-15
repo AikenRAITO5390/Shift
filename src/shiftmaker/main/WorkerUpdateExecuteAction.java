@@ -23,7 +23,10 @@ public class WorkerUpdateExecuteAction extends Action {
 		HttpSession session = req.getSession();//セッション
 		Store store = (Store)session.getAttribute("user");// ログインユーザーを取得object型で取り出されるためTeacher型にキャストする
 
+		//ログイン情報から名前を取得ヘッダーの為
 
+		Store stores = sDao.get(store.getStoreId());
+		req.setAttribute("managerName", stores.getManagerName());
 
 
 		//リクエストパラメータ―の取得 2

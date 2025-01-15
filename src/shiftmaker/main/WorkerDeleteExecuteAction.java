@@ -27,6 +27,10 @@ public class WorkerDeleteExecuteAction extends Action {
         HttpSession session = req.getSession(); // セッション
         Store store = (Store) session.getAttribute("user"); // ログインユーザーを取得
 
+    	//ログイン情報から名前を取得して"managerName"として渡す
+		Store stores = sDao.get(store.getStoreId());
+		req.setAttribute("managerName", stores.getManagerName());
+
         // 店IDの取得
         String STORE_ID = store.getStoreId();
 
