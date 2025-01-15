@@ -28,8 +28,9 @@
     flex-direction: row; /* 横方向に配置 */
     justify-content: space-between; /* 左右に配置 */
 }
-.header h2{
-color: white;}
+.header_work  h2{
+color: white;
+}
 
 .ushiro {
     display: flex;
@@ -59,13 +60,15 @@ color: white;}
 </script>
 
 <div class="header_work">
+<div style="display: flex; align-items: center;">
     <button onclick="toggleSidebar()">三</button>
     <div id="sidebar" class="sidebar">
         <jsp:include page="../common/navigation_work.jsp" />
     </div>
 <h2> まるごとシフトくん</h2>
+</div>
     <div class="ushiro">
-        <a href="../Logout.action">ログアウト</a>
+        <a href="../LogoutWorker.action">ログアウト</a>
         <p>${WorkerName}さん</p>
     </div>
 </div>

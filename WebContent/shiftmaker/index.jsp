@@ -8,6 +8,7 @@
 <title></title>
 </head>
 <script>
+
 //ログインページにリダイレクト
 location.href="/shift/shiftmaker/Login.action";
 </script>

@@ -23,7 +23,7 @@ public  class LogoutAction extends Action{
 		//DBへデータ保存 5
 		//なし
 		//レスポンス値をセット 6
-		session.invalidate();
+		//session.invalidate();
 		System.out.println("a");
 		//JSPへフォワード 7
 		req.getRequestDispatcher("logout_ok.jsp").forward(req, res);
