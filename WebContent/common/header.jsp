@@ -83,7 +83,7 @@ button:hover {
     </div>
     <div class="ushiro">
         <a href="../Logout.action">ログアウト</a>
-        <p>${user.managerName}さん</p>
+        <p>${managerName}さん</p>
     </div>
 </div>
 

@@ -15,7 +15,8 @@
 }
 .delete{
 	margin-top : 30px;
-	margin-left: 460px;
+	margin-left: 480px;
+	margin-bottom : 10px;
 }
 .name{
 	margin-top : 8px;

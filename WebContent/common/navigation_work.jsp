@@ -45,11 +45,11 @@ function hideLinks(id) {
 </ul>
 
 <ul>
-	<li><a href="#">📝　掲示板</a></li>
+	<li><a href="BBSWorker.action">📝　掲示板</a></li>
 </ul>
 
 <ul>
-	<li><a href="#">💪　従業員情報登録</a></li>
+	<li><a href="ShiftWorkerSignUp.action">💪　従業員情報登録</a></li>
 </ul>
 </div>
 
