@@ -9,8 +9,9 @@
     <h1>削除確認</h1>
     <p>投稿者: ${user}</p>
     <p>コメント: ${text}</p>
-    <form action="bbs_delete_confirm.jsp" method="post">
-        <input type="hidden" name="BBS_ID" value="${BBS_ID}">
+    <p>コメント: ${BBS_ID}</p>
+    <form action="BbsDeleteExecute.action" method="post">
+        <input type="hidden" name="bbsId" value="${BBS_ID}">
         <input type="submit" value="削除">
     </form>
 </body>

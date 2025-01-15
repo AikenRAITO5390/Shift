@@ -851,8 +851,9 @@ try{
 		//プリペアードステートメントに値をバインド
 		statement.setInt(1, store.getWorkWeekScore());
 		statement.setInt(2, store.getWeekScore());
-		statement.setString(3, store.getStoreId());
-		statement.setInt(4, store.getWorkWeekScore());
+		statement.setString(3, store.getWorkTimeId());
+		statement.setString(4, store.getStoreId());
+		statement.setInt(5, store.getWorkWeekScore());
 	}
 	//プリペアードステートメントにを実行
 	count = statement.executeUpdate();

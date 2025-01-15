@@ -66,6 +66,7 @@ public class PowerSettingResultAction extends Action {
 		        } else {
 		            store = new Store(); // 必要に応じて新しいインスタンスを作成
 		        }
+		        String woekTimeId = "F";
 
 		        // インスタンスに値をセット
 		        //　新規作成の可能性もあるのでstoreの中身全てセットする
@@ -75,7 +76,7 @@ public class PowerSettingResultAction extends Action {
 		        store.setManagerId(store_login.getManagerId());
 		        store.setPassword(store_login.getPassword());
 		        store.setEmail(store_login.getEmail());
-		        store.setWorkTimeId(store_login.getWorkTimeId());
+		        store.setWorkTimeId(woekTimeId);
 		        store.setWorkTimeStart(store_login.getWorkTimeStart());
 		        store.setWorkTimeEnd(store_login.getWorkTimeEnd());
 		        store.setWorkWeekScore(workWeekScoreInts[i]);
