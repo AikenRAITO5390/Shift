@@ -2,6 +2,7 @@ package shiftmaker.main;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -69,12 +70,40 @@ public class ShiftEditAction extends Action{
         List<Shift> shifts = shiftDao.getShiftsByStoreId(storeId);
 
         // 確認用
-        System.out.println("shifts: " + shifts);
+        for (Shift aaa : shifts){
+            System.out.println("shifts: " + aaa.getWorkTimeId());
+            System.out.println("shifts: " + aaa.getShiftTimeStart());
+            System.out.println("shifts: " + aaa.getShiftTimeEnd());
+        }
 
-        //３０日分のシフト情報を入れるためのリスト
-      	List<Map<String, Object>> innerList = new ArrayList<>();
+        // 従業員IDと日付をキーにシフト情報を格納するマップ
+        Map<String, Map<LocalDate, Shift>> shiftMap = new HashMap<>();
+
+        // シフトデータを整理
+        for (Shift shift : shifts) {
+        	// workeridのnullチェック
+            if (shift.getWorker() == null) {
+                System.out.println("Worker is null for shift: " + shift);
+                continue;
+            }
+            String workerId = shift.getWorker().getWorkerId();
+
+
+            // 日付を取得
+            LocalDate shiftDate = shift.getShiftDate().toLocalDate();
+            System.out.println("shiftDate: " + shiftDate);
+            String workTimeId = shift.getWorkTimeId();
+            System.out.println("workTimeId: " + workTimeId);
+
+            shiftMap.computeIfAbsent(workerId, k -> new HashMap<>()).put(shiftDate, shift);
+
+
+        }
+
 
         // リクエストにデータをセット
+        req.setAttribute("shiftMap", shiftMap);
+        req.setAttribute("dates", dates);
         req.setAttribute("shifts", shifts);
         req.setAttribute("worker_list", worker_list);
 

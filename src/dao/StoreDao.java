@@ -497,7 +497,7 @@ public class StoreDao extends Dao{
 
 		try{
 //			プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement("select store_time_start from STORE where STORE_ID=? and WORK_TIME_ID='A' ");//後で書く
+			statement = connection.prepareStatement("select store_time_start from STORE where STORE_ID=? and WORK_TIME_ID='A'");//後で書く
 			//
 
 			statement.setString(1, store_id);
@@ -851,9 +851,8 @@ try{
 		//プリペアードステートメントに値をバインド
 		statement.setInt(1, store.getWorkWeekScore());
 		statement.setInt(2, store.getWeekScore());
-		statement.setString(3, store.getWorkTimeId());
-		statement.setString(4, store.getStoreId());
-		statement.setInt(5, store.getWorkWeekScore());
+		statement.setString(3, store.getStoreId());
+		statement.setInt(4, store.getWorkWeekScore());
 	}
 	//プリペアードステートメントにを実行
 	count = statement.executeUpdate();

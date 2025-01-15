@@ -83,9 +83,11 @@
 		    <tbody>
 		        <c:forEach var="workTime" items="${workTimeDetails}">
 		            <tr>
-		                <td>${workTime.workTimeId}</td>
-		                <td>${workTime.workTimeStart}</td>
-		                <td>${workTime.workTimeEnd}</td>
+		            	<c:if test="${workTime.workTimeId != 'F'}">
+		            		<td>${workTime.workTimeId}</td>
+			                <td>${workTime.workTimeStart}</td>
+			                <td>${workTime.workTimeEnd}</td>
+		            	</c:if>
 		            </tr>
 		        </c:forEach>
 		    </tbody>

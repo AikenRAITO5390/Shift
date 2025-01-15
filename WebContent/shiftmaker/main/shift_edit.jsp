@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ja">
 
@@ -32,14 +34,35 @@
         <!-- シフト情報 -->
         <tbody>
         <c:forEach var="workerlist" items="${worker_list}">
-        	<tr>
-        		<td>${workerlist.workerName}</td>
-
-				<c:forEach var="date" items="${dates}">
-
-				</c:forEach>
-        	</tr>
-        </c:forEach>
+		    <tr>
+		        <td>${workerlist.workerName}</td>
+		        <c:forEach var="date" items="${dates}">
+		            <td>
+		                <c:choose>
+		                    <%-- シフト情報が存在する場合 --%>
+		                    <c:when test="${shiftMap[workerlist.workerId][date] != null}">
+		                        <c:set var="shift" value="${shiftMap[workerlist.workerId][date]}" />
+		                        <c:if test="${shift.workTimeId != null}">
+		                            <a href="#?workerId=${workerlist.workerId}&date=${date}&workTimeId=${shift.workTimeId}" class="calendar-link">
+		                                ${shift.workTimeId}
+		                            </a>
+		                        </c:if>
+		                        <c:if test="${shift.workTimeId == null}">
+								    <a href="#?workerId=${workerlist.workerId}&date=${date}">
+		                                <fmt:formatDate value="${shift.shiftTimeStart}" pattern="HH:mm" /> -
+		                                <fmt:formatDate value="${shift.shiftTimeEnd}" pattern="HH:mm" />
+		                            </a>
+								</c:if>
+		                    </c:when>
+		                    <%-- シフト情報がない場合 --%>
+		                    <c:otherwise>
+		                    	<a href="#?workerId=${workerlist.workerId}&date=${date}">-</a>
+		                    </c:otherwise>
+		                </c:choose>
+		            </td>
+		        </c:forEach>
+		    </tr>
+		</c:forEach>
         </tbody>
     </table>
 </body>
