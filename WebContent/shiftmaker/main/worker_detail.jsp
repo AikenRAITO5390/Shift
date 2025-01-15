@@ -5,63 +5,37 @@
 .h2 h2{
 	margin-top : 60px;
 	text-align : center;
-
 }
-
 .label {
 	margin-left : 100px;
 	margin-top : 50px;
 	width: 100%;
 }
-
 .labela {
 	margin-left : 590px;
 	margin-top : -250px;
-
 }
-
 .label label{
 	margin-left : 100px;
-
-
 }
-
 .label p{
 	margin-left : 270px;
 	margin-top: -20px;
-
 }
-
 .labela label{
 	margin-left : 80px;
-
-
 }
-
 .labela p{
 	margin-left : 270px;
 	margin-top: -20px;
-
 }
-
 .label a{
 	margin-left : 850px;
-
-
 }
-
-
-
-
-
-
 </style>
 
-
-
-
 <head>
-    <title>詳細</title>
+    <title>従業員情報詳細</title>
 </head>
 <c:import url="../../common/header.jsp"/>
 <body>
@@ -82,13 +56,9 @@
     <a href="WorkerDate.action">戻る</a>
 </div>
 
-
 <div class="labela">
     <label>実力 </label> <p>${worker.workerScore}</p>
     <label>得意なポジション </label> <p>${worker.workerPosition}</p>
-
-
-
 </div>
 
 <c:import url="../../common/footer.jsp"/>

@@ -10,12 +10,12 @@
 }
 .date{
 	margin-top: -62px;
-	margin-left: 460px;
+	margin-left: 500px;
 	margin-right: 20px;
 }
 .delete{
 	margin-top : 30px;
-	margin-left: 480px;
+	margin-left: 540px;
 	margin-bottom : 10px;
 }
 .name{
@@ -33,14 +33,14 @@
     border-radius: 5px; /* 角を丸くする */
     margin-top : 10px;
     display: inline-block; /*文字の幅だけ線をひく*/
-    margin-left: 180px;
+    margin-left: 230px;
     width: 60%; /* 画面の幅いっぱいに広げる */
 }
 .create{
   position: fixed; /* 要素を固定 */
-  top: 400px; /* 画面の上部に配置 */
-  left: 805px; /* 画面の左端に配置 */
-  width: 11%; /* 画面の幅いっぱいに広げる */
+  top: 450px; /* 画面の上部に配置 */
+  left: 950px; /* 画面の左端に配置 */
+  width: 9%; /* 画面の幅いっぱいに広げる */
   border: 1px solid ; /* 枠線を設定 */
   background-color: #75A9FF; /* 背景色を設定 */
   border-radius: 5px; /* 角を丸くする */
@@ -51,8 +51,8 @@
 }
 .modoru{
   position: fixed; /* 要素を固定 */
-  top: 400px; /* 画面の上部に配置 */
-  left: 929px; /* 画面の左端に配置 */
+  top: 450px; /* 画面の上部に配置 */
+  left: 1100px; /* 画面の左端に配置 */
   width: 3%; /* 画面の幅いっぱいに広げる */
   border: 1px solid ; /* 枠線を設定 */
   background-color: #75A9FF; /* 背景色を設定 */

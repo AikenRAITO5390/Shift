@@ -31,28 +31,27 @@
 	margin-left : 50px;
 	color: red;
 }
-
-
 .worker-links {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column; /* 縦方向に配置 */
+    align-items: flex-start; /* 左端に配置 */
     margin-top: -30px;
     margin-right: 19px;
-}
-.worker-links a {
-    margin-left: 10px;
+
+  }
+.main {
+    margin-left: -50px;
+    color: block;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+.a {
+	margin: 3px;
+    margin-left: 1053px;
     color: red;
-    text-decoration: none;
-}
-
-
-.main a {
-    margin-left: 20px;
-    color: black;
-    margin-top: 50px;
-    margin-bottom: 30px;
-
-}
+    margin-top: -39px;
+    margin-bottom: 50px;
+  }
 </style>
 
 <head>
@@ -103,8 +102,10 @@
         <!-- 変更と削除リンクをテーブル外に配置 -->
         <div class="worker-links">
             <c:forEach var="worker" items="${workersnot}">
+                <div class="a">
                 <a href="WorkerUpdate.action?workerId=${worker.workerId}">変更</a>
                 <a href="WorkerDelete.action?WORKER_ID=${worker.workerId}">削除</a>
+                </div>
             </c:forEach>
         </div>
     </c:if>
@@ -142,8 +143,10 @@
     <!-- 変更と削除リンクをテーブル外に配置 -->
     <div class="worker-links">
         <c:forEach var="worker" items="${workers}">
+        <div class="a">
             <a href="WorkerUpdate.action?workerId=${worker.workerId}">変更</a>
             <a href="WorkerDelete.action?WORKER_ID=${worker.workerId}">削除</a>
+        </div>
         </c:forEach>
     </div>
 </c:if>

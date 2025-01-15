@@ -34,9 +34,15 @@
     text-align: center;
 
 }
-
 .managertable a{
 	margin-bottom: 20px;
+
+}
+.main{
+	margin-left: -3px;
+    color: block;
+    margin-top: 15px;
+    margin-bottom: 15px;
 
 }
 
@@ -142,8 +148,12 @@
 
         </table>
     </c:if>
+
+    <div class="main">
     <a href="Main.action">メインへ戻る</a>
+    </div>
 </div>
+
 
 
 

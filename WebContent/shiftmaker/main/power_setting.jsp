@@ -4,6 +4,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
+<style>
+<!-- cssここにかいていいのか！？！？-->
+</style>
+
+
 <head>
 <link rel="stylesheet" href="../../css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -13,7 +19,7 @@
 <body>
 <div class = "power_Setting">
 
-<h1>シフト時間設定</h1>
+<h1>パワーバランス設定</h1>
 <p>"${toDay}分"</p>
 <div class = "Point_Setting">
 <div class = "week_Setting">
@@ -182,6 +188,7 @@
 	});
 	</script>
 
+<c:import url="../../common/footer.jsp"/>
 
 </body>
 </html>

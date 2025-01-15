@@ -47,12 +47,12 @@
     border: none; /* ボーダーをなしに設定 */
     border-radius: 5px; /* 角を丸くする */
     cursor: pointer; /* カーソルをポインターに変更 */
-    margin-left: 450px;
+    margin-left: 575px;
 
 }
 .managerlogin {
 	margin-top : 20px;
-	margin-left: 630px;
+	margin-left: 750px;
 }
 .footer {
     position: fixed;
