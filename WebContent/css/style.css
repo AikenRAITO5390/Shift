@@ -166,34 +166,6 @@ input[type="submit"]:hover {
 
 /* PointSetting.jspの設定*/
 
-.Point_Setting {
-    display: flex;
-    justify-content: left; /* 子要素を左右に均等に配置 */
-    align-items: stretch; /* 子要素の高さを揃える */
-    margin-top: 20px; /* ヘッダーの高さ分だけ下に配置 */
-}
-
-.power_Setting h1{
-	text-align: center;
-	margin-top: 70px;
-}
-.power_Setting p{
-	text-align: center;
-	margin-top: 30px;
-
-}
-
-.week_Setting, .point_conetnt {
-    padding: 0 5px; /* 各カラムに左右のパディングを追加 */
-}
-
-.week_Setting {
-    width: 300px; /* 必要に応じて幅を設定 */
-}
-
-.power_Setting button{
-		text-align: center;
-}
 
 .shift_manager {
     display: flex;

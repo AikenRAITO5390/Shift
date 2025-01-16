@@ -14,12 +14,12 @@
 	text-align : center;
 }
 .ok {
-	margin-top : 62px;
-	margin-left: 530px;
+	margin-top : 64px;
+	margin-left: 670px;
 }
 .no {
-	margin-top : -20px;
-	margin-left: 430px;
+	margin-top : -25px;
+	margin-left: 530px;
 }
 .header {
 	 position: fixed;

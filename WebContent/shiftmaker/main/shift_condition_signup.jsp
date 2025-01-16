@@ -15,11 +15,14 @@
 
 
     <!-- 画面タイトル -->
-    <h2>シフト条件登録</h2>
+    <div class="shift_condtion_signup_h2">
+    	<h2>シフト条件登録</h2>
+    </div>
 
 	<!-- アルバイトのみ設定画面表示 -->
 	<c:if test="${not empty workers}">
 	    <form action="ShiftConditionSignupResult.action" method="post">
+	    <div class="shift_condtion_signup_table">
 	        <table>
 	            <tr>
 	                <th>ID</th>
@@ -54,7 +57,11 @@
 	                </tr>
 	            </c:forEach>
 	        </table>
+	        </div>
+
+	        <div class="shift_condtion_signup_input">
 	        <input type="submit" value="登録" />
+	        </div>
 	    </form>
 	</c:if>
 

@@ -49,8 +49,9 @@
 	    </c:if>
     </div>
 
-
+	<div class="main">
     <a class="link3" href="Main.action">メインへ戻る</a>
+    </div>
 
 </body>
 

@@ -6,12 +6,126 @@
 <html>
 
 <style>
+
+.Point_Setting {
+    display: flex;
+    justify-content: left; /* 子要素を左右に均等に配置 */
+    align-items: stretch; /* 子要素の高さを揃える */
+    margin-top: 20px; /* ヘッダーの高さ分だけ下に配置 */
+    margin-left: 100px;
+}
+
+.power_Setting h1{
+	text-align: center;
+	margin-top: 70px;
+}
+.power_Setting p{
+	text-align: center;
+	margin-top: 30px;
+
+}
+
+.week_Setting, .point_conetnt {
+    padding: 0 5px; /* 各カラムに左右のパディングを追加 */
+}
+
+.week_Setting {
+    width: 350px; /* 必要に応じて幅を設定 */
+    height: 10px; /* 縦の長さを指定 */
+}
+
+
+.point_conetnt input[type="number"]{
+    width: 450px; /* 必要に応じて幅を設定 */
+    margin-left: 20px;
+    margin-top: 15px;
+}
+}
+.power_Setting button{
+	text-align: center;
+}
+
+
+/*一か月のカレンダー表示する*/
+.point_conetnt{
+	border: 1px solid ; /* 枠線を設定 */
+	background-color: #FFFFFF; /* 背景色を設定 */
+    padding: 2px; /* 枠線と内容の間にスペースを追加 */
+    border-radius: 5px; /* 角を丸くする */
+    display: inline-block; /*文字の幅だけ線をひく*/
+    width: 60%; /* 画面の幅いっぱいに広げる */
+    height: 400px; /* 縦の長さを指定 */
+
+    margin-left: -80px;
+
+
+
+
+}
+.point_conetnt table{
+	margin-left: -35px;
+
+}
+
+.point_conetnt button{
+	margin-left: 640px;
+	margin-top: 30px;
+
+}
+
+/*一か月の日付*/
+.point_conetnt label{
+	margin-left: 32px;
+	width: 85%; /* 画面の幅いっぱいに広げる */
+
+}
+
+.scrollable-vertical {
+    height: 400px; /* 必要に応じて調整 */
+    overflow-y: scroll; /* 縦方向のスクロールバーを表示 */
+    width: 80%; /* 画面の幅いっぱいに広げる */
+    box-sizing: border-box; /* パディングとボーダーを含めた全体の幅と高さを指定 */
+    overflow-x: hidden; /* 横方向のスクロールバーを非表示 */
+    max-width: 100%; /* 最大幅を指定して余分なスペースを防ぐ */
+
+    margin-left: 80px;
+}
+
+.week_Setting tr:nth-child(6) input[type="number"] {
+    background-color: #A4C6FF; /* 必要に応じて色を変更 */
+    color: inherit; /* 文字色をデフォルトに設定 */
+}
+
+.week_Setting tr:nth-child(7) input[type="number"] {
+    background-color: #FFABCE; /* 必要に応じて色を変更 */
+    color: inherit; /* 文字色をデフォルトに設定 */
+}
+
+.week_Setting tr {
+    padding-bottom: 15px; /* 必要に応じて調整 */
+}
+
+.week_Setting td {
+    padding-bottom: 15px; /* 必要に応じて調整 */
+}
+
+.week_Setting button{
+	margin-top: 20px;
+	margin-left: 145px;
+
+}
+
+.power_Setting a{
+	margin-left: 930px;
+	margin-top: 10px;
+
+}
 <!-- cssここにかいていいのか！？！？-->
 </style>
 
 
 <head>
-<link rel="stylesheet" href="../../css/style.css">
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 </head>
@@ -21,7 +135,13 @@
 
 <h1>パワーバランス設定</h1>
 <p>"${toDay}分"</p>
+<a href="Main.action">トップページに戻る</a>
+
+<!-- 2つの表を横の並べるためのやつ！ -->
 <div class = "Point_Setting">
+
+
+<!-- 一週間の必要点数を設定する -->
 <div class = "week_Setting">
 <form id="myForm" action="PowerSettingResult.action" method="post">
     <table class="table table-hover">
@@ -61,8 +181,13 @@
 </form>
 </div>
 
+
+<!-- 一か月の必要点数を設定する -->
 <div class = point_conetnt>
 <form id = 'dayForm' action="DayPowerSettingResult.action" method="post">
+
+<!-- スクロールバーつける -->
+	<div class="scrollable-vertical">
 	    <table class="table table-hover">
 	        <c:forEach var="dateMap" items="${dateList}" varStatus="loopStatus">
 	            <c:forEach var="entry" items="${dateMap.entrySet()}">
@@ -71,13 +196,18 @@
 	                    <td>
 	                        <input type="number" name="DayScore_${loopStatus.index + 1}" id="DayScore_${loopStatus.index + 1}" >
 	                         <span class="error" id="DayScore_${loopStatus.index + 1}Error"></span>
+	                         <hr>
 	                    </td>
 	                    	<input type="hidden" name="WorkDayScore_${loopStatus.index + 1}" value="${entry.key}">
 	                </tr>
 	            </c:forEach>
 	        </c:forEach>
 	    </table>
+	 </div>
+
+
 	    <button type="submit">変更</button>
+
 	</form>
 	</div>
 </div>

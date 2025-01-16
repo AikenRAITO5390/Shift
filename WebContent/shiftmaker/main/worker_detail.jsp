@@ -7,30 +7,53 @@
 	text-align : center;
 }
 .label {
-	margin-left : 100px;
+	margin-left : 10px;
 	margin-top : 50px;
-	width: 100%;
+	width: 50%;
+
 }
 .labela {
-	margin-left : 590px;
-	margin-top : -250px;
+	margin-top : -365px;
+	margin-left : 600px;
+	width: 50%;
 }
 .label label{
-	margin-left : 100px;
+	margin-left : 50px;
+
+    padding: 2px;
+    text-align: center;
+    background-color: #6495ED;
+    color: white;
+    width: 100px;
+
 }
 .label p{
-	margin-left : 270px;
+	margin-left : 170px;
 	margin-top: -20px;
+
+	border: 1px solid #000;
+    padding: 2px;
+    text-align: center;
 }
 .labela label{
 	margin-left : 80px;
+
+    padding: 4px;
+    text-align: center;
+    background-color: #6495ED;
+    color: white;
 }
 .labela p{
 	margin-left : 270px;
 	margin-top: -20px;
+
+	border: 1px solid #000;
+    padding: 2px;
+    text-align: center;
 }
 .label a{
-	margin-left : 850px;
+	margin-top : 60px;
+	margin-left : 55px;
 }
 </style>
 
@@ -53,11 +76,12 @@
     <label>パスワード  </label> <p>${worker.workerPassword}</p>
     <label>店情報  </label> <p>${worker.store.storeName}</p>
 
+
     <a href="WorkerDate.action">戻る</a>
 </div>
 
 <div class="labela">
-    <label>実力 </label> <p>${worker.workerScore}</p>
+	<label>実力 </label> <p>${worker.workerScore}</p>
     <label>得意なポジション </label> <p>${worker.workerPosition}</p>
 </div>
 

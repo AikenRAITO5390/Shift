@@ -14,12 +14,12 @@
 	text-align : center;
 }
 .ok {
-	margin-top : 62px;
-	margin-left: 530px;
+	margin-top : 63px;
+	margin-left: 670px;
 }
 .no {
-	margin-top : -20px;
-	margin-left: 430px;
+	margin-top : -25px;
+	margin-left: 530px;
 }
 .header {
 	 position: fixed;
@@ -80,6 +80,7 @@
     text-align: center;
 }
 
+
 </style>
 
 <head>
@@ -111,6 +112,7 @@
     <h3>ログアウトしますか？</h3>
 </div>
 
+<div class="aaaa">
 <div class="ok">
     <form action="WorkerLogoutExecute.action" method="post">
         <button type="submit">はい</button>
@@ -121,6 +123,8 @@
     <form action="/shift/shiftmaker/main/Main.action" method="post">
         <button type="submit">いいえ</button>
     </form>
+</div>
+
 </div>
 
 <div class="footer">
