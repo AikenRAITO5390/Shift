@@ -1,5 +1,7 @@
 package shiftmaker.main;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,21 +25,43 @@ public class BbsDeleteWorkerAction extends Action{
 	        String WORKER_ID = req.getParameter("Worker_ID");
 
 
-	        BBS bbs = bDao.get(BBS_ID);
+	        BBS bbs = bDao.get_BbsId(BBS_ID);
 	        System.out.println("取得したbbs: " + bbs);
+
+	        Worker worker_delete = bbs.getWorker();
+	        String worker_name = Optional.ofNullable(worker_delete)
+	                                     .map(Worker::getWorkerName)
+	                                     .orElse(null);
+
+	        String user = bbs.getManager();
+
+	        String text = bbs.getBbsText();
 
 	        // コンソールで確認
 	        System.out.println("取得したBBS_ID: " + BBS_ID);
 	        System.out.println("取得したWORKER_ID: " + WORKER_ID);
 
-
+	    if (worker_name != null) {
 	        req.setAttribute("BBS_ID", BBS_ID);
 	        req.setAttribute("bbs", bbs);
+	        req.setAttribute("text", text);
+	        req.setAttribute("user", worker_name);
 
 	        // 削除完了後に一覧画面へリダイレクト
 	       // res.sendRedirect("bbs_delete.jsp");
 
 	        req.getRequestDispatcher("bbs_delete_worker.jsp").forward(req, res);
+	    }else{
+	    	 req.setAttribute("BBS_ID", BBS_ID);
+	         req.setAttribute("bbs", bbs);
+	         req.setAttribute("text", text);
+	         req.setAttribute("user", user);
+
+
+	         System.out.println("取得したuser: " + user);
+	         System.out.println("取得したtext: " + text);
+	         req.getRequestDispatcher("bbs_delete_worker.jsp").forward(req, res);
 	    }
+	 }
 
 }

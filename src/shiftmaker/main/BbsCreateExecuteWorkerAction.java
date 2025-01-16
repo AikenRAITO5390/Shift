@@ -25,7 +25,12 @@ public class BbsCreateExecuteWorkerAction extends Action {
         StoreDao sDao = new StoreDao();
         BBSDao bDao = new BBSDao();
 
+        //ログイン情報から名前を取得ヘッダー
         HttpSession session = req.getSession();
+        Worker workers = (Worker) session.getAttribute("user");
+        Worker worker_login = wDao.get(workers.getWorkerId());
+
+
         Store store = (Store) session.getAttribute("store");
 
         if (store == null) {
@@ -110,6 +115,7 @@ public class BbsCreateExecuteWorkerAction extends Action {
             e.printStackTrace();
             System.out.println("データベースの更新に失敗しました。");
         }
+        req.setAttribute("WorkerName", worker_login.getWorkerName());
 
         // JSPへフォワード
         req.getRequestDispatcher("bbs_create_worker_done.jsp").forward(req, res);

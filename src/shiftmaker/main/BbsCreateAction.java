@@ -11,6 +11,7 @@ import bean.BBS;
 import bean.Store;
 import bean.Worker;
 import dao.BBSDao;
+import dao.StoreDao;
 import tool.Action;
 
 public class BbsCreateAction extends Action {
@@ -27,6 +28,12 @@ public class BbsCreateAction extends Action {
 
         Worker worker = (Worker) session.getAttribute("worker");
         System.out.println("Worker: " + worker);
+
+        Store stores = (Store) session.getAttribute("user"); // ログインユーザーを取得
+
+		StoreDao sDao = new StoreDao();
+
+		Store store_login = sDao.get(stores.getStoreId());
 
         // ログインユーザーの情報を取得
         String ManagerName = store != null ? store.getManagerName() : null;
@@ -77,6 +84,7 @@ public class BbsCreateAction extends Action {
         req.setAttribute("today", formattedDate);
         req.setAttribute("BbsId", BbsId);
         req.setAttribute("StoreId", StoreId);
+        req.setAttribute("managerName", store_login.getManagerName());
 
         System.out.println(UserName);
 

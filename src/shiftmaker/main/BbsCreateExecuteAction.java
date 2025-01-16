@@ -27,6 +27,9 @@ public class BbsCreateExecuteAction extends Action {
         HttpSession session = req.getSession();
         Store store = (Store) session.getAttribute("user");
 
+		Store store_login = sDao.get(store.getStoreId());
+
+
         if (store == null) {
             System.out.println("Store is null");
             res.sendRedirect("login.jsp");
@@ -55,7 +58,6 @@ public class BbsCreateExecuteAction extends Action {
 //
 //        // 取得したBBS_IDを使用して処理を続けます
 //        System.out.println("取得したBBS_IDは: " + BBS_ID);
-
 
 
 
@@ -124,6 +126,7 @@ public class BbsCreateExecuteAction extends Action {
         try {
             bDao.savemanager(bbs);
             System.out.println("データベースの更新に成功しました。");
+            req.setAttribute("managerName", store_login.getManagerName());
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("データベースの更新に失敗しました。");

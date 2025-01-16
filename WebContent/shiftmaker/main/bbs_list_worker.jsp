@@ -129,21 +129,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>従業員掲示板</title>
+    <title>～従業員掲示板～</title>
 </head>
 
-<div class="header_work">
-    <button onclick="toggleSidebar()">三</button>
-    <div id="sidebar" class="sidebar">
-        <jsp:include page="../../common/navigation_work.jsp" />
-    </div>
-<h2> まるごとシフトくん</h2>
-    <div class="ushiro">
-        <a href="../Logout.action">ログアウト</a>
-        <p>${WorkerName}さん</p>
-    </div>
-</div>
-
+<c:import url="../../common/header_work.jsp"/>
 <body>
 
 	<div class="h1">

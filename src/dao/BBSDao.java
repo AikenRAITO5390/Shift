@@ -106,6 +106,7 @@ public class BBSDao extends Dao {
 				bbs.setWorker(workerDao.get(rSet.getString("WORKER_ID")));
 				//STOREはworker_idコードで検索したworkerインスタンスをセット
 				bbs.setStore(storeDao.get(rSet.getString("STORE_ID")));
+				bbs.setManager(rSet.getString("MANAGER_ID"));
 
 			} else {
 				//リザルトセットが存在しない場合

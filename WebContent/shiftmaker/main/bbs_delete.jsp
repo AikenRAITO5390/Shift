@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <style>
@@ -6,71 +7,89 @@
 	margin-top : 60px;
 	text-align : center;
 }
-.p {
-	margin-top : 120px;
-	margin-left : 420px;
-}
-.footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 15px;
-    background: #7d7d7d;
+
+   .inline {
+            display: inline-block;
+            margin-right: 10px; /* 必要に応じて調整 */
+
+        }
+
+<!---->
+.user h3{
+  	margin-left : 20%;
+  	text-align: center !important; /* 水平方向に中央揃え */
     color: white;
-    z-index: 1000;
-}
-.footer p {
-    font-size: 12px; /* 文字サイズを12pxに設定 */
-    margin: 0; /* デフォルトのマージンをリセット */
-    padding: 0; /* デフォルトのパディングをリセット */
-    line-height: 15px; /* 行の高さを15pxに設定 */
-    text-align: center;
-}
-.sidebar {
-    display: none;
-    width: 200px;
-    height: 100%;
-    background-color: #7d7d7d;
-    position: fixed;
-    left: 0;
-    top: 50px;
-    padding: 10px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-}
+    margin-right: 20px; /* 右に10pxの余白を追加 */
+    margin-top: 20px; /* 右に10pxの余白を追加 */
+    border: 1px solid white; /* 白い枠線を設定 */
+    background-color: #4169E1; /* 背景色を設定 */
+    padding: 10px; /* 枠線と内容の間にスペースを追加 */
+     width:  100px;
 
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 50px;
-    background: #7d7d7d;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+        }
+
+    .user p{
+    margin-right: 20px; /* 右に10pxの余白を追加 */
+    margin-top: 20px; /* 右に10pxの余白を追加 */
+    border: 1px solid black; /* 白い枠線を設定 */
+    padding: 10px; /* 枠線と内容の間にスペースを追加 */
+     width: 150px;
+
+
+        }
+<!---->
+        .text h3{
+  	margin-left : 20%;
+  	text-align: center !important; /* 水平方向に中央揃え */
     color: white;
-    z-index: 1000;
-    flex-direction: row; /* 横方向に配置 */
-    justify-content: space-between; /* 左右に配置 */
+    margin-right: 20px; /* 右に10pxの余白を追加 */
+    margin-top: 20px; /* 右に10pxの余白を追加 */
+    border: 1px solid white; /* 白い枠線を設定 */
+    background-color: #4169E1; /* 背景色を設定 */
+    padding: 10px; /* 枠線と内容の間にスペースを追加 */
+     width: 100px;
+
+
+        }
+
+    .text p{
+    margin-right: 20px; /* 右に10pxの余白を追加 */
+    margin-top: 20px; /* 右に10pxの余白を追加 */
+    border: 1px solid black; /* 白い枠線を設定 */
+    padding: 10px; /* 枠線と内容の間にスペースを追加 */
+     width: 40%;
+    height: 100px; /* 高さを100pxに設定 */
+        }
+
+  .kakunin{
+  text-align: center  !important;
+  }
+
+ .submit input[type="submit"] {
+    background-color: #ff6347;
+    color: white;
+    border: 1px solid white;
+    padding: 10px 20px; /* ボタンの内側の余白を調整 */
+    border: 1px solid white; /* 白い枠線を設定 */
+    font-size: 16px; /* フォントサイズを調整 */
+    border-radius: 4px; /* 角を丸くする */
+    width: 120px;
+
 }
-.header h2{
-color: white;}
 
-.ushiro {
-    display: flex;
-    flex-direction: column; /* 縦方向に配置 */
-    align-items: flex-end; /* 右端に配置 */
-    justify-content: center; /* 垂直方向に中央揃え */
-    height: 100%; /* 親要素の高さを継承 */
-     padding-right: 15px;
-}
-
-.ushiro a,
-.ushiro p {
-    margin: 0; /* デフォルトのマージンをリセット */
-    padding: 2px 0; /* 上下のパディングを設定 */
-
+.submit a{
+	 margin-left: 40%;
+	 margin-right: 40px;
+    display: inline-block; /* インラインブロック要素に変更 */
+    color: white;
+    text-align: center !important; /* 水平方向に中央揃え */
+    border: 1px solid white; /* 白い枠線を設定 */
+    background-color: #2C7CFF; /* 背景色を設定 */
+    padding: 10px 20px; /* 枠線と内容の間にスペースを追加 */
+    font-size: 16px; /* フォントサイズを調整 */
+    border-radius: 4px; /* 角を丸くする */
+    width: 70px;
 }
 </style>
 
@@ -79,40 +98,37 @@ color: white;}
     <title>掲示板削除確認</title>
 </head>
 
-<div class="header">
-    <div style="display: flex; align-items: center;">
-        <button onclick="toggleSidebar()">三</button>
-        <div id="sidebar" class="sidebar">
-        <jsp:include page="../../common/navigation.jsp" />
-    </div>
-        <h2>まるごとシフトくん</h2>
-    </div>
-    <div class="ushiro">
-        <a href="../Logout.action">ログアウト</a>
-        <p>${managerName}さん</p>
-    </div>
-</div>
+<c:import url="../../common/header.jsp"/>
 
 <body>
 
 <div class="delete">
     <h1>削除確認</h1>
 </div>
-    <p>投稿者: ${user}</p>
-    <p>コメント: ${text}</p>
-    <p>コメント: ${BBS_ID}</p>
 
-	<div class="p">
-    	<p>この投稿を削除しますか？</p>
-    </div>
+<div class = "user">
+       <h3 class="inline">投稿者:</h3><p class="inline">${user}</p><br>
+</div>
+
+<div class = "text">
+       <h3 class="inline">コメント:</h3><p class="inline">${text}</p>
+</div>
+
+<div class="kakunin">
+    	<h2>この投稿を削除しますか？</h2>
+</div>
+
+
     <form action="BbsDeleteExecute.action" method="post">
         <input type="hidden" name="bbsId" value="${BBS_ID}">
+<div class ="submit">
+<a href="BBS.action">戻る</a>
         <input type="submit" value="削除">
+
+</div>
     </form>
 
-<div class="footer">
-	<p>ＴＥＡＭ Ⅽ   Bug Busters</p>
-</div>
+<c:import url="../../common/footer.jsp"/>
 
 </body>
 </html>

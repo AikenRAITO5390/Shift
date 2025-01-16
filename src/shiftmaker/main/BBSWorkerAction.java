@@ -42,6 +42,7 @@ public class BBSWorkerAction extends Action {
 
 
 
+
         // WorkerオブジェクトからStoreを取得
         Worker worker_login = wDao.get(worker.getWorkerId());
         Store store = worker_login.getStore(); //storeに何も入っていない
@@ -86,6 +87,7 @@ public class BBSWorkerAction extends Action {
         req.setAttribute("messages", messages);
         req.setAttribute("managerName", managerName);
         req.setAttribute("WorkerLogin_Name", Worker_Id);
+        req.setAttribute("WorkerName", worker_login.getWorkerName());
 
 
         session.setAttribute("store", store);

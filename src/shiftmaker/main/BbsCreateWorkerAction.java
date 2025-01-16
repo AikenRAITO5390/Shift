@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.Store;
 import bean.Worker;
+import dao.WorkerDao;
 import tool.Action;
 
 public class BbsCreateWorkerAction extends Action {
@@ -31,6 +32,9 @@ public class BbsCreateWorkerAction extends Action {
 
         Worker worker = (Worker) session.getAttribute("user");
         System.out.println("Worker: " + worker);
+        WorkerDao wDao = new WorkerDao();
+
+        Worker worker_login = wDao.get(worker.getWorkerId());
 
 
         if (store == null && worker == null) {
@@ -81,8 +85,10 @@ public class BbsCreateWorkerAction extends Action {
         System.out.println(UserName);
 
         if (worker != null) {
+        	req.setAttribute("WorkerName", worker_login.getWorkerName());
             req.getRequestDispatcher("bbs_create_worker.jsp").forward(req, res);
         } else if (store != null) {
+        	req.setAttribute("WorkerName", worker_login.getWorkerName());
             req.getRequestDispatcher("bbs_create_manager.jsp").forward(req, res);
         }
     }

@@ -45,7 +45,7 @@
   background-color: #75A9FF; /* 背景色を設定 */
   border-radius: 5px; /* 角を丸くする */
   display: inline-block; /*文字の幅だけ線をひく*/
-  color: white; /* テキストの色を設定 */
+
   padding: 5px; /* 内側の余白を設定 */
   z-index: 1000; /* 他の要素の上に表示 */
 }
@@ -58,7 +58,7 @@
   background-color: #75A9FF; /* 背景色を設定 */
   border-radius: 5px; /* 角を丸くする */
   display: inline-block; /*文字の幅だけ線をひく*/
-  color: white; /* テキストの色を設定 */
+
   padding: 5px; /* 内側の余白を設定 */
   z-index: 1000; /* 他の要素の上に表示 */
 }
@@ -75,7 +75,7 @@
 <body>
 
 <div class="h1">
-    <h1>掲示板</h1>
+    <h1>～掲示板～</h1>
 </div>
 
 
