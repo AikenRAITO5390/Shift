@@ -33,15 +33,19 @@
 	            <c:forEach var="worker" items="${workers}">
 	                <tr>
 	                    <!-- IDを表示 -->
+	                    <div class="shift_condtion_signup_table_label">
 	                    <td>
-	                        <input type="text" name="worker_id" value="${worker.workerId}" readonly />
+	                    	<p>${worker.workerId}</p>
+	                        <input type="hidden" name="worker_id" value="${worker.workerId}" readonly />
 	                        <input type="hidden" name="worker_id" value="${worker.workerId}" />
 	                    </td>
 	                    <!-- 名前を表示 -->
 	                    <td>
-	                        <input type="text" name="worker_name" value="${worker.workerName}" readonly />
+	                    	<p>${worker.workerName}</p>
+	                        <input type="hidden" name="worker_name" value="${worker.workerName}" readonly />
 	                        <input type="hidden" name="worker_name" value="${worker.workerName}" />
 	                    </td>
+	                    </div>
 
 	                    <td>
 	                        <select name="worker_position" required>
@@ -55,6 +59,7 @@
 	                    </td>
 
 	                </tr>
+
 	            </c:forEach>
 	        </table>
 	        </div>
@@ -62,6 +67,11 @@
 	        <div class="shift_condtion_signup_input">
 	        <input type="submit" value="登録" />
 	        </div>
+
+	        <div class="shift_condtion_signup_input_back">
+	        <a href="Main.action">トップページへ戻る</a>
+	        </div>
+
 	    </form>
 	</c:if>
 

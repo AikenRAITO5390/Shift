@@ -81,20 +81,46 @@ label {
 .shift_condtion_signup_table{
 	text-align: center;
 	margin-top: 50px;
-	margin-left: 390px;
+	margin-left: 60px;
+	margin-right: 60px;
 }
+/*登録ボタン*/
 .shift_condtion_signup_input{
 	text-align: center;
-	margin-top: 100px;
-	margin-left: 600px;
+	margin-top: 20px;
+	margin-left: 1090px;
 }
+/*戻るボタン*/
+.shift_condtion_signup_input_back{
+	text-align: center;
+	margin-top: -330px;
+	margin-left: 1105px;
+	position: fixed; /* 要素を固定 */
+}
+/*項目*/
 .shift_condtion_signup_table th{
 	border: 1px solid #000;
     padding: 4px;
     text-align: center;
     background-color: #6495ED;
     color: white;
+    width: 30px;    /* テーブル幅の調整 */
 }
+/*でーた*/
+.shift_condtion_signup_table td{
+	border: 1px solid #000;
+    padding: 4px;
+    text-align: center;
+    background-color: white;
+    color: block;
+    width: 35%;    /* テーブル幅の調整 */
+    margin-top: 20px;
+}
+.shift_condtion_signup_table_label p{
+	margin-top: 20px;
+}
+
+
 
 
 /* ------------------------------------------------------------ */

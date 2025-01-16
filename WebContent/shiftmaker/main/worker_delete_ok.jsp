@@ -13,14 +13,15 @@
 	text-align : center;
 }
 
-.delete_button ,button {
-	text-align : center;
+.delete_button button {
+	margin-left: 700px;
+	margin-top: 30px;
 
 }
-.button ,button {
-	margin-left: 20px;
-    color: red;
+.button {
+	margin-left: 520px;
     text-decoration: none;
+    margin-top: -40px;
 
 </style>
 <head>
@@ -37,17 +38,22 @@
 <div class="h3">
     <h3>${worker.workerName}さんの情報を削除しますか？</h3>
 </div>
+
+
     <form action="WorkerDeleteExecute.action" method="post">
         <input type="hidden" name="WORKER_ID" value="${worker.workerId}">
         <input type="hidden" name="confirm" value="yes">
+
         <div class="delete_button">
         	<button type="submit">削除</button>
         </div>
     </form>
     <form action="WorkerList.action" method="get">
-    <div class="botton">
+
+    <div class="button">
         <button type="submit">戻る</button>
     </div>
+
     </form>
 </body>
 </html>
