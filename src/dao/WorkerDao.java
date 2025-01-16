@@ -473,7 +473,27 @@ public class WorkerDao extends Dao{
 	    return count > 0;
 	}
 
-
+	// workerIdをStringからWorker型に直すために使ってます
+	public Worker getWorkerById(String workerId) {
+	    Worker worker = null;
+	    try (Connection con = getConnection()) {
+	        String sql = "SELECT * FROM worker WHERE worker_id = ?";
+	        try (PreparedStatement ps = con.prepareStatement(sql)) {
+	            ps.setString(1, workerId);
+	            try (ResultSet rs = ps.executeQuery()) {
+	                if (rs.next()) {
+	                    worker = new Worker();
+	                    worker.setWorkerId(rs.getString("worker_id"));
+	                    worker.setWorkerName(rs.getString("worker_name"));
+	                    // 他のフィールドも設定
+	                }
+	            }
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return worker;
+	}
 
 
 

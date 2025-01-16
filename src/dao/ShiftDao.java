@@ -783,6 +783,26 @@ public class ShiftDao extends Dao{
 	    return shifts;
 	}
 
+	public boolean updateShift(Shift shift) {
+	    try (Connection con = getConnection()) {
+	        String sql = "UPDATE shift SET work_time_id = ?, shift_time_start = ?, shift_time_end = ? " +
+	                     "WHERE worker_id = ? AND shift_date = ?";
+	        try (PreparedStatement ps = con.prepareStatement(sql)) {
+	            ps.setString(1, shift.getWorkTimeId());
+	            ps.setTimestamp(2, shift.getShiftTimeStart());
+	            ps.setTimestamp(3, shift.getShiftTimeEnd());
+	            ps.setString(4, shift.getWorker().getWorkerId());
+	            ps.setDate(5, shift.getShiftDate());
+
+	            int rowsUpdated = ps.executeUpdate();
+	            return true;
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+
 
 	//パワー作成save
 	public boolean save_Score(Shift shift)throws Exception{
