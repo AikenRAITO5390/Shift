@@ -406,6 +406,95 @@ public class ShiftDao extends Dao{
 		}
 	}
 
+	// Eの選択肢用にデータを保存するメソッド
+		public void insertCustomWorkTime_shiftEdit(Date shiftDate, String workerId, String storeId, Timestamp customStartTime, Timestamp customEndTime, String shiftScore, String shift_hope_time_id, String work_time_id, String shift_time_start, String shift_time_end) throws Exception {
+			Connection connection = getConnection();
+			PreparedStatement statement = null;
+
+			Shift old = WeekScore_get(storeId, shiftDate, workerId);
+
+			try {
+
+				if(old == null){
+
+					String sql = "INSERT INTO SHIFT (SHIFT_DATE, WORKER_ID, STORE_ID, SHIFTHOPE_TIME_START, SHIFTHOPE_TIME_END, SHIFT_SCORE, SHIFT_HOPE_TIME_ID, WORK_TIME_ID, SHIFT_TIME_START, SHIFT_TIME_END) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				    statement = connection.prepareStatement(sql);
+				    statement.setDate(1, shiftDate);
+				    statement.setString(2, workerId);
+				    statement.setString(3, storeId);
+				    statement.setTimestamp(4, customStartTime);
+				    statement.setTimestamp(5, customEndTime);
+				    statement.setString(6, shiftScore);
+				    statement.setString(7, shift_hope_time_id);
+				    statement.setString(8, work_time_id);
+				    statement.setString(9, shift_time_start);
+				    statement.setString(10, shift_time_end);
+				}  else {
+
+					//プリペアードステートメントにUPDATE文をセット
+					statement = connection.prepareStatement("UPDATE shift SET work_time_id=?, shift_time_start=?, shift_time_end=? WHERE shift_date=? AND worker_id=? AND store_id=? AND shift_score=?");
+					//プリペアードステートメントに値をバインド
+					statement.setString(1, work_time_id);
+					statement.setTimestamp(2, customStartTime);
+					statement.setTimestamp(3, customEndTime);
+					statement.setDate(4, shiftDate);
+					statement.setString(5, workerId);
+					statement.setString(6, storeId);
+					statement.setString(7, shiftScore);
+				}
+
+				statement.executeUpdate();
+
+			} finally {
+			    if (statement != null) statement.close();
+			    if (connection != null) connection.close();
+			}
+		}
+
+		// A~Dの選択肢用にデータを保存するメソッド
+		public void insertWorkTime_shiftEdit(Date shiftDate, String workerId, String storeId, String workTimeId, String shiftScore, String shift_hope_time_id, String shift_time_start, String shift_time_end, Timestamp customStartTime, Timestamp customEndTime) throws Exception {
+			Connection connection = getConnection();
+			PreparedStatement statement = null;
+
+			Shift old = WeekScore_get(storeId, shiftDate, workerId);
+
+			try {
+
+				if(old == null){
+					String sql = "INSERT INTO SHIFT (SHIFT_DATE, WORKER_ID, STORE_ID, WORK_TIME_ID, SHIFT_SCORE, SHIFTHOPE_TIME_ID, SHIFT_TIME_START, SHIFT_TIME_END, SHIFTHOPE_TIME_START, SHIFTHOPE_TIME_END) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					statement = connection.prepareStatement(sql);
+					statement.setDate(1, shiftDate);
+					statement.setString(2, workerId);
+					statement.setString(3, storeId);
+					statement.setString(4, workTimeId);
+					statement.setString(5, shiftScore);
+				    statement.setString(6, shift_hope_time_id);
+				    statement.setString(7, shift_time_start);
+				    statement.setString(8, shift_time_end);
+				    statement.setTimestamp(9, customStartTime);
+					statement.setTimestamp(10, customEndTime);
+				} else {
+
+					//プリペアードステートメントにUPDATE文をセット
+					statement = connection.prepareStatement("UPDATE shift SET work_time_id=?, shift_time_start=?, shift_time_end=? WHERE shift_date=? AND worker_id=? AND store_id=? AND shift_score=?");
+					//プリペアードステートメントに値をバインド
+					statement.setString(1, workTimeId);
+					statement.setTimestamp(2, customStartTime);
+					statement.setTimestamp(3, customEndTime);
+					statement.setDate(4, shiftDate);
+					statement.setString(5, workerId);
+					statement.setString(6, storeId);
+					statement.setString(7, shiftScore);
+				}
+
+				statement.executeUpdate();
+
+			} finally {
+				if (statement != null) statement.close();
+				if (connection != null) connection.close();
+			}
+		}
+
 	// 追加メソッドを作成して、登録済みのシフトを取得
 	public Map<String, String> getSelectedShifts(String workerId) throws Exception {
 	    Connection connection = getConnection();
@@ -577,6 +666,19 @@ public class ShiftDao extends Dao{
             stmt.executeUpdate();
         }
     }
+
+	// シフト編集でなしを選んだ際に、DB上をnullにする
+	public void updatenullShift(String workerId, Date shiftDate) throws Exception {
+	    String sql;
+	    sql = "UPDATE shift SET work_time_id = NULL, shift_time_start = NULL, shift_time_end = NULL WHERE worker_id = ? AND shift_date = ?";
+
+
+	    try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
+	        stmt.setString(1, workerId);
+	        stmt.setDate(2, shiftDate);
+	        stmt.executeUpdate();
+	    }
+	}
 
 	public void ShiftUpdate(String workerId, Map<String, Object> workerInfo,Date shift_date) throws Exception{
 		String sql;
