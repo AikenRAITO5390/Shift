@@ -29,6 +29,8 @@ public class ShiftEditAction extends Action{
 		// セッションを取得
         HttpSession session = req.getSession();
 
+        int count = 1;
+
         // Daoを初期化
         ShiftDao shiftDao = new ShiftDao();
         WorkerDao workerDao  = new WorkerDao();
@@ -106,6 +108,7 @@ public class ShiftEditAction extends Action{
         req.setAttribute("dates", dates);
         req.setAttribute("shifts", shifts);
         req.setAttribute("worker_list", worker_list);
+        req.setAttribute("count", count);
 
 
         // JSPへフォワード

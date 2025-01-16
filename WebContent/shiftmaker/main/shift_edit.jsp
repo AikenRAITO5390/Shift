@@ -10,7 +10,7 @@
 <c:import url="../../common/header_work.jsp"/>
 
 <head>
-    <title>Shift Calendar</title>
+    <title>シフト編集</title>
     <style>
         table { width: 90%; border-collapse: collapse; margin: 20px auto; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <h1>Shift Calendar</h1>
+    <h1>シフト編集</h1>
     <table>
         <!-- 曜日ヘッダー -->
         <thead>
@@ -43,12 +43,12 @@
 		                    <c:when test="${shiftMap[workerlist.workerId][date] != null}">
 		                        <c:set var="shift" value="${shiftMap[workerlist.workerId][date]}" />
 		                        <c:if test="${shift.workTimeId != null}">
-		                            <a href="#?workerId=${workerlist.workerId}&date=${date}&workTimeId=${shift.workTimeId}" class="calendar-link">
+		                            <a href="ShiftEditSet.action?workerId=${workerlist.workerId}&date=${date}&workTimeId=${shift.workTimeId}&count=${count}" class="calendar-link">
 		                                ${shift.workTimeId}
 		                            </a>
 		                        </c:if>
 		                        <c:if test="${shift.workTimeId == null}">
-								    <a href="#?workerId=${workerlist.workerId}&date=${date}">
+								    <a href="ShiftEditSet.action?workerId=${workerlist.workerId}&date=${date}&shiftTimeStart=${shift.shiftTimeStart}&shiftTimeEnd=${shift.shiftTimeEnd}&count=${count}">
 		                                <fmt:formatDate value="${shift.shiftTimeStart}" pattern="HH:mm" /> -
 		                                <fmt:formatDate value="${shift.shiftTimeEnd}" pattern="HH:mm" />
 		                            </a>
@@ -56,7 +56,7 @@
 		                    </c:when>
 		                    <%-- シフト情報がない場合 --%>
 		                    <c:otherwise>
-		                    	<a href="#?workerId=${workerlist.workerId}&date=${date}">-</a>
+		                    	<a href="ShiftEditSet.action?workerId=${workerlist.workerId}&date=${date}&count=${count}">-</a>
 		                    </c:otherwise>
 		                </c:choose>
 		            </td>
