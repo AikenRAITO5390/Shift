@@ -29,7 +29,6 @@ public class WorkerDeleteExecuteAction extends Action {
 
     	//ログイン情報から名前を取得して"managerName"として渡す
 		Store stores = sDao.get(store.getStoreId());
-		req.setAttribute("managerName", stores.getManagerName());
 
         // 店IDの取得
         String STORE_ID = store.getStoreId();
@@ -55,11 +54,13 @@ public class WorkerDeleteExecuteAction extends Action {
             // リクエスト属性をセット
             req.setAttribute("errors", errors);
             req.setAttribute("WORKER_ID", WORKER_ID);
+            req.setAttribute("managerName", stores.getManagerName());
             req.getRequestDispatcher("worker_delete_ok.jsp").forward(req, res);
             return;
         }
+        req.setAttribute("managerName", stores.getManagerName());
 
         // 削除完了後に一覧画面へリダイレクト
-        res.sendRedirect("worker_delete_done.jsp");
+        req.getRequestDispatcher("worker_delete_done.jsp").forward(req, res);
     }
 }

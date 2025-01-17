@@ -6,74 +6,73 @@
 	margin-top : 60px;
 	text-align : center;
 }
-.label {
-	margin-left : 300px;
-	margin-top : 50px;
-	width: 70%;
-}
-.label_label {
-	margin-left : 800px;
-	margin-top : -500px;
 
+.container {
+    display: flex;
+    justify-content: space-between; /* 要素間のスペースを均等にする */
 }
-.label label{
-    margin: 0; /* デフォルトのマージンをリセット */
-    color: white;
-    padding: 10px 0; /* 上下のパディングを設定 */
-    margin-top: 10px;
-    border: 0.5px solid white; /* 青い枠線を設定 */
-    background-color: #75A9FF;
-    padding: 5px; /* 枠線と内容の間にスペースを追加 */
-    border-radius: 5px;
-    text-align: center; /* テキストを中央揃えにする */
 
-    width: 120px; /* 幅を固定 */
-    height: 35px; /* 高さを固定 */
-    box-sizing: border-box;
-    margin-right: 15px;
-    text-align: right;
-    margin-top: -5px;
-    text-align: center;
-
-}
-.label p{
-	width: 200px; /* 必要に応じて調整 */
-    max-width: 700px; /*  最大幅を700pxに設定 */
-    padding: 10px; /* 内側の余白を追加してボックスを大きく見せる */
-    margin-right: 40px;
-    box-sizing: border-box;
-}
-.label_label label{
-    margin: 0; /* デフォルトのマージンをリセット */
-    color: white;
-    padding: 10px 0; /* 上下のパディングを設定 */
-    margin-top: -100px;
-    border: 0.5px solid white; /* 白の枠線を設定 */
-    background-color: #75A9FF;
-    padding: 5px; /* 枠線と内容の間にスペースを追加 */
-    border-radius: 5px; /*角*/
-    text-align: center; /* テキストを中央揃えにする */
-
-	width: 80px; /* 幅を固定 */
-    height: 65px; /* 高さを固定 */
-    box-sizing: border-box;
-    margin-right: 230px;
-    text-align: right;
-    margin-top: -5px;
-    text-align: center;
-}
-.label_label p{
-	width: 200px; /* 必要に応じて調整 */
-    max-width: 700px; /*  最大幅を700pxに設定 */
-    padding: 10px; /* 内側の余白を追加してボックスを大きく見せる */
-    margin-right: 140px;
-    box-sizing: border-box;
+.label, .label_2 {
+    width: 60%; /* 幅を調整して隣に並べる */
+    box-sizing: border-box; /* パディングとボーダーを含めた幅を計算 */
 }
 
 .back a{
-	margin-top : 20px;
-	margin-left : 80px;
+	float: right;
+	margin-top : -30px;
+	margin-right : 150px;
+	font-size: 20px; /* フォントサイズを大きくする */
+    font-weight: bold; /* 太字にする */
+  /*  color: #2C7CFF;  テキストの色を変更 */
+  /*  text-decoration: none; 下線を消す */
 }
+
+.inline {
+            display: inline-block;
+            margin-right: 10px; /* 必要に応じて調整 */
+ }
+
+ .label h3{
+   	margin-left : 20%;
+   	text-align: center !important; /* 水平方向に中央揃え */
+    color: white;
+    margin-top: 20px; /* 右に10pxの余白を追加 */
+    border: 1px solid white; /* 白い枠線を設定 */
+    background-color: #6495ED; /* 背景色を設定 */
+    padding: 10px; /* 枠線と内容の間にスペースを追加 */
+     width:  25%;
+
+ }
+
+  .label p{
+    margin-top: 20px; /* 右に10pxの余白を追加 */
+    border: 1px solid #a9a9a9; /* 白い枠線を設定 */
+    padding: 10px; /* 枠線と内容の間にスペースを追加 */
+     width: 40%;
+
+
+  }
+
+   .label_2 h3{
+   margin-left : 5%;
+   	text-align: center !important; /* 水平方向に中央揃え */
+    color: white;
+    margin-top: 20px; /* 右に10pxの余白を追加 */
+    border: 1px solid white; /* 白い枠線を設定 */
+    background-color: #6495ED; /* 背景色を設定 */
+    padding: 10px; /* 枠線と内容の間にスペースを追加 */
+     width: 25%;
+
+ }
+
+  .label_2 p{
+    margin-top: 20px; /* 右に10pxの余白を追加 */
+    border: 1px solid #a9a9a9; /* 白い枠線を設定 */
+    padding: 10px; /* 枠線と内容の間にスペースを追加 */
+     width: 40%;
+
+
+  }
 </style>
 
 <head>
@@ -83,22 +82,23 @@
 <body>
 
 <div class="h2">
-    <h2>詳細</h2>
+    <h2>～詳細ページ～</h2>
 </div>
-
+<div class="container">
 <div class="label">
-    <label>ID  </label>  <p>${worker.workerId} </p>
-    <label>名前  </label> <p>${worker.workerName}</p>
-    <label>生年月日  </label> <p>${worker.workerDate}</p>
-    <label>住所  </label> <p>${worker.workerAddress}</p>
-    <label>電話番号  </label> <p>${worker.workerTel}</p>
+	<h3 class="inline">ID</h3><p class="inline">${worker.workerId}</p><br>
+	<h3 class="inline">名前</h3><p class="inline">${worker.workerName}</p><br>
+	<h3 class="inline">生年月日</h3><p class="inline">${worker.workerDate}</p><br>
+	<h3 class="inline">住所</h3><p class="inline">${worker.workerAddress}</p><br>
+	<h3 class="inline">電話番号</h3><p class="inline">${worker.workerTel}</p><br>
 </div>
 
-<div class="label_label">
-	<label>パスワード  </label> <p>${worker.workerPassword}</p>
-    <label>店情報  </label> <p>${worker.store.storeName}</p>
-    <label>実力 </label> <p>${worker.workerScore}</p>
-    <label>得意なポジション </label> <p>${worker.workerPosition}</p>
+<div class="label_2">
+	<h3 class="inline">パスワード</h3><p class="inline">${worker.workerPassword}</p><br>
+	<h3 class="inline">店情報</h3><p class="inline">${worker.store.storeName}</p><br>
+	<h3 class="inline">実力</h3><p class="inline">${worker.workerScore}</p><br>
+	<h3 class="inline">得意なポジション</h3><p class="inline">${worker.workerPosition}</p>
+</div>
 </div>
 
 <div class="back">

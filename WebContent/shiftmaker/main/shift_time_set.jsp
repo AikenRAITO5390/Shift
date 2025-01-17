@@ -6,28 +6,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <style>
-.h2 {
-	margin-top : 60px;
+.h2 h2{
+	margin-top : 80px;
 	text-align : center;
 }
 .time label{
-	margin-left: 290px;
-    width: 200px; /* 幅を設定 */
-    height: 100px; /* 高さを設定 */
-    top: 50px; /* 上からの位置を設定 */
-    left: 50px; /* 左からの位置を設定 */
+	margin-left: 440px;
+
+}
+.time h3{
+	margin-left: 30px;
+
 }
 .time select{
-	margin-left : 80px;
+	margin-left : 30px;
 }
-.time p{
-	/*position: absolute; /* 要素の位置を絶対位置に設定 */
-    z-index: 10; /* z-indexを設定して最前面に表示 */
-    width: 100px; /* 幅を設定 */
-    height: 10px; /* 高さを設定 */
-    margin-left : 480px;
-    margin-top : 4px;
-}
+
+
 .time_time {
 	margin-top : 60px;
 	text-align : center;
@@ -43,6 +38,13 @@
 	margin-top : -30px;
 	margin-left : 220px;
 }
+
+td {
+    width: 100px; /* 必要に応じて幅を調整 */
+    box-sizing: border-box; /* パディングとボーダーを含めた幅を計算 */
+}
+
+
 
 </style>
 
@@ -69,8 +71,6 @@
             <%--A~Dの表示　--%>
                 <td><label>${fn:substring('ABCD', i, i+1)}</label></td>
 
-
-
                 <td>
                 <%--スタート時間の表示--%>
                 <%--初期値timeSelectStart(下で設定）、nameはAのworkTimeStartでわたす　--%>
@@ -94,6 +94,7 @@
 	                                <option value="24:00:00">24:00</option>
                     </select>
                 </td>
+				<td><h3>～</h3></td>
                 <td>
                 <%--エンド時間の表示--%>
                 <%--初期値timeSelectEnd(下で設定）、nameはAのworkTimeEndでわたす　--%>
@@ -157,6 +158,7 @@
 	    <option value="23:00:00">23:00</option>
 	 	<option value="24:00:00">24:00</option>
      </select>
+     <h3>|</h3>
      <select name="storeTimeEnd">
      	<option value="00:00:00">00:00</option>
 		<option value="01:00:00">01:00</option>
@@ -211,7 +213,6 @@
             </c:choose>
         </c:forEach>
     </script>
-    <br>
 
     <div class="ok">
     <button type="submit">決定</button>
