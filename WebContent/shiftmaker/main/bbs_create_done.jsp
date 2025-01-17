@@ -34,11 +34,11 @@
 <h1>～掲示板投稿～</h1>
 </div>
 
-		<div class="p">
+<div class="p">
 <h4>投稿が完了しました</h4>
 </div>
 
-	<div class="a">
+<div class="a">
 <a href="BBS.action">掲示板一覧</a>
 </div>
 

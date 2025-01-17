@@ -97,7 +97,7 @@
 }
 
 .week_Setting tr:nth-child(7) input[type="number"] {
-    background-color: #FFABCE; /* 必要に応じて色を変更 */
+    background-color: #FF69A3; /* 必要に応じて色を変更 */
     color: inherit; /* 文字色をデフォルトに設定 */
 }
 

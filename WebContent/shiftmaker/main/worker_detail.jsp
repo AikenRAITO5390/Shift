@@ -7,53 +7,72 @@
 	text-align : center;
 }
 .label {
-	margin-left : 10px;
+	margin-left : 300px;
 	margin-top : 50px;
-	width: 50%;
-
+	width: 70%;
 }
-.labela {
-	margin-top : -365px;
-	margin-left : 600px;
-	width: 50%;
+.label_label {
+	margin-left : 800px;
+	margin-top : -500px;
+
 }
 .label label{
-	margin-left : 50px;
-
-    padding: 2px;
-    text-align: center;
-    background-color: #6495ED;
+    margin: 0; /* デフォルトのマージンをリセット */
     color: white;
-    width: 100px;
+    padding: 10px 0; /* 上下のパディングを設定 */
+    margin-top: 10px;
+    border: 0.5px solid white; /* 青い枠線を設定 */
+    background-color: #75A9FF;
+    padding: 5px; /* 枠線と内容の間にスペースを追加 */
+    border-radius: 5px;
+    text-align: center; /* テキストを中央揃えにする */
+
+    width: 120px; /* 幅を固定 */
+    height: 35px; /* 高さを固定 */
+    box-sizing: border-box;
+    margin-right: 15px;
+    text-align: right;
+    margin-top: -5px;
+    text-align: center;
 
 }
 .label p{
-	margin-left : 170px;
-	margin-top: -20px;
-
-	border: 1px solid #000;
-    padding: 2px;
-    text-align: center;
+	width: 200px; /* 必要に応じて調整 */
+    max-width: 700px; /*  最大幅を700pxに設定 */
+    padding: 10px; /* 内側の余白を追加してボックスを大きく見せる */
+    margin-right: 40px;
+    box-sizing: border-box;
 }
-.labela label{
-	margin-left : 80px;
-
-    padding: 4px;
-    text-align: center;
-    background-color: #6495ED;
+.label_label label{
+    margin: 0; /* デフォルトのマージンをリセット */
     color: white;
-}
-.labela p{
-	margin-left : 270px;
-	margin-top: -20px;
+    padding: 10px 0; /* 上下のパディングを設定 */
+    margin-top: -100px;
+    border: 0.5px solid white; /* 白の枠線を設定 */
+    background-color: #75A9FF;
+    padding: 5px; /* 枠線と内容の間にスペースを追加 */
+    border-radius: 5px; /*角*/
+    text-align: center; /* テキストを中央揃えにする */
 
-	border: 1px solid #000;
-    padding: 2px;
+	width: 80px; /* 幅を固定 */
+    height: 65px; /* 高さを固定 */
+    box-sizing: border-box;
+    margin-right: 230px;
+    text-align: right;
+    margin-top: -5px;
     text-align: center;
 }
-.label a{
-	margin-top : 60px;
-	margin-left : 55px;
+.label_label p{
+	width: 200px; /* 必要に応じて調整 */
+    max-width: 700px; /*  最大幅を700pxに設定 */
+    padding: 10px; /* 内側の余白を追加してボックスを大きく見せる */
+    margin-right: 140px;
+    box-sizing: border-box;
+}
+
+.back a{
+	margin-top : 20px;
+	margin-left : 80px;
 }
 </style>
 
@@ -73,16 +92,17 @@
     <label>生年月日  </label> <p>${worker.workerDate}</p>
     <label>住所  </label> <p>${worker.workerAddress}</p>
     <label>電話番号  </label> <p>${worker.workerTel}</p>
-    <label>パスワード  </label> <p>${worker.workerPassword}</p>
-    <label>店情報  </label> <p>${worker.store.storeName}</p>
-
-
-    <a href="WorkerDate.action">戻る</a>
 </div>
 
-<div class="labela">
-	<label>実力 </label> <p>${worker.workerScore}</p>
+<div class="label_label">
+	<label>パスワード  </label> <p>${worker.workerPassword}</p>
+    <label>店情報  </label> <p>${worker.store.storeName}</p>
+    <label>実力 </label> <p>${worker.workerScore}</p>
     <label>得意なポジション </label> <p>${worker.workerPosition}</p>
+</div>
+
+<div class="back">
+<a href="WorkerDate.action">トップページに戻る</a>
 </div>
 
 <c:import url="../../common/footer.jsp"/>
