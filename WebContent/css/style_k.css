@@ -93,7 +93,7 @@ label {
 /*戻るボタン*/
 .shift_condtion_signup_input_back{
 	text-align: center;
-	margin-top: -330px;
+	margin-top: -360px;
 	margin-left: 1105px;
 	position: fixed; /* 要素を固定 */
 }
@@ -114,10 +114,12 @@ label {
     background-color: white;
     color: block;
     width: 35%;    /* テーブル幅の調整 */
-    margin-top: 20px;
+    margin-top: 25px;
 }
 .shift_condtion_signup_table_label p{
-	margin-top: 20px;
+	margin-top: 30px;
+	margin-top: 30px;
+	color: red;
 }
 
 

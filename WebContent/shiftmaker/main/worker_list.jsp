@@ -4,54 +4,55 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <style>
-.h2 h2{
+.h2 {
 	margin-top : 60px;
 	text-align : center;
 }
-.h3 h3{
+.h3 {
 	text-align : left;
-}
-.table{
-	border-collapse: collapse;
-    width: 88%;
-}
-.tr ,th {
-    border: 1px solid #000;
-    padding: 4px;
-    text-align: center;
-    background-color: #6495ED;
-    color: white;
-}
-.tr ,td {
-    border: 1px solid #000;
-    padding: 8px;
-    text-align: center;
-}
-.td ,a {
 	margin-left : 50px;
-	color: red;
+	margin-bottom : 5px;
 }
-.worker-links {
-    display: flex;
-    flex-direction: column; /* 縦方向に配置 */
-    align-items: flex-start; /* 左端に配置 */
-    margin-top: -30px;
-    margin-right: 19px;
+.h3_h3 {
+	text-align : left;
+	margin-left : 50px;
+}
+.workertable {
+    width: 90%; /* 画面の幅いっぱいに広げる */
+    margin-left : 50px;
+    text-align : center;
 
-  }
-.main {
-    margin-left: -50px;
-    color: block;
-    margin-top: 10px;
-    margin-bottom: 20px;
-  }
-.a {
-	margin: 3px;
-    margin-left: 1053px;
-    color: red;
-    margin-top: -39px;
+    white-space: nowrap; /* 改行をしない */
+    overflow: hidden; /* はみ出た部分を非表示 */
+    text-overflow: ellipsis; /* 省略記号を表示 */
+}
+.workertable th {
+    background-color: #6495ED; /* 背景色を水色に設定 */
+    border: 1px solid #000; /* 枠線を黒に設定 */
+    color: white;
+    width: 10%; /* 画面の幅いっぱいに広げる */
+}
+.managertable {
+    width: 90%; /* 画面の幅いっぱいに広げる */
+    margin-left : 50px;
+    text-align : center;
+
+    white-space: nowrap; /* 改行をしない */
+    overflow: hidden; /* はみ出た部分を非表示 */
+    text-overflow: ellipsis; /* 省略記号を表示 */
+}
+.managertable th {
+    background-color: #6495ED; /* 背景色を水色に設定 */
+    border: 1px solid #000; /* 枠線を黒に設定 */
+    color: white;
+    width: 10%; /* 画面の幅いっぱいに広げる */
+    margin-left : 30px;
     margin-bottom: 50px;
-  }
+}
+.main {
+    margin-left: 1080px;
+    margin-top: -390px;
+}
 </style>
 
 <head>
@@ -86,37 +87,40 @@
                 <th>電話番号</th>
                 <th>パスワード</th>
                 <th>店情報</th>
+
             </tr>
             <c:forEach var="worker" items="${workersnot}">
                 <tr>
-                    <td>${worker.workerId}</td>
+					<td>${worker.workerId}</td>
                     <td>${worker.workerName}</td>
                     <td>${worker.workerDate}</td>
                     <td>${worker.workerAddress}</td>
                     <td>${worker.workerTel}</td>
                     <td>${worker.workerPassword}</td>
                     <td>${stores.storeName}</td>
+
+                    <td><a href="WorkerUpdate.action?workerId=${worker.workerId}">変更</a>
+                    <a href="WorkerDelete.action?WORKER_ID=${worker.workerId}">削除</a></td>
+
+
                 </tr>
             </c:forEach>
         </table>
-        <!-- 変更と削除リンクをテーブル外に配置 -->
-        <div class="worker-links">
-            <c:forEach var="worker" items="${workersnot}">
-                <div class="a">
-                <a href="WorkerUpdate.action?workerId=${worker.workerId}">変更</a>
-                <a href="WorkerDelete.action?WORKER_ID=${worker.workerId}">削除</a>
-                </div>
-            </c:forEach>
-        </div>
+        <hr>
     </c:if>
 </div>
 
-<h3>社員</h3>
+
+<div class="h3_h3">
+	<h3>社員</h3>
+</div>
 
 <c:if test="${empty workers}">
     <p>社員が見つかりませんでした。</p>
 </c:if>
 
+
+<div class="managertable">
 <c:if test="${not empty workers}">
     <table class="table table-hover">
         <tr>
@@ -137,22 +141,18 @@
                 <td>${worker.workerTel}</td>
                 <td>${worker.workerPassword}</td>
                 <td>${stores.storeName}</td>
+
+                <td><a href="WorkerUpdate.action?workerId=${worker.workerId}">変更</a>
+                <a href="WorkerDelete.action?WORKER_ID=${worker.workerId}">削除</a></td>
             </tr>
         </c:forEach>
     </table>
-    <!-- 変更と削除リンクをテーブル外に配置 -->
-    <div class="worker-links">
-        <c:forEach var="worker" items="${workers}">
-        <div class="a">
-            <a href="WorkerUpdate.action?workerId=${worker.workerId}">変更</a>
-            <a href="WorkerDelete.action?WORKER_ID=${worker.workerId}">削除</a>
-        </div>
-        </c:forEach>
-    </div>
+    <hr>
 </c:if>
+</div>
 
 <div class="main">
-	<a href="Main.action">メインへ戻る</a>
+	<a href="Main.action">トップページへ戻る</a>
 </div>
 <c:import url="../../common/footer.jsp"/>
 
