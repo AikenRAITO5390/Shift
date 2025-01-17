@@ -196,7 +196,7 @@ public class ShiftCreate {
 						worker.maxHours--;
 						kitchenNeeded = kitchenNeeded-worker.power;
 						//従業員の役割がホールの場合
-					} else if (worker.role.equals("hole") && hallNeeded > 0) {
+					} else if (worker.role.equals("hall") && hallNeeded > 0) {
 						Map<String, String> assignment = new HashMap<>();
 						assignment.put("name", worker.name);
 						assignment.put("role", worker.role);
