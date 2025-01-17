@@ -776,6 +776,54 @@ public class ShiftDao extends Dao{
 
 	}
 
+	// shift_scoreのget
+		public String shiftScoreGet2(Date shift_date, String store_id, String worker_id) throws Exception{
+
+			Connection connection = getConnection();
+		    PreparedStatement statement = null;
+		    String shift_score = null;
+
+			String sql = "SELECT shift_score from shift where shift_date = ? and store_id = ? AND worker_id = ?";
+			try{
+				statement = connection.prepareStatement(sql);
+				// プレースホルダーにstoreNameをセット
+				statement.setDate(1, shift_date);
+				statement.setString(2, store_id);
+				statement.setString(3, worker_id);
+				ResultSet rSet = statement.executeQuery();
+
+				// リザルトセットからシフトインスタンスを作成
+				if(rSet.next()) {
+					shift_score = rSet.getString("SHIFT_SCORE");
+				}
+
+
+	    	} catch (SQLException e) {
+//	        		e.printStackTrace();
+	    		throw e;
+	    	} finally {
+	    		// リソースを閉じる
+	    		if (statement != null) {
+	    			try {
+	    				statement.close();
+	    			} catch (SQLException sqle) {
+	    				throw sqle;
+	    			}
+	        }
+
+
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	    	}
+			return shift_score;
+
+		}
+
 	// shiftDBにworker_idに対応したシフトデータがあるかどうかを調べる
 	public boolean checkIfShiftExists(String workerId, int year, int month) throws Exception{
 

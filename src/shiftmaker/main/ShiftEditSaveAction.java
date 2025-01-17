@@ -130,6 +130,10 @@ public class ShiftEditSaveAction extends Action {
 	    List<LocalDate> dates = calende.Calender(year, nextmonth);
 	    dates.removeIf(Objects::isNull);
 
+	    // 参考時間表示のため
+    	List<Store> workTimeDetails = storeDao.getWorkTimes(manager.getStoreId());
+    	req.setAttribute("workTimeDetails", workTimeDetails);
+
 
 	    req.setAttribute("shiftMap", shiftMap);
 	    req.setAttribute("shifts", shifts);

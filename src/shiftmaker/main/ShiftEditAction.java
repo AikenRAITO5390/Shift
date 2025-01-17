@@ -1,5 +1,6 @@
 package shiftmaker.main;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import bean.Shift;
 import bean.Store;
 import bean.Worker;
 import dao.ShiftDao;
+import dao.StoreDao;
 import dao.WorkerDao;
 import tool.Action;
 import tool.CalendeCreate;
@@ -34,6 +36,7 @@ public class ShiftEditAction extends Action{
         // Daoを初期化
         ShiftDao shiftDao = new ShiftDao();
         WorkerDao workerDao  = new WorkerDao();
+        StoreDao storeDao = new StoreDao();
         CalendeCreate calende = new CalendeCreate();
 
         LocalDate todaysDate = LocalDate.now();
@@ -80,6 +83,8 @@ public class ShiftEditAction extends Action{
 
         // 従業員IDと日付をキーにシフト情報を格納するマップ
         Map<String, Map<LocalDate, Shift>> shiftMap = new HashMap<>();
+        // 日付ごとの shift_score を格納
+        Map<LocalDate, Map<String, Integer>> shiftScores = new HashMap<>();
 
         // シフトデータを整理
         for (Shift shift : shifts) {
@@ -97,14 +102,37 @@ public class ShiftEditAction extends Action{
             String workTimeId = shift.getWorkTimeId();
             System.out.println("workTimeId: " + workTimeId);
 
+            // LocalDate を java.sql.Date に変換
+            Date sqlDate = Date.valueOf(shiftDate);
+
+            // shift_score を取得
+            String shiftScore = shiftDao.shiftScoreGet2(sqlDate, storeId, workerId);
+            System.out.println("shiftScore: " + shiftScore);
+
+            // String を int に変換
+            int shiftScore2 = 0;  // 初期値を 0 に設定
+            try {
+                shiftScore2 = Integer.parseInt(shiftScore);  // String を int に変換
+            } catch (NumberFormatException e) {
+                System.out.println("shiftScore の変換に失敗しました: " + shiftScore);
+            }
+
             shiftMap.computeIfAbsent(workerId, k -> new HashMap<>()).put(shiftDate, shift);
+
+            // shiftScores に shift_score を格納
+            shiftScores.computeIfAbsent(shiftDate, k -> new HashMap<>()).put(workerId, shiftScore2);
 
 
         }
 
+        // 参考時間表示のため
+    	List<Store> workTimeDetails = storeDao.getWorkTimes(manager.getStoreId());
+    	req.setAttribute("workTimeDetails", workTimeDetails);
+
 
         // リクエストにデータをセット
         req.setAttribute("shiftMap", shiftMap);
+        req.setAttribute("shiftScores", shiftScores);
         req.setAttribute("dates", dates);
         req.setAttribute("shifts", shifts);
         req.setAttribute("worker_list", worker_list);

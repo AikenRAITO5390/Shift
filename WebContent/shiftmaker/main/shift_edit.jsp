@@ -7,7 +7,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ja">
 
-<c:import url="../../common/header_work.jsp"/>
+<c:import url="../../common/header.jsp"/>
 
 <head>
     <title>シフト編集</title>
@@ -26,7 +26,19 @@
         <tr>
             <th>名前</th>
             <c:forEach var="date" items="${dates}">
-                <th>${date.dayOfMonth}</th>
+                <th>
+                	${date.dayOfMonth}
+                	<c:choose>
+                        <c:when test="${shiftScores[date] != null}">
+                            <br>
+                            <!-- shift_score を表示 -->
+                            <c:forEach var="workerId" items="${shiftScores[date].keySet()}">
+                                <c:set var="score" value="${shiftScores[date][workerId]}" />
+                                ${score}
+                            </c:forEach>
+                        </c:when>
+                    </c:choose>
+                </th>
             </c:forEach>
         </tr>
         </thead>
@@ -65,6 +77,31 @@
 		</c:forEach>
         </tbody>
     </table>
+
+    <!-- StoreDBから情報取得。表示するだけ -->
+    <h3>＜店舗のシフト時間参考＞</h3>
+		<table>
+		    <thead>
+		        <tr>
+		            <th>勤務時間ID</th>
+		            <th>開始時間</th>
+		            <th>終了時間</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <c:forEach var="workTime" items="${workTimeDetails}">
+		            <tr>
+		            	<c:if test="${workTime.workTimeId != 'F'}">
+		            		<td>${workTime.workTimeId}</td>
+			                <td>${workTime.workTimeStart}</td>
+			                <td>${workTime.workTimeEnd}</td>
+		            	</c:if>
+		            </tr>
+		        </c:forEach>
+		    </tbody>
+		</table>
+
+	<a href="Main.action">メインへ</a>
 </body>
 
 <c:import url="../../common/footer.jsp"/>

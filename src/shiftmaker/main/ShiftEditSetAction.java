@@ -1,6 +1,8 @@
 package shiftmaker.main;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +26,7 @@ public class ShiftEditSetAction extends Action{
 		HttpSession session = req.getSession();
 
 		String countStr = req.getParameter("count");
-		int count = Integer.parseInt(countStr);
+		int count = (countStr != null && !countStr.isEmpty()) ? Integer.parseInt(countStr) : 0;
 		System.out.println("count：" + count);
 
 		// ログインユーザーを取得
@@ -78,11 +80,20 @@ public class ShiftEditSetAction extends Action{
         System.out.println("customEndTime: " + customEndTime);
 
 
-        // カスタム時間の検証（エラー処理）
-        if (customStartTime != null && customEndTime != null) {
-            int startHour = Integer.parseInt(customStartTime);
-            int endHour = Integer.parseInt(customEndTime);
+     // カスタム時間の検証（エラー処理）
+        if (customStartTime != null && !customStartTime.isEmpty() && customEndTime != null && !customEndTime.isEmpty()) {
+            // 日付と時刻の形式を解析するためのフォーマットを作成
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
 
+            // 文字列をLocalDateTimeとしてパース
+            LocalDateTime startDateTime = LocalDateTime.parse(customStartTime, formatter);
+            LocalDateTime endDateTime = LocalDateTime.parse(customEndTime, formatter);
+
+            // 時間部分（Hour）を抽出
+            int startHour = startDateTime.getHour();  // 08
+            int endHour = endDateTime.getHour();  // 12
+
+            // 開始時刻と終了時刻が正しいか確認
             if (startHour >= endHour) {
                 req.setAttribute("errorMessage", "正確に時間を選択してください。");
                 req.getRequestDispatcher("shift_worker_signup_set.jsp").forward(req, res);
