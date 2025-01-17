@@ -15,7 +15,7 @@
 <body>
 
 <c:import url="../../common/header.jsp"/>
-<h2>売上入力</h2>
+<h2>～売上入力～</h2>
 
 <div class="tmain">
 

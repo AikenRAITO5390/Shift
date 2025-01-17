@@ -6,7 +6,7 @@
 <html>
 	<c:import url="../../common/header.jsp"/>
 <div class="body">
-	    <h2>シフト条件登録結果</h2>
+	    <h2>～シフト条件登録結果～</h2>
 
 	    <!-- メッセージ表示 -->
 	    <c:if test="${not empty message}">

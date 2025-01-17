@@ -29,7 +29,7 @@
 <c:import url="../../common/header.jsp"/>
 
 <div class="h2">
-	<h2>時間変更完了</h2>
+	<h2>～時間変更完了～</h2>
 
 		<p>変更が完了しました</p>
 	<a href="Main.action">メインメニューへ</a>

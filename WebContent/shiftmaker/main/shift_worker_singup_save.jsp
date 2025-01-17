@@ -17,7 +17,7 @@
     </style>
 </head>
 <body>
-    <h1>カレンダー</h1>
+    <h1>～カレンダー～</h1>
     <table>
         <tr>
             <th>日</th>

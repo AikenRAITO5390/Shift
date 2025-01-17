@@ -10,7 +10,7 @@
 
 	<div class="body">
 
-			<h2>従業員希望シフト登録</h2>
+			<h2>～従業員希望シフト登録～</h2>
 			<p>送信されました</p>
 			<a href="MainWork.action">メインへ</a>
 

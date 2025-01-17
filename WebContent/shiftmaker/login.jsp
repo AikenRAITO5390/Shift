@@ -41,7 +41,7 @@
 .login input[type="submit"] {
     width: 110px; /* ボタンの幅を200pxに設定 */
     height: 40px; /* ボタンの高さを50pxに設定 */
-    background-color: #00BFFF; /* 背景色を水色に設定 */
+    background-color: #6495ED; /* 背景色を水色に設定 */
     color: #FFFFFF; /* 文字色を白に設定 */
     font-size: 16px; /* 文字サイズを16pxに設定 */
     border: none; /* ボーダーをなしに設定 */

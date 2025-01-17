@@ -133,7 +133,7 @@
 <body>
 <div class = "power_Setting">
 
-<h1>パワーバランス設定</h1>
+<h1>～パワーバランス設定～</h1>
 <p>"${toDay}分"</p>
 <a href="Main.action">トップページに戻る</a>
 

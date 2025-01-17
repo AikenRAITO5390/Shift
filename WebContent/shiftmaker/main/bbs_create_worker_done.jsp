@@ -92,7 +92,7 @@
 
 <body>
 <div class="h2">
-	<h2>掲示板投稿</h2>
+	<h2>～掲示板投稿～</h2>
 </div>
 
 	<div class="p">

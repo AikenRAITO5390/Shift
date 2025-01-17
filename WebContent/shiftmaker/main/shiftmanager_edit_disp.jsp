@@ -15,7 +15,7 @@
 <c:import url="../../common/header.jsp"/>
 <div class = "shift_manager">
 
-	<h2>シフト作成者変更</h2>
+	<h2>～シフト作成者変更～</h2>
 <%-- 次とばす場所の設定 --%>
         <form id="myForm" action="ShiftManagerSignupResult.action" method="post">
 <%-- css設定のためのdiv_class --%>

@@ -38,7 +38,7 @@
 <%-- ヘッダーサイドバーの設定 --%>
 <c:import url="../../common/header.jsp"/>
 <div class="shiftmanager_edit">
-	<h2>シフト作成者変更</h2>
+	<h2>～シフト作成者変更～</h2>
 		<p>変更が完了しました</p>
 	<a href="Main.action">メインメニューへ</a>
 </div>

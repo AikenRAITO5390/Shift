@@ -25,7 +25,7 @@
 
 </style>
 <head>
-    <title>従業員情報削除</title>
+    <title>～従業員情報削除～</title>
 </head>
 
 <c:import url="../../common/header.jsp"/>

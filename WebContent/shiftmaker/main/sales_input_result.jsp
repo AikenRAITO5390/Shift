@@ -12,7 +12,7 @@
 	<c:import url="../../common/header.jsp"/>
 
 <div class="tmain">
-	    <h2>売上登録完了</h2>
+	    <h2>～売上登録完了～</h2>
 
 	<p>売上の登録が完了しました</p>
 

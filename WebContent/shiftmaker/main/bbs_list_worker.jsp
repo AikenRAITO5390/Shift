@@ -129,14 +129,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>～従業員掲示板～</title>
+    <title>従業員掲示板</title>
 </head>
 
 <c:import url="../../common/header_work.jsp"/>
 <body>
 
 	<div class="h1">
-    	<h1>掲示板</h1>
+    	<h1>～掲示板～</h1>
 	</div>
 
 <div class="tabel">

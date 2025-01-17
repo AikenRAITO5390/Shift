@@ -51,7 +51,7 @@
 }
 .main {
     margin-left: 1080px;
-    margin-top: -390px;
+    margin-top: -380px;
 }
 </style>
 
@@ -65,7 +65,7 @@
 <body>
 
 <div class="h2">
-    <h2>従業員一覧</h2>
+    <h2>～従業員一覧～</h2>
 </div>
 
 <div class="h3">

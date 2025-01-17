@@ -12,7 +12,7 @@
 
 
 	<!-- 画面タイトル -->
-	<h2>シフト条件変更完了</h2>
+	<h2>～シフト条件変更完了～</h2>
 
 	<div>${message}</div>
     <a href="ShiftConditionWorkerList.action">一覧に戻る</a>

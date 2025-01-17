@@ -39,11 +39,8 @@
 
 }
 .main{
-	margin-left: -3px;
-    color: block;
-    margin-top: 15px;
-    margin-bottom: 15px;
-
+	margin-left: 1080px;
+    margin-top: -420px;
 }
 
 
@@ -69,7 +66,7 @@
 
 
 <div class="h2">
-    <h2>従業員一覧</h2>
+    <h2>～従業員一覧～</h2>
 </div>
 
 <div class="h3">
@@ -150,7 +147,7 @@
     </c:if>
 
     <div class="main">
-    <a href="Main.action">メインへ戻る</a>
+    <a href="Main.action">トップページへ戻る</a>
     </div>
 </div>
 

@@ -103,7 +103,7 @@
 <body>
 
 <div class="delete">
-    <h1>削除確認</h1>
+    <h1>～削除確認～</h1>
 </div>
 
 <div class = "user">

@@ -11,7 +11,7 @@
 <body>
 <%-- ヘッダーとサイドバー --%>
 <c:import url="../../common/header.jsp"/>
-	<h2>パワー設定変更完了</h2>
+	<h2>～パワー設定変更完了～</h2>
 		<p>変更が完了しました</p>
 	<a href="Main.action">メインメニューへ</a>
 	<a href="PowerSetting.action">点数設定へ戻る</a>

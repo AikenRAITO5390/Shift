@@ -31,7 +31,7 @@
 <body>
 
 <div class="h2">
-	<h2>従業員情報削除</h2>
+	<h2>～従業員情報削除～</h2>
 </div>
 
 <div class="p">

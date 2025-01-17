@@ -35,7 +35,7 @@ function setRating(rating) {
 
 		<!-- 画面タイトル -->
 		<div class="h2">
-			<h2>シフト条件変更</h2>
+			<h2>～シフト条件変更～</h2>
 		</div>
 
 		<!-- 余白 -->
