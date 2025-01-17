@@ -41,20 +41,16 @@
     padding: 10px 20px; /* ボタンの内側の余白を調整 */
      width:  100px;
     margin-top: 10px;
-    margin-right: 20%;
     display: inline-block;
     float: right;
 
 }
 
 .submit a{
-    background-color: #6495ED;
-    color: white;
-    border: 1px solid white;
-    padding: 10px 20px; /* ボタンの内側の余白を調整 */
      width:  100px;
-    margin-top: 10px;
-    margin-right: 20%;
+    margin-top: 30px;
+    margin-right: 10px;
+    margin-left: 20px;
     display: inline-block;
     float: right;
 

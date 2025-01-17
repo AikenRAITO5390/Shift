@@ -196,19 +196,18 @@ input[type="submit"]:hover {
 }
 
 .shift_manager label {
-	 margin: 0; /* デフォルトのマージンをリセット */
     color: white;
     padding: 10px 0; /* 上下のパディングを設定 */
-    margin-top: 10px;
     border: 0.5px solid black; /* 青い枠線を設定 */
     background-color: #75A9FF;
     padding: 5px; /* 枠線と内容の間にスペースを追加 */
     border-radius: 5px;
     text-align: center; /* テキストを中央揃えにする */
+	display: inline-block;
+    width: 200px; /* 幅を固定 */
+    height: 20px; /* 高さを固定 */
 
-    width: 120px; /* 幅を固定 */
-    height: 35px; /* 高さを固定 */
-    box-sizing: border-box;
+
     margin-right: 15px;
     text-align: right;
     margin-top: -5px;
