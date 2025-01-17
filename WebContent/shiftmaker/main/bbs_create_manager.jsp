@@ -5,20 +5,22 @@
 
 <style>
 .date1{
-    margin-top : -50px;
-    margin-left: 820px;
+    margin-top : -60px;
+    margin-left: 85%;
 }
 .name1{
     margin-left: 20px;
     margin-top : 15px;
 }
 .text1 textarea{
+
 	margin-top : -10px;
     margin-left: 20px;
-    width: 900px; /* 画面の幅いっぱいに広げる */
+    width: 95%; /* 画面の幅いっぱいに広げる */
     height: 320px;
 }
 .create1{
+ 	 z-index: 0;
 	border: 1px solid ; /* 枠線を設定 */
 	background-color: #EEEEEE; /* 背景色を設定 */
     padding: 2px; /* 枠線と内容の間にスペースを追加 */
@@ -28,6 +30,25 @@
     margin-left: 10px;
     width: 97%; /* 画面の幅いっぱいに広げる */
     height: 400px;
+     position: relative;
+}
+
+
+ .submit input[type="submit"] {
+   z-index: 1;
+	margin-top : -80px !important;
+	margin-left: 70%;
+    background-color: #2C7CFF;
+    color: white;
+    border: 1px solid white;
+    padding: 10px 20px; /* ボタンの内側の余白を調整 */
+    border: 1px solid white; /* 白い枠線を設定 */
+    font-size: 20px; /* フォントサイズを調整 */
+    border-radius: 4px; /* 角を丸くする */
+    width: 160px;
+     height: 60px;
+    position: absolute;
+
 }
 
 
@@ -57,7 +78,7 @@
         <input type="hidden" name="STORE_ID" value="${StoreId}" readonly required><br>
 
         <div class="date1">
-        <label for="bbs_date"></label>
+        <label for="bbs_date">日付：</label>
         <label>${today}</label>
         <input type="hidden" id="bbs_date" name="BBS_DATE" value="${today}" readonly><br><br>
         </div>
@@ -68,8 +89,10 @@
         </div>
 
    </div>
+   <div class ="submit">
+   		<a href="BBS.action">掲示板へ戻る</a>
         <input type="submit" value="投稿">
-        <a href="BBS.action">戻る</a>
+   </div>
     </form>
 
 <c:import url="../../common/footer.jsp"/>

@@ -13,7 +13,8 @@ body {
     display: flex;
     justify-content: space-between; /* 子要素を左右に均等に配置 */
     align-items: stretch; /* 子要素の高さを揃える */
-    margin-top: 50px; /* ヘッダーの高さ分だけ下に配置 */
+    margin-top: 90px; /* ヘッダーの高さ分だけ下に配置 */
+     margin-left: 50px
 }
 
 .left-content, .center-content, .right-content {
@@ -146,7 +147,8 @@ input[type="submit"]:hover {
     flex-direction: column; /* 縦方向に配置 */
     justify-content: center; /* 子要素を上下中央に配置 */
     align-items: center; /* 子要素を左右中央に配置 */
-    margin-top: 50px; /* ヘッダーの高さ分だけ下に配置 */
+        margin-top: 90px; /* ヘッダーの高さ分だけ下に配置 */
+     margin-left: 50px/* ヘッダーの高さ分だけ下に配置 */
 }
 
 .main_worker-content h2 a {

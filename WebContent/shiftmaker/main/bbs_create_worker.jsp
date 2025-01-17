@@ -5,20 +5,21 @@
 <style>
 .date1{
     margin-top : -110px;
-    margin-left: 820px;
-    margin-bottom: 40px;
+    margin-left: 85%;
 }
 .name1{
     margin-left: 20px;
     margin-top : 15px;
 }
 .text1 textarea{
-	margin-top : -30px;
+
+	margin-top : -10px;
     margin-left: 20px;
-    width: 900px; /* 画面の幅いっぱいに広げる */
+    width: 95%; /* 画面の幅いっぱいに広げる */
     height: 320px;
 }
 .create1{
+ 	 z-index: 0;
 	border: 1px solid ; /* 枠線を設定 */
 	background-color: #EEEEEE; /* 背景色を設定 */
     padding: 2px; /* 枠線と内容の間にスペースを追加 */
@@ -28,69 +29,28 @@
     margin-left: 10px;
     width: 97%; /* 画面の幅いっぱいに広げる */
     height: 400px;
+     position: relative;
 }
-.footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 15px;
-    background: #7d7d7d;
+
+
+ .submit input[type="submit"] {
+   z-index: 1;
+	margin-top : -80px !important;
+	margin-left: 70%;
+    background-color: #2C7CFF;
     color: white;
-    z-index: 1000;
-}
-.footer p {
-    font-size: 12px; /* 文字サイズを12pxに設定 */
-    margin: 0; /* デフォルトのマージンをリセット */
-    padding: 0; /* デフォルトのパディングをリセット */
-    line-height: 15px; /* 行の高さを15pxに設定 */
-    text-align: center;
-}
-.sidebar {
-    display: none;
-    width: 200px;
-    height: 100%;
-    background-color: #7d7d7d;
-    position: fixed;
-    left: 0;
-    top: 50px;
-    padding: 10px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-}
-.header_work {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 50px;
-    background: #7d7d7d;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: white;
-    z-index: 1000;
-    flex-direction: row; /* 横方向に配置 */
-    justify-content: space-between; /* 左右に配置 */
-}
-.header h2{
-	color: white;
-}
-
-.ushiro {
-    display: flex;
-    flex-direction: column; /* 縦方向に配置 */
-    align-items: flex-end; /* 右端に配置 */
-    justify-content: center; /* 垂直方向に中央揃え */
-    height: 100%; /* 親要素の高さを継承 */
-     padding-right: 15px;
-}
-
-.ushiro a,
-.ushiro p {
-    margin: 0; /* デフォルトのマージンをリセット */
-    padding: 2px 0; /* 上下のパディングを設定 */
+    border: 1px solid white;
+    padding: 10px 20px; /* ボタンの内側の余白を調整 */
+    border: 1px solid white; /* 白い枠線を設定 */
+    font-size: 20px; /* フォントサイズを調整 */
+    border-radius: 4px; /* 角を丸くする */
+    width: 160px;
+     height: 60px;
+    position: absolute;
 
 }
+
+
 </style>
 
 <head>
@@ -108,7 +68,7 @@
 	<div class="create1">
 
 		<div class="name1">
-        <label for="worker_id">投稿者ID:</label>
+        <label for="worker_id">投稿者:</label>
         <label>${UserName}</label>
         <input type="hidden" name="WORKER_NAME" value="${UserName}"  readonly required><br><br>
         <input type="hidden" name="WORKER_ID" value="${WorkerId}"  readonly required><br><br>
@@ -118,7 +78,7 @@
         <input type="hidden" name="STORE_ID" value="${StoreId}" readonly required><br><br>
 
         <div class="date1">
-        <label for="bbs_date"></label>
+        <label for="bbs_date">日付:</label>
         <label>${today}</label>
         <input type="hidden" id="bbs_date" name="BBS_DATE" value="${today}" readonly><br><br>
         </div>
@@ -129,13 +89,14 @@
         </div>
 
 	</div>
+	<div class ="submit">
+		<a href="BBSWorker.action">掲示板へ戻る</a>
         <input type="submit" value="投稿">
-        <a href="BBSWorker.action">戻る</a>
+
+        </div>
     </form>
 
-<div class="footer">
-	<p>ＴＥＡＭ Ⅽ   Bug Busters</p>
-</div>
+<c:import url="../../common/footer.jsp"/>
 
 </body>
 </html>
