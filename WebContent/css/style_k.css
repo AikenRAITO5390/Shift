@@ -57,7 +57,6 @@ label {
     align-items: center;    /* 垂直方向の中央揃え */
 
 }
-
 .table {
     width: 80%;    /* テーブル幅の調整 */
     max-width: 1200px;    /* 最大幅を設定 */
@@ -66,6 +65,7 @@ label {
 /* テーブルのセルに縦線を追加 */
 .table th, .table td {
     border-right: 1px solid #dee2e6;    /* テーブルボーダーカラー */
+
 }
 
 .table th:last-child, .table td:last-child {

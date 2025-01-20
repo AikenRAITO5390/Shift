@@ -5,6 +5,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
+<style>
+.h2{
+	margin-top : 60px;
+	text-align : center;
+}
+.div{
+	margin-top : 60px;
+	text-align : center;
+}
+.a{
+	margin-top : 60px;
+	text-align : center;
+}
+
+</style>
+
 <c:import url="../../common/header.jsp"/>
 
 <body>
@@ -12,10 +28,17 @@
 
 
 	<!-- 画面タイトル -->
-	<h2>～シフト条件変更完了～</h2>
+	<div class="h2">
+		<h2>～シフト条件変更完了～</h2>
+	</div>
 
-	<div>${message}</div>
-    <a href="ShiftConditionWorkerList.action">一覧に戻る</a>
+	<div class="div">
+		<div>${message}</div>
+	</div>
+
+	<div class="a">
+    	<a href="ShiftConditionWorkerList.action">一覧に戻る</a>
+    </div>
 
 
 </div>

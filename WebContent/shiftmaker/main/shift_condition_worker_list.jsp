@@ -11,6 +11,15 @@
 <link rel="stylesheet" href="../../css/style_k.css">
 
 <html>
+
+<style>
+.table-container th{
+	background-color: #6495ED; /* 背景色を水色に設定 */
+    color: white;
+}
+</style>
+
+
 <c:import url="../../common/header.jsp"/>
 <body>
 
@@ -25,7 +34,7 @@
 	<div class="table-container">
 	    <c:if test="${not empty workers}">
 	        <table  class="table">
-	            <tr class="table-primary">
+	            <tr>
 	                <th>ID</th>
 	                <th>名前</th>
 	                <th>ポジション</th>

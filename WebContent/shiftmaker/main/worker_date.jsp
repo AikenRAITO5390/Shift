@@ -39,8 +39,8 @@
 
 }
 .main{
-	margin-left: 1080px;
-    margin-top: -420px;
+	margin-left: 1100px;
+    margin-top: -460px;
 }
 
 

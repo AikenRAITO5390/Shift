@@ -11,6 +11,15 @@
 
 <html>
 
+<style>
+.body label{
+	background-color: #6495ED; /* 背景色を水色に設定 */
+    color: white;
+    border: 2px solid white;
+}
+
+</style>
+
 <c:import url="../../common/header.jsp"/>
 
 <body>

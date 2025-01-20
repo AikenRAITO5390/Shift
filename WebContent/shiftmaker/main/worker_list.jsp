@@ -18,8 +18,8 @@
 	margin-left : 50px;
 }
 .workertable {
-    width: 90%; /* 画面の幅いっぱいに広げる */
-    margin-left : 50px;
+    width: 100%; /* 画面の幅いっぱいに広げる */
+    margin-left : 5px;
     text-align : center;
 
     white-space: nowrap; /* 改行をしない */
@@ -33,8 +33,8 @@
     width: 10%; /* 画面の幅いっぱいに広げる */
 }
 .managertable {
-    width: 90%; /* 画面の幅いっぱいに広げる */
-    margin-left : 50px;
+    width: 100%; /* 画面の幅いっぱいに広げる */
+    margin-left : 5px;
     text-align : center;
 
     white-space: nowrap; /* 改行をしない */
@@ -50,8 +50,8 @@
     margin-bottom: 50px;
 }
 .main {
-    margin-left: 1080px;
-    margin-top: -380px;
+    margin-left: 1100px;
+    margin-top: -400px;
 }
 </style>
 
