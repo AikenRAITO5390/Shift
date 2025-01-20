@@ -21,8 +21,7 @@ import dao.WorkerDao;
 import tool.Action;
 import tool.CalendeCreate;
 
-public class ShiftAction extends Action{
-
+public class ShiftEmployeeAction extends Action{
 
 	@Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -70,7 +69,7 @@ public class ShiftAction extends Action{
         //従業員情報一覧を格納するリスト
       	List<Worker> worker_list = new ArrayList<>();
       	//従業員情報一覧を取得
-      	worker_list = workerDao.filter_b(manager);
+      	worker_list = workerDao.filter_e(manager);
 
         // 店舗IDに基づいてシフト情報を取得
         List<Shift> shifts = shiftDao.getShiftsByStoreId(storeId);
@@ -141,6 +140,7 @@ public class ShiftAction extends Action{
 
 
         // JSPへフォワード
-        req.getRequestDispatcher("shift.jsp").forward(req, res);
+        req.getRequestDispatcher("shift_employee.jsp").forward(req, res);
     }
+
 }

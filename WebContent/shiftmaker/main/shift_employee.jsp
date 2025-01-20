@@ -1,4 +1,4 @@
-<%-- シフト編集JSP --%>
+<%-- シフト閲覧JSP --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -10,7 +10,7 @@
 <c:import url="../../common/header.jsp"/>
 
 <head>
-    <title>シフト編集</title>
+    <title>シフト閲覧（社員）</title>
     <style>
         table { width: 90%; border-collapse: collapse; margin: 20px auto; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <h1>シフト編集</h1>
+    <h1>シフト閲覧（社員）</h1>
     <table>
         <!-- 曜日ヘッダー -->
         <thead>
@@ -45,20 +45,16 @@
 		                    <c:when test="${shiftMap[workerlist.workerId][date] != null}">
 		                        <c:set var="shift" value="${shiftMap[workerlist.workerId][date]}" />
 		                        <c:if test="${shift.workTimeId != null}">
-		                            <a href="ShiftEditSet.action?workerId=${workerlist.workerId}&date=${date}&workTimeId=${shift.workTimeId}&count=${count}" class="calendar-link">
 		                                ${shift.workTimeId}
-		                            </a>
 		                        </c:if>
 		                        <c:if test="${shift.workTimeId == null}">
-								    <a href="ShiftEditSet.action?workerId=${workerlist.workerId}&date=${date}&shiftTimeStart=${shift.shiftTimeStart}&shiftTimeEnd=${shift.shiftTimeEnd}&count=${count}">
 		                                <fmt:formatDate value="${shift.shiftTimeStart}" pattern="HH:mm" /> -
 		                                <fmt:formatDate value="${shift.shiftTimeEnd}" pattern="HH:mm" />
-		                            </a>
 								</c:if>
 		                    </c:when>
 		                    <%-- シフト情報がない場合 --%>
 		                    <c:otherwise>
-		                    	<a href="ShiftEditSet.action?workerId=${workerlist.workerId}&date=${date}&count=${count}">-</a>
+									-
 		                    </c:otherwise>
 		                </c:choose>
 		            </td>
@@ -68,30 +64,8 @@
         </tbody>
     </table>
 
-    <!-- StoreDBから情報取得。表示するだけ -->
-    <h3>＜店舗のシフト時間参考＞</h3>
-		<table>
-		    <thead>
-		        <tr>
-		            <th>勤務時間ID</th>
-		            <th>開始時間</th>
-		            <th>終了時間</th>
-		        </tr>
-		    </thead>
-		    <tbody>
-		        <c:forEach var="workTime" items="${workTimeDetails}">
-		            <tr>
-		            	<c:if test="${workTime.workTimeId != 'F'}">
-		            		<td>${workTime.workTimeId}</td>
-			                <td>${workTime.workTimeStart}</td>
-			                <td>${workTime.workTimeEnd}</td>
-		            	</c:if>
-		            </tr>
-		        </c:forEach>
-		    </tbody>
-		</table>
 
-	<a href="Main.action">メインへ</a>
+	<a href="ShiftChoose.action">戻る</a>
 </body>
 
 <c:import url="../../common/footer.jsp"/>

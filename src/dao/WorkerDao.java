@@ -301,6 +301,108 @@ public class WorkerDao extends Dao{
         return list;
 	}
 
+	// バイトのみ取得
+	public List<Worker> filter_b(Store store) throws Exception {
+
+		// リストを初期化
+		List<Worker> list = new ArrayList<>();
+		// コネクションを確立
+		Connection connection = getConnection();
+		// プリペアードステートメント
+		PreparedStatement statement = null;
+        // リザルトセット
+        ResultSet rSet = null;
+
+
+        try {
+            statement = connection.prepareStatement("select * from worker where store_id=? and worker_judge=false order by worker_id asc");
+            statement.setString(1, store.getStoreId());
+
+            rSet = statement.executeQuery();
+            list = postFilter(rSet, store);
+        }catch(Exception e){
+			throw e;
+
+		}finally {
+            // Close resources in finally block to ensure they're always closed
+
+            if (statement != null) {
+            	try {
+
+            		statement.close();
+
+				} catch (SQLException sqle) {
+					// TODO: handle exception
+					throw sqle;
+				}
+
+            }
+            if (connection != null) {
+            	try {
+            		 connection.close();
+
+				} catch (SQLException sqle) {
+					// TODO: handle exception
+					throw sqle;
+				}
+
+            }
+        }
+
+        return list;
+	}
+
+	// 社員のみ取得
+		public List<Worker> filter_e(Store store) throws Exception {
+
+			// リストを初期化
+			List<Worker> list = new ArrayList<>();
+			// コネクションを確立
+			Connection connection = getConnection();
+			// プリペアードステートメント
+			PreparedStatement statement = null;
+	        // リザルトセット
+	        ResultSet rSet = null;
+
+
+	        try {
+	            statement = connection.prepareStatement("select * from worker where store_id=? and worker_judge=true order by worker_id asc");
+	            statement.setString(1, store.getStoreId());
+
+	            rSet = statement.executeQuery();
+	            list = postFilter(rSet, store);
+	        }catch(Exception e){
+				throw e;
+
+			}finally {
+	            // Close resources in finally block to ensure they're always closed
+
+	            if (statement != null) {
+	            	try {
+
+	            		statement.close();
+
+					} catch (SQLException sqle) {
+						// TODO: handle exception
+						throw sqle;
+					}
+
+	            }
+	            if (connection != null) {
+	            	try {
+	            		 connection.close();
+
+					} catch (SQLException sqle) {
+						// TODO: handle exception
+						throw sqle;
+					}
+
+	            }
+	        }
+
+	        return list;
+		}
+
 	public List<Worker> filterByStoreId(String storeId) throws Exception {
         List<Worker> list = new ArrayList<>();
         Connection connection = getConnection();

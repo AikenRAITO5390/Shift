@@ -17,8 +17,8 @@
 <ul>
         <li><a href="ShiftSelect.action">作成</a></li>
         <li><a href="ShiftEdit.action">編集</a></li>
-        <li><a href="#">閲覧</a></li>
-        <li><a href="#">削除</a></li>
+        <li><a href="ShiftChoose.action">閲覧</a></li>
+        <li><a href="ShiftDelete.action">削除</a></li>
 </ul>
 <div class="h2top-content">
 <h2>👦　シフト作成者</h2>
