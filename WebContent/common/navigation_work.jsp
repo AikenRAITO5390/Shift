@@ -49,7 +49,7 @@ function hideLinks(id) {
 </ul>
 
 <ul>
-	<li><a href="ShiftWorkerSignUp.action">💪　従業員情報登録</a></li>
+	<li><a href="ShiftWorkerSignup.action">💪　従業員情報登録</a></li>
 </ul>
 </div>
 

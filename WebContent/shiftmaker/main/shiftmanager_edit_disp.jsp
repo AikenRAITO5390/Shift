@@ -63,6 +63,10 @@
     <input type="submit" value="変更">
 </div>
 </form>
+
+
+<c:import url="../../common/footer.jsp"/>
+
 </div>
 
   <script>

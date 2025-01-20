@@ -102,7 +102,7 @@
 </div>
 
 <div class="back">
-<a href="WorkerDate.action">トップページに戻る</a>
+<a href="WorkerDate.action">従業員一覧に戻る</a>
 </div>
 
 <c:import url="../../common/footer.jsp"/>

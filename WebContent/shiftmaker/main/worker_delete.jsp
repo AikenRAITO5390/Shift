@@ -28,5 +28,7 @@
 
 	<a href="SubjectList.action">戻る</a>
 
+<c:import url="../../common/footer.jsp"/>
+
 </body>
 </html>

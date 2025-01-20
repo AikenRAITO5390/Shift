@@ -34,6 +34,9 @@
 		<p>変更が完了しました</p>
 	<a href="Main.action">メインメニューへ</a>
 </div>
+
+<c:import url="../../common/footer.jsp"/>
+
 </body>
 </html>
 
