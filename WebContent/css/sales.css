@@ -6,13 +6,23 @@ body {
     color: #000000; /* メインページのテキスト色 */
 }
 
+h2 {
+	width: fit-content;
+	margin: 20px auto;/* 中央に揃える */
+}
+
+h3 {
+	width: fit-content;
+	margin: auto;/* 中央に揃える */
+}
+
 .error{
     color: red; /* プレースホルダーの色を赤に設定 */
 }
 
 .tmain{
 	width: fit-content;
-    margin: 100px auto;/* 中央に揃える */
+    margin: 60px auto;/* 中央に揃える */
 }
 
 .center {
@@ -21,6 +31,8 @@ body {
 
 }
 
+
+
 /*------------------------ 売上操作選択画面 -------------------------*/
 
 
@@ -28,7 +40,6 @@ body {
 form.form1 {
 	display: inline-block;
 	padding:  30px;
-	background-color:  #ccc;
 }
 
 /*-------------------------- 売上入力画面 ---------------------------*/
@@ -48,8 +59,8 @@ form.sales_input {
 
 /* 登録と戻るボタン */
 .touroku {
-	position: relative;
-	top: 20px
+	width: fit-content;
+    margin: 30px auto;/* 中央に揃える */
 }
 
 .input_date {
@@ -59,20 +70,22 @@ form.sales_input {
 
 
 form.form2 {
-	display: inline-block;
-	background-color:  #ccc;
+	width: fit-content;
+    margin: 10px auto;/* 中央に揃える */
 }
 
 /* 売上入力,予測ボタンの大きさ */
 button.button1 {
 	width: 10em;
   height:5em;
+  background-color: #6495ED;
 }
 
 
 button.button2 {
-	display: inline-block;
-	text-align: right;
+	width: fit-content;
+    margin: 10px auto;/* 中央に揃える */
+    background-color: #6495ED;
 }
 
 
@@ -83,5 +96,5 @@ IMG.imgGraph {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 70%;
+    width: 100%;
     }

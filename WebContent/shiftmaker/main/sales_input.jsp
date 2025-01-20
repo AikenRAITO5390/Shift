@@ -15,11 +15,11 @@
 <body>
 
 <c:import url="../../common/header.jsp"/>
-<h2>～売上入力～</h2>
+
 
 <div class="tmain">
 
-
+<h2>～売上入力～</h2>
 
 
 	<form action="SalesInputResult.action" class="sales_input">
@@ -49,7 +49,7 @@
 
 		<div class="touroku">
 		<!-- 登録ボタン -->
-	    <input type="submit" value="登録" />
+	    <button class="button2">登録</button>
 
 
 	    <!-- 戻るリンク -->

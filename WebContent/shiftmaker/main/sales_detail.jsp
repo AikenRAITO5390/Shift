@@ -14,7 +14,7 @@
 
 <div class="tmain">
 
-
+<h2>～売上予測～</h2>
 
 	<!-- グラフを画像にして表示 -->
 	<img src="${pageContext.request.contextPath}/JFreeChartTest" class="imgGraph" />
