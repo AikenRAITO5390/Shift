@@ -5,30 +5,67 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
+<style>
+.h2 {
+	margin-top : 60px;
+	text-align : center;
+}
+.h3 {
+	margin-top : 40px;
+	text-align : center;
+}
+.date {
+	margin-top : 65px;
+	margin-left : 150px;
+}
+.table {
+	margin-top : -85px;
+	margin-left : 500px;
+	width: 100%; /* 画面の幅いっぱいに広げる */
+}
+.input input[type="submit"]{
+	margin-top : 55px;
+	margin-left : 600px;
+}
+.input a{
+	margin-top : 55px;
+	margin-left : 30px;
+}
+
+</style>
+
 <c:import url="../../common/header.jsp"/>
 
 <body>
 <div class="body">
 
 		<!-- 画面タイトル -->
-		<h2>シフト編集</h2>
+		<div class="h2">
+			<h2>シフト編集</h2>
+		</div>
 
-		<div>シフトの時間を選択してください。</div>
+		<div class="h3">
+			<h3>シフトの時間を選択してください。</h3>
+		</div>
+
 
 		<form action="ShiftEditSave.action?date=${date}?workerId=${workerId}&count=${count}" method="post">
 
+			<div class="date">
 			<c:if test="${not empty workerId}">
-		        <h3>選択された従業員:
+		        <p>選択された従業員:
 		            ${workerId}
-		        </h3>
+		        </p>
 		    </c:if>
 
 			<c:if test="${not empty date}">
-		        <h3>選択された日付:
+		        <p>選択された日付:
 		            ${date}
-		        </h3>
+		        </p>
 		    </c:if>
+			</div>
 
+			<div class="table">
 	        <table>
 	            <thead>
 	                <tr>
@@ -88,6 +125,7 @@
 				</tr>
 	            </tbody>
 	        </table>
+	        </div>
 
 	        <script>
 			    document.addEventListener("DOMContentLoaded", () => {
@@ -118,11 +156,12 @@
 			    });
 			</script>
 
-
+			<div class="input">
 	        <input type="hidden" name="workerId" value="${param.workerId}">
     		<input type="hidden" name="date" value="${date}">
 	        <input type="submit" value="決定">
 	        <a href="ShiftEdit.action">戻る</a>
+	        </div>
 	    </form>
 
 

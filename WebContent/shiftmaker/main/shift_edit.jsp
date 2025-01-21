@@ -7,6 +7,34 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ja">
 
+
+<style>
+.h1 {
+	margin-top : 60px;
+	text-align : center;
+}
+.main {
+	margin-top : -740px;
+	margin-left : 1060px;
+}
+/*シフト時間変更のラベル*/
+.table th {
+	background-color: #6495ED; /* 背景色を水色に設定 */
+	color: white;
+}
+/*ラベル(なまえ)*/
+.date {
+	background-color: #6495ED; /* 背景色を水色に設定 */
+	color: white;
+}
+/*ラベル(日付)*/
+.date1 {
+	background-color: #6495ED; /* 背景色を水色に設定 */
+	color: white;
+}
+</style>
+
+
 <c:import url="../../common/header.jsp"/>
 
 <head>
@@ -15,23 +43,34 @@
         table { width: 90%; border-collapse: collapse; margin: 20px auto; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
         th { background-color: #f4f4f4; }
+
     </style>
 </head>
 
 <body>
-    <h1>シフト編集</h1>
+
+	<div class="h1">
+    	<h1>シフト編集</h1>
+    </div>
+
+
     <table>
+
         <!-- 曜日ヘッダー -->
         <thead>
-        <tr>
-            <th>名前</th>
-            <c:forEach var="date" items="${dates}">
-                <th>
+
+
+        	<tr>
+        		<th class="date">名前</th>
+            		<c:forEach var="date" items="${dates}">
+                <th class="date1">
                 	${date.dayOfMonth}
                 </th>
-            </c:forEach>
-        </tr>
+            		</c:forEach>
+        	</tr>
+
         </thead>
+
 
         <!-- シフト情報 -->
         <tbody>
@@ -58,7 +97,9 @@
 		                    </c:when>
 		                    <%-- シフト情報がない場合 --%>
 		                    <c:otherwise>
+		                    <div class="a">
 		                    	<a href="ShiftEditSet.action?workerId=${workerlist.workerId}&date=${date}&count=${count}">-</a>
+		                    </div>
 		                    </c:otherwise>
 		                </c:choose>
 		            </td>
@@ -68,6 +109,7 @@
         </tbody>
     </table>
 
+	<div class="table">
     <!-- StoreDBから情報取得。表示するだけ -->
     <h3>＜店舗のシフト時間参考＞</h3>
 		<table>
@@ -90,8 +132,10 @@
 		        </c:forEach>
 		    </tbody>
 		</table>
-
-	<a href="Main.action">メインへ</a>
+	</div>
+	<div class="main">
+		<a href="Main.action">メインへ</a>
+	</div>
 </body>
 
 <c:import url="../../common/footer.jsp"/>
