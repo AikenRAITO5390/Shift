@@ -683,6 +683,7 @@ public class ShiftDao extends Dao{
 	public void ShiftUpdate(String workerId, Map<String, Object> workerInfo,Date shift_date) throws Exception{
 		String sql;
 		String work_id = null;
+		WorkerDao wDao = new WorkerDao();
 		String result =  (workerInfo.get("mergedShifts").toString()).replaceAll("[\\[\\]]", "");
 		sql = "UPDATE shift Set work_time_id = ?, shift_time_start = ?, shift_time_end = ? WHERE worker_id = ? AND shift_date = ?";
 
@@ -695,9 +696,18 @@ public class ShiftDao extends Dao{
 			}
 		}
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+		Worker woreker = wDao.get(workerId);
+		if(woreker.isWorkerJudge()){
+			try (Connection con = getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
+	            stmt.setString(1, result);
+	            stmt.setString(2,null);
+	            stmt.setString(3,null);
+	            stmt.setString(4, workerId);
+	            stmt.setDate(5, shift_date);
+	            stmt.executeUpdate();
+			}
 
-
-		if(work_id == null){
+		}else if(work_id == null){
 			String [] parts = result.toString().split("-");
 			String start =shift_date.toString()+"T"+parts[0]+":00";
 			String end = shift_date.toString()+"T"+parts[1]+":00";

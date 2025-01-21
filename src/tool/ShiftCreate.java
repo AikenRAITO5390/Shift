@@ -84,6 +84,11 @@ public class ShiftCreate {
         List<String> merged = new ArrayList<>();
 
         if (shifts.isEmpty()) return merged;
+
+        if(worker.judge){
+        	merged.add("T");
+        	return merged;
+        }
         StoreDao stDao = new StoreDao();
         List<String>  store_time_id = Arrays.asList("A","B","C","D");
         //currentに開始時間を格納
