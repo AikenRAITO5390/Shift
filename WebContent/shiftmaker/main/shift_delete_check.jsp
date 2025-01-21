@@ -17,7 +17,7 @@
     <!-- 削除確認メッセージ -->
     <p>本当に削除しますか？</p>
 
-    <form action="ShiftDeleteResultAction" method="post">
+    <form action="ShiftDeleteResult.action" method="post">
         <!-- 年、月を隠しパラメータとして送信 -->
         <input type="hidden" name="year" value="${year}">
         <input type="hidden" name="month" value="${month}">
@@ -27,7 +27,7 @@
     </form>
 
     <!-- 戻るボタン -->
-    <form action="ShiftDeleteAction" method="get">
+    <form action="ShiftDelete.action" method="get">
         <input type="hidden" name="year" value="${year}">
         <input type="hidden" name="month" value="${month}">
         <button type="submit">戻る</button>

@@ -1,13 +1,11 @@
-<%-- シフト削除JSP --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="ja">
 
-<c:import url="../../common/header.jsp"/>
+<c:import url="../../common/header.jsp" />
 
 <head>
     <title>シフト削除</title>
@@ -22,17 +20,17 @@
     <h1>シフト削除</h1>
 
     <!-- 前月・次月へのリンク -->
-    <form action="ShiftDeleteAction?count=${count}" method="get">
-	    <input type="hidden" name="year" value="${year}">
-	    <input type="hidden" name="month" value="${prevMonth}">
-	    <button type="submit">&lt;&lt; 前月</button>
-	</form>
-	<span>${year}年 ${month}月</span>
-	<form action="ShiftDeleteAction?count=${count}" method="get">
-	    <input type="hidden" name="year" value="${year}">
-	    <input type="hidden" name="month" value="${nextMonth}">
-	    <button type="submit">&gt;&gt; 次月</button>
-	</form>
+    <form action="ShiftDelete.action?count=${count}" method="get">
+        <input type="hidden" name="year" value="${year}">
+        <input type="hidden" name="month" value="${prevMonth}">
+        <button type="submit">&lt;&lt; 前月</button>
+    </form>
+    <span>${year}年 ${month}月</span>
+    <form action="ShiftDelete.action?count=${count}" method="get">
+        <input type="hidden" name="year" value="${year}">
+        <input type="hidden" name="month" value="${nextMonth}">
+        <button type="submit">&gt;&gt; 次月</button>
+    </form>
 
     <!-- シフトテーブルの表示 -->
     <table>
@@ -72,15 +70,16 @@
         </tbody>
     </table>
 
-    <!-- シフト削除フォーム -->
-    <form action="ShiftDeleteCheckAction" method="post">
+    <!-- シフト削除フォーム (カレンダー外に1つの削除ボタン) -->
+    <form action="ShiftDeleteCheck.action" method="post">
         <input type="hidden" name="year" value="${year}">
         <input type="hidden" name="month" value="${month}">
-        <button type="submit">シフト削除</button>
+        <button type="submit">この月のシフトを削除</button>
     </form>
 
     <a href="Main.action">戻る</a>
 </body>
 
-<c:import url="../../common/footer.jsp"/>
+<c:import url="../../common/footer.jsp" />
+
 </html>
