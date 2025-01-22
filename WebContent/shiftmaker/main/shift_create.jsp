@@ -42,7 +42,12 @@
                                     	<c:forEach var="shift" items="${worker.mergedShifts}">
                                     		<c:choose>
 												<c:when test="${wlist.workerName == worker.name}">
-                                        			<p>${shift}</p>
+													<c:choose>
+            											<c:when test="${shift == 'T'}">○</c:when>
+            											<c:otherwise>
+											                <p>${shift}</p>
+											            </c:otherwise>
+											        </c:choose>
                                         		</c:when>
                                         	</c:choose>
                                     	</c:forEach>
