@@ -10,7 +10,7 @@
 <script>
 
 //ログインページにリダイレクト
-location.href="/shift/shiftmaker/Login.action";
+location.href="/shift/shiftmaker/Login.action"
 </script>
 <body>
 
