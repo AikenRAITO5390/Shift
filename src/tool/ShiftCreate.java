@@ -264,8 +264,11 @@ public class ShiftCreate {
         			//社員の場合
         			if(shift_lists.getWorker().isWorkerJudge()){
         				maxHours = minutesToHour(timeToMinutes(work_time_start)-timeToMinutes(work_time_end));
-        				workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(), shift_lists.getWorker().getWorkerPosition(), work_time_start, work_time_end, maxHours,true,power));
-
+        				if(shift_lists.getShiftHopeTimeId().equals("T")){
+        					workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(), shift_lists.getWorker().getWorkerPosition(), work_time_start, work_time_end, maxHours,true,power));
+        				}else{
+        					workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(), shift_lists.getWorker().getWorkerPosition(), work_time_start, work_time_end, maxHours,true,power));
+        				}
         			}else{
         			workers.add(new WorkerShift(
         					shift_lists.getWorker().getWorkerName(),shift_lists.getWorker().getWorkerPosition(), availableFrom, availableTo, maxHours,false,power));
