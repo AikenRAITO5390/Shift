@@ -4,14 +4,6 @@
 <html>
 <head>
     <title>Shift Calendar</title>
-    <style>
-        table { width: 90%; border-collapse: collapse; margin: 20px auto; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
-        th { background-color: #f4f4f4; }
-        .p {
-        	text-align : center;
-        }
-    </style>
 </head>
 <body>
     <h1>Shift Calendar</h1>
@@ -53,7 +45,6 @@
                                     	</c:forEach>
                                 	</ul>
                             	</c:when>
-
                         	</c:choose>
 						</c:forEach>
 					</td>
@@ -63,5 +54,11 @@
         </tbody>
         </div>
     </table>
+    <form action="ShiftEdit.action" method="post">
+    	<button>編集</button>
+    </form>
+    <form action="ShiftCreateResult.action" method="post">
+    	<button>確定</button>
+    </form>
 </body>
 </html>
