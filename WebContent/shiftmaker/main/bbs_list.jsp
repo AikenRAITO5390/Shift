@@ -9,14 +9,14 @@
 	text-align : center;
 }
 .date{
-	margin-top: -83px;
-	margin-left: 960px;
+	margin-top: -45px;
+	margin-left: 460px;
 	margin-right: 20px;
 }
 .delete{
-	margin-top : 20px;
-	margin-left: 960px;
-	margin-bottom : 20px;
+	margin-top : 25px;
+	margin-left: 480px;
+	margin-bottom : 10px;
 }
 .name{
 	margin-top : 8px;
