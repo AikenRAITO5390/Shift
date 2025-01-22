@@ -218,10 +218,13 @@ public class ShiftCreate {
 					worker.assignedShifts.add(timeSlot);
 				}
 
+
+
 				if (kitchenNeeded <= 0 && hallNeeded <= 0) break;
 			}
 			schedule.put(timeSlot, assignedWorkers);
 		}
+
         for (WorkerShift worker : workers) {
             worker.mergedShifts = mergeShifts(worker.assignedShifts,shift_manager,worker);
         }
@@ -246,50 +249,45 @@ public class ShiftCreate {
         	for(Shift shift_lists: shift_list){
         		System.out.println(shift_lists.getShiftHopeTimeId());
         		System.out.println(shift_lists.getWorker().getWorkerId());
+        		String availableFrom = null;
+    			String availableTo	= null;
+    			int maxHours = 0;
+    			Store work_time = new Store();
 
-        		//シフト希望時間ID（A,B,C,D）がある場合
-        		if(shift_lists.getShiftHopeTimeId() !=null) {
-        			String availableFrom = null;
-        			String availableTo	= null;
-        			int maxHours = 0;
-        			Store work_time = new Store();
-        			//A,B,C,DのいずれかのIDを取得している
-        			work_time = stDao.Time_get(shift_manager.getStoreId(), shift_lists.getShiftHopeTimeId());
-        			//A,B,C,Dの開始時間と終了時間を取得
-        			availableFrom = work_time.getWorkTimeStart().toString();
-        			availableTo   = work_time.getWorkTimeEnd().toString();
-        			//勤務可能最大時間を計算
-        			maxHours =minutesToHour(timeToMinutes(availableTo)-timeToMinutes(availableFrom));
-        			int power = Integer.parseInt(shift_lists.getWorker().getWorkerScore());
+        		if(shift_lists.getWorker().isWorkerJudge()){
         			//社員の場合
-        			if(shift_lists.getWorker().isWorkerJudge()){
+        			if(shift_lists.getShiftHopeTimeId() != null){
         				maxHours = minutesToHour(timeToMinutes(work_time_start)-timeToMinutes(work_time_end));
         				workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(), "employee", work_time_start, work_time_end, maxHours,true,0));
-
-        			}else{
-        			workers.add(new WorkerShift(
-        					shift_lists.getWorker().getWorkerName(),shift_lists.getWorker().getWorkerPosition(), availableFrom, availableTo, maxHours,false,power));
         			}
-
-        			//シフト希望時間がその他の場合
         		}else{
+        			//シフト希望時間ID（A,B,C,D）がある場合
+        			if(shift_lists.getShiftHopeTimeId() !=null) {
+        				//A,B,C,DのいずれかのIDを取得している
 
-        			}if(shift_lists.getShiftHopeTimeStart() == null){
-        				continue;
-        			}else{
-        				String availableFrom = null;
-            			String availableTo	= null;
-            			int maxHours = 0;
-            			int power = Integer.parseInt(shift_lists.getWorker().getWorkerScore());
-        				LocalTime timeFrom =shift_lists.getShiftHopeTimeStart().toLocalDateTime().toLocalTime();
-            			LocalTime timeTo =shift_lists.getShiftHopeTimeEnd().toLocalDateTime().toLocalTime();
-            			availableFrom = timeFrom.toString();
-            			availableTo   = timeTo.toString();
+        				work_time = stDao.Time_get(shift_manager.getStoreId(), shift_lists.getShiftHopeTimeId());
+        				//A,B,C,Dの開始時間と終了時間を取得
+        				availableFrom = work_time.getWorkTimeStart().toString();
+        				availableTo   = work_time.getWorkTimeEnd().toString();
+        				//勤務可能最大時間を計算
         				maxHours =minutesToHour(timeToMinutes(availableTo)-timeToMinutes(availableFrom));
-        				workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(),"employee", availableFrom, availableTo, maxHours,false,power));
-
+        				int power = Integer.parseInt(shift_lists.getWorker().getWorkerScore());
+        				workers.add(new WorkerShift(
+        						shift_lists.getWorker().getWorkerName(),shift_lists.getWorker().getWorkerPosition(), availableFrom, availableTo, maxHours,false,power));
+        			}else{
+        				if(shift_lists.getShiftHopeTimeStart() == null){
+        					continue;
+        				}
+        				int power = Integer.parseInt(shift_lists.getWorker().getWorkerScore());
+        				LocalTime timeFrom =shift_lists.getShiftHopeTimeStart().toLocalDateTime().toLocalTime();
+        				LocalTime timeTo =shift_lists.getShiftHopeTimeEnd().toLocalDateTime().toLocalTime();
+        				availableFrom = timeFrom.toString();
+        				availableTo   = timeTo.toString();
+        				maxHours =minutesToHour(timeToMinutes(availableTo)-timeToMinutes(availableFrom));
+        				workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(),shift_lists.getWorker().getWorkerPosition(), availableFrom, availableTo, maxHours,false,power));
         			}
         		}
+        	}
 
         }catch (Exception e) {
         	System.out.println(e);
