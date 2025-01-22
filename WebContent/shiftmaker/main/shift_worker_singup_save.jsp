@@ -45,11 +45,11 @@
 		                <%-- 勤務時間情報を表示（datesマップから値を取得） --%>
 		                <c:choose>
 						    <c:when test="${shiftHopeTimeIds[status.index] == 'T'}">
-						        <!-- shiftHopeTimeIdが'T'の場合は〇を表示 -->
+						        <%-- shiftHopeTimeIdが'T'の場合は〇を表示 --%>
 						        <p>〇</p>
 						    </c:when>
 						    <c:when test="${shiftHopeTimeIds[status.index] != ''}">
-						        <!-- shiftHopeTimeIdが空でない場合はそのまま表示 -->
+						        <%-- shiftHopeTimeIdが空でない場合はそのまま表示 --%>
 						        <p>${shiftHopeTimeIds[status.index]}</p>
 						    </c:when>
 						</c:choose>

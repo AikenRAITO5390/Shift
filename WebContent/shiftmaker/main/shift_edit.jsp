@@ -84,9 +84,19 @@
 		                    <c:when test="${shiftMap[workerlist.workerId][date] != null}">
 		                        <c:set var="shift" value="${shiftMap[workerlist.workerId][date]}" />
 		                        <c:if test="${shift.workTimeId != null}">
-		                            <a href="ShiftEditSet.action?workerId=${workerlist.workerId}&date=${date}&workTimeId=${shift.workTimeId}&count=${count}" class="calendar-link">
-		                                ${shift.workTimeId}
-		                            </a>
+		                            <c:choose>
+	                                    <%-- worker_judgeがTrueの時はTを〇に変換して表示 --%>
+	                                    <c:when test="${shift.workTimeId  == 'T'}">
+	                                        <a href="ShiftEditSet.action?workerId=${workerlist.workerId}&date=${date}&workTimeId=${shift.workTimeId}&count=${count}">
+	                                            〇
+	                                        </a>
+	                                    </c:when>
+	                                    <c:otherwise>
+	                                        <a href="ShiftEditSet.action?workerId=${workerlist.workerId}&date=${date}&workTimeId=${shift.workTimeId}&count=${count}">
+	                                            ${shift.workTimeId}
+	                                        </a>
+	                                    </c:otherwise>
+	                                </c:choose>
 		                        </c:if>
 		                        <c:if test="${shift.workTimeId == null}">
 								    <a href="ShiftEditSet.action?workerId=${workerlist.workerId}&date=${date}&shiftTimeStart=${shift.shiftTimeStart}&shiftTimeEnd=${shift.shiftTimeEnd}&count=${count}">
