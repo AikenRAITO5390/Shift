@@ -687,7 +687,7 @@ public class ShiftDao extends Dao{
 		String result =  (workerInfo.get("mergedShifts").toString()).replaceAll("[\\[\\]]", "");
 		sql = "UPDATE shift Set work_time_id = ?, shift_time_start = ?, shift_time_end = ? WHERE worker_id = ? AND shift_date = ?";
 
-		List<String>  store_time_id = Arrays.asList("A","B","C","D");
+		List<String>  store_time_id = Arrays.asList("A","B","C","D","T");
 		for(String time_id:store_time_id){
 			System.out.println("timeid"+time_id+":"+result);
 			if(time_id.equals(result)){
@@ -915,8 +915,11 @@ public class ShiftDao extends Dao{
 	public List<Shift> getShiftsByStoreId(String storeId) throws Exception {
 	    List<Shift> shifts = new ArrayList<>();
 
-	    String sql = "SELECT shift_date, worker_id, work_time_id, shift_time_start, shift_time_end " +
-	                 "FROM shift WHERE store_id = ? ORDER BY worker_id ASC";
+	    String sql = "SELECT shift.shift_date, shift.worker_id, shift.work_time_id, shift.shift_time_start, shift.shift_time_end " +
+                "FROM shift " +
+                "JOIN worker ON shift.worker_id = worker.worker_id " +
+                "WHERE shift.store_id = ? " +
+                "ORDER BY worker.worker_judge DESC, shift.worker_id ASC";
 
 	    try (Connection connection = getConnection();
 	         PreparedStatement statement = connection.prepareStatement(sql)) {
