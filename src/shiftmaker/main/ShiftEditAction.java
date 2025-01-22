@@ -95,6 +95,23 @@ public class ShiftEditAction extends Action{
             }
             String workerId = shift.getWorker().getWorkerId();
 
+            // Worker オブジェクトを取得
+            Worker worker = workerDao.get(workerId);
+            if (worker == null) {
+                throw new Exception("Worker not found for workerId: " + workerId);
+            }
+
+        	// worker_judgeの値を取得
+            boolean workerJudge = worker.isWorkerJudge();
+
+            // worker_judgeがTrueの場合
+            if (workerJudge) {
+                req.setAttribute("isWorkerJudgeTrue", true);
+            } else {
+                // worker_judgeがFalseの場合
+                req.setAttribute("isWorkerJudgeTrue", false);
+            }
+
 
             // 日付を取得
             LocalDate shiftDate = shift.getShiftDate().toLocalDate();
@@ -128,7 +145,6 @@ public class ShiftEditAction extends Action{
         // 参考時間表示のため
     	List<Store> workTimeDetails = storeDao.getWorkTimes(manager.getStoreId());
     	req.setAttribute("workTimeDetails", workTimeDetails);
-
 
         // リクエストにデータをセット
         req.setAttribute("shiftMap", shiftMap);

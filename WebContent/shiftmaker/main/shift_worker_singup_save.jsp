@@ -43,9 +43,16 @@
 		                </a>
 
 		                <%-- 勤務時間情報を表示（datesマップから値を取得） --%>
-		                <c:if test="${shiftHopeTimeIds[status.index] != ''}">
-		                    <p>${shiftHopeTimeIds[status.index]}</p>
-		                </c:if>
+		                <c:choose>
+						    <c:when test="${shiftHopeTimeIds[status.index] == 'T'}">
+						        <!-- shiftHopeTimeIdが'T'の場合は〇を表示 -->
+						        <p>〇</p>
+						    </c:when>
+						    <c:when test="${shiftHopeTimeIds[status.index] != ''}">
+						        <!-- shiftHopeTimeIdが空でない場合はそのまま表示 -->
+						        <p>${shiftHopeTimeIds[status.index]}</p>
+						    </c:when>
+						</c:choose>
 
 		                <c:if test="${nullAndTime[status.index] != null}">
 		                    <p>${nullAndTime[status.index]}</p>
@@ -70,28 +77,30 @@
         </c:if>
     </table>
 
-	<!-- StoreDBから情報取得。表示するだけ -->
-    <h3>＜店舗のシフト時間参考＞</h3>
-		<table>
-		    <thead>
-		        <tr>
-		            <th>勤務時間ID</th>
-		            <th>開始時間</th>
-		            <th>終了時間</th>
-		        </tr>
-		    </thead>
-		    <tbody>
-		        <c:forEach var="workTime" items="${workTimeDetails}">
-		            <tr>
-		            	<c:if test="${workTime.workTimeId != 'F'}">
-		            		<td>${workTime.workTimeId}</td>
-			                <td>${workTime.workTimeStart}</td>
-			                <td>${workTime.workTimeEnd}</td>
-		            	</c:if>
-		            </tr>
-		        </c:forEach>
-		    </tbody>
-		</table>
+	<!-- worker_judgeがFalseの場合のみ店舗のシフト時間参考セクションを表示 -->
+    <c:if test="${not isWorkerJudgeTrue}">
+        <h3>＜店舗のシフト時間参考＞</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>勤務時間ID</th>
+                    <th>開始時間</th>
+                    <th>終了時間</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="workTime" items="${workTimeDetails}">
+                    <tr>
+                        <c:if test="${workTime.workTimeId != 'F'}">
+                            <td>${workTime.workTimeId}</td>
+                            <td>${workTime.workTimeStart}</td>
+                            <td>${workTime.workTimeEnd}</td>
+                        </c:if>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </c:if>
 
     <form action="ShiftWorkerSignupResult.action" method="get">
 	    <button type="submit">送信</button>

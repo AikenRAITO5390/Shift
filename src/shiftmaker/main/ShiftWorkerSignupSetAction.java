@@ -146,6 +146,18 @@ public class ShiftWorkerSignupSetAction extends Action{
         System.out.println(workTimes);
         System.out.println("店舗ID" + loginuser.getStoreId());
 
+        // worker_judgeの値を取得
+        boolean workerJudge = worker.isWorkerJudge();
+
+        // worker_judgeがTrueの場合
+        if (workerJudge) {
+            // 選択肢を「〇」「-」に変更
+            req.setAttribute("isWorkerJudgeTrue", true);
+        } else {
+            // worker_judgeがFalseの場合、A, B, C, Dを表示
+            req.setAttribute("isWorkerJudgeTrue", false);
+        }
+
 		// リクエストにデータをセット
 		req.setAttribute("worker", worker);
 		req.setAttribute("workTimes", workTimes);

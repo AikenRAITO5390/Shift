@@ -5,127 +5,113 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
-<style>
-.h2 {
-	margin-top : 60px;
-	text-align : center;
-}
-.h3 {
-	margin-top : 40px;
-	text-align : center;
-}
-.date {
-	margin-top : 65px;
-	margin-left : 150px;
-}
-.table {
-	margin-top : -85px;
-	margin-left : 500px;
-	width: 100%; /* 画面の幅いっぱいに広げる */
-}
-.input input[type="submit"]{
-	margin-top : 55px;
-	margin-left : 600px;
-}
-.input a{
-	margin-top : 55px;
-	margin-left : 30px;
-}
-
-</style>
-
 <c:import url="../../common/header.jsp"/>
 
 <body>
 <div class="body">
 
 		<!-- 画面タイトル -->
-		<div class="h2">
-			<h2>シフト編集</h2>
-		</div>
+		<h2>シフト編集</h2>
 
-		<div class="h3">
-			<h3>シフトの時間を選択してください。</h3>
-		</div>
-
+		<c:if test="${isWorkerJudgeTrue}">
+	          <h3>シフトの希望を選択してください。</h3>
+	    </c:if>
+	    <c:if test="${not isWorkerJudgeTrue}">
+	          <h3>シフトの希望時間を選択してください。</h3>
+	    </c:if>
 
 		<form action="ShiftEditSave.action?date=${date}?workerId=${workerId}&count=${count}" method="post">
 
-			<div class="date">
 			<c:if test="${not empty workerId}">
-		        <p>選択された従業員:
+		        <h3>選択された従業員:
 		            ${workerId}
-		        </p>
+		        </h3>
 		    </c:if>
 
 			<c:if test="${not empty date}">
-		        <p>選択された日付:
+		        <h3>選択された日付:
 		            ${date}
-		        </p>
+		        </h3>
 		    </c:if>
-			</div>
 
-			<div class="table">
 	        <table>
 	            <thead>
 	                <tr>
-	                    <th>選択</th>
-	                    <th>勤務時間ID</th>
-	                    <th>開始時間</th>
-	                    <th>終了時間</th>
+	                    <c:if test="${isWorkerJudgeTrue}">
+	                        <!-- worker_judgeがTrueの場合のヘッダー -->
+	                        <th>選択</th>
+	                    </c:if>
+	                    <c:if test="${not isWorkerJudgeTrue}">
+	                        <!-- worker_judgeがFalseの場合の従来のヘッダー -->
+	                        <th>選択</th>
+	                        <th>勤務時間ID</th>
+	                        <th>開始時間</th>
+	                        <th>終了時間</th>
+	                    </c:if>
 	                </tr>
 	            </thead>
 	            <tbody>
+	                <c:if test="${isWorkerJudgeTrue}">
+	                <!-- worker_judgeがTrueの場合の選択肢（〇または-） -->
+	                <tr>
+	                    <td>
+	                        <input type="radio" name="workTimeId" value="T" required> 〇
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td>
+	                        <input type="radio" name="workTimeId" value="NONE" required> -
+	                    </td>
+	                </tr>
+	            </c:if>
+
+	            <c:if test="${not isWorkerJudgeTrue}">
+	                <!-- worker_judgeがFalseの場合の従来通りの選択肢（A, B, C, D） -->
 	                <c:forEach var="workTime" items="${workTimes}">
 	                    <tr>
 	                        <c:if test="${workTime.workTimeId != 'F'}">
-		                        <td>
-		                            <input type="radio" name="workTimeId" value="${workTime.workTimeId}" required>
-		                        </td>
-	                        	<td>${workTime.workTimeId}</td>
-	                        	<td>${workTime.workTimeStart}</td>
-	                        	<td>${workTime.workTimeEnd}</td>
+	                            <td>
+	                                <input type="radio" name="workTimeId" value="${workTime.workTimeId}" required>
+	                            </td>
+	                            <td>${workTime.workTimeId}</td>
+	                            <td>${workTime.workTimeStart}</td>
+	                            <td>${workTime.workTimeEnd}</td>
 	                        </c:if>
 	                    </tr>
 	                </c:forEach>
 
-	            <!-- Eの選択肢を追加 -->
-	            <tr>
-				    <td>
-				        <input type="radio" name="workTimeId" value="E" id="customWorkTime" required>
-				    </td>
-				    <td>E</td>
-				    <td>
-				        <select name="customStartTime" id="customStartTime" disabled>
-				            <c:forEach var="hour" begin="${store_time_start}" end="${store_time_end - 1}">
-				                <option value="${hour}">${hour}:00</option>
-				            </c:forEach>
-				        </select>
-				    </td>
-				    <td>
-				        <select name="customEndTime" id="customEndTime" disabled>
-				            <c:forEach var="hour" begin="${store_time_start + 1}" end="${store_time_end}">
-				                <option value="${hour}">${hour}:00</option>
-				            </c:forEach>
-				        </select>
-				    </td>
-
-				    <!-- Eの時間設定エラー処理（アラート） -->
-				    <c:if test="${not empty errorMessage}">
-					    <div style="color: red;">${errorMessage}</div>
-					</c:if>
-				</tr>
-				<!-- なしにする -->
-				<tr>
-				    <td>
-				        <input type="radio" name="workTimeId" value="NONE" required>
-				    </td>
-					<td>なし</td>
-				    <td colspan="2">希望なし</td>
-				</tr>
+	                <!-- Eの選択肢を追加 -->
+	                <tr>
+	                    <td>
+	                        <input type="radio" name="workTimeId" value="E" id="customWorkTime" required>
+	                    </td>
+	                    <td>E</td>
+	                    <td>
+	                        <select name="customStartTime" id="customStartTime" disabled>
+	                            <c:forEach var="hour" begin="${store_time_start}" end="${store_time_end - 1}">
+	                                <option value="${hour}">${hour}:00</option>
+	                            </c:forEach>
+	                        </select>
+	                    </td>
+	                    <td>
+	                        <select name="customEndTime" id="customEndTime" disabled>
+	                            <c:forEach var="hour" begin="${store_time_start + 1}" end="${store_time_end}">
+	                                <option value="${hour}">${hour}:00</option>
+	                            </c:forEach>
+	                        </select>
+	                    </td>
+	                </tr>
+	                <!-- なしにする -->
+					<tr>
+					    <td>
+					        <input type="radio" name="workTimeId" value="NONE" required>
+					    </td>
+						<td>なし</td>
+					    <td colspan="2">希望なし</td>
+					</tr>
+	            </c:if>
 	            </tbody>
 	        </table>
-	        </div>
 
 	        <script>
 			    document.addEventListener("DOMContentLoaded", () => {
@@ -156,12 +142,11 @@
 			    });
 			</script>
 
-			<div class="input">
+
 	        <input type="hidden" name="workerId" value="${param.workerId}">
     		<input type="hidden" name="date" value="${date}">
 	        <input type="submit" value="決定">
 	        <a href="ShiftEdit.action">戻る</a>
-	        </div>
 	    </form>
 
 

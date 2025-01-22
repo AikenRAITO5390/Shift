@@ -71,6 +71,17 @@ public class ShiftEditSaveAction extends Action {
 	        throw new Exception("Worker not found for workerId: " + workerId);
 	    }
 
+	 	// worker_judgeの値を取得
+        boolean workerJudge = worker.isWorkerJudge();
+
+        // worker_judgeがTrueの場合
+        if (workerJudge) {
+            req.setAttribute("isWorkerJudgeTrue", true);
+        } else {
+            // worker_judgeがFalseの場合
+            req.setAttribute("isWorkerJudgeTrue", false);
+        }
+
 	    // Store オブジェクトを取得
     	Store store = storeDao.get(manager.getStoreId());
 

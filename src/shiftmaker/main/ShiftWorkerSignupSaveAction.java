@@ -263,6 +263,17 @@ public class ShiftWorkerSignupSaveAction extends Action {
     	List<Store> workTimeDetails = storeDao.getWorkTimes(loginuser.getStoreId());
     	req.setAttribute("workTimeDetails", workTimeDetails);
 
+    	// worker_judgeの値を取得
+        boolean workerJudge = worker.isWorkerJudge();
+
+        // worker_judgeがTrueの場合
+        if (workerJudge) {
+            req.setAttribute("isWorkerJudgeTrue", true);
+        } else {
+            // worker_judgeがFalseの場合
+            req.setAttribute("isWorkerJudgeTrue", false);
+        }
+
     	req.setAttribute("dateKeys", dateKeys);
     	req.setAttribute("dates", dates);
     	req.setAttribute("nullAndTime", nullAndTime);

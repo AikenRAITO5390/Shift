@@ -42,9 +42,19 @@
 					        <c:when test="${shiftMap[workerlist.workerId][date] != null}">
 					            <c:set var="shift" value="${shiftMap[workerlist.workerId][date]}" />
 					            <c:if test="${shift.workTimeId != null}">
-					                <a href="ShiftEditSet.action?workerId=${workerlist.workerId}&date=${date}&workTimeId=${shift.workTimeId}&count=${count}">
-					                    ${shift.workTimeId}
-					                </a>
+					                <c:choose>
+                                    <!-- worker_judgeがTrueの時はTを〇に変換して表示 -->
+                                    <c:when test="${shiftHopeTimeIds[date] == 'T'}">
+                                        <a href="ShiftEditSet.action?workerId=${workerlist.workerId}&date=${date}&workTimeId=${shift.workTimeId}&count=${count}">
+                                            〇
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="ShiftEditSet.action?workerId=${workerlist.workerId}&date=${date}&workTimeId=${shift.workTimeId}&count=${count}">
+                                            ${shift.workTimeId}
+                                        </a>
+                                    </c:otherwise>
+                                </c:choose>
 					            </c:if>
 					            <c:if test="${shift.workTimeId == null}">
 					                <a href="ShiftEditSet.action?workerId=${workerlist.workerId}&date=${date}&shiftTimeStart=${shift.shiftTimeStart}&shiftTimeEnd=${shift.shiftTimeEnd}&count=${count}">
@@ -64,28 +74,30 @@
         </tbody>
     </table>
 
-    <!-- StoreDBから情報取得。表示するだけ -->
-    <h3>＜店舗のシフト時間参考＞</h3>
-		<table>
-		    <thead>
-		        <tr>
-		            <th>勤務時間ID</th>
-		            <th>開始時間</th>
-		            <th>終了時間</th>
-		        </tr>
-		    </thead>
-		    <tbody>
-		        <c:forEach var="workTime" items="${workTimeDetails}">
-		            <tr>
-		            	<c:if test="${workTime.workTimeId != 'F'}">
-		            		<td>${workTime.workTimeId}</td>
-			                <td>${workTime.workTimeStart}</td>
-			                <td>${workTime.workTimeEnd}</td>
-		            	</c:if>
-		            </tr>
-		        </c:forEach>
-		    </tbody>
-		</table>
+    <!-- worker_judgeがFalseの場合のみ店舗のシフト時間参考セクションを表示 -->
+    <c:if test="${not isWorkerJudgeTrue}">
+        <h3>＜店舗のシフト時間参考＞</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>勤務時間ID</th>
+                    <th>開始時間</th>
+                    <th>終了時間</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="workTime" items="${workTimeDetails}">
+                    <tr>
+                        <c:if test="${workTime.workTimeId != 'F'}">
+                            <td>${workTime.workTimeId}</td>
+                            <td>${workTime.workTimeStart}</td>
+                            <td>${workTime.workTimeEnd}</td>
+                        </c:if>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </c:if>
 
     <form action="ShiftEditResult.action" method="get">
 	    <button type="submit">確定</button>

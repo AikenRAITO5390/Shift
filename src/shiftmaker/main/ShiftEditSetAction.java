@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Store;
+import bean.Worker;
 import dao.ShiftDao;
 import dao.StoreDao;
 import dao.WorkerDao;
@@ -115,6 +116,23 @@ public class ShiftEditSetAction extends Action{
         // 確認用
         System.out.println(workTimes);
         System.out.println("店舗ID: " + manager.getStoreId());
+
+        // Worker オブジェクトを取得
+        Worker worker = workerDao.get(workerId);
+        if (worker == null) {
+            throw new Exception("Worker not found for workerId: " + workerId);
+        }
+
+    	// worker_judgeの値を取得
+        boolean workerJudge = worker.isWorkerJudge();
+
+        // worker_judgeがTrueの場合
+        if (workerJudge) {
+            req.setAttribute("isWorkerJudgeTrue", true);
+        } else {
+            // worker_judgeがFalseの場合
+            req.setAttribute("isWorkerJudgeTrue", false);
+        }
 
         // リクエストにデータをセット
      	req.setAttribute("workerId", workerId);
