@@ -9,14 +9,14 @@
 	text-align : center;
 }
 .date{
-	margin-top: -62px;
-	margin-left: 500px;
+	margin-top: -83px;
+	margin-left: 960px;
 	margin-right: 20px;
 }
 .delete{
-	margin-top : 30px;
-	margin-left: 540px;
-	margin-bottom : 10px;
+	margin-top : 20px;
+	margin-left: 960px;
+	margin-bottom : 20px;
 }
 .name{
 	margin-top : 8px;
@@ -25,6 +25,10 @@
 .text{
 	margin-top : 2px;
 	margin-left: 60px;
+
+	width: 90ch; /* 40文字分の幅を指定 */
+  	overflow-wrap: break-word; /* 単語の途中でも改行 */
+  	word-wrap: break-word; /* 単語の途中でも改行 */
 }
 .toukou{
 	border: 1px solid ; /* 枠線を設定 */
@@ -33,14 +37,15 @@
     border-radius: 5px; /* 角を丸くする */
     margin-top : 10px;
     display: inline-block; /*文字の幅だけ線をひく*/
-    margin-left: 230px;
-    width: 60%; /* 画面の幅いっぱいに広げる */
+    margin-left: 20px;
+    width: 95%; /* 画面の幅いっぱいに広げる */
 }
 .create{
+  text-align : center;
   position: fixed; /* 要素を固定 */
-  top: 450px; /* 画面の上部に配置 */
-  left: 950px; /* 画面の左端に配置 */
-  width: 9%; /* 画面の幅いっぱいに広げる */
+  top: 90px; /* 画面の上部に配置 */
+  left: 1140px; /* 画面の左端に配置 */
+  width: 6%; /* 画面の幅いっぱいに広げる */
   border: 1px solid ; /* 枠線を設定 */
   background-color: #75A9FF; /* 背景色を設定 */
   border-radius: 5px; /* 角を丸くする */
@@ -50,14 +55,10 @@
   z-index: 1000; /* 他の要素の上に表示 */
 }
 .modoru{
-  position: fixed; /* 要素を固定 */
-  top: 450px; /* 画面の上部に配置 */
-  left: 1100px; /* 画面の左端に配置 */
+  margin-top : -1200px;
+  margin-left: 60px; /* 画面の左端に配置 */
   width: 3%; /* 画面の幅いっぱいに広げる */
-  border: 1px solid ; /* 枠線を設定 */
-  background-color: #75A9FF; /* 背景色を設定 */
-  border-radius: 5px; /* 角を丸くする */
-  display: inline-block; /*文字の幅だけ線をひく*/
+
 
   padding: 5px; /* 内側の余白を設定 */
   z-index: 1000; /* 他の要素の上に表示 */
@@ -108,7 +109,7 @@
 </div>
 
 <div class="create">
-    <a href="BbsCreate.action">投稿を作成する</a>
+    <a href="BbsCreate.action">投稿作成</a>
 </div>
 
 <div class="modoru">

@@ -8,6 +8,9 @@
         table { width: 90%; border-collapse: collapse; margin: 20px auto; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
         th { background-color: #f4f4f4; }
+        .p {
+        	text-align : center;
+        }
     </style>
 </head>
 <body>
@@ -24,6 +27,7 @@
         </thead>
 
         <!-- シフト情報 -->
+        <div class="p">
         <tbody>
         <c:forEach var="wlist" items="${worker_list}">
         	<tr>
@@ -38,7 +42,7 @@
                                     	<c:forEach var="shift" items="${worker.mergedShifts}">
                                     		<c:choose>
 												<c:when test="${wlist.workerName == worker.name}">
-                                        			<li>${shift}</li>
+                                        			<p>${shift}</p>
                                         		</c:when>
                                         	</c:choose>
                                     	</c:forEach>
@@ -52,6 +56,7 @@
         	</tr>
         </c:forEach>
         </tbody>
+        </div>
     </table>
 </body>
 </html>
