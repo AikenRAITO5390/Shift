@@ -16,11 +16,11 @@
 }
 .button1 {
 	margin-top : 40px;
-	margin-left : 250px;
+	margin-left : 520px;
 }
 .button2 {
-	margin-top : -80px;
-	margin-left : 450px;
+	margin-top : -40px;
+	margin-left : 700px;
 }
 .a {
 	margin-top : 80px;
@@ -40,22 +40,19 @@
 
 		<h2>シフト閲覧</h2>
 
-	<h3>閲覧したいシフトを選択してください</h3>
+	<h3>閲覧したいシフトを選択してください。</h3>
 
 
 
-	<form action="ShiftEmployee.action" method="post" class="form1">
-	<div class="button1">
+	<form action="ShiftEmployee.action" method="post">
 		<button class="button1">社員用</button>
-	</div>
-
 	</form>
 
 
 
-	<form action="Shift.action" method="post" class="form1">
+	<form action="Shift.action" method="post">
 	<div class="button2">
-		<button class="button1">バイト用</button>
+		<button>バイト用</button>
 	</div>
 
 	</form>

@@ -11,6 +11,10 @@
 
 <html>
 
+<head>
+    <title>シフト条件変更</title>
+</head>
+
 <style>
 .body label{
 	background-color: #6495ED; /* 背景色を水色に設定 */

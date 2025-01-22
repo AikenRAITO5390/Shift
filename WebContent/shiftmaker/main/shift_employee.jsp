@@ -44,9 +44,15 @@
 		                    <%-- シフト情報が存在する場合 --%>
 		                    <c:when test="${shiftMap[workerlist.workerId][date] != null}">
 		                        <c:set var="shift" value="${shiftMap[workerlist.workerId][date]}" />
-		                        <c:if test="${shift.workTimeId != null}">
-		                                ${shift.workTimeId}
-		                        </c:if>
+		                        <c:choose>
+	                                    <%-- worker_judgeがTrueの時はTを〇に変換して表示 --%>
+	                                    <c:when test="${shift.workTimeId  == 'T'}">
+	                                            〇
+	                                    </c:when>
+	                                    <c:otherwise>
+	                                            ${shift.workTimeId}
+	                                    </c:otherwise>
+	                                </c:choose>
 		                        <c:if test="${shift.workTimeId == null}">
 		                                <fmt:formatDate value="${shift.shiftTimeStart}" pattern="HH:mm" /> -
 		                                <fmt:formatDate value="${shift.shiftTimeEnd}" pattern="HH:mm" />

@@ -12,6 +12,10 @@
 
 <html>
 
+<head>
+    <title>シフト条件変更（一覧）</title>
+</head>
+
 <style>
 .table-container th{
 	background-color: #6495ED; /* 背景色を水色に設定 */

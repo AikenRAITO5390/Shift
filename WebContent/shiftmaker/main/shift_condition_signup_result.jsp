@@ -5,6 +5,10 @@
 
 <html>
 
+<head>
+    <title>シフト条件登録完了</title>
+</head>
+
 <style>
 .body h2{
 	margin-top : 60px;
