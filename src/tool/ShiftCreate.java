@@ -264,11 +264,8 @@ public class ShiftCreate {
         			//社員の場合
         			if(shift_lists.getWorker().isWorkerJudge()){
         				maxHours = minutesToHour(timeToMinutes(work_time_start)-timeToMinutes(work_time_end));
-        				if(shift_lists.getShiftHopeTimeId().equals("T")){
-        					workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(), shift_lists.getWorker().getWorkerPosition(), work_time_start, work_time_end, maxHours,true,power));
-        				}else{
-        					workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(), shift_lists.getWorker().getWorkerPosition(), work_time_start, work_time_end, maxHours,true,power));
-        				}
+        				workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(), "employee", work_time_start, work_time_end, maxHours,true,0));
+
         			}else{
         			workers.add(new WorkerShift(
         					shift_lists.getWorker().getWorkerName(),shift_lists.getWorker().getWorkerPosition(), availableFrom, availableTo, maxHours,false,power));
@@ -284,18 +281,13 @@ public class ShiftCreate {
             			String availableTo	= null;
             			int maxHours = 0;
             			int power = Integer.parseInt(shift_lists.getWorker().getWorkerScore());
-        				if(shift_lists.getWorker().isWorkerJudge()){
-            				maxHours = minutesToHour(timeToMinutes(work_time_start)-timeToMinutes(work_time_end));
-            				workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(), shift_lists.getWorker().getWorkerPosition(), work_time_start, work_time_end, maxHours,true,power));
-        				}else{
-        					LocalTime timeFrom =shift_lists.getShiftHopeTimeStart().toLocalDateTime().toLocalTime();
-            				LocalTime timeTo =shift_lists.getShiftHopeTimeEnd().toLocalDateTime().toLocalTime();
-            				availableFrom = timeFrom.toString();
-            				availableTo   = timeTo.toString();
-        					maxHours =minutesToHour(timeToMinutes(availableTo)-timeToMinutes(availableFrom));
-        					workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(),shift_lists.getWorker().getWorkerPosition(), availableFrom, availableTo, maxHours,false,power));
+        				LocalTime timeFrom =shift_lists.getShiftHopeTimeStart().toLocalDateTime().toLocalTime();
+            			LocalTime timeTo =shift_lists.getShiftHopeTimeEnd().toLocalDateTime().toLocalTime();
+            			availableFrom = timeFrom.toString();
+            			availableTo   = timeTo.toString();
+        				maxHours =minutesToHour(timeToMinutes(availableTo)-timeToMinutes(availableFrom));
+        				workers.add(new WorkerShift(shift_lists.getWorker().getWorkerName(),"employee", availableFrom, availableTo, maxHours,false,power));
 
-        				}
         			}
         		}
 
