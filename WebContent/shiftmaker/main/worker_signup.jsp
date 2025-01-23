@@ -11,6 +11,8 @@
 
 <html>
 
+<title>従業員情報登録</title>
+
 <c:import url="../../common/header.jsp"/>
 
 <body>

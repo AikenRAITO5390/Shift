@@ -10,6 +10,9 @@
 <link rel="stylesheet" href="../../css/style_k.css">
 
 <html>
+
+<title>従業員情報登録完了</title>
+
 	<c:import url="../../common/header.jsp"/>
 
 	<body>
