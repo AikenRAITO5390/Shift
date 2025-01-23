@@ -13,7 +13,7 @@
 <c:import url="../../common/header_work.jsp"/>
 <div class="main_worker-content">
 
-<h2><a href="#">📜　シフト閲覧</a></h2>
+<h2><a href="ShiftChooseWork.action">📜　シフト閲覧</a></h2>
 
 <h2><a href="BBSWorker.action">📝　掲示板</a></h2>
 
