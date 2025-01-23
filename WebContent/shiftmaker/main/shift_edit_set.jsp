@@ -5,23 +5,55 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
+<style>
+.h2 {
+	margin-top : 60px;
+	text-align : center;
+}
+.h3 {
+	margin-top : 40px;
+	text-align : center;
+}
+.worker {
+	margin-top : 40px;
+	margin-left : 250px;
+}
+.table {
+	margin-top : -95px;
+	margin-left : 600px;
+}
+.submit {
+	margin-top : 50px;
+	margin-left : 850px;
+}
+.a {
+	margin-top : -25px;
+	margin-left : 790px;
+}
+</style>
+
 <c:import url="../../common/header.jsp"/>
 
 <body>
 <div class="body">
-
+		<div class="h2">
 		<!-- 画面タイトル -->
 		<h2>シフト編集</h2>
+		</div>
 
+		<div class="h3">
 		<c:if test="${isWorkerJudgeTrue}">
 	          <h3>シフトの希望を選択してください。</h3>
 	    </c:if>
 	    <c:if test="${not isWorkerJudgeTrue}">
 	          <h3>シフトの希望時間を選択してください。</h3>
 	    </c:if>
+		</div>
+
 
 		<form action="ShiftEditSave.action?date=${date}?workerId=${workerId}&count=${count}" method="post">
 
+			<div class="worker">
 			<c:if test="${not empty workerId}">
 		        <h3>選択された従業員:
 		            ${workerId}
@@ -33,7 +65,9 @@
 		            ${date}
 		        </h3>
 		    </c:if>
+			</div>
 
+			<div class="table">
 	        <table>
 	            <thead>
 	                <tr>
@@ -112,6 +146,7 @@
 	            </c:if>
 	            </tbody>
 	        </table>
+	        </div>
 
 	        <script>
 			    document.addEventListener("DOMContentLoaded", () => {
@@ -145,8 +180,8 @@
 
 	        <input type="hidden" name="workerId" value="${param.workerId}">
     		<input type="hidden" name="date" value="${date}">
-	        <input type="submit" value="決定">
-	        <a href="ShiftEdit.action">戻る</a>
+	        <div class="submit"><input type="submit" value="決定"></div>
+	        <div class="a"><a href="ShiftEdit.action">戻る</a></div>
 	    </form>
 
 

@@ -13,9 +13,24 @@
 	margin-top : 60px;
 	text-align : center;
 }
-.main {
-	margin-top : -740px;
-	margin-left : 1060px;
+table {
+	width: 90%;
+	border-collapse: collapse;
+	margin: 20px auto;
+}
+th, td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: center;
+}
+th {
+	background-color: #f4f4f4;
+}
+a {
+    text-decoration: none;
+}
+.table_table {
+    overflow-x: scroll; /* 縦方向のスクロールバーを表示 */
 }
 /*シフト時間変更のラベル*/
 .table th {
@@ -31,6 +46,7 @@
 .date1 {
 	background-color: #6495ED; /* 背景色を水色に設定 */
 	color: white;
+	/*width: 100%;*/
 }
 </style>
 
@@ -39,12 +55,6 @@
 
 <head>
     <title>シフト編集</title>
-    <style>
-        table { width: 90%; border-collapse: collapse; margin: 20px auto; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
-        th { background-color: #f4f4f4; }
-
-    </style>
 </head>
 
 <body>
@@ -53,24 +63,17 @@
     	<h1>シフト編集</h1>
     </div>
 
-
+    <div class="table_table">
     <table>
-
         <!-- 曜日ヘッダー -->
         <thead>
-
-
         	<tr>
         		<th class="date">名前</th>
             		<c:forEach var="date" items="${dates}">
-                <th class="date1">
-                	${date.dayOfMonth}
-                </th>
-            		</c:forEach>
+                	<th class="date1">${date.dayOfMonth}</th>
+            	</c:forEach>
         	</tr>
-
         </thead>
-
 
         <!-- シフト情報 -->
         <tbody>
@@ -79,6 +82,7 @@
 		        <td>${workerlist.workerName}</td>
 		        <c:forEach var="date" items="${dates}">
 		            <td>
+		            <div class="a">
 		                <c:choose>
 		                    <%-- シフト情報が存在する場合 --%>
 		                    <c:when test="${shiftMap[workerlist.workerId][date] != null}">
@@ -112,12 +116,14 @@
 		                    </div>
 		                    </c:otherwise>
 		                </c:choose>
+		                </div>
 		            </td>
 		        </c:forEach>
 		    </tr>
 		</c:forEach>
         </tbody>
     </table>
+    </div>
 
 	<div class="table">
     <!-- StoreDBから情報取得。表示するだけ -->

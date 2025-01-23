@@ -143,7 +143,7 @@ function togglePasswordVisibility() {
 }
 </script>
 	 <c:forEach var="error" items="${errors}">
-	 <li>${errors}</li>
+	 <p>${errors}</p>
 	 </c:forEach>
 
 	<!-- ログイン用ボタン -->

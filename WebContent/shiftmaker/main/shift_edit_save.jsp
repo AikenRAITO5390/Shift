@@ -7,28 +7,80 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ja">
 
+<style>
+.h1 {
+	margin-top : 60px;
+	text-align : center;
+}
+.submit {
+	margin-top : 30px;
+	margin-left : 700px;
+}
+.main {
+	margin-top : -40px;
+	margin-left : 600px;
+}
+table {
+	margin-top : 50px;
+	width: 90%;
+	border-collapse: collapse;
+	margin: 20px auto;
+}
+th, td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: center;
+}
+th {
+	background-color: #f4f4f4;
+}
+a {
+    text-decoration: none;
+}
+.table_table {
+    overflow-x: scroll; /* 縦方向のスクロールバーを表示 */
+}
+/*シフト時間変更のラベル*/
+.table th {
+	background-color: #6495ED; /* 背景色を水色に設定 */
+	color: white;
+}
+/*ラベル(なまえ)*/
+.date {
+	background-color: #6495ED; /* 背景色を水色に設定 */
+	color: white;
+}
+/*ラベル(日付)*/
+.date1 {
+	background-color: #6495ED; /* 背景色を水色に設定 */
+	color: white;
+	/*width: 100%;*/
+}
+</style>
+
 <c:import url="../../common/header.jsp"/>
 
 <head>
     <title>シフト編集</title>
-    <style>
-        table { width: 90%; border-collapse: collapse; margin: 20px auto; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
-        th { background-color: #f4f4f4; }
-    </style>
+
 </head>
 
 <body>
-    <h1>シフト編集</h1>
+
+	<div class="h1">
+    	<h1>シフト編集</h1>
+    </div>
+
+	<div class="table_table">
     <table>
         <!-- 曜日ヘッダー -->
         <thead>
-        <tr>
-            <th>名前</th>
-            <c:forEach var="date" items="${dates}">
-                <th>${date.dayOfMonth}</th>
-            </c:forEach>
-        </tr>
+        	<tr>
+        		<th class="date">名前</th>
+            	<c:forEach var="date" items="${dates}">
+                	<th class="date1">${date.dayOfMonth}</th>
+            	</c:forEach>
+        	</tr>
         </thead>
 
         <!-- シフト情報 -->
@@ -38,6 +90,7 @@
 		        <td>${workerlist.workerName}</td>
 		        <c:forEach var="date" items="${dates}">
 		            <td>
+		            <div class="a">
 					    <c:choose>
 					        <c:when test="${shiftMap[workerlist.workerId][date] != null}">
 					            <c:set var="shift" value="${shiftMap[workerlist.workerId][date]}" />
@@ -64,16 +117,21 @@
 					            </c:if>
 					        </c:when>
 					        <c:otherwise>
+					        <div class="a">
 					            <a href="ShiftEditSet.action?workerId=${workerlist.workerId}&date=${date}&count=${count}">-</a>
+					        </div>
 					        </c:otherwise>
 					    </c:choose>
+					    </div>
 					</td>
 		        </c:forEach>
 		    </tr>
 		</c:forEach>
         </tbody>
     </table>
+    </div>
 
+	<div class="table">
     <!-- worker_judgeがFalseの場合のみ店舗のシフト時間参考セクションを表示 -->
     <c:if test="${not isWorkerJudgeTrue}">
         <h3>＜店舗のシフト時間参考＞</h3>
@@ -98,11 +156,18 @@
             </tbody>
         </table>
     </c:if>
+    </div>
 
+	<div class="submit">
     <form action="ShiftEditResult.action" method="get">
 	    <button type="submit">確定</button>
 	</form>
+	</div>
+
+	<div class="main">
 	<a href="Main.action">メインへ</a>
+	</div>
+
 </body>
 
 <c:import url="../../common/footer.jsp"/>
