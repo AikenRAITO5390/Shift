@@ -41,6 +41,7 @@ a {
 .date {
 	background-color: #6495ED; /* 背景色を水色に設定 */
 	color: white;
+
 }
 /*ラベル(日付)*/
 .date1 {
