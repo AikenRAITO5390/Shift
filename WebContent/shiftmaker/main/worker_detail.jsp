@@ -76,7 +76,7 @@
 </style>
 
 <head>
-    <title>～従業員情報詳細～</title>
+    <title>従業員情報詳細</title>
 </head>
 <c:import url="../../common/header.jsp"/>
 <body>

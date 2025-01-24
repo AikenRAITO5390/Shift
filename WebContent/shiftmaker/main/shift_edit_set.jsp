@@ -5,6 +5,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
+<title>シフト編集</title>
+
 <style>
 .h2 {
 	margin-top : 60px;
@@ -38,7 +40,7 @@
 <div class="body">
 		<div class="h2">
 		<!-- 画面タイトル -->
-		<h2>シフト編集</h2>
+		<h2>～シフト編集～</h2>
 		</div>
 
 		<div class="h3">

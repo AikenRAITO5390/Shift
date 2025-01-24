@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>まるごとシフトくん</title>
+<title>従業員情報削除</title>
 </head>
 <body>
 	<h2>～従業員情報削除～</h2>

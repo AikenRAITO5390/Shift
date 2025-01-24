@@ -2,11 +2,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
+
+<c:import url="../../common/header.jsp"/>
+
 <head>
-    <title>Shift Calendar</title>
+    <title>シフトカレンダー</title>
 </head>
 <body>
-    <h1>Shift Calendar</h1>
+    <h1>～シフト作成～</h1>
     <table>
         <!-- 曜日ヘッダー -->
         <thead>
@@ -61,4 +64,7 @@
     	<button>確定</button>
     </form>
 </body>
+
+<c:import url="../../common/footer.jsp"/>
+
 </html>
