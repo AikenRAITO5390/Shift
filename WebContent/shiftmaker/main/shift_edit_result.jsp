@@ -30,11 +30,11 @@
 
 	<!-- 画面タイトル -->
 	<div class="h2">
-		<h2>シフト編集完了</h2>
+		<h2>～シフト編集完了～</h2>
 	</div>
 
 	<div class="div">
-		<div>正しく変更されました。</div>
+		<div>正しく変更されました</div>
 	</div>
 
 	<div class="div">

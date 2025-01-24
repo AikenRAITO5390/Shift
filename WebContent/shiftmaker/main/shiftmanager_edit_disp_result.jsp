@@ -4,6 +4,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
+<title>シフト作成者変更完了</title>
+
 <style>
 .shiftmanager_edit h2{
 	text-align: center; /* 水平方向に中央揃え */

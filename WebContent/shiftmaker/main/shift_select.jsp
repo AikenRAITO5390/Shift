@@ -15,6 +15,7 @@
 <h1>～シフト作成～</h1>
 <%--ShiftCreateActionにボタンで飛ばす --%>
 <button onclick="location.href='ShiftCreate.action'" >作成</button>
+<a href="Main.action">メインへ戻る</a>
 </body>
 
 <c:import url="../../common/footer.jsp"/>

@@ -61,7 +61,7 @@ a {
 <body>
 
 	<div class="h1">
-    	<h1>～シフト編集～</h1>
+    	<h1>～シフトカレンダー～</h1>
     </div>
 
     <div class="table_table">

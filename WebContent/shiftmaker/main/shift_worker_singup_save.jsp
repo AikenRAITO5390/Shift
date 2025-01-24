@@ -10,14 +10,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>カレンダー</title>
+    <title>シフト希望提出</title>
     <style>
         table { border-collapse: collapse; }
         th, td { border: 1px solid black; width: 50px; height: 50px; text-align: center; }
     </style>
 </head>
 <body>
-    <h1>～カレンダー～</h1>
+    <h1>～シフト希望提出～</h1>
     <table>
         <tr>
             <th>日</th>
@@ -103,7 +103,9 @@
     </c:if>
 
     <form action="ShiftWorkerSignupResult.action" method="get">
-	    <button type="submit">送信</button>
+	    <button type="submit">登録</button>
 	</form>
 </body>
+
+<c:import url="../../common/footer.jsp"/>
 </html>

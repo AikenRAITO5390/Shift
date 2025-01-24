@@ -182,7 +182,7 @@
 
 	        <input type="hidden" name="workerId" value="${param.workerId}">
     		<input type="hidden" name="date" value="${date}">
-	        <div class="submit"><input type="submit" value="決定"></div>
+	        <div class="submit"><input type="submit" value="変更"></div>
 	        <div class="a"><a href="ShiftEdit.action">戻る</a></div>
 	    </form>
 

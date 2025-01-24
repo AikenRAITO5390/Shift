@@ -10,10 +10,12 @@
 
 	<div class="body">
 
-			<h2>～従業員希望シフト登録～</h2>
-			<p>送信されました</p>
+			<h2>～送信完了～</h2>
+			<p>正しく送信されました</p>
 			<a href="MainWork.action">メインへ</a>
 
 	</div>
+
+	<c:import url="../../common/footer.jsp"/>
 
 </html>

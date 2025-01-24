@@ -11,7 +11,7 @@
 <div class="body">
 
 		<!-- 画面タイトル -->
-		<h2>～従業員希望シフト登録～</h2>
+		<h2>～希望シフト登録～</h2>
 
 		<c:if test="${isWorkerJudgeTrue}">
 	          <h3>シフトの希望を選択してください。</h3>
@@ -139,7 +139,7 @@
 
 	        <input type="hidden" name="workerId" value="${worker.workerId}">
 	        <input type="hidden" name="storeId" value="${param.storeId}">
-	        <input type="submit" value="決定">
+	        <input type="submit" value="登録">
 	    </form>
 
 
