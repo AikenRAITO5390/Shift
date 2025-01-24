@@ -4,7 +4,7 @@
 <html>
 <style>
 .date1{
-    margin-top : -110px;
+    margin-top : -60px;
     margin-left: 85%;
 }
 .name1{
@@ -13,7 +13,7 @@
 }
 .text1 textarea{
 
-	margin-top : -10px;
+	margin-top : -8%;
     margin-left: 20px;
     width: 95%; /* 画面の幅いっぱいに広げる */
     height: 320px;
@@ -50,6 +50,9 @@
 
 }
 
+textarea {
+    resize: none; /* リサイズ機能を無効にする */
+}
 
 </style>
 

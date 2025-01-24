@@ -9,122 +9,90 @@
 	text-align : center;
 }
 .date{
-	margin-top: -45px;
-	margin-left: 970px;
-	margin-right: 20px;
+	margin-top : 15px;
+	 font-size: 18px;
 }
 .delete{
 	margin-top : 15px;
-	margin-left: 970px;
-	margin-bottom : 5px;
+	margin-left: 3%;
+	 font-size: 18px;
+	 margin-bottom: 7px;
 }
+
+.delete a {
+    display: inline-block; /* リンクをブロック要素にする */
+    padding: 5px 5px; /* 内側の余白を設定 */
+    background-color: #ff6347; /* 背景色を薄い赤色に設定 */
+    color: white; /* 文字色を赤色に設定 */
+    text-decoration: none; /* 下線を消す */
+}
+
+.delete a:hover {
+    background-color: #ffcccc; /* ホバー時の背景色を変更 */
+    border-color: #cc0000; /* ホバー時の枠線色を変更 */
+}
+
 .name{
-	margin-top : 8px;
-	margin-left: 60px;
+	margin-left: 2%;
+  flex-grow: 1;
+	margin-top : 15px;
 }
 .text{
 	margin-top : 2px;
 	margin-left: 60px;
-
-	width: 90ch; /* 40文字分の幅を指定 */
+	width: 80%; /* 40文字分の幅を指定 */
   	overflow-wrap: break-word; /* 単語の途中でも改行 */
   	word-wrap: break-word; /* 単語の途中でも改行 */
 }
+
 .toukou{
 	border: 1px solid ; /* 枠線を設定 */
 	background-color: #EEEEEE; /* 背景色を設定 */
     padding: 2px; /* 枠線と内容の間にスペースを追加 */
-    border-radius: 5px; /* 角を丸くする */
     margin-top : 10px;
-    display: inline-block; /*文字の幅だけ線をひく*/
-    margin-left: 20px;
-    width: 95%; /* 画面の幅いっぱいに広げる */
+    margin-left: 5%;
+    width: 85%; /* 画面の幅いっぱいに広げる */
 }
 .create{
   text-align : center;
   position: fixed; /* 要素を固定 */
-  top: 90px; /* 画面の上部に配置 */
-  left: 1140px; /* 画面の左端に配置 */
-  width: 6%; /* 画面の幅いっぱいに広げる */
-  border: 1px solid ; /* 枠線を設定 */
-  background-color: #75A9FF; /* 背景色を設定 */
-  border-radius: 5px; /* 角を丸くする */
-  display: inline-block; /*文字の幅だけ線をひく*/
-
-  padding: 5px; /* 内側の余白を設定 */
-  z-index: 1000; /* 他の要素の上に表示 */
+  left: 78%; /* 画面の左端に配置 */
 }
+
+.create a{
+	 background-color: #75A9FF; /* 背景色を設定 */
+     text-decoration: none; /* 下線を消す */
+ 	 padding: 5px 40px; /* 内側の余白を設定 */
+ 	  color: white; /* 文字色を赤色に設定 */
+ 	 z-index: 1000; /* 他の要素の上に表示 */
+ 	  border: 0.5px solid black; /* 赤色の枠線を設定 */
+}
+
 .modoru{
-  margin-top : -935px;
-  margin-left: 60px; /* 画面の左端に配置 */
-  width: 3%; /* 画面の幅いっぱいに広げる */
+  margin-left:10%;
+}
 
+.modoru a {
+	border: 0.5px solid black; /* 赤色の枠線を設定 */
+    display: inline-block; /* リンクをブロック要素にする */
+    padding: 5px 20px; /* 内側の余白を設定 */
+    background-color: #75A9FF; /* 背景色を薄い赤色に設定 */
+    color: white; /* 文字色を赤色に設定 */
+    text-decoration: none; /* 下線を消す */
 
-  padding: 5px; /* 内側の余白を設定 */
-  z-index: 1000; /* 他の要素の上に表示 */
 }
-.footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 15px;
-    background: #7d7d7d;
-    color: white;
-    z-index: 1000;
-}
-.footer p {
-    font-size: 12px; /* 文字サイズを12pxに設定 */
-    margin: 0; /* デフォルトのマージンをリセット */
-    padding: 0; /* デフォルトのパディングをリセット */
-    line-height: 15px; /* 行の高さを15pxに設定 */
-    text-align: center;
-}
-.sidebar {
-    display: none;
-    width: 200px;
-    height: 100%;
-    background-color: #7d7d7d;
-    position: fixed;
-    left: 0;
-    top: 50px;
-    padding: 10px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-}
-.header_work {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 50px;
-    background: #7d7d7d;
+
+.message-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: white;
-    z-index: 1000;
-    flex-direction: row; /* 横方向に配置 */
-    justify-content: space-between; /* 左右に配置 */
-}
-.header h2{
-	color: white;
+    align-items: center; /* 垂直方向の中央揃え */
+       padding-right: 5%;
 }
 
-.ushiro {
-    display: flex;
-    flex-direction: column; /* 縦方向に配置 */
-    align-items: flex-end; /* 右端に配置 */
-    justify-content: center; /* 垂直方向に中央揃え */
-    height: 100%; /* 親要素の高さを継承 */
-     padding-right: 15px;
-}
-
-.ushiro a,
-.ushiro p {
-    margin: 0; /* デフォルトのマージンをリセット */
-    padding: 2px 0; /* 上下のパディングを設定 */
+a:hover {
+    background-color: #71C5E8; /* ホバー時の背景色を変更 */
 
 }
+
 </style>
 
 
@@ -140,11 +108,22 @@
     	<h1>～掲示板～</h1>
 	</div>
 
-<div class="tabel">
+	 <div class="message-container">
+	<div class="create">
+    <a href="BbsCreateWorker.action">投稿作成</a>
+	</div>
+
+	<div class="modoru">
+	    <a href="MainWork.action">戻る</a>
+	</div>
+	</div>
+
+
     <ul>
         <c:forEach var="message" items="${messages}">
 
 			<div class="toukou">
+			<div class="message-container">
                 <!-- <strong>投稿者:</strong> -->
 
 				<div class="name">
@@ -157,10 +136,10 @@
                     </c:when>
                 </c:choose>
                 </div>
-
-
-				<div class="text">${message.bbsText} <br></div>
                 <div class="date"> ${message.bbsDate}<br></div>
+</div>
+ <div class="message-container">
+				<div class="text">${message.bbsText} <br></div>
 				<div class="delete">
                 	<c:choose>
 						<c:when test="${message.worker.workerId == WorkerLogin_Name}">
@@ -170,21 +149,12 @@
 				</div>
 
 			</div>
+			</div>
         </c:forEach>
     </ul>
-</div>
 
-<div class="create">
-    <a href="BbsCreateWorker.action">投稿作成</a>
-</div>
 
-<div class="modoru">
-    <a href="MainWork.action">戻る</a>
-</div>
-
-<div class="footer">
-	<p>ＴＥＡＭ Ⅽ   Bug Busters</p>
-</div>
+  <c:import url="../../common/footer.jsp"/>
 
 </body>
 </html>

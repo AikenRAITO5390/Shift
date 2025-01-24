@@ -51,6 +51,10 @@
 
 }
 
+textarea {
+    resize: none; /* リサイズ機能を無効にする */
+}
+
 
 </style>
 
