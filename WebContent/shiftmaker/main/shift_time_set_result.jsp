@@ -5,6 +5,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
+<title>シフト時間設定完了</title>
+
 <style>
 .h2 {
 	margin-top : 60px;
@@ -29,9 +31,9 @@
 <c:import url="../../common/header.jsp"/>
 
 <div class="h2">
-	<h2>～時間変更完了～</h2>
+	<h2>～シフト時間設定完了～</h2>
 
-		<p>変更が完了しました</p>
+		<p>時間設定が完了しました</p>
 	<a href="Main.action">メインメニューへ</a>
 </div>
 

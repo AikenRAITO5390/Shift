@@ -5,6 +5,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
+<title>シフト時間設定</title>
+
 <style>
 .h2 h2{
 	margin-top : 80px;
@@ -63,7 +66,7 @@ td {
 <%--次とぶやつ--%>
 
 <div class="time">
-<form action="ShiftTimeSetting.action" method="post">
+<form action="ShiftTimeSetting.action" method="post" onsubmit="return validateShiftTimes()">
     <table class="table table-hover">
     <%--四回繰り返す（A～D)　--%>
         <c:forEach var="i" begin="0" end="3">
@@ -223,6 +226,35 @@ td {
     </div>
 
 </form>
+
+<script>
+    function validateShiftTimes() {
+        // A～D のシフト時間をループで検証
+        for (let i = 0; i < 4; i++) {
+            var workTimeStart = document.getElementById("timeSelectStart_" + String.fromCharCode(65 + i)).value;
+            var workTimeEnd = document.getElementById("timeSelectEnd_" + String.fromCharCode(65 + i)).value;
+
+            // 時間の形式を比較
+            if (workTimeStart >= workTimeEnd) {
+                alert("シフト開始時間は終了時間より遅く設定できません。正しく選択してください。");
+                return false;  // フォーム送信を停止
+            }
+        }
+
+        // 営業時間のバリデーション
+        var storeTimeStart = document.getElementsByName("storeTimeStart")[0].value;
+        var storeTimeEnd = document.getElementsByName("storeTimeEnd")[0].value;
+
+        // 営業開始時間と終了時間を比較
+        if (storeTimeStart >= storeTimeEnd) {
+            alert("営業時間開始時間は終了時間より遅く設定できません。正しく選択してください。");
+            return false;  // フォーム送信を停止
+        }
+
+        // すべての時間が正しい場合、フォーム送信
+        return true;
+    }
+</script>
 
 <c:import url="../../common/footer.jsp"/>
 
