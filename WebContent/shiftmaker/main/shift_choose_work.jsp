@@ -6,7 +6,7 @@
 <html>
 
 <style>
-.body h2{
+.body h1{
 	margin-top : 60px;
 	text-align : center;
 }
@@ -38,7 +38,7 @@
 
 <div class="body">
 
-		<h2>シフト閲覧</h2>
+		<h1>～シフト閲覧～</h1>
 
 	<h3>閲覧したいシフトを選択してください。</h3>
 
@@ -63,7 +63,7 @@
 <!-- 戻るリンク -->
 <div>
 <div class="a">
-	    <a href="MainWork.action">戻る</a>
+	    <a href="MainWork.action">メインへ</a>
 </div>
 </div>
 

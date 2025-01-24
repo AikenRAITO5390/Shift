@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <h1>シフト削除</h1>
+    <h1>～シフト削除～</h1>
 
     <!-- 前月・次月へのリンク -->
     <form action="ShiftDelete.action?count=${count}" method="get">
@@ -74,7 +74,7 @@
     <form action="ShiftDeleteCheck.action" method="post">
         <input type="hidden" name="year" value="${year}">
         <input type="hidden" name="month" value="${month}">
-        <button type="submit">この月のシフトを削除</button>
+        <button type="submit">このシフトを削除する</button>
     </form>
 
     <a href="Main.action">戻る</a>

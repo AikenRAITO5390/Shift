@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <h1>シフト削除結果</h1>
+    <h1>～シフト削除結果～</h1>
 
     <c:if test="${not empty message}">
         <p>${message}</p>
