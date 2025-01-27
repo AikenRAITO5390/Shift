@@ -67,6 +67,23 @@
 		            ${date}
 		        </h3>
 		    </c:if>
+
+		    <h3>元のシフト希望:</h3>
+
+	        <c:if test="${not empty workTimeId}">
+			    <h3>
+			        <c:choose>
+			            <c:when test="${workTimeId == 'T'}">〇</c:when>
+			            <c:otherwise>${workTimeId}</c:otherwise>
+			        </c:choose>
+			    </h3>
+			</c:if>
+
+	        <c:if test="${not empty startHour_c}">
+	            <h3>${startHour_c}:00 - ${endHour_c}:00</h3>
+	        </c:if>
+
+
 			</div>
 
 			<div class="table">

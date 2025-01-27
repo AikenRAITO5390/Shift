@@ -74,12 +74,15 @@ public class ShiftEditSetAction extends Action{
         // 確認用
         System.out.println("date: " + shiftDateString);
         String workTimeId = req.getParameter("workTimeId");
+        req.setAttribute("workTimeId", workTimeId);
      	// 確認用
         System.out.println("workTimeId: " + workTimeId);
         String customStartTime = req.getParameter("shiftTimeStart");
+        req.setAttribute("customStartTime", customStartTime);
         // 確認用
         System.out.println("customStartTime: " + customStartTime);
         String customEndTime = req.getParameter("shiftTimeEnd");
+        req.setAttribute("customEndTime", customEndTime);
      	// 確認用
         System.out.println("customEndTime: " + customEndTime);
 
@@ -94,11 +97,13 @@ public class ShiftEditSetAction extends Action{
             LocalDateTime endDateTime = LocalDateTime.parse(customEndTime, formatter);
 
             // 時間部分（Hour）を抽出
-            int startHour = startDateTime.getHour();  // 08
-            int endHour = endDateTime.getHour();  // 12
+            int startHour_c = startDateTime.getHour();
+            int endHour_c = endDateTime.getHour();
+            req.setAttribute("startHour_c", startHour_c);
+         	req.setAttribute("endHour_c", endHour_c);
 
             // 開始時刻と終了時刻が正しいか確認
-            if (startHour >= endHour) {
+            if (startHour_c >= endHour_c) {
                 req.setAttribute("errorMessage", "正確に時間を選択してください。");
                 req.getRequestDispatcher("shift_worker_signup_set.jsp").forward(req, res);
                 return; // 処理を中断
