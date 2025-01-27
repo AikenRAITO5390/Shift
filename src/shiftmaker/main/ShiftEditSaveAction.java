@@ -38,6 +38,12 @@ public class ShiftEditSaveAction extends Action {
 	        return;
 	    }
 
+	    // ログイン名をヘッダーに出す
+	    StoreDao storeDao = new StoreDao();
+		Store store_login = storeDao.get(manager.getStoreId());
+
+
+
 	    // パラメータの取得
 	    String workerId = req.getParameter("workerId");
 	    String storeId = manager.getStoreId();
@@ -46,7 +52,6 @@ public class ShiftEditSaveAction extends Action {
 
 	    // Worker と Store の情報を取得
 	    WorkerDao workerDao = new WorkerDao();
-	    StoreDao storeDao = new StoreDao();
 	    ShiftDao shiftDao = new ShiftDao();
 
 	    // insert用宣言
@@ -150,7 +155,7 @@ public class ShiftEditSaveAction extends Action {
 	    req.setAttribute("shifts", shifts);
 	    req.setAttribute("worker_list", worker_list);
 	    req.setAttribute("dates", dates);
-
+	    req.setAttribute("managerName", store_login.getManagerName());
 	    String countStr = req.getParameter("count");
 		int count = Integer.parseInt(countStr);
 		System.out.println("count：" + count);

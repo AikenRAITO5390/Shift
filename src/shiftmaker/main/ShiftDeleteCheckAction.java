@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Store;
+import dao.StoreDao;
 import tool.Action;
 
 public class ShiftDeleteCheckAction extends Action {
@@ -21,6 +22,13 @@ public class ShiftDeleteCheckAction extends Action {
 	        return;
 	    }
 
+	    //ログイン名をヘッダーに出す
+	    StoreDao sDao = new StoreDao();
+
+		Store store_login = sDao.get(manager.getStoreId());
+
+
+
 	    // リクエストから年と月を取得
 	    String yearStr = req.getParameter("year");
 	    String monthStr = req.getParameter("month");
@@ -32,6 +40,8 @@ public class ShiftDeleteCheckAction extends Action {
 
 	    req.setAttribute("year", year);
 	    req.setAttribute("month", month);
+	    req.setAttribute("managerName", store_login.getManagerName());
+
 
 	    // 確認ページにフォワード
 	    req.getRequestDispatcher("shift_delete_check.jsp").forward(req, res);

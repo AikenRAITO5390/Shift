@@ -62,6 +62,8 @@ public class ShiftEditAction extends Action{
             return;
         }
 
+        Store store_login = storeDao.get(manager.getStoreId());
+
         // 店舗IDを取得
         String storeId = manager.getStoreId();
         System.out.println("storeId: " + storeId);
@@ -153,6 +155,7 @@ public class ShiftEditAction extends Action{
         req.setAttribute("shifts", shifts);
         req.setAttribute("worker_list", worker_list);
         req.setAttribute("count", count);
+        req.setAttribute("managerName", store_login.getManagerName());
 
 
         // JSPへフォワード

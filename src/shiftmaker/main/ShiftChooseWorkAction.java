@@ -4,9 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.Store;
 import bean.Worker;
-import dao.StoreDao;
+import dao.WorkerDao;
 import tool.Action;
 
 public class ShiftChooseWorkAction extends Action {
@@ -16,15 +15,15 @@ public class ShiftChooseWorkAction extends Action {
 
 		// セッションを取得
 		HttpSession session = req.getSession();//セッション
-		StoreDao sDao = new StoreDao();
+		WorkerDao sDao = new WorkerDao();
 
 		// ログインユーザーを取得
      	Worker loginuser = (Worker)session.getAttribute("user");
      	// 確認用
     	System.out.println("loginuser：" + loginuser);
 
-		Store store = sDao.get(loginuser.getStoreId());
-		req.setAttribute("managerName", store.getManagerName());
+		Worker worker = sDao.get(loginuser.getWorkerId());
+		req.setAttribute("WorkerName", worker.getWorkerName());
 
 		//JSPへフォワード 7
 		req.getRequestDispatcher("shift_choose_work.jsp").forward(req, res);

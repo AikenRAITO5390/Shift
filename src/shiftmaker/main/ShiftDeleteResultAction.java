@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.Store;
 import dao.ShiftDao;
+import dao.StoreDao;
 import tool.Action;
 
 public class ShiftDeleteResultAction extends Action {
@@ -21,6 +22,12 @@ public class ShiftDeleteResultAction extends Action {
 	        res.sendRedirect("login.jsp");
 	        return;
 	    }
+
+	    // ログイン名をヘッダーに出す
+	    StoreDao sDao = new StoreDao();
+	    Store store_login = sDao.get(manager.getStoreId());
+
+
 
 	    // リクエストから年、月を取得
 	    String yearStr = req.getParameter("year");
@@ -47,9 +54,11 @@ public class ShiftDeleteResultAction extends Action {
 	    // メッセージをリクエストにセット
 	    if (!message.isEmpty()) {
 	        req.setAttribute("message", message);
+	        req.setAttribute("managerName", store_login.getManagerName());
 	    }
 	    if (!errorMessage.isEmpty()) {
 	        req.setAttribute("errorMessage", errorMessage);
+	        req.setAttribute("managerName", store_login.getManagerName());
 	    }
 
 	    // 削除後、結果ページに遷移

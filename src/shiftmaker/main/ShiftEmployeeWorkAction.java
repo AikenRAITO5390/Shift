@@ -59,6 +59,9 @@ public class ShiftEmployeeWorkAction extends Action{
      	// 確認用
     	System.out.println("loginuser：" + loginuser);
 
+    	//ログイン名をヘッダーに出す
+    	Worker worker_login = workerDao.get(loginuser.getWorkerId());
+
         // 店舗IDを取得
         String storeId = loginuser.getStoreId();
         System.out.println("storeId: " + storeId);
@@ -134,7 +137,7 @@ public class ShiftEmployeeWorkAction extends Action{
         req.setAttribute("shifts", shifts);
         req.setAttribute("worker_list", worker_list);
         req.setAttribute("count", count);
-
+        req.setAttribute("WorkerName", worker_login.getWorkerName());
 
         // JSPへフォワード
         req.getRequestDispatcher("shift_employee_work.jsp").forward(req, res);

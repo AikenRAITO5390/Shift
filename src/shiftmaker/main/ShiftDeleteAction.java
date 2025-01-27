@@ -74,6 +74,9 @@ public class ShiftDeleteAction extends Action{
             return;
         }
 
+        //ログイン名をヘッダーに出す
+        Store store_login = storeDao.get(manager.getStoreId());
+
         // 店舗IDを取得
         String storeId = manager.getStoreId();
 
@@ -115,6 +118,7 @@ public class ShiftDeleteAction extends Action{
         req.setAttribute("shiftScores", shiftScores);
         req.setAttribute("worker_list", worker_list);
         req.setAttribute("count", count);
+        req.setAttribute("managerName", store_login.getManagerName());
 
         // JSPへフォワード
         req.getRequestDispatcher("shift_delete.jsp").forward(req, res);

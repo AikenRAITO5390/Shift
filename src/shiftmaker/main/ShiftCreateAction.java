@@ -55,6 +55,9 @@ public class ShiftCreateAction extends Action{
 		HttpSession session = req.getSession();
 		//ログインユーザーの情報取得
 		Store manager = (Store)session.getAttribute("user");
+
+		//ログイン名をヘッダーに出す
+		Store store_login = stDao.get(manager.getStoreId());
 		//店舗の開店時間の取得
 		String work_time_start = stDao.TimeStartGet(manager.getStoreId());
 		//店舗の閉店時間の取得
@@ -175,6 +178,8 @@ public class ShiftCreateAction extends Action{
         req.setAttribute("month", nextmonth);
         req.setAttribute("innerList",innerList);
 		req.setAttribute("worker_list", worker_list);
+		req.setAttribute("managerName", store_login.getManagerName());
+
 		//shift_select.jspに遷移
 		req.getRequestDispatcher("shift_create.jsp").forward(req,res);
 	}

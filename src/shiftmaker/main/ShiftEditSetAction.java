@@ -62,6 +62,9 @@ public class ShiftEditSetAction extends Action{
 		// StoreDaoを初期化
 		StoreDao storeDao = new StoreDao();
 
+		//ログイン名をヘッダーに出す
+
+		Store store_login = storeDao.get(manager.getStoreId());
 
 		// リクエストパラメータを取得
         String workerId = req.getParameter("workerId");
@@ -140,6 +143,7 @@ public class ShiftEditSetAction extends Action{
      	req.setAttribute("store_time_end", endHour);
      	req.setAttribute("workTimes", workTimes);
      	req.setAttribute("date", shiftDateString);
+     	req.setAttribute("managerName", store_login.getManagerName());
 
      	count += 1;
 
