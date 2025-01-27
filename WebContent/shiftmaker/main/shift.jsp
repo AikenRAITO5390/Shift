@@ -12,11 +12,14 @@
 <head>
     <title>シフト閲覧（バイト）</title>
     <style>
-		.shiftAction{margin-top : 60px;}
-        table { width: 90%; border-collapse: collapse; margin: 20px auto; }
+        		.shiftAction{margin-top : 60px;}
+        table {border-collapse: collapse; width: 90%;  table-layout: fixed; margin-bottom: 10px; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
-        th { background-color: #6495ED; color: white;}
-        a{display: inline-block;
+       .shiftAction th { background-color: #6495ED; color: white;
+			  text-align: center; /* テキストを中央揃え */
+			  vertical-align: middle; /* 垂直方向も中央揃え */
+}
+        .shiftAction a{display: inline-block;
    		  padding: 10px;
    		  text-decoration: none; /* 下線を消す */
   		  border-radius: 3px;
@@ -25,11 +28,45 @@
   		  margin-bottom: 5%;
   		  margin-left: 85%;
   		  }
+
+  		  h1{
+  		  margin-left: 40%;
+  		  }
+
+
+  		  .grahu th{
+  		  	width: 40px !important;
+  		  	height: 40px !important;
+
+  		  }
+  		  .grahu td{
+  		  	width: 40px !important;
+  		  	height: 40px !important;
+  		  	font-size: 13px;
+
+  		  }
+
+  		  .table_table {
+  	 			 overflow-x: scroll; /* 縦方向のスクロールバーを表示 */
+				}
+
+
+		.year{
+			margin-left:　90%;
+				}
     </style>
 </head>
 <div class = "shiftAction">
 <body>
-    <h1>シフト閲覧（バイト）</h1>
+    <h1>～シフト閲覧（バイト）～</h1>
+
+    <div class="year">
+        <h4>${year}年 ${month}月</h4>
+    </div>
+
+    <div class="table_table">
+
+    <div class ="grahu">
     <table>
         <!-- 曜日ヘッダー -->
         <thead>
@@ -73,7 +110,8 @@
 		</c:forEach>
         </tbody>
     </table>
-
+</div>
+</div>
     <!-- StoreDBから情報取得。表示するだけ -->
     <h3>＜店舗のシフト時間参考＞</h3>
 		<table>
@@ -98,7 +136,7 @@
 		</table>
 
 	<a href="ShiftChoose.action">戻る</a>
-</body>
 </div>
+</body>
 <c:import url="../../common/footer.jsp"/>
 </html>
