@@ -4,6 +4,21 @@
 <!DOCTYPE html>
 <html lang="ja">
 
+<style>
+.h1 {
+	margin-top : 60px;
+	text-align : center;
+}
+.message {
+	margin-top : 3%;
+	text-align : center;
+}
+.link {
+	margin-top : 5%;
+	text-align : center;
+}
+</style>
+
 <c:import url="../../common/header.jsp" />
 
 <head>
@@ -11,17 +26,24 @@
 </head>
 
 <body>
+	<div class="h1">
     <h1>～シフト削除結果～</h1>
+    </div>
 
+	<div class="message">
     <c:if test="${not empty message}">
         <p>${message}</p>
     </c:if>
+    </div>
 
     <c:if test="${not empty errorMessage}">
         <p style="color: red;">${errorMessage}</p>
     </c:if>
 
+
+	<div class="link">
     <a href="Main.action">メインページへ戻る</a>
+    </div>
 
 </body>
 

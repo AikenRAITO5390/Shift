@@ -5,6 +5,52 @@
 <!DOCTYPE html>
 <html lang="ja">
 
+<style>
+.h1 {
+	margin-top : 60px;
+	text-align : center;
+}
+.lt {
+	margin-top : -15px;
+	margin-left : 100px;
+	margin-bottom : -40px;
+}
+.gt {
+	margin-top : -90px;
+	margin-left : 1100px;
+}
+.year {
+	margin-top : 10px;
+	margin-left : 580px;
+	margin-bottom : 60px;
+}
+/*ラベル(なまえ)*/
+.date {
+	background-color: #6495ED; /* 背景色を水色に設定 */
+	color: white;
+
+}
+/*ラベル(日付)*/
+.date1 {
+	background-color: #6495ED; /* 背景色を水色に設定 */
+	color: white;
+	/*width: 100%;*/
+}
+.table_table {
+    overflow-x: scroll; /* 縦方向のスクロールバーを表示 */
+}
+.delete {
+	margin-top : 60px;
+	text-align : center;
+}
+.main {
+	margin-top : 20px;
+	text-align : center;
+	margin-bottom : 20px;
+}
+
+</style>
+
 <c:import url="../../common/header.jsp" />
 
 <head>
@@ -17,28 +63,39 @@
 </head>
 
 <body>
-    <h1>～シフト削除～</h1>
+	<div class="h1">
+    	<h1>～シフト削除～</h1>
+    </div>
 
+	<div class="lt">
     <!-- 前月・次月へのリンク -->
     <form action="ShiftDelete.action?count=${count}" method="get">
         <input type="hidden" name="year" value="${year}">
         <input type="hidden" name="month" value="${prevMonth}">
         <button type="submit">&lt;&lt; 前月</button>
     </form>
+    </div>
+
+    <div class="year">
     <span>${year}年 ${month}月</span>
+    </div>
+
+    <div class="gt">
     <form action="ShiftDelete.action?count=${count}" method="get">
         <input type="hidden" name="year" value="${year}">
         <input type="hidden" name="month" value="${nextMonth}">
         <button type="submit">&gt;&gt; 次月</button>
     </form>
+    </div>
 
+	<div class="table_table">
     <!-- シフトテーブルの表示 -->
     <table>
         <thead>
             <tr>
-                <th>名前</th>
+                <th class="date">名前</th>
                 <c:forEach var="date" items="${dates}">
-                    <th>${date.dayOfMonth}</th>
+                    <th class="date1">${date.dayOfMonth}</th>
                 </c:forEach>
             </tr>
         </thead>
@@ -69,15 +126,20 @@
             </c:forEach>
         </tbody>
     </table>
+    </div>
 
+	<div class="delete">
     <!-- シフト削除フォーム (カレンダー外に1つの削除ボタン) -->
     <form action="ShiftDeleteCheck.action" method="post">
         <input type="hidden" name="year" value="${year}">
         <input type="hidden" name="month" value="${month}">
         <button type="submit">このシフトを削除する</button>
     </form>
+    </div>
 
+	<div class="main">
     <a href="Main.action">戻る</a>
+    </div>
 </body>
 
 <c:import url="../../common/footer.jsp" />
