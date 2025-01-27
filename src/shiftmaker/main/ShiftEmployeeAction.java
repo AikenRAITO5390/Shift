@@ -140,6 +140,8 @@ public class ShiftEmployeeAction extends Action{
         req.setAttribute("shifts", shifts);
         req.setAttribute("worker_list", worker_list);
         req.setAttribute("count", count);
+        req.setAttribute("year", year);   // 年をセット
+        req.setAttribute("month", nextmonth);   // 月をセット
         req.setAttribute("managerName", store_login.getManagerName());
 
 
