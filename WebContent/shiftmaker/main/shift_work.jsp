@@ -10,7 +10,7 @@
 <c:import url="../../common/header_work.jsp"/>
 
 <head>
-    <title>シフト閲覧（バイト）</title>
+    <title>シフト閲覧（アルバイト）</title>
     <style>
         table { width: 90%; border-collapse: collapse; margin: 20px auto; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <h1>シフト閲覧（バイト）</h1>
+    <h1>～シフト閲覧　アルバイト～</h1>
     <table>
         <!-- 曜日ヘッダー -->
         <thead>
