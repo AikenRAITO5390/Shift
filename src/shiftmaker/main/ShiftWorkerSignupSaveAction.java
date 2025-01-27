@@ -53,6 +53,9 @@ public class ShiftWorkerSignupSaveAction extends Action {
     	WorkerDao workerDao = new WorkerDao();
     	StoreDao storeDao = new StoreDao();
 
+    	//ログイン名をヘッダーに出す
+    	Worker worker_login = workerDao.get(loginuser.getWorkerId());
+
     	LocalDate todaysDate = LocalDate.now();// LcalDateインスタンスを取得
 		Integer year = todaysDate.getYear();// 現在の年を取得
 		Integer month = todaysDate.getMonthValue();// 現在の月を取得
@@ -278,6 +281,7 @@ public class ShiftWorkerSignupSaveAction extends Action {
     	req.setAttribute("dates", dates);
     	req.setAttribute("nullAndTime", nullAndTime);
     	req.setAttribute("shiftHopeTimeIds", shiftHopeTimeIds);
+    	req.setAttribute("WorkerName", worker_login.getWorkerName());
 
     	String countStr = req.getParameter("count");
 		int count = Integer.parseInt(countStr);

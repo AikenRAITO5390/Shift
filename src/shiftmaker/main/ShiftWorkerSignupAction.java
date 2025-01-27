@@ -42,6 +42,9 @@ public class ShiftWorkerSignupAction extends Action{
 		// StoreDaoを初期化
 		StoreDao storeDao = new StoreDao();
 
+		//ログイン名をヘッダーに出す
+		 Worker worker_login = workerDao.get(loginuser.getWorkerId());
+
 		// loginuserからworkerIdを取得
 	    String workerId = loginuser.getWorkerId();
         // 確認用
@@ -101,6 +104,7 @@ public class ShiftWorkerSignupAction extends Action{
 		req.setAttribute("year", year);
 		req.setAttribute("nextmonth", nextmonth);
 		req.setAttribute("count", count);
+		req.setAttribute("WorkerName", worker_login.getWorkerName());
 
         // JSPへフォワード
         req.getRequestDispatcher("shift_worker_signup.jsp").forward(req, res);

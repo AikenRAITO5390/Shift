@@ -41,7 +41,7 @@ function hideLinks(id) {
 </ul>
 
 <ul>
-    <li><a href="#" >📜　シフト閲覧</a></li>
+    <li><a href="ShiftChooseWork.action" >📜　シフト閲覧</a></li>
 </ul>
 
 <ul>
