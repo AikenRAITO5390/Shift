@@ -12,17 +12,26 @@
 .logout_ok {
 	margin-top : 60px;
 	text-align : center;
+
 }
-.ok {
-	margin-top : 63px;
+.ok input[type="submit"]{
+	margin-top : 62px;
 	margin-left: 670px;
+	background-color: #6495ED; /* 背景色を水色に設定 */
+	color: white;
+	border-radius: 5px; /* 角を丸くする */
+	border: none; /* ボーダーをなしに設定 */
 }
-.no {
+.no input[type="submit"]{
 	margin-top : -25px;
 	margin-left: 530px;
+	background-color: #6495ED; /* 背景色を水色に設定 */
+	color: white;
+	border-radius: 5px; /* 角を丸くする */
+	border: none; /* ボーダーをなしに設定 */
 }
 .header {
-	 position: fixed;
+	position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -53,7 +62,7 @@
     align-items: flex-end; /* 右端に配置 */
     justify-content: center; /* 垂直方向に中央揃え */
     height: 100%; /* 親要素の高さを継承 */
-     padding-right: 15px;
+    padding-right: 15px;
 }
 
 .ushiro a,
@@ -115,13 +124,13 @@
 <div class="aaaa">
 <div class="ok">
     <form action="WorkerLogoutExecute.action" method="post">
-        <button type="submit">はい</button>
+        <input type="submit" value="はい">
     </form>
 </div>
 
 <div class="no">
     <form action="/shift/shiftmaker/main/Main.action" method="post">
-        <button type="submit">いいえ</button>
+        <input type="submit" value="いいえ">
     </form>
 </div>
 

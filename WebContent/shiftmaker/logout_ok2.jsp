@@ -13,13 +13,21 @@
 	margin-top : 60px;
 	text-align : center;
 }
-.ok {
-	margin-top : 64px;
+.ok input[type="submit"]{
+	margin-top : 62px;
 	margin-left: 670px;
+	background-color: #6495ED; /* 背景色を水色に設定 */
+	color: white;
+	border-radius: 5px; /* 角を丸くする */
+	border: none; /* ボーダーをなしに設定 */
 }
-.no {
+.no input[type="submit"]{
 	margin-top : -25px;
 	margin-left: 530px;
+	background-color: #6495ED; /* 背景色を水色に設定 */
+	color: white;
+	border-radius: 5px; /* 角を丸くする */
+	border: none; /* ボーダーをなしに設定 */
 }
 .header {
 	 position: fixed;
