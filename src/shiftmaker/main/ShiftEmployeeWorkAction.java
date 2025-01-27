@@ -138,6 +138,8 @@ public class ShiftEmployeeWorkAction extends Action{
         req.setAttribute("worker_list", worker_list);
         req.setAttribute("count", count);
         req.setAttribute("WorkerName", worker_login.getWorkerName());
+        req.setAttribute("year", year);   // 年をセット
+        req.setAttribute("month", nextmonth);   // 月をセット
 
         // JSPへフォワード
         req.getRequestDispatcher("shift_employee_work.jsp").forward(req, res);
