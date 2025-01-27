@@ -15,12 +15,12 @@
 	text-align : center;
 }
 .button1 {
-	margin-top : 40px;
-	margin-left : 520px;
+	margin-top : 42px;
+	margin-left : 40%;
 }
 .button2 {
-	margin-top : -40px;
-	margin-left : 700px;
+	margin-top : -33px;
+	margin-left : 54%;
 }
 .a {
 	margin-top : 80px;

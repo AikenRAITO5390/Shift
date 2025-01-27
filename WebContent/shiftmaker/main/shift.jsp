@@ -12,12 +12,22 @@
 <head>
     <title>シフト閲覧（バイト）</title>
     <style>
+		.shiftAction{margin-top : 60px;}
         table { width: 90%; border-collapse: collapse; margin: 20px auto; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
-        th { background-color: #f4f4f4; }
+        th { background-color: #6495ED; color: white;}
+        a{display: inline-block;
+   		  padding: 10px;
+   		  text-decoration: none; /* 下線を消す */
+  		  border-radius: 3px;
+  		  background-color: #6495ED;
+  		  color: white;
+  		  margin-bottom: 5%;
+  		  margin-left: 85%;
+  		  }
     </style>
 </head>
-
+<div class = "shiftAction">
 <body>
     <h1>シフト閲覧（バイト）</h1>
     <table>
@@ -89,6 +99,6 @@
 
 	<a href="ShiftChoose.action">戻る</a>
 </body>
-
+</div>
 <c:import url="../../common/footer.jsp"/>
 </html>
