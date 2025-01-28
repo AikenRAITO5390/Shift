@@ -8,46 +8,42 @@
 <title>パワーバランス設定</title>
 
 <style>
-
 .Point_Setting {
     display: flex;
     justify-content: left; /* 子要素を左右に均等に配置 */
     align-items: stretch; /* 子要素の高さを揃える */
     margin-top: 20px; /* ヘッダーの高さ分だけ下に配置 */
-    margin-left: 100px;
+    margin-left: 10%;
 }
-
 .power_Setting h1{
 	text-align: center;
 	margin-top: 70px;
 }
+/*日付*/
 .power_Setting p{
 	text-align: center;
 	margin-top: 30px;
-
 }
-
+/*曜日と枠線*/
 .week_Setting, .point_conetnt {
     padding: 0 5px; /* 各カラムに左右のパディングを追加 */
 }
-
+/*一週間分のテーブル*/
 .week_Setting {
-    width: 350px; /* 必要に応じて幅を設定 */
+    width: 35%; /* 必要に応じて幅を設定 */
     height: 10px; /* 縦の長さを指定 */
+
 }
-
-
+/*一か月分の入力された点数*/
 .point_conetnt input[type="number"]{
-    width: 450px; /* 必要に応じて幅を設定 */
+    width: 200%; /* 必要に応じて幅を設定 */
     margin-left: 20px;
     margin-top: 15px;
 }
-}
+/*２つの変更ボタン*/
 .power_Setting button{
 	text-align: center;
 }
-
-
 /*一か月のカレンダー表示する*/
 .point_conetnt{
 	border: 1px solid ; /* 枠線を設定 */
@@ -57,31 +53,23 @@
     display: inline-block; /*文字の幅だけ線をひく*/
     width: 60%; /* 画面の幅いっぱいに広げる */
     height: 400px; /* 縦の長さを指定 */
-
-    margin-left: -80px;
-
-
-
-
+    margin-left: -5%;
 }
+/*一か月の日付*/
 .point_conetnt table{
 	margin-left: -35px;
-
 }
-
+/*一か月のパワーバランス変更ボタン*/
 .point_conetnt button{
 	margin-left: 640px;
 	margin-top: 30px;
-
 }
-
 /*一か月の日付*/
 .point_conetnt label{
 	margin-left: 32px;
 	width: 85%; /* 画面の幅いっぱいに広げる */
-
 }
-
+/*スクロールバー*/
 .scrollable-vertical {
     height: 400px; /* 必要に応じて調整 */
     overflow-y: scroll; /* 縦方向のスクロールバーを表示 */
@@ -89,40 +77,47 @@
     box-sizing: border-box; /* パディングとボーダーを含めた全体の幅と高さを指定 */
     overflow-x: hidden; /* 横方向のスクロールバーを非表示 */
     max-width: 100%; /* 最大幅を指定して余分なスペースを防ぐ */
-
     margin-left: 80px;
 }
-
+/*土曜に色*/
 .week_Setting tr:nth-child(6) input[type="number"] {
     background-color: #A4C6FF; /* 必要に応じて色を変更 */
     color: inherit; /* 文字色をデフォルトに設定 */
 }
-
+/*日曜に色*/
 .week_Setting tr:nth-child(7) input[type="number"] {
     background-color: #FF69A3; /* 必要に応じて色を変更 */
     color: inherit; /* 文字色をデフォルトに設定 */
 }
-
+/*一週間の曜日*/
 .week_Setting tr {
     padding-bottom: 15px; /* 必要に応じて調整 */
-}
 
+}
+/*一週間の日付と土曜と日曜の点数*/
 .week_Setting td {
     padding-bottom: 15px; /* 必要に応じて調整 */
 }
-
+/*変更ボタン*/
 .week_Setting button{
 	margin-top: 20px;
-	margin-left: 145px;
-
+	margin-left: 37%;
 }
-
+/*変更ボタン*/
+.point_conetnt button{
+    margin-top: 20px;
+	margin-left: 92%;
+	margin-bottom: 20px;
+}
+/*トップページに戻るリンク*/
 .power_Setting a{
-	margin-left: 930px;
+	margin-left: 80%;
 	margin-top: 10px;
-
 }
-
+/*hr*/
+.hr {
+	width: 220%;
+}
 </style>
 
 
@@ -198,7 +193,9 @@
 	                    <td>
 	                        <input type="number" name="DayScore_${loopStatus.index + 1}" id="DayScore_${loopStatus.index + 1}" >
 	                         <span class="error" id="DayScore_${loopStatus.index + 1}Error"></span>
+	                         <div class="hr">
 	                         <hr>
+	                         </div>
 	                    </td>
 	                    	<input type="hidden" name="WorkDayScore_${loopStatus.index + 1}" value="${entry.key}">
 	                </tr>

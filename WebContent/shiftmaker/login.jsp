@@ -42,20 +42,20 @@
 	text-align : center;
 }
 .login input[type="submit"] {
-    width: 110px; /* ボタンの幅を200pxに設定 */
-    height: 40px; /* ボタンの高さを50pxに設定 */
+    width: 110px; /* ボタンの幅を110pxに設定 */
+    height: 40px; /* ボタンの高さを40pxに設定 */
     background-color: #6495ED; /* 背景色を水色に設定 */
     color: #FFFFFF; /* 文字色を白に設定 */
     font-size: 16px; /* 文字サイズを16pxに設定 */
     border: none; /* ボーダーをなしに設定 */
     border-radius: 5px; /* 角を丸くする */
     cursor: pointer; /* カーソルをポインターに変更 */
-    margin-left: 575px;
+    margin-left: 45%;
 
 }
 .managerlogin {
 	margin-top : 20px;
-	margin-left: 750px;
+	margin-left: 65%;
 }
 .footer {
     position: fixed;

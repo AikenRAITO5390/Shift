@@ -36,9 +36,16 @@ tb{
 a {
     text-decoration: none;
 }
-.main {
+.main input[type="submit"]{
     margin-bottom: 40px;
     text-align: right;
+    margin-top : 20px;
+	margin-left: 90%;
+
+	background-color: #6495ED; /* 背景色を水色に設定 */
+	color: white;
+	border-radius: 4px; /* 角を丸くする */
+	border: none; /* ボーダーをなしに設定 */
 }
 .table_table {
     overflow-x: scroll; /* 縦方向のスクロールバーを表示 */
@@ -165,7 +172,9 @@ a {
 		</table>
 	</div>
 	<div class="main">
-		<a href="Main.action">メインへ</a>
+		<form action="Main.action" method="post">
+		<input type="submit" value="メインへ">
+		</form>
 	</div>
 	<div class="sita"></div>
 </body>

@@ -13,12 +13,19 @@
 	text-align : center;
 }
 .submit {
-	margin-top : 30px;
-	margin-left : 700px;
+	margin-top : 35px;
+	margin-left : 90%;
 }
-.main {
-	margin-top : -30px;
-	margin-left : 600px;
+.main input[type="submit"]{
+	margin-top : -40px;
+	margin-left : 80%;
+
+	background-color: #6495ED; /* 背景色を水色に設定 */
+	color: white;
+	border-radius: 4px; /* 角を丸くする */
+	border: none; /* ボーダーをなしに設定 */
+	width: 6%;
+	height: 40px;
 }
 table {
 	margin-top : 50px;
@@ -168,7 +175,9 @@ a {
 	</div>
 
 	<div class="main">
-	<a href="Main.action">topへ</a>
+	<form action="Main.action" method="post">
+		<input type="submit" value="メインへ">
+	</form>
 	</div>
 
 	<div class="sita"></div>

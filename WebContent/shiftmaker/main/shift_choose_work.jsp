@@ -21,11 +21,31 @@
 .button2 {
 	margin-top : -33px;
 	margin-left : 54%;
+
+	background-color: #6495ED; /* 背景色を水色に設定 */
+    color: white;
 }
 .a {
 	margin-top : 80px;
-	margin-left : 860px;
+	margin-left : 65%;
 }
+.ok input[type="submit"]{
+	margin-top : -20px;
+	margin-left: 55%;
+	background-color: #6495ED; /* 背景色を水色に設定 */
+	color: white;
+	border-radius: 4px; /* 角を丸くする */
+	border: none; /* ボーダーをなしに設定 */
+}
+.ok2 input[type="submit"]{
+	margin-top : 25px;
+	margin-left: 40%;
+	background-color: #6495ED; /* 背景色を水色に設定 */
+	color: white;
+	border-radius: 4px; /* 角を丸くする */
+	border: none; /* ボーダーをなしに設定 */
+}
+
 </style>
 
 <head>
@@ -45,14 +65,16 @@
 
 
 	<form action="ShiftEmployeeWork.action" method="post">
-		<button class="button1">社員用</button>
+		<div class="ok2">
+		<input type="submit" value="社員用">
+		</div>
 	</form>
 
 
 
 	<form action="ShiftWork.action" method="post">
-	<div class="button2">
-		<button>バイト用</button>
+	<div class="ok">
+		<input type="submit" value="バイト用">
 	</div>
 
 	</form>

@@ -24,7 +24,7 @@
 }
 .a {
 	margin-top : 80px;
-	margin-left : 860px;
+	margin-left : 65%;
 }
 </style>
 

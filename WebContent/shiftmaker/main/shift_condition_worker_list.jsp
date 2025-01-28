@@ -21,6 +21,11 @@
 	background-color: #6495ED; /* 背景色を水色に設定 */
     color: white;
 }
+.main{
+	position: absolute;
+    left: 5%; /* 画面の中央に配置 */
+    transform: translateX(-50%) translateX(-90%);
+}
 </style>
 
 
