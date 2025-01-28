@@ -5,29 +5,61 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
+<style>
+.h2 {
+	margin-top : 60px;
+	text-align : center;
+}
+.h3 {
+	margin-top : 40px;
+	text-align : center;
+}
+.worker {
+	margin-top : 40px;
+	margin-left : 20%;
+}
+.table {
+	margin-top : -50px;
+	margin-left : 45%;
+}
+.submit {
+	margin-top : 50px;
+	margin-left : 65%;
+}
+</style>
+
 <c:import url="../../common/header_work.jsp"/>
 
 <body>
 <div class="body">
 
+		<div class="h2">
 		<!-- 画面タイトル -->
 		<h2>～希望シフト登録～</h2>
+		</div>
 
+		<div class="h3">
 		<c:if test="${isWorkerJudgeTrue}">
 	          <h3>シフトの希望を選択してください。</h3>
 	    </c:if>
+	    </div>
+
+	    <div class="h3">
 	    <c:if test="${not isWorkerJudgeTrue}">
 	          <h3>シフトの希望時間を選択してください。</h3>
 	    </c:if>
+	    </div>
 
 		<form action="ShiftWorkerSignupSave.action?shiftDate=${shiftDate}&count=${count}" method="post">
-
+			<div class="worker">
 			<c:if test="${not empty shiftDate}">
 		        <h3>選択された日付:
 		            ${shiftDate}
 		        </h3>
 		    </c:if>
+		    </div>
 
+			<div class="table">
 	        <table>
 	            <thead>
 	                <tr>
@@ -106,6 +138,7 @@
 	            </c:if>
 	            </tbody>
 	        </table>
+	        </div>
 
 	        <script>
 			    document.addEventListener("DOMContentLoaded", () => {
@@ -139,7 +172,7 @@
 
 	        <input type="hidden" name="workerId" value="${worker.workerId}">
 	        <input type="hidden" name="storeId" value="${param.storeId}">
-	        <input type="submit" value="登録">
+	        <div class="submit"><input type="submit" value="登録"></div>
 	    </form>
 
 
