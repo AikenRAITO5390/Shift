@@ -6,6 +6,44 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ja">
 
+<style>
+.h1 {
+	margin-top : 60px;
+	text-align : center;
+}
+.table {
+	margin-top : 70px;
+	margin-left : 28%;
+	tabel-layout: fixed;
+}
+.table a{
+	text-decoration: none;
+}
+.red {
+    color: #FF69A3;
+}
+
+.blue {
+    color: #6495ED;
+}
+.table_table th{
+    background-color: #6495ED;
+    color: white;
+}
+.table_table {
+    margin-left : 5%;
+    margin-top : 60px;
+}
+.ok input[type="submit"]{
+	margin-top : -420px;
+	margin-left: 75%;
+	background-color: #6495ED; /* 背景色を水色に設定 */
+	color: white;
+	border-radius: 4px; /* 角を丸くする */
+	border: none; /* ボーダーをなしに設定 */
+}
+</style>
+
 <c:import url="../../common/header_work.jsp"/>
 
 <head>
@@ -13,21 +51,28 @@
     <title>シフト希望提出</title>
     <style>
         table { border-collapse: collapse; }
-        th, td { border: 1px solid black; width: 50px; height: 50px; text-align: center; }
+        .table_table th { border: 1px solid black; width: 350px; height: 10px; text-align: center; }
+        td { border: 1px solid black; width: 75px; height: 75px; text-align: center; }
+
     </style>
 </head>
 <body>
+	<div class="h1">
     <h1>～シフト希望提出～</h1>
+    </div>
+
+	<div class="table">
     <table>
         <tr>
-            <th>日</th>
+            <th class="red">日</th>
             <th>月</th>
             <th>火</th>
             <th>水</th>
             <th>木</th>
             <th>金</th>
-            <th>土</th>
+            <th class="blue">土</th>
         </tr>
+
 
         <c:set var="counter" value="0" />
 		<c:forEach var="dateKey" items="${dateKeys}" varStatus="status">
@@ -38,9 +83,11 @@
 		        <c:choose>
 		            <c:when test="${dateKey != null}">
 		                <%-- 日付リンクを生成 --%>
+		                <div class="date">
 		                <a href="ShiftWorkerSignupSet.action?shiftDay=${dateKey}&count=${count}">
 		                    ${fn:substring(dateKey.toString(), 8, 10)}
 		                </a>
+		                </div>
 
 		                <%-- 勤務時間情報を表示（datesマップから値を取得） --%>
 		                <c:choose>
@@ -76,9 +123,11 @@
             </tr>
         </c:if>
     </table>
+    </div>
 
 	<!-- worker_judgeがFalseの場合のみ店舗のシフト時間参考セクションを表示 -->
     <c:if test="${not isWorkerJudgeTrue}">
+    	<div class="table_table">
         <h3>＜店舗のシフト時間参考＞</h3>
         <table>
             <thead>
@@ -100,11 +149,15 @@
                 </c:forEach>
             </tbody>
         </table>
+        </div>
     </c:if>
 
+	<div class="ok">
     <form action="ShiftWorkerSignupResult.action" method="get">
-	    <button type="submit">登録</button>
+	    <input type="submit" value="登録">
 	</form>
+	</div>
+
 </body>
 
 <c:import url="../../common/footer.jsp"/>
