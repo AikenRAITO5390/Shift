@@ -8,19 +8,7 @@
 	margin-top : 60px;
 	text-align : center;
 }
-/*ラベル(なまえ)*/
-.date {
-	background-color: #6495ED; /* 背景色を水色に設定 */
-	color: white;
 
-}
-/*ラベル(日付)*/
-.date1 {
-	background-color: #6495ED; /* 背景色を水色に設定 */
-	color: white;
-	width: 65%; /* 各セルの幅 */
-  	height: 60px; /* 各セルの高さ */
-}
 /*削除*/
 .delete {
 	margin-top : 60px;
@@ -33,35 +21,38 @@
 	margin-bottom : 20px;
 }
 /*データ*/
-.p {
-	text-align: center;
-}
-
-
 table {
-	width: 100%;
+	margin-top : 50px;
+	width: 90%;
 	border-collapse: collapse;
 	margin: 20px auto;
 	table-layout: fixed;
 }
-
-th {
-	width: 40px !important; /* 各セルの幅 */
-  	height: 40px !important; /* 各セルの高さ */
+th, td {
 	border: 1px solid #ddd;
 	padding: 8px;
 	text-align: center;
+	vertical-align: middle;
+	width: 50px !important;
+	height: 50px !important;
 }
-td {
-	width: 40px !important; /* 各セルの幅 */
-  	height: 40px !important; /* 各セルの高さ */
-  	border: 1px solid #ddd; /* 枠線の太さと色 */
-  	text-align: center; /* テキストの中央揃え */
-  	vertical-align: middle; /* 垂直方向の中央揃え */
-  	font-size: 13px;
+th {
+	background-color: #f4f4f4;
 }
 .table_table {
     overflow-x: scroll; /* 縦方向のスクロールバーを表示 */
+}
+
+.date {
+	background-color: #6495ED; /* 背景色を水色に設定 */
+	color: white;
+
+}
+/*ラベル(日付)*/
+.date1 {
+	background-color: #6495ED; /* 背景色を水色に設定 */
+	color: white;
+	/*width: 100%;*/
 }
 
 
@@ -91,7 +82,6 @@ td {
         </thead>
 
         <!-- シフト情報 -->
-        <div class="p">
         <tbody>
         <c:forEach var="wlist" items="${worker_list}">
         	<tr>
@@ -110,9 +100,9 @@ td {
             											<c:when test="${shift == 'T'}">○</c:when>
             											<c:otherwise>
 
-            												<div class ="p">
-											                <p>${shift}</p>
-											                </div>
+
+											                <td>${shift}</td>
+
 
 											            </c:otherwise>
 											        </c:choose>
@@ -128,7 +118,6 @@ td {
         	</tr>
         </c:forEach>
         </tbody>
-        </div>
     </table>
     </div>
 

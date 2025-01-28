@@ -48,21 +48,48 @@
 	text-align : center;
 	margin-bottom : 20px;
 }
+.table_table th{
+  		  	width: 40px !important;
+  		  	height: 40px !important;
+
+  		  }
+.table_table td{
+  		  	width: 40px !important;
+  		  	height: 40px !important;
+  		  	font-size: 13px;
+
+  		  }
+
+.shiftAction a{display: inline-block;
+   		  padding: 10px;
+   		  text-decoration: none; /* 下線を消す */
+  		  border-radius: 3px;
+  		  background-color: #6495ED;
+  		  color: white;
+  		  margin-bottom: 5%;
+  		  margin-left: 85%;
+  		  }
 
 </style>
 
 <c:import url="../../common/header.jsp" />
 
 <head>
+
     <title>シフト削除</title>
     <style>
-        table { width: 90%; border-collapse: collapse; margin: 20px auto; }
+        .shiftAction{margin-top : 60px;}
+        table {border-collapse: collapse; width: 90%;  table-layout: fixed; margin-bottom: 10px; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
-        th { background-color: #f4f4f4; }
+       .shiftAction th { background-color: #6495ED; color: white;
+			  text-align: center; /* テキストを中央揃え */
+			  vertical-align: middle; /* 垂直方向も中央揃え */
+}
     </style>
 </head>
 
 <body>
+<div class = "shiftAction">
 	<div class="h1">
     	<h1>～シフト削除～</h1>
     </div>
@@ -139,6 +166,7 @@
 
 	<div class="main">
     <a href="Main.action">戻る</a>
+    </div>
     </div>
 </body>
 

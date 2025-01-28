@@ -18,7 +18,7 @@
 }
 .worker {
 	margin-top : 40px;
-	margin-left : 250px;
+	margin-left : 20%;
 }
 .table {
 	margin-top : -145px;
