@@ -17,17 +17,25 @@ table {
 	width: 90%;
 	border-collapse: collapse;
 	margin: 20px auto;
+	table-layout: fixed;
 }
 th, td {
 	border: 1px solid #ddd;
 	padding: 8px;
 	text-align: center;
+	width: 40px !important;
+	height: 40px !important;
 }
 th {
 	background-color: #f4f4f4;
 }
-a {
+
+tb{
+	font-size: 13px !important;
+}
+.main a {
     text-decoration: none;
+    margin-botton: 40px;
 }
 .table_table {
     overflow-x: scroll; /* 縦方向のスクロールバーを表示 */

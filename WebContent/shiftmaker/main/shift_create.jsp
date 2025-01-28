@@ -42,21 +42,23 @@ table {
 	width: 100%;
 	border-collapse: collapse;
 	margin: 20px auto;
+	table-layout: fixed;
 }
 
 th {
-	width: 50px; /* 各セルの幅 */
-  	height: 50px; /* 各セルの高さ */
+	width: 40px !important; /* 各セルの幅 */
+  	height: 40px !important; /* 各セルの高さ */
 	border: 1px solid #ddd;
 	padding: 8px;
 	text-align: center;
 }
 td {
-	width: 100px; /* 各セルの幅 */
-  	height: 100px; /* 各セルの高さ */
+	width: 40px !important; /* 各セルの幅 */
+  	height: 40px !important; /* 各セルの高さ */
   	border: 1px solid #ddd; /* 枠線の太さと色 */
   	text-align: center; /* テキストの中央揃え */
   	vertical-align: middle; /* 垂直方向の中央揃え */
+  	font-size: 13px;
 }
 .table_table {
     overflow-x: scroll; /* 縦方向のスクロールバーを表示 */
