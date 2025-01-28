@@ -126,13 +126,13 @@
 
     <div class="ok">
     <form action="WorkerLogoutExecute.action" method="post">
-        <button type="submit">はい</button>
+        <input type="submit" value="はい">
     </form>
     </div>
 
 <div class="no">
     <form action="/shift/shiftmaker/main/MainWork.action" method="post">
-        <button type="submit">いいえ</button>
+        <input type="submit" value="いいえ">
     </form>
     </div>
 

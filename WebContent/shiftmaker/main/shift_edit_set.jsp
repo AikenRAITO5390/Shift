@@ -21,16 +21,26 @@
 	margin-left : 250px;
 }
 .table {
-	margin-top : -95px;
-	margin-left : 600px;
+	margin-top : -145px;
+	margin-left : 45%;
 }
 .submit {
 	margin-top : 50px;
-	margin-left : 850px;
+	margin-left : 65%;
 }
 .a {
 	margin-top : -25px;
-	margin-left : 790px;
+	margin-left : 60%;
+}
+/*アルファベットの場合*/
+.workTimeId {
+	margin-top : -46px;
+	margin-left : 14%;
+}
+/*時間選択済の場合*/
+.workTimeId2 {
+	margin-top : -46px;
+	margin-left : 14%;
 }
 </style>
 
@@ -70,6 +80,7 @@
 
 		    <h3>元のシフト希望:</h3>
 
+			<div class="workTimeId">
 	        <c:if test="${not empty workTimeId}">
 			    <h3>
 			        <c:choose>
@@ -78,10 +89,13 @@
 			        </c:choose>
 			    </h3>
 			</c:if>
+			</div>
 
+			<div class="workTimeId2">
 	        <c:if test="${not empty startHour_c}">
 	            <h3>${startHour_c}:00 - ${endHour_c}:00</h3>
 	        </c:if>
+	        </div>
 
 
 			</div>

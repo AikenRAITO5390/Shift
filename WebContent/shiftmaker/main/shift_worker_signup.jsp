@@ -5,6 +5,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ja">
 
+<style>
+.h1 {
+	margin-top : 60px;
+	text-align : center;
+}
+.table {
+	margin-top : 70px;
+	margin-left : 35%;
+}
+.table a{
+	text-decoration: none;
+}
+.red {
+    color: #FF69A3;
+}
+
+.blue {
+    color: #6495ED;
+}
+</style>
+
 <c:import url="../../common/header_work.jsp"/>
 
 <head>
@@ -16,16 +37,21 @@
     </style>
 </head>
 <body>
+
+	<div class="h1">
     <h1>～シフト希望提出～</h1>
+    </div>
+
+	<div class="table">
     <table>
         <tr>
-            <th>日</th>
+            <th class="red">日</th>
             <th>月</th>
             <th>火</th>
             <th>水</th>
             <th>木</th>
             <th>金</th>
-            <th>土</th>
+            <th class="blue">土</th>
         </tr>
 
         <c:set var="counter" value="0" />
@@ -58,6 +84,7 @@
             </tr>
         </c:if>
     </table>
+    </div>
 </body>
 
 <c:import url="../../common/footer.jsp"/>
