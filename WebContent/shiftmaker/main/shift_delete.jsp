@@ -136,8 +136,15 @@
                                 <c:when test="${shiftMap[workerlist.workerId][date] != null}">
                                     <c:set var="shift" value="${shiftMap[workerlist.workerId][date]}" />
                                     <c:if test="${shift.workTimeId != null}">
-                                        ${shift.workTimeId}
-                                    </c:if>
+			                            <c:choose>
+			                                <c:when test="${shift.workTimeId == 'T'}">
+			                                    〇  <%-- Tの場合は〇を表示 --%>
+			                                </c:when>
+			                                <c:otherwise>
+			                                    ${shift.workTimeId}  <%-- A, B, C, Dなどそのまま表示 --%>
+			                                </c:otherwise>
+			                            </c:choose>
+			                        </c:if>
                                     <c:if test="${shift.workTimeId == null}">
                                         <fmt:formatDate value="${shift.shiftTimeStart}" pattern="HH:mm" /> -
                                         <fmt:formatDate value="${shift.shiftTimeEnd}" pattern="HH:mm" />
