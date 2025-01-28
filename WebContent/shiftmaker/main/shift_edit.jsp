@@ -33,9 +33,12 @@ th {
 tb{
 	font-size: 13px !important;
 }
-.main a {
+a {
     text-decoration: none;
-    margin-botton: 40px;
+}
+.main {
+    margin-bottom: 40px;
+    text-align: right;
 }
 .table_table {
     overflow-x: scroll; /* 縦方向のスクロールバーを表示 */
@@ -56,6 +59,9 @@ tb{
 	background-color: #6495ED; /* 背景色を水色に設定 */
 	color: white;
 	/*width: 100%;*/
+}
+.sita {
+	margin-top : 60px;
 }
 </style>
 
@@ -161,6 +167,7 @@ tb{
 	<div class="main">
 		<a href="Main.action">メインへ</a>
 	</div>
+	<div class="sita"></div>
 </body>
 
 <c:import url="../../common/footer.jsp"/>

@@ -28,6 +28,9 @@
 	text-align : center;
 	letter-spacing: 17px; /* 文字間のスペースを2pxに設定 */
 }
+.error {
+	text-align : center;
+}
 .pass {
 	margin-top : 20px;
 	text-align : center;
@@ -140,7 +143,7 @@ function togglePasswordVisibility() {
 
 
 	 <c:forEach var="error" items="${errors}">
-	 <p>${errors}</p>
+	 <p class="error">${errors}</p>
 	 </c:forEach>
 
 	<!-- ログイン用ボタン -->

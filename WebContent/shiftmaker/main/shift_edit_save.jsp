@@ -17,7 +17,7 @@
 	margin-left : 700px;
 }
 .main {
-	margin-top : -40px;
+	margin-top : -30px;
 	margin-left : 600px;
 }
 table {
@@ -55,6 +55,9 @@ a {
 	background-color: #6495ED; /* 背景色を水色に設定 */
 	color: white;
 	/*width: 100%;*/
+}
+.sita {
+	margin-top : 60px;
 }
 </style>
 
@@ -167,6 +170,8 @@ a {
 	<div class="main">
 	<a href="Main.action">topへ</a>
 	</div>
+
+	<div class="sita"></div>
 
 </body>
 
