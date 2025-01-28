@@ -16,7 +16,7 @@
 
 <!---->
 .user h3{
-  	margin-left : 20%;
+  	margin-left : -500px;
   	text-align: center !important; /* 水平方向に中央揃え */
     color: white;
     margin-right: 20px; /* 右に10pxの余白を追加 */
@@ -36,17 +36,22 @@
     padding: 10px; /* 枠線と内容の間にスペースを追加 */
      width: 150px;
 
-
         }
+
+        .user{
+             display: flex;
+   			 justify-content: center; /* 水平方向に中央揃え */
+    		align-items: center; /* 垂直方向に中央揃え（必要に応じて） */}
 <!---->
 .text {
     display: flex;
     align-items: flex-start; /* コンテナの先頭にアイテムを揃える */
+     display: flex;
+    justify-content: center; /* 水平方向に中央揃え */
+    align-items: center; /* 垂直方向に中央揃え（必要に応じて） */
 }
 
         .text h3{
-	 margin: 0;
-  	margin-left : 20%;
   	text-align: center !important; /* 水平方向に中央揃え */
     color: white; /* 右に10pxの余白を追加 */
 
@@ -64,9 +69,11 @@
     margin-top: 20px; /* 右に10pxの余白を追加 */
     border: 1px solid black; /* 白い枠線を設定 */
     padding: 10px; /* 枠線と内容の間にスペースを追加 */
-    width: 40%;
+    width: 650px;
     min-height: 100px;
     max-height: 400px; /* 高さを100pxに設定 */
+    overflow-wrap: break-word; /* 単語の途中でも改行 */
+  	word-wrap: break-word; /* 単語の途中でも改行 */
         }
 
   .kakunin{
@@ -84,9 +91,13 @@
     width: 120px;
 
 }
+.submit {
+    display: flex;
+    justify-content: center; /* 水平方向に中央揃え */
+    align-items: center; /* 垂直方向に中央揃え（必要に応じて） */
+}
 
 .submit a{
-	 margin-left: 40%;
 	 margin-right: 40px;
     display: inline-block; /* インラインブロック要素に変更 */
     color: white;
