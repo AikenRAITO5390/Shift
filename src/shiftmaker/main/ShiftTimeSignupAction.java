@@ -1,5 +1,6 @@
 package shiftmaker.main;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,10 +20,34 @@ public class ShiftTimeSignupAction extends Action {
 		Store store_login = (Store)session.getAttribute("user");// ログインユーザーを取得
 		Map<String, String> errors = new HashMap<>();
 
-//ログイン情報でゲットする
+		//ログイン情報でゲットする
 		List<Store> list = sDao.filterStore(store_login.getStoreId());
 		Store store = sDao.get(store_login.getStoreId());
-		//ここ直す
+
+		// StoreDaoからデータを取得（listにはwork_time_idが"A"のデータが含まれていると仮定）
+		List<Store> list_e = sDao.filterStore(store_login.getStoreId());  // この部分で取得
+
+		// "A" の work_time_id を持つデータを検索
+		String storeTimeStart = null;
+		String storeTimeEnd = null;
+
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");  // 時刻のフォーマット
+
+		for (Store store_e : list) {
+		    if ("A".equals(store_e.getWorkTimeId())) { // work_time_idが"A"のものを見つける
+		    	if (store.getStoreTimeStart() != null) {
+		            storeTimeStart = sdf.format(store.getStoreTimeStart());
+		        }
+		        if (store.getStoreTimeEnd() != null) {
+		            storeTimeEnd = sdf.format(store.getStoreTimeEnd());
+		        }
+		        break;  // 一度見つかったらループを抜ける
+		    }
+		}
+
+		// 取得したstoreTimeStart, storeTimeEndをリクエストに設定
+		req.setAttribute("storeTimeStart", storeTimeStart);
+		req.setAttribute("storeTimeEnd", storeTimeEnd);
 
 		if (list != null) {// 店舗が存在していた場合
 			// リクエストに学生リストをセット

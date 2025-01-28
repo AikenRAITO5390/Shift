@@ -54,6 +54,10 @@ th {
 	color: white;
 	/*width: 100%;*/
 }
+ul {
+    list-style-type: none;
+    padding-left: 0; /* インデントを消す */
+}
 
 
 </style>
@@ -101,7 +105,7 @@ th {
             											<c:otherwise>
 
 
-											                <td>${shift}</td>
+											                <li>${shift}</li>
 
 
 											            </c:otherwise>

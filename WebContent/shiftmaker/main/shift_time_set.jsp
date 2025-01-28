@@ -13,6 +13,9 @@
 	margin-top : 80px;
 	text-align : center;
 }
+.time {
+	margin-left : 50px;
+}
 .time label{
 	margin-left: 440px;
 
@@ -33,20 +36,25 @@
 .time_time select{
 	margin-left : 30px;
 }
+.time_time h3{
+	margin-left : 1.5%;
+}
 .ok{
 	margin-top : 60px;
-	margin-left : 750px;
+	margin-left : 60%;
 }
 .no{
 	margin-top : -30px;
-	margin-left : 220px;
+	margin-left : 40%;
 }
 
 td {
     width: 100px; /* 必要に応じて幅を調整 */
     box-sizing: border-box; /* パディングとボーダーを含めた幅を計算 */
 }
-
+.sita {
+	margin-top : 60px;
+}
 
 
 </style>
@@ -135,60 +143,60 @@ td {
 
 
     <select name="storeTimeStart">
-    	<option value="00:00:00">00:00</option>
-		<option value="01:00:00">01:00</option>
-		<option value="02:00:00">02:00</option>
-	    <option value="03:00:00">03:00</option>
-	    <option value="04:00:00">04:00</option>
-	    <option value="05:00:00">05:00</option>
-	    <option value="06:00:00">06:00</option>
-	    <option value="07:00:00">07:00</option>
-        <option value="08:00:00">08:00</option>
-		<option value="09:00:00">09:00</option>
-		<option value="10:00:00">10:00</option>
-	    <option value="11:00:00">11:00</option>
-	    <option value="12:00:00">12:00</option>
-	    <option value="13:00:00">13:00</option>
-	    <option value="14:00:00">14:00</option>
-	    <option value="15:00:00">15:00</option>
-	    <option value="16:00:00">16:00</option>
-	    <option value="17:00:00">17:00</option>
-	    <option value="18:00:00">18:00</option>
-	    <option value="19:00:00">19:00</option>
-	    <option value="20:00:00">20:00</option>
-	    <option value="21:00:00">21:00</option>
-	    <option value="22:00:00">22:00</option>
-	    <option value="23:00:00">23:00</option>
-	 	<option value="24:00:00">24:00</option>
-     </select>
-     <h3>|</h3>
-     <select name="storeTimeEnd">
-     	<option value="00:00:00">00:00</option>
-		<option value="01:00:00">01:00</option>
-		<option value="02:00:00">02:00</option>
-	    <option value="03:00:00">03:00</option>
-	    <option value="04:00:00">04:00</option>
-	    <option value="05:00:00">05:00</option>
-	    <option value="06:00:00">06:00</option>
-	    <option value="07:00:00">07:00</option>
-        <option value="08:00:00">08:00</option>
-		<option value="09:00:00">09:00</option>
-		<option value="10:00:00">10:00</option>
-	    <option value="11:00:00">11:00</option>
-	    <option value="12:00:00">12:00</option>
-	    <option value="13:00:00">13:00</option>
-	    <option value="14:00:00">14:00</option>
-	    <option value="15:00:00">15:00</option>
-	    <option value="16:00:00">16:00</option>
-	    <option value="17:00:00">17:00</option>
-	    <option value="18:00:00">18:00</option>
-	    <option value="19:00:00">19:00</option>
-	    <option value="20:00:00">20:00</option>
-	    <option value="21:00:00">21:00</option>
-	    <option value="22:00:00">22:00</option>
-	    <option value="23:00:00">23:00</option>
-	 	<option value="24:00:00">24:00</option>
-     </select>
+        <option value="00:00:00" ${storeTimeStart == '00:00:00' ? 'selected' : ''}>00:00</option>
+        <option value="01:00:00" ${storeTimeStart == '01:00:00' ? 'selected' : ''}>01:00</option>
+        <option value="02:00:00" ${storeTimeStart == '02:00:00' ? 'selected' : ''}>02:00</option>
+        <option value="03:00:00" ${storeTimeStart == '03:00:00' ? 'selected' : ''}>03:00</option>
+        <option value="04:00:00" ${storeTimeStart == '04:00:00' ? 'selected' : ''}>04:00</option>
+        <option value="05:00:00" ${storeTimeStart == '05:00:00' ? 'selected' : ''}>05:00</option>
+        <option value="06:00:00" ${storeTimeStart == '06:00:00' ? 'selected' : ''}>06:00</option>
+        <option value="07:00:00" ${storeTimeStart == '07:00:00' ? 'selected' : ''}>07:00</option>
+        <option value="08:00:00" ${storeTimeStart == '08:00:00' ? 'selected' : ''}>08:00</option>
+        <option value="09:00:00" ${storeTimeStart == '09:00:00' ? 'selected' : ''}>09:00</option>
+        <option value="10:00:00" ${storeTimeStart == '10:00:00' ? 'selected' : ''}>10:00</option>
+        <option value="11:00:00" ${storeTimeStart == '11:00:00' ? 'selected' : ''}>11:00</option>
+        <option value="12:00:00" ${storeTimeStart == '12:00:00' ? 'selected' : ''}>12:00</option>
+        <option value="13:00:00" ${storeTimeStart == '13:00:00' ? 'selected' : ''}>13:00</option>
+        <option value="14:00:00" ${storeTimeStart == '14:00:00' ? 'selected' : ''}>14:00</option>
+        <option value="15:00:00" ${storeTimeStart == '15:00:00' ? 'selected' : ''}>15:00</option>
+        <option value="16:00:00" ${storeTimeStart == '16:00:00' ? 'selected' : ''}>16:00</option>
+        <option value="17:00:00" ${storeTimeStart == '17:00:00' ? 'selected' : ''}>17:00</option>
+        <option value="18:00:00" ${storeTimeStart == '18:00:00' ? 'selected' : ''}>18:00</option>
+        <option value="19:00:00" ${storeTimeStart == '19:00:00' ? 'selected' : ''}>19:00</option>
+        <option value="20:00:00" ${storeTimeStart == '20:00:00' ? 'selected' : ''}>20:00</option>
+        <option value="21:00:00" ${storeTimeStart == '21:00:00' ? 'selected' : ''}>21:00</option>
+        <option value="22:00:00" ${storeTimeStart == '22:00:00' ? 'selected' : ''}>22:00</option>
+        <option value="23:00:00" ${storeTimeStart == '23:00:00' ? 'selected' : ''}>23:00</option>
+        <option value="24:00:00" ${storeTimeStart == '24:00:00' ? 'selected' : ''}>24:00</option>
+    </select>
+    <h3>|</h3>
+    <select name="storeTimeEnd">
+        <option value="00:00:00" ${storeTimeEnd == '00:00:00' ? 'selected' : ''}>00:00</option>
+        <option value="01:00:00" ${storeTimeEnd == '01:00:00' ? 'selected' : ''}>01:00</option>
+        <option value="02:00:00" ${storeTimeEnd == '02:00:00' ? 'selected' : ''}>02:00</option>
+        <option value="03:00:00" ${storeTimeEnd == '03:00:00' ? 'selected' : ''}>03:00</option>
+        <option value="04:00:00" ${storeTimeEnd == '04:00:00' ? 'selected' : ''}>04:00</option>
+        <option value="05:00:00" ${storeTimeEnd == '05:00:00' ? 'selected' : ''}>05:00</option>
+        <option value="06:00:00" ${storeTimeEnd == '06:00:00' ? 'selected' : ''}>06:00</option>
+        <option value="07:00:00" ${storeTimeEnd == '07:00:00' ? 'selected' : ''}>07:00</option>
+        <option value="08:00:00" ${storeTimeEnd == '08:00:00' ? 'selected' : ''}>08:00</option>
+        <option value="09:00:00" ${storeTimeEnd == '09:00:00' ? 'selected' : ''}>09:00</option>
+        <option value="10:00:00" ${storeTimeEnd == '10:00:00' ? 'selected' : ''}>10:00</option>
+        <option value="11:00:00" ${storeTimeEnd == '11:00:00' ? 'selected' : ''}>11:00</option>
+        <option value="12:00:00" ${storeTimeEnd == '12:00:00' ? 'selected' : ''}>12:00</option>
+        <option value="13:00:00" ${storeTimeEnd == '13:00:00' ? 'selected' : ''}>13:00</option>
+        <option value="14:00:00" ${storeTimeEnd == '14:00:00' ? 'selected' : ''}>14:00</option>
+        <option value="15:00:00" ${storeTimeEnd == '15:00:00' ? 'selected' : ''}>15:00</option>
+        <option value="16:00:00" ${storeTimeEnd == '16:00:00' ? 'selected' : ''}>16:00</option>
+        <option value="17:00:00" ${storeTimeEnd == '17:00:00' ? 'selected' : ''}>17:00</option>
+        <option value="18:00:00" ${storeTimeEnd == '18:00:00' ? 'selected' : ''}>18:00</option>
+        <option value="19:00:00" ${storeTimeEnd == '19:00:00' ? 'selected' : ''}>19:00</option>
+        <option value="20:00:00" ${storeTimeEnd == '20:00:00' ? 'selected' : ''}>20:00</option>
+        <option value="21:00:00" ${storeTimeEnd == '21:00:00' ? 'selected' : ''}>21:00</option>
+        <option value="22:00:00" ${storeTimeEnd == '22:00:00' ? 'selected' : ''}>22:00</option>
+        <option value="23:00:00" ${storeTimeEnd == '23:00:00' ? 'selected' : ''}>23:00</option>
+        <option value="24:00:00" ${storeTimeEnd == '24:00:00' ? 'selected' : ''}>24:00</option>
+    </select>
 </div>
      <script>
         <c:forEach var="i" begin="0" end="3">
@@ -226,6 +234,8 @@ td {
     </div>
 
 </form>
+
+<div class="sita"></div>
 
 <script>
     function validateShiftTimes() {
