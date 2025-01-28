@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -16,17 +16,23 @@
 }
 .ok input[type="submit"]{
 	margin-top : 62px;
-	margin-left: 670px;
-	background-color: #6495ED; /* 背景色を水色に設定 */
+	margin-left: 53%;
+	background-color: #ff6347; /* 背景色を水色に設定 */
 	color: white;
+	width: 100px;
+    height: 50px;
 	border-radius: 5px; /* 角を丸くする */
 	border: none; /* ボーダーをなしに設定 */
 }
 .no input[type="submit"]{
-	margin-top : -25px;
-	margin-left: 530px;
+	margin-top : -52px;
+	position: absolute;
+    left: 50%; /* 画面の中央に配置 */
+    transform: translateX(-50%) translateX(-90%); /* 中央から左に20%移動 */
 	background-color: #6495ED; /* 背景色を水色に設定 */
 	color: white;
+	width: 100px;
+    height: 55px;
 	border-radius: 5px; /* 角を丸くする */
 	border: none; /* ボーダーをなしに設定 */
 }
@@ -121,7 +127,7 @@
     <h3>ログアウトしますか？</h3>
 </div>
 
-<div class="aaaa">
+
 <div class="ok">
     <form action="WorkerLogoutExecute.action" method="post">
         <input type="submit" value="はい">
@@ -134,11 +140,8 @@
     </form>
 </div>
 
-</div>
 
-<div class="footer">
-	<p>ＴＥＡＭ Ⅽ   Bug Busters</p>
-</div>
+<c:import url="../common/footer.jsp"/>
 
 </body>
 </html>

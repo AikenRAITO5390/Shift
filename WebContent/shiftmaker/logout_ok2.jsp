@@ -15,17 +15,23 @@
 }
 .ok input[type="submit"]{
 	margin-top : 62px;
-	margin-left: 670px;
-	background-color: #6495ED; /* 背景色を水色に設定 */
+	margin-left: 53%;
+	background-color: #ff6347; /* 背景色を水色に設定 */
 	color: white;
+	width: 100px;
+    height: 50px;
 	border-radius: 5px; /* 角を丸くする */
 	border: none; /* ボーダーをなしに設定 */
 }
 .no input[type="submit"]{
-	margin-top : -25px;
-	margin-left: 530px;
+	margin-top : -52px;
+	position: absolute;
+    left: 50%; /* 画面の中央に配置 */
+    transform: translateX(-50%) translateX(-90%); /* 中央から左に20%移動 */
 	background-color: #6495ED; /* 背景色を水色に設定 */
 	color: white;
+	width: 100px;
+    height: 55px;
 	border-radius: 5px; /* 角を丸くする */
 	border: none; /* ボーダーをなしに設定 */
 }
