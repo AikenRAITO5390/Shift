@@ -10,18 +10,19 @@
 </head>
 <body>
 	<c:import url="../../common/header.jsp"/>
+<div class="under">
+	<div class="tmain">
+		<h2>～売上登録完了～</h2>
 
-<div class="tmain">
-	<h2>～売上登録完了～</h2>
-
-	<p>売上の登録が完了しました</p>
-
-
-	<a href="Sales.action">売上へ</a>
-
-	<a href="Main.action">メインメニューへ</a>
+		<p>売上の登録が完了しました</p>
 
 
+		<a href="Sales.action">売上へ</a>
+
+		<a href="Main.action">メインメニューへ</a>
+
+
+	</div>
 </div>
 <c:import url="../../common/footer.jsp"/>
 

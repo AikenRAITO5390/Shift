@@ -12,35 +12,39 @@
 
 <c:import url="../../common/header.jsp"/>
 
-<div class="tmain">
+<div class="under">
 
-	<h2>～売上～</h2>
+	<div class="tmain">
 
-	<h3>売上の操作したい項目を選択してください</h3>
-
-
-
-	<form action="SalesInput.action" method="post" class="form1">
-
-	<button class="button1">売上入力</button>
-
-	</form>
+		<h2>～売上～</h2>
 
 
 
-	<form action="SalesDetail.action" method="post" class="form1">
 
-	<button class="button1">売上予測</button>
 
-	</form>
+		<h3>売上の操作したい項目を選択してください</h3>
 
+
+
+		<form action="SalesInput.action" method="post" class="form1">
+			<button class="button1">売上入力</button>
+		</form>
+
+
+		<form action="SalesDetail.action" method="post" class="form1">
+			<button class="button1">売上予測</button>
+		</form>
+
+
+	</div>
+
+	<!-- 戻るリンク -->
+	<div class="tmain">
+		    <a href="Main.action">TOPへ</a>
+	</div>
 
 </div>
 
-<!-- 戻るリンク -->
-<div class="tmain">
-	    <a href="Main.action">TOPへ</a>
-</div>
 
 <c:import url="../../common/footer.jsp"/>
 

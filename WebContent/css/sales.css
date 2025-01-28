@@ -32,6 +32,11 @@ h3 {
 }
 
 
+.under {
+	width: fit-content;
+    margin: 120px auto;
+}
+
 
 /*------------------------ 売上操作選択画面 -------------------------*/
 
@@ -44,12 +49,11 @@ form.form1 {
 
 /*-------------------------- 売上入力画面 ---------------------------*/
 
-
-form.sales_input {
-
-
-
+.sales_input {
+	width: fit-content;
+    margin: 30px auto;
 }
+
 
 /* 売上金額 */
 .money {
@@ -60,7 +64,7 @@ form.sales_input {
 /* 登録と戻るボタン */
 .touroku {
 	width: fit-content;
-    margin: 30px auto;/* 中央に揃える */
+    margin: 40px auto;/* 中央に揃える */
 }
 
 .input_date {
@@ -76,8 +80,8 @@ form.form2 {
 
 /* 売上入力,予測ボタンの大きさ */
 button.button1 {
-	width: 10em;
-  height:5em;
+	width: 12em;
+  height:8em;
   background-color: #6495ED;
 }
 
@@ -98,3 +102,5 @@ IMG.imgGraph {
     margin-right: auto;
     width: 100%;
     }
+
+

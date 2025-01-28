@@ -17,47 +17,49 @@
 <c:import url="../../common/header.jsp"/>
 
 
-<div class="tmain">
+<div class="under">
+	<div class="tmain">
 
-<h2>～売上入力～</h2>
-
-
-	<form action="SalesInputResult.action" class="sales_input">
-
-		<div class="hiduke">
-
-			<label class="label1">日付を選択してください</label>
-			<!-- 入力したい売上の日付選択 -->
-			<%
-	    		java.time.LocalDate today = java.time.LocalDate.now();
-	    		String formattedDate = today.toString(); // YYYY-MM-DD 形式
-			%>
-			<input type="date" name="sales_date" class="input_date" value="<%= formattedDate %>" />
-
-		</div>
-
-		<br>
-
-		<div class="money">
-
-		<label class="label1">売上金額を選択してください</label>
-		<!-- 売上金額入力 -->
-		<input type="number" name="sales" placeholder="売上金額を入力" maxlength="8" value="${sales}" min="0" required />
-		<div>${errors.get("sales")}</div>
-
-		</div>
-
-		<div class="touroku">
-		<!-- 登録ボタン -->
-	    <button class="button2">登録</button>
+	<h2>～売上入力～</h2>
 
 
-	    <!-- 戻るリンク -->
-	    <a href="Sales.action">戻る</a>
+		<form action="SalesInputResult.action" class="sales_input">
 
-		</div>
-	</form>
+			<div class="hiduke">
 
+				<label class="label1">日付を選択してください</label>
+				<!-- 入力したい売上の日付選択 -->
+				<%
+		    		java.time.LocalDate today = java.time.LocalDate.now();
+		    		String formattedDate = today.toString(); // YYYY-MM-DD 形式
+				%>
+				<input type="date" name="sales_date" class="input_date" max="<%= formattedDate %>" value="<%= formattedDate %>" />
+
+			</div>
+
+			<br>
+
+			<div class="money">
+
+			<label class="label1">売上金額を選択してください</label>
+			<!-- 売上金額入力 -->
+			<input type="number" name="sales" placeholder="売上金額を入力" maxlength="8" value="${sales}" min="0" required />
+			<div>${errors.get("sales")}</div>
+
+			</div>
+
+			<div class="touroku">
+				<!-- 登録ボタン -->
+			    <button class="button2">登録</button>
+
+
+			    <!-- 戻るリンク -->
+			    <a href="Sales.action">戻る</a>
+
+			</div>
+		</form>
+
+	</div>
 </div>
 
 <c:import url="../../common/footer.jsp"/>
