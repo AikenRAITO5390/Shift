@@ -59,7 +59,18 @@
 
 }
 .nenn{
-	margin-left: 0.8%;
+	margin-left: 1.2%;
+}
+.btn {
+	position: relative;   /* relativeを指定 */
+	top: 10px;   /* 上から10px移動 */
+	left: 450px;   /* 左から450px移動 */
+}
+
+.link1 {
+	position: relative;   /* relativeを指定 */
+	top: 10px;   /* 上から10px移動 */
+	left: 460px;   /* 左から460px移動 */
 }
 
 
@@ -88,7 +99,7 @@
 
 		<label>生年月日</label>
 	    <!-- 年、月、日を選択するフォーム -->
-		    <select name="year" required>
+		    <select name="year" class="nenn" required>
 				<option value="">年</option>
 					<c:forEach var="year" items="${year_list}">
 						<option value="${year}" ${year == selectedYear ? 'selected' : ''}>${year}</option>
@@ -127,12 +138,12 @@
 
 </div>
 <div class ="submit">
-		<a href="WorkerList.action">戻る</a>
-		<input type="submit" value="変更">
-
+		<a class="link1" href="WorkerList.action">戻る</a>
+		<input type="submit" class="btn" value="変更">
+</div>
 	</form>
 
-</div>
+
 <c:import url="../../common/footer.jsp"/>
 </body>
 </html>
