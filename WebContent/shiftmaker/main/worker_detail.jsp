@@ -17,12 +17,18 @@
     box-sizing: border-box; /* パディングとボーダーを含めた幅を計算 */
 }
 
+.back{
+			display: flex;
+		    justify-content: center; /* 水平方向に中央揃え */
+		    align-items: center; /* 垂直方向に中央揃え（必要に応じて） */
+}
+
 .back a{
-	float: right;
 	margin-top : -30px;
-	margin-right : 150px;
+	margin-left : 700px;
 	font-size: 20px; /* フォントサイズを大きくする */
     font-weight: bold; /* 太字にする */
+    pointer-events: auto;
   /*  color: #2C7CFF;  テキストの色を変更 */
   /*  text-decoration: none; 下線を消す */
 }

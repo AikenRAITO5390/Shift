@@ -38,11 +38,17 @@
 	margin-bottom: 20px;
 
 }
-.main{
-	margin-left: 1100px;
+.main a{
+	margin-left: 800px;
     margin-top: -460px;
 }
 
+
+.main {
+			display: flex;
+		    justify-content: center; /* 水平方向に中央揃え */
+		    align-items: center; /* 垂直方向に中央揃え（必要に応じて） */
+}
 
 
 

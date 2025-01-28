@@ -14,14 +14,33 @@
 }
 
 .delete_button button {
-	margin-left: 700px;
+	margin-left: 170px;
 	margin-top: 30px;
+	background-color: #ff6347;
+    color: white;
+     width: 120px;
 
 }
-.button {
-	margin-left: 520px;
+
+.delete_button button:hover {
+    background-color: #ff9980; /* ホバー時の背景色を同じに設定 */
+}
+
+.button button{
+	background-color: #2C7CFF;
+	color: white;
+	margin-left: -200px;
     text-decoration: none;
     margin-top: -40px;
+    width: 120px;
+    }
+
+.button, .delete_button {
+    display: flex;
+    justify-content: center; /* 水平方向に中央揃え */
+    align-items: center; /* 垂直方向に中央揃え（必要に応じて） */
+}
+
 
 </style>
 <head>

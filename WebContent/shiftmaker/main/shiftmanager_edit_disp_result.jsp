@@ -19,17 +19,22 @@
  	padding-top: 40px;
 
 }
-.shiftmanager_edit a {
+.submit a {
     display: inline-block; /* インラインブロック要素に変更 */
     color: white;
     text-align: center !important; /* 水平方向に中央揃え */
-    float: right; /* 右側に配置 */
-    margin-right: 300px; /* 右に10pxの余白を追加 */
     margin-top: 40px; /* 右に10pxの余白を追加 */
     border: 1px solid white; /* 白い枠線を設定 */
     background-color: #75A9FF; /* 背景色を設定 */
     padding: 10px; /* 枠線と内容の間にスペースを追加 */
     border-radius: 5px; /* 角を丸くする */
+    margin-left: 300px;
+}
+
+.submit{
+			display: flex;
+		    justify-content: center; /* 水平方向に中央揃え */
+		    align-items: center; /* 垂直方向に中央揃え（必要に応じて） */
 }
 
 
@@ -43,7 +48,8 @@
 <div class="shiftmanager_edit">
 	<h2>～シフト作成者変更～</h2>
 		<p>変更が完了しました</p>
-	<a href="Main.action">メインメニューへ</a>
+		<div class ="submit">
+	<a href="Main.action">メインメニューへ</a></div>
 </div>
 </body>
 </html>
