@@ -58,6 +58,9 @@
     float: right;
 
 }
+.nenn{
+	margin-left: 0.8%;
+}
 
 
 </style>
@@ -84,7 +87,25 @@
 
 
 		<label>生年月日</label>
-		<input type="text" name="WORKER_DATE" maxlength="10" value="${worker.workerDate}" required />
+	    <!-- 年、月、日を選択するフォーム -->
+		    <select name="year" required>
+				<option value="">年</option>
+					<c:forEach var="year" items="${year_list}">
+						<option value="${year}" ${year == selectedYear ? 'selected' : ''}>${year}</option>
+					</c:forEach>
+			</select>
+			<select name="month" required>
+				<option value="">月</option>
+					<c:forEach var="month" items="${month_list}">
+						<option value="${month}" ${month == selectedMonth ? 'selected' : ''}>${month}</option>
+					</c:forEach>
+			</select>
+			<select name="day" required>
+				<option value="">日</option>
+					<c:forEach var="day" items="${day_list}">
+						 <option value="${day}" ${day == selectedDay ? 'selected' : ''}>${day}</option>
+					</c:forEach>
+			</select>
 
 <br>
 

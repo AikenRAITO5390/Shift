@@ -32,7 +32,11 @@ public class WorkerUpdateExecuteAction extends Action {
 		//リクエストパラメータ―の取得 2
 		String WORKER_ID= req.getParameter("WORKER_ID");
 		String WORKER_NAME = req.getParameter("WORKER_NAME");
-		String WORKER_DATE = req.getParameter("WORKER_DATE");
+		String year = req.getParameter("year");
+		String month = req.getParameter("month");
+		String day = req.getParameter("day");
+		// 生年月日
+		String WORKER_DATE = year + "/" + month + "/" + day;
 		String WORKER_ADDRESS = req.getParameter("WORKER_ADDRESS");
 		String WORKER_TEL = req.getParameter("WORKER_TEL");
 		String WORKER_PASSWORD = req.getParameter("WORKER_PASSWORD");
