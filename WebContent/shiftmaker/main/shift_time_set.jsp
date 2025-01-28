@@ -14,21 +14,11 @@
 	text-align : center;
 }
 .time {
-	margin-left : 50px;
+	margin-left : 38%;
 }
-.time label{
-	margin-left: 440px;
-
+.kara {
+	margin-left : 10%;
 }
-.time h3{
-	margin-left: 30px;
-
-}
-.time select{
-	margin-left : 30px;
-}
-
-
 .time_time {
 	margin-top : 60px;
 	text-align : center;
@@ -105,7 +95,7 @@ td {
 	                                <option value="24:00:00">24:00</option>
                     </select>
                 </td>
-				<td><h3>～</h3></td>
+				<td><h3 class="kara">～</h3></td>
                 <td>
                 <%--エンド時間の表示--%>
                 <%--初期値timeSelectEnd(下で設定）、nameはAのworkTimeEndでわたす　--%>
@@ -137,7 +127,7 @@ td {
 </div>
 
 
-    <!-- 営業時間設定 -->
+<!-- 営業時間設定（値保持） -->
 <div class="time_time">
     <h2>営業時間設定</h2>
 
