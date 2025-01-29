@@ -9,6 +9,7 @@
 .h2 {
 	margin-top : 60px;
 	text-align : center;
+
 }
 .p {
 	margin-top : 60px;
@@ -17,8 +18,13 @@
 .a {
 	margin-top : 40px;
 	text-align : center;
-	margin-left : 30px;
-	}
+}
+
+.h3{
+	margin-top : 60px;
+	text-align : center;
+	margin-left: 200px;
+}
 </style>
 
 <head>
@@ -38,7 +44,7 @@
 	<p>削除が完了しました</p>
 </div>
 
-<div class="h2">
+<div class="h3">
 	<a href="WorkerList.action">従業員情報一覧へ</a>
 </div>
 

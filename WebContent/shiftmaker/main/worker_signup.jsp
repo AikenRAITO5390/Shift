@@ -27,7 +27,7 @@
 		<!-- 余白 -->
 		<div class="mt-3"></div>
 
-		<form class="center" action="WorkerSignUpResult.action" method="post">
+		<form id="myForm" class="center" action="WorkerSignUpResult.action" method="post">
 
 			<table>
 
@@ -107,8 +107,8 @@
 						<label>電話番号</label>
 					</th>
 					<td>
-						<input type="text" name="worker_tel" placeholder="電話番号を入力してください" size="30" maxlength="15" value="${worker_tel}" required />
-						<div>${errors.get("worker_tel")}</div>
+						<input type="text" name="worker_tel" id="worker_tel" placeholder="電話番号を入力してください" size="30" value="${worker_tel}"  />
+						 <span class="error" id="worker_telError"></span>
 						<div class="mt-3"></div>
 					</td>
 				</tr>
@@ -170,6 +170,47 @@
 
 
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("ページが読み込まれました");
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+        var isValid = true;
+        var phonePattern = /^[0-9-]+$/;
+
+        // メールアドレスの検証
+        var worker_tel = document.getElementById('worker_tel');
+        var worker_telError = document.getElementById('worker_telError');
+        if (worker_tel.value.trim() === "") {
+        	worker_tel.value = ""; // 入力値をクリア
+        	worker_tel.placeholder = "電話番号を入力してください";
+        	worker_tel.classList.add('error-placeholder');
+        	worker_tel.style.color = "red";
+            isValid = false;
+        } else if (worker_tel.value.length > 30) {
+        	worker_tel.value = ""; // 入力値をクリア
+        	worker_tel.placeholder = "電話番号は30文字以内で入力してください";
+        	worker_tel.classList.add('error-placeholder');
+        	worker_tel.style.color = "red";
+            isValid = false;
+        } else if (!phonePattern.test(worker_tel.value)) {
+        	worker_tel.value = ""; // 入力値をクリア
+        	worker_tel.placeholder = "有効な電話番号を入力してください";
+        	worker_tel.classList.add('error-placeholder');
+        	worker_tel.style.color = "red";
+            isValid = false;
+        } else {
+        	worker_tel.placeholder = "";
+        	worker_tel.classList.remove('error-placeholder');
+        }
+
+    if (!isValid) {
+        event.preventDefault();
+    }
+});
+});
+
+</script>
 
 </body>
 

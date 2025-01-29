@@ -32,16 +32,10 @@ label {
 
 /* ------------------------------------------------------------ */
 /* 従業員情報登録完了 */
-.result_text {
-	text-align: center;   /* 中央寄せ */
-	font-size: larger;   /* 文字の大きさ */
-}
 
-.link2 {
-	position: relative;   /* relativeを指定 */
-	top: 10px;   /* 上から10px移動 */
-	left: 800px;   /* 左から800px移動 */
-}
+
+
+
 
 /* ------------------------------------------------------------ */
 /* 従業員シフト条件一覧 */
@@ -72,61 +66,6 @@ label {
     border-right: none;    /* 最後のセルには右側の線を除外 */
 }
 
-/* ------------------------------------------------------------ */
-/* 従業員シフト条件登録 */
-.shift_condtion_signup_h2 h2{
-	text-align: center;
-	margin-top: 70px;
-}
-.shift_condtion_signup_table{
-	text-align: center;
-	margin-top: 50px;
-	margin-left: 60px;
-	margin-right: 60px;
-}
-/*登録ボタン*/
-.shift_condtion_signup_input{
-	text-align: center;
-	margin-top: 20px;
-	margin-left: 1090px;
-}
-/*戻るボタン*/
-.shift_condtion_signup_input_back{
-	text-align: center;
-	margin-top: -360px;
-	margin-left: 1105px;
-	position: fixed; /* 要素を固定 */
-}
-/*項目*/
-.shift_condtion_signup_table th{
-	border: 1px solid #000;
-    padding: 4px;
-    text-align: center;
-    background-color: #6495ED;
-    color: white;
-    width: 30px;    /* テーブル幅の調整 */
-}
-/*でーた*/
-.shift_condtion_signup_table td{
-	border: 1px solid #000;
-    padding: 4px;
-    text-align: center;
-    background-color: white;
-    color: block;
-    width: 35%;    /* テーブル幅の調整 */
-    margin-top: 25px;
-}
-.shift_condtion_signup_table_label p{
-	margin-top: 30px;
-	margin-top: 30px;
-	color: red;
-}
-
-
-
-
-/* ------------------------------------------------------------ */
-/* 従業員シフト条件登録完了 */
 
 
 /* ------------------------------------------------------------ */

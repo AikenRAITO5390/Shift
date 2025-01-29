@@ -6,22 +6,74 @@
 <!-- bootstrapと繋げる -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 <!-- css -->
-<link rel="stylesheet" href="../../css/style_k.css">
 
 <html>
 <c:import url="../../common/header.jsp"/>
 
 <head>
+<style>
+.shift_condtion_signup_h2 h2{
+	text-align: center;
+	margin-top: 70px;
+}
+.shift_condtion_signup_table{
+	text-align: center;
+	margin-top: 10px;
+	margin-left: 60px;
+	margin-right: 60px;
+}
+/*登録ボタン*/
+.shift_condtion_signup_input{
+	text-align: center;
+	margin-top: 20px;
+	margin-left: 1090px;
+	margin-bottom: 100px;
+}
+
+/*項目*/
+.shift_condtion_signup_table th{
+	border: 1px solid #000;
+    padding: 4px;
+    text-align: center;
+    background-color: #6495ED;
+    color: white;
+    width: 30px;    /* テーブル幅の調整 */
+}
+/*でーた*/
+.shift_condtion_signup_table td{
+	border: 1px solid #000;
+    padding: 4px;
+    text-align: center;
+    background-color: white;
+    color: block;
+    width: 35%;    /* テーブル幅の調整 */
+    margin-top: 25px;
+}
+.shift_condtion_signup_table_label p{
+	margin-top: 30px;
+
+}
+
+/* 戻るボタン */
+.mainSubmit {
+	margin-left: 200px;
+    margin-top: 20px; /* 上から20px */
+}
+</style>
     <title>シフト条件登録</title>
 </head>
 
-<div class="body">
+<div class="body_ddd">
 
 
     <!-- 画面タイトル -->
     <div class="shift_condtion_signup_h2">
     	<h2>～シフト条件登録～</h2>
     </div>
+    	        <div class="mainSubmit"></div>
+
+	        <a href="Main.action">トップページへ戻る</a>
+	        </div>
 
 	<!-- アルバイトのみ設定画面表示 -->
 	<c:if test="${not empty workers}">
@@ -72,9 +124,6 @@
 	        <input type="submit" value="登録" />
 	        </div>
 
-	        <div class="shift_condtion_signup_input_back">
-	        <a href="Main.action">トップページへ戻る</a>
-	        </div>
 
 	    </form>
 	</c:if>

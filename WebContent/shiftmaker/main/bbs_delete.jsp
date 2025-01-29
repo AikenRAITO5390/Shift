@@ -52,29 +52,29 @@
 }
 
         .text h3{
-  	text-align: center !important; /* 水平方向に中央揃え */
-    color: white; /* 右に10pxの余白を追加 */
+			  	text-align: center !important; /* 水平方向に中央揃え */
+			    color: white; /* 右に10pxの余白を追加 */
 
-    border: 1px solid white; /* 白い枠線を設定 */
-    background-color: #4169E1; /* 背景色を設定 */
-    padding: 10px; /* 枠線と内容の間にスペースを追加 */
-     width: 100px;
+			    border: 1px solid white; /* 白い枠線を設定 */
+			    background-color: #4169E1; /* 背景色を設定 */
+			    padding: 10px; /* 枠線と内容の間にスペースを追加 */
+			     width: 100px;
 
 
         }
 
     .text p{
-     margin: 0 20px;
-    margin-right: 20px; /* 右に10pxの余白を追加 */
-    margin-top: 20px; /* 右に10pxの余白を追加 */
-    border: 1px solid black; /* 白い枠線を設定 */
-    padding: 10px; /* 枠線と内容の間にスペースを追加 */
-    width: 650px;
-    min-height: 100px;
-    max-height: 400px; /* 高さを100pxに設定 */
-    overflow-wrap: break-word; /* 単語の途中でも改行 */
-  	word-wrap: break-word; /* 単語の途中でも改行 */
-        }
+		     margin: 0 20px;
+		    margin-right: 20px; /* 右に10pxの余白を追加 */
+		    margin-top: 20px; /* 右に10pxの余白を追加 */
+		    border: 1px solid black; /* 白い枠線を設定 */
+		    padding: 10px; /* 枠線と内容の間にスペースを追加 */
+		    width: 650px;
+		    min-height: 100px;
+		    max-height: 400px; /* 高さを100pxに設定 */
+		    overflow-wrap: break-word; /* 単語の途中でも改行 */
+		  	word-wrap: break-word; /* 単語の途中でも改行 */
+		        }
 
   .kakunin{
   text-align: center  !important;

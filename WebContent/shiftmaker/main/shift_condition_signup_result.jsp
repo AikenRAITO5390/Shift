@@ -18,9 +18,14 @@
 	margin-top : 30px;
 	text-align : center;
 }
-.body a{
-	margin-top : 80px;
-	margin-left : 580px;
+.condision_ok a{
+	margin-left : 400px;
+}
+
+.condision_ok{
+				display: flex;
+   			 justify-content: center; /* 水平方向に中央揃え */
+    		align-items: center;
 }
 </style>
 
@@ -34,9 +39,10 @@
 	            ${message}
 	        </div>
 	    </c:if>
-
+	    </div>
+	<div class="condision_ok">
 	    <!-- 他のコンテンツやリンクを配置 -->
-	    <a href="Main.action">トップページへ</a>
+	    <a href="Main.action">トップページへ</a></div>
 
-</div>
+
 </html>
