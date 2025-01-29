@@ -10,8 +10,11 @@
 	margin-top : 60px;
 	text-align : center;
 }
+table {
+	border-collapse: collapse;
+}
 .table {
-	margin-top : 70px;
+	margin-top : 60px;
 	margin-left : 35%;
 }
 .table a{
@@ -24,6 +27,12 @@
 .blue {
     color: #6495ED;
 }
+th, td {
+	border: 1px solid black;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+}
 </style>
 
 <c:import url="../../common/header_work.jsp"/>
@@ -31,10 +40,6 @@
 <head>
     <meta charset="UTF-8">
     <title>シフト希望提出</title>
-    <style>
-        table { border-collapse: collapse; }
-        th, td { border: 1px solid black; width: 50px; height: 50px; text-align: center; }
-    </style>
 </head>
 <body>
 
