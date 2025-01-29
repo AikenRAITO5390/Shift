@@ -5,6 +5,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
+<title>希望シフト登録</title>
+
 <style>
 .h2 {
 	margin-top : 60px;
@@ -25,6 +27,13 @@
 .submit {
 	margin-top : 50px;
 	margin-left : 65%;
+}
+.submit input[type="submit"]{
+	background-color: #6495ED; /* 背景色を水色に設定 */
+	padding: 10px 20px;
+	color: white;
+	border-radius: 4px; /* 角を丸くする */
+	border: none; /* ボーダーをなしに設定 */
 }
 </style>
 

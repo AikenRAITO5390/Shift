@@ -33,6 +33,10 @@ th, td {
 	height: 50px;
 	text-align: center;
 }
+.main {
+	margin-top : 2%;
+	margin-left : 70%;
+}
 </style>
 
 <c:import url="../../common/header_work.jsp"/>
@@ -90,6 +94,11 @@ th, td {
         </c:if>
     </table>
     </div>
+
+    <div class="main">
+		<a href="MainWork.action">戻る</a>
+	</div>
+
 </body>
 
 <c:import url="../../common/footer.jsp"/>

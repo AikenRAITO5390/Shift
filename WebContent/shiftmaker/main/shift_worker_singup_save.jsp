@@ -38,9 +38,13 @@
 	margin-top : -420px;
 	margin-left: 75%;
 	background-color: #6495ED; /* 背景色を水色に設定 */
+	padding: 10px 20px;
 	color: white;
 	border-radius: 4px; /* 角を丸くする */
 	border: none; /* ボーダーをなしに設定 */
+}
+.sita {
+	margin-top : 60px;
 }
 </style>
 
@@ -157,6 +161,8 @@
 	    <input type="submit" value="登録">
 	</form>
 	</div>
+
+	<div class="sita"></div>
 
 </body>
 
