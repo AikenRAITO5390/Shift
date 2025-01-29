@@ -81,10 +81,11 @@ public class SalesTableCreateAction extends HttpServlet {
 //	                点の設定
 	                renderer.setSeriesShapesVisible(0, true);
 	                renderer.setSeriesShapesVisible(1, true);
+	                renderer.setSeriesShapesVisible(2, true);
 //	                折れ線の太さ設定
 	                chart.getCategoryPlot().getRenderer().setSeriesStroke(0,new BasicStroke(4));
 	                chart.getCategoryPlot().getRenderer().setSeriesStroke(1,new BasicStroke(4));
-
+	                chart.getCategoryPlot().getRenderer().setSeriesStroke(2,new BasicStroke(4));
 
 //	                PNG画像生成
 	                ServletOutputStream objSos=response.getOutputStream();

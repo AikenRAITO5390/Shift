@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import bean.Store;
 import dao.StoreDao;
 import tool.Action;
+import tool.SalesAnalyze;
 
 public class SalesAction extends Action {
 
@@ -37,6 +38,20 @@ public class SalesAction extends Action {
 		//レスポンス値をセット 6
 		//なし
 		//JSPへフォワード 7
+
+
+
+
+
+
+		SalesAnalyze salesAnalyze = new SalesAnalyze();
+//		salesAnalyze.main(1, 1, 2024);
+		System.out.println(salesAnalyze.main(2, 1, 2024));// 月、日、年
+
+
+
+
+
 		req.getRequestDispatcher("sales.jsp").forward(req, res);
 	}
 }
