@@ -23,11 +23,16 @@
 	margin-right: 60px;
 }
 /*登録ボタン*/
-.shift_condtion_signup_input{
-	text-align: center;
-	margin-top: 20px;
-	margin-left: 1090px;
-	margin-bottom: 100px;
+.shift_condtion_signup_input input[type="submit"]{
+	background-color: #6495ED;
+    color: white;
+    border: 1px solid white;
+    padding: 5px 8px; /* ボタンの内側の余白を調整 */
+     width:  100px;
+    display: inline-block;
+    float: right;
+    margin-right: 10px;
+    border-radius: 4px;
 }
 
 /*項目*/
@@ -56,7 +61,7 @@
 
 /* 戻るボタン */
 .mainSubmit {
-	margin-left: 200px;
+	margin-left: 80%;
     margin-top: 20px; /* 上から20px */
 }
 </style>
@@ -70,10 +75,11 @@
     <div class="shift_condtion_signup_h2">
     	<h2>～シフト条件登録～</h2>
     </div>
-    	        <div class="mainSubmit"></div>
+    	<div class="mainSubmit">
+    		<a href="Main.action">トップページへ戻る</a>
+    	</div>
 
-	        <a href="Main.action">トップページへ戻る</a>
-	        </div>
+
 
 	<!-- アルバイトのみ設定画面表示 -->
 	<c:if test="${not empty workers}">
@@ -119,6 +125,8 @@
 	            </c:forEach>
 	        </table>
 	        </div>
+
+			<br>
 
 	        <div class="shift_condtion_signup_input">
 	        <input type="submit" value="登録" />

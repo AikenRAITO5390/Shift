@@ -13,6 +13,12 @@
 
 <title>従業員情報登録</title>
 
+<style>
+.sita {
+	margin-top : 60px;
+}
+</style>
+
 <c:import url="../../common/header.jsp"/>
 
 <body>
@@ -168,6 +174,8 @@
 
 		</form>
 
+<!-- 余白 -->
+<div class="sita"></div>
 
 </div>
 
