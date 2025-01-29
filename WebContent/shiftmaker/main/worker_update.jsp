@@ -43,7 +43,6 @@
     border: 1px solid white;
     padding: 10px 20px; /* ボタンの内側の余白を調整 */
      width:  100px;
-    margin-top: 10px;
     display: inline-block;
     float: right;
 
@@ -51,9 +50,6 @@
 
 .submit a{
      width:  100px;
-    margin-top: 30px;
-    margin-right: 10px;
-    margin-left: 20px;
     display: inline-block;
     float: right;
 
@@ -62,15 +58,12 @@
 	margin-left: 1.2%;
 }
 .btn {
-	position: relative;   /* relativeを指定 */
-	top: 10px;   /* 上から10px移動 */
-	left: 450px;   /* 左から450px移動 */
+    margin-left: 20%;
 }
 
 .link1 {
-	position: relative;   /* relativeを指定 */
-	top: 10px;   /* 上から10px移動 */
-	left: 460px;   /* 左から460px移動 */
+	margin-top: 0.6%;
+	margin-left: 1%;
 }
 
 

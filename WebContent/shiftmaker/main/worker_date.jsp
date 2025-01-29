@@ -39,8 +39,7 @@
 
 }
 .main a{
-	margin-left: 800px;
-    margin-top: -460px;
+	margin-left: 80%;
 }
 
 
@@ -48,6 +47,9 @@
 			display: flex;
 		    justify-content: center; /* 水平方向に中央揃え */
 		    align-items: center; /* 垂直方向に中央揃え（必要に応じて） */
+}
+.sita {
+	margin-top : 60px;
 }
 
 
@@ -73,6 +75,10 @@
 
 <div class="h2">
     <h2>～従業員一覧～</h2>
+</div>
+
+<div class="main">
+    <a href="Main.action">トップページへ戻る</a>
 </div>
 
 <div class="h3">
@@ -152,10 +158,10 @@
         </table>
     </c:if>
 
-    <div class="main">
-    <a href="Main.action">トップページへ戻る</a>
-    </div>
 </div>
+
+<!-- 余白 -->
+<div class="sita"></div>
 
 
 

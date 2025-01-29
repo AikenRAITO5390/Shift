@@ -50,8 +50,7 @@
     margin-bottom: 50px;
 }
 .main {
-    margin-left: 1100px;
-    margin-top: -400px;
+    margin-left: 80%;
 }
 </style>
 
@@ -66,6 +65,10 @@
 
 <div class="h2">
     <h2>～従業員一覧～</h2>
+</div>
+
+<div class="main">
+	<a href="Main.action">トップページへ戻る</a>
 </div>
 
 <div class="h3">
@@ -151,9 +154,7 @@
 </c:if>
 </div>
 
-<div class="main">
-	<a href="Main.action">トップページへ戻る</a>
-</div>
+
 <c:import url="../../common/footer.jsp"/>
 
 </body>
