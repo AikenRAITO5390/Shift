@@ -78,7 +78,7 @@
 	<h2>～従業員情報変更～</h2>
 </div>
 
-	<form action = "WorkerUpdateExecute.action" method="post">
+	<form id="myForm"  action = "WorkerUpdateExecute.action" method="post">
 <div class = "worker_update">
 		<label>ID</label>
 		<input type ="text"  name="WORKER_ID"  value="${worker.workerId}"required>
@@ -118,7 +118,8 @@
 <br>
 
 		<label>電話番号</label>
-		<input type ="text"  name="WORKER_TEL"  value="${worker.workerTel}"required>
+		<input type ="text"  name="WORKER_TEL" id="worker_tel" value="${worker.workerTel}" />
+		<span class="error" id="worker_telError"></span>
 <br>
 
 		<label>パスワード</label>
@@ -138,5 +139,46 @@
 
 
 <c:import url="../../common/footer.jsp"/>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("ページが読み込まれました");
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+        var isValid = true;
+        var phonePattern = /^[0-9-]+$/;
+
+        // メールアドレスの検証
+        var worker_tel = document.getElementById('worker_tel');
+        var worker_telError = document.getElementById('worker_telError');
+        if (worker_tel.value.trim() === "") {
+        	worker_tel.value = ""; // 入力値をクリア
+        	worker_tel.placeholder = "電話番号を入力してください";
+        	worker_tel.classList.add('error-placeholder');
+        	worker_tel.style.color = "red";
+            isValid = false;
+        } else if (worker_tel.value.length > 30) {
+        	worker_tel.value = ""; // 入力値をクリア
+        	worker_tel.placeholder = "電話番号は30文字以内で入力してください";
+        	worker_tel.classList.add('error-placeholder');
+        	worker_tel.style.color = "red";
+            isValid = false;
+        } else if (!phonePattern.test(worker_tel.value)) {
+        	worker_tel.value = ""; // 入力値をクリア
+        	worker_tel.placeholder = "有効な電話番号を入力してください";
+        	worker_tel.classList.add('error-placeholder');
+        	worker_tel.style.color = "red";
+            isValid = false;
+        } else {
+        	worker_tel.placeholder = "";
+        	worker_tel.classList.remove('error-placeholder');
+        }
+
+    if (!isValid) {
+        event.preventDefault();
+    }
+});
+});
+
+</script>
 </body>
 </html>
