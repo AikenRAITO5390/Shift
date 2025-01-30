@@ -18,7 +18,7 @@
 	margin-left : 50px;
 }
 .workertable {
-    width: 100%; /* 画面の幅いっぱいに広げる */
+    width: 98%; /* 画面の幅いっぱいに広げる */
     margin-left : 5px;
     text-align : center;
 
@@ -26,8 +26,7 @@
     overflow: hidden; /* はみ出た部分を非表示 */
     text-overflow: ellipsis; /* 省略記号を表示 */
 
-
-    overflow-x: scroll; /* 縦方向のスクロールバーを表示 */
+	overflow-x: scroll; /*スクロールバー*/
 }
 .workertable th {
     background-color: #6495ED; /* 背景色を水色に設定 */
@@ -43,6 +42,8 @@
     white-space: nowrap; /* 改行をしない */
     overflow: hidden; /* はみ出た部分を非表示 */
     text-overflow: ellipsis; /* 省略記号を表示 */
+
+    overflow-x: scroll; /*スクロールバー*/
 }
 .managertable th {
     background-color: #6495ED; /* 背景色を水色に設定 */
@@ -105,17 +106,22 @@
                     <td>${worker.workerPassword}</td>
                     <td>${stores.storeName}</td>
 
-                    <td><a href="WorkerUpdate.action?workerId=${worker.workerId}">変更</a>
-                    <a href="WorkerDelete.action?WORKER_ID=${worker.workerId}">削除</a></td>
 
 
-                </tr>
+                    <td>
+                    <a href="WorkerUpdate.action?workerId=${worker.workerId}" class="update-link">変更</a>
+                    <a href="WorkerDelete.action?WORKER_ID=${worker.workerId}" class="delete-link">削除</a>
+                    </td>
+
+				</tr>
+
+
             </c:forEach>
         </table>
-        <hr>
+
     </c:if>
 </div>
-
+<hr>
 
 <div class="h3_h3">
 	<h3>社員</h3>
