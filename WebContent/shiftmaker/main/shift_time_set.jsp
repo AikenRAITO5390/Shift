@@ -12,6 +12,7 @@
 .h2 h2{
 	margin-top : 80px;
 	text-align : center;
+	margin-left : -1% !important;
 }
 /*時間設定*/
 .time {
@@ -19,24 +20,24 @@
 }
 /*アルファベット*/
 .time label{
-	margin-left : -55%;
+	margin-left : -85%;
 }
 /*終了予定時間*/
 .end{
-	margin-left : 95%;
+	margin-left : 93%;
 }
 .end select{
 	margin-left : 15%;
 	width: 2550%;
 }
 .start{
-	margin-left : 25%;
+	margin-left : 15%;
 }
 .start select{
 	width: 180%;
 }
 .kara {
-	margin-left : 230%;
+	margin-left : 240%;
 }
 .time_time {
 	margin-top : 60px;
