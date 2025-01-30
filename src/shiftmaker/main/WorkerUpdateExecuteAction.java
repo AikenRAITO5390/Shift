@@ -1,6 +1,11 @@
 package shiftmaker.main;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +33,18 @@ public class WorkerUpdateExecuteAction extends Action {
 		Store stores = sDao.get(store.getStoreId());
 		req.setAttribute("managerName", stores.getManagerName());
 
+		// 生年月日選択のための年リスト作成（例: 1950年～2023年）
+	    List<Integer> years = new ArrayList<>();
+	    for (int i = 1950; i <= 2023; i++) {
+	        years.add(i);
+	    }
+	    // 月、日リストを作成
+	    List<Integer> months = IntStream.rangeClosed(1, 12).boxed().collect(Collectors.toList());
+	    List<Integer> days = IntStream.rangeClosed(1, 31).boxed().collect(Collectors.toList());
+
+		// エラー用
+		Map<String, String> errors = new HashMap<>();// エラーメッセージ
+
 
 		//リクエストパラメータ―の取得 2
 		String WORKER_ID= req.getParameter("WORKER_ID");
@@ -51,24 +68,22 @@ public class WorkerUpdateExecuteAction extends Action {
 
 
 		//DBからデータ取得 3
-		Worker worker = wDao.get(WORKER_ID);// 学生番号から学生インスタンスを取得
-		List<String> list = sDao.filter(store.getStoreId());//ログインユーザーの学校コードをもとにクラス番号の一覧を取得
+		Worker worker = wDao.get(WORKER_ID);
+		List<String> list = sDao.filter(store.getStoreId());
 
-		worker.setWorkerName(WORKER_NAME);
+
+        worker.setWorkerName(WORKER_NAME);
         worker.setWorkerDate(WORKER_DATE);
         worker.setWorkerAddress(WORKER_ADDRESS);
         worker.setWorkerTel(WORKER_TEL);
         worker.setWorkerPassword(WORKER_PASSWORD);
-        store.setStoreName(STORE_NAME);
-
-
+        stores.setStoreName(STORE_NAME);
 
         // データベースの更新
         wDao.save(worker);
 
+        req.getRequestDispatcher("worker_updata_done.jsp").forward(req, res);
 
-
-		req.getRequestDispatcher("worker_updata_done.jsp").forward(req, res);
 	}
 }
 

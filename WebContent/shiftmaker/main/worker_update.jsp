@@ -81,7 +81,7 @@
 	<form id="myForm"  action = "WorkerUpdateExecute.action" method="post">
 <div class = "worker_update">
 		<label>ID</label>
-		<input type ="text"  name="WORKER_ID"  value="${worker.workerId}"required>
+		<input type="text" name="WORKER_ID" value="${worker.workerId}" required readonly>
 
 <br>
 
