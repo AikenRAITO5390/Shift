@@ -55,7 +55,7 @@ public class BbsCreateAction extends Action {
         System.out.println("④★★★★★★manager★★★★★★");
         Date today = new Date();
         System.out.println("Today (Date): " + today);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = sdf.format(today);
 
 

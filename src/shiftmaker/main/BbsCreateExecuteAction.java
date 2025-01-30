@@ -91,9 +91,8 @@ public class BbsCreateExecuteAction extends Action {
 
 
       //BBS_DATEをstring型からdate型にする
-        String BBS_DATE1 = "2024-11-27";
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = dateFormat.parse(BBS_DATE1);
+        Date date = dateFormat.parse(BBS_DATE);
 
         System.out.println("⑧★★★★★★manager★★★★★★");
         System.out.println(date);
@@ -115,7 +114,7 @@ public class BbsCreateExecuteAction extends Action {
         bbs.setBbsText(BBS_TEXT);
         //bbs.setBbsId(BBS_ID);
         bbs.setStore(storeFromDb);
-        bbs.setBbsDate(BBS_DATE1);
+        bbs.setBbsDate(BBS_DATE);
 
         if (worker != null) {
             System.out.println("従業員：" + worker);
