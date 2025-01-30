@@ -115,7 +115,7 @@
 						<label>電話番号</label>
 					</th>
 					<td>
-						<input type="text" name="worker_tel" id="worker_tel" placeholder="電話番号を入力してください" size="30" value="${worker_tel}"  />
+						<input type="text" name="worker_tel" id="worker_tel" placeholder="電話番号を入力してください" size="30" maxlength="15" value="${worker_tel}"  />
 						 <span class="error" id="worker_telError"></span>
 						<div class="mt-3"></div>
 					</td>
