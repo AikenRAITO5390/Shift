@@ -47,6 +47,10 @@ color: white;}
     padding: 2px 0; /* 上下のパディングを設定 */
 
 }
+a{
+	 color: #0000CD; /* ホバー時のテキストの色を設定 */
+    text-decoration: none;
+    }
 
 button {
     background-color:  #75A9FF; /* ボタンの背景色を設定 */

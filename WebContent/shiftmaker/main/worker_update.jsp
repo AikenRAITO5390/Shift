@@ -12,30 +12,50 @@
 	margin-top : 60px;
 	text-align : center;
 }
+.worker_update {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 垂直方向の中央揃え */
+}
 
-.worker_update label{
-    color: white;
-    border: 1px solid white; /* 白い枠線を設定 */
-    text-align: center !important; /* 水平方向に中央揃え */
-    background-color: #6495ED; /* 背景色を設定 */
-    padding: 5px; /* 枠線と内容の間にスペースを追加 */
-     width:  100px;
-    margin-top: 10px;
-    margin-left: 15%;
-    display: inline-block;
+.worker_update div {
+  display: flex;
+  align-items: center; /* ラベルと入力フィールドを垂直方向に中央揃え */
+}
 
+.worker_update label {
+  color: white;
+  border: 1px solid white; /* 白い枠線を設定 */
+  background-color: #6495ED; /* 背景色を設定 */
+  padding: 5px; /* 枠線と内容の間にスペースを追加 */
+  width: 100px;
+  margin-right: 10px; /* ラベルと入力フィールドの間にスペースを追加 */
+  display: inline-block;
+  text-align: center; /* ラベルのテキストを右揃え */
 }
 
 .worker_update input[type="text"]{
-    border: 1px solid brack; /* 白い枠線を設定 */
-    padding: 5px; /* 枠線と内容の間にスペースを追加 */
-     width:  50%;
-    margin-top: 10px;
-    margin-left: 15px;
-    display: inline-block;
+  border: 1px solid black; /* 枠線を設定 */
+  padding: 5px; /* 枠線と内容の間にスペースを追加 */
+  display: inline-block;
+  width: 300px; /* 入力フィールドの幅を設定 */
+  box-sizing: border-box;
+}
+.worker_update select {
+  border: 1px solid black; /* 枠線を設定 */
+  padding: 5px; /* 枠線と内容の間にスペースを追加 */
+  display: inline-block;
+  width: 95px; /* 入力フィールドの幅を設定 */
+  margin-right: 5px;
+  box-sizing: border-box;
 
 }
 
+.submit{
+			display: flex;
+   			 justify-content: center; /* 水平方向に中央揃え */
+    		align-items: center;
+}
 
 .submit input[type="submit"]{
     background-color: #6495ED;
@@ -44,16 +64,23 @@
     padding: 10px 20px; /* ボタンの内側の余白を調整 */
      width:  100px;
     display: inline-block;
-    float: right;
+    margin-left: 700px;
 
 }
 
-.submit a{
-     width:  100px;
-    display: inline-block;
-    float: right;
+.link_a{
+			display: flex;
+   			 justify-content: center; /* 水平方向に中央揃え */
+    		align-items: center;
+}
+
+.link_a{
+    margin-left: 900px;
+    margin-top: -20px;
 
 }
+
+
 .nenn{
 	margin-left: 1.2%;
 }
@@ -61,10 +88,6 @@
     margin-left: 20%;
 }
 
-.link1 {
-	margin-top: 0.6%;
-	margin-left: 1%;
-}
 
 
 </style>
@@ -80,16 +103,18 @@
 
 	<form id="myForm"  action = "WorkerUpdateExecute.action" method="post">
 <div class = "worker_update">
+<div>
 		<label>ID</label>
-		<input type="text" name="WORKER_ID" value="${worker.workerId}" required readonly>
-
+		<input type="text" name="WORKER_ID" size="70" value="${worker.workerId}" required readonly>
+</div>
 <br>
-
+<div>
 		<label>名前</label>
-		<input type ="text"  name="WORKER_NAME"  value="${worker.workerName}" required maxlength="30">
+		<input type ="text"  name="WORKER_NAME" size="70" value="${worker.workerName}" required maxlength="30">
+</div>
 <br>
 
-
+<div>
 		<label>生年月日</label>
 	    <!-- 年、月、日を選択するフォーム -->
 		    <select name="year" class="nenn" required>
@@ -111,30 +136,39 @@
 					</c:forEach>
 			</select>
 
+</div>
 <br>
-
+<div>
 		<label>住所</label>
-		<input type ="text"  name="WORKER_ADDRESS"  value="${worker.workerAddress}" required maxlength="40">
+		<input type ="text"  name="WORKER_ADDRESS" size="70"  value="${worker.workerAddress}" required maxlength="40">
+</div>
 <br>
-
+<div>
 		<label>電話番号</label>
-		<input type ="text"  name="WORKER_TEL" id="worker_tel" value="${worker.workerTel}" required maxlength="15">
+		<input type ="text"  name="WORKER_TEL" size="70" id="worker_tel" value="${worker.workerTel}" required maxlength="15">
 		<span class="error" id="worker_telError"></span>
+</div>
 <br>
-
+<div>
 		<label>パスワード</label>
-		<input type="text" name="WORKER_PASSWORD" value="${worker.workerPassword}" required maxlength="20">
+
+		<input type="text" name="WORKER_PASSWORD" size="70" value="${worker.workerPassword}" required maxlength="20">
+</div>
 <br>
-
+<div>
 		<label>店情報</label>
-		<input type ="text"  name="STORE_NAME"  value="${stores.storeName}"required>
+		<input type ="text"  name="STORE_NAME"  size="70" value="${stores.storeName}"required>
 
-
+</div>
 </div>
 <div class ="submit">
-		<a class="link1" href="WorkerList.action">戻る</a>
+
 		<input type="submit" class="btn" value="変更">
 </div>
+
+<div class ="link_a">
+		<a  href="WorkerList.action">戻る</a>
+		</div>
 	</form>
 
 
