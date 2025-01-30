@@ -86,7 +86,7 @@
 <br>
 
 		<label>名前</label>
-		<input type ="text"  name="WORKER_NAME"  value="${worker.workerName}" required>
+		<input type ="text"  name="WORKER_NAME"  value="${worker.workerName}" required maxlength="30">
 <br>
 
 
@@ -114,16 +114,16 @@
 <br>
 
 		<label>住所</label>
-		<input type ="text"  name="WORKER_ADDRESS"  value="${worker.workerAddress}"required>
+		<input type ="text"  name="WORKER_ADDRESS"  value="${worker.workerAddress}" required maxlength="40">
 <br>
 
 		<label>電話番号</label>
-		<input type ="text"  name="WORKER_TEL" id="worker_tel" value="${worker.workerTel}" />
+		<input type ="text"  name="WORKER_TEL" id="worker_tel" value="${worker.workerTel}" required maxlength="15">
 		<span class="error" id="worker_telError"></span>
 <br>
 
 		<label>パスワード</label>
-		<input type ="text"  name="WORKER_PASSWORD"  value="${worker.workerPassword}"required>
+		<input type="text" name="WORKER_PASSWORD" value="${worker.workerPassword}" required maxlength="20">
 <br>
 
 		<label>店情報</label>
