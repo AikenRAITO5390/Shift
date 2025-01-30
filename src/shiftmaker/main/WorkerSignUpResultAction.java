@@ -1,8 +1,11 @@
 package shiftmaker.main;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -93,13 +96,14 @@ public class WorkerSignUpResultAction extends Action{
 		// ラジオボタンの値を取得
 		String worker_judge = req.getParameter("worker_judge");
 
-
-
-		// ビジネスロジック 4
-
-
-
-		// DBへデータ保存 5
+		// 生年月日選択のための年リスト作成（例: 1950年～2023年）
+	    List<Integer> years = new ArrayList<>();
+	    for (int i = 1950; i <= 2023; i++) {
+	        years.add(i);
+	    }
+	    // 月、日リストを作成
+	    List<Integer> months = IntStream.rangeClosed(1, 12).boxed().collect(Collectors.toList());
+	    List<Integer> days = IntStream.rangeClosed(1, 31).boxed().collect(Collectors.toList());
 
 		// 従業員が未登録だった場合
 		if (worker == null) {
@@ -150,6 +154,10 @@ public class WorkerSignUpResultAction extends Action{
 			req.setAttribute("worker_tel", worker_tel);
 			req.setAttribute("worker_password", worker_password);
 			req.setAttribute("store_name", store_name);
+			// 年、月、日をセット
+			req.setAttribute("year_list", years);
+			req.setAttribute("month_list", months);
+		    req.setAttribute("day_list", days);
 			req.getRequestDispatcher("worker_signup.jsp").forward(req, res);
 			return;
 		}
