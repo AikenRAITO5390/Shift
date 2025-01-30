@@ -12,10 +12,13 @@
 }
 table {
 	border-collapse: collapse;
+
 }
 .table {
 	margin-top : 60px;
-	margin-left : 35%;
+	display: flex;
+   	justify-content: center; /* 水平方向に中央揃え */
+    align-items: center;
 }
 .table a{
 	text-decoration: none;
@@ -34,8 +37,14 @@ th, td {
 	text-align: center;
 }
 .main {
+	display: flex;
+   	justify-content: center; /* 水平方向に中央揃え */
+    align-items: center
+}
+
+.main a{
 	margin-top : 2%;
-	margin-left : 70%;
+	margin-left: 600px;
 }
 </style>
 

@@ -58,7 +58,7 @@
 	                <th>点数</th>
 	                <th> </th>
 	            </tr>
-	            <tbody class="table-group-divider">
+
 	            <c:forEach var="worker" items="${workers}">
 	            	<c:if test="${!worker.workerJudge}">
 		                <tr>
@@ -70,7 +70,7 @@
 		                </tr>
 	                </c:if>
 	            </c:forEach>
-	            </tbody>
+
 	        </table>
 	    </c:if>
     </div>

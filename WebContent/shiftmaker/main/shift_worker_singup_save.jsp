@@ -13,8 +13,8 @@
 }
 .table {
 	margin-top : 70px;
-	margin-left : 28%;
-	tabel-layout: fixed;
+	display: flex;
+   	justify-content: center; /* 水平方向に中央揃え */
 }
 .table a{
 	text-decoration: none;
@@ -30,13 +30,33 @@
     background-color: #6495ED;
     color: white;
 }
+.table_table h3{
+	 margin-top: 0; /* 必要に応じて調整 */
+    margin-left: -400px;
+}
+
+
+
 .table_table {
-    margin-left : 5%;
-    margin-top : 60px;
+	margin-top: 100px;
+    text-align: center;
+
+}
+
+.table_table table{
+	 margin: 0 auto;
+}
+
+.ok{
+	display: flex;
+   	justify-content: center; /* 水平方向に中央揃え */
+    align-items: center;
+    margin-bottom: 100px;
+
 }
 .ok input[type="submit"]{
 	margin-top : -420px;
-	margin-left: 75%;
+	margin-left : 700px;
 	background-color: #6495ED; /* 背景色を水色に設定 */
 	padding: 10px 20px;
 	color: white;

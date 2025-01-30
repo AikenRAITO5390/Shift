@@ -17,18 +17,26 @@
 	text-align : center;
 }
 .worker {
-	margin-top : 40px;
-	margin-left : 20%;
+	display: flex;
+   	justify-content: center; /* 水平方向に中央揃え */
+    align-items: center;
+    margin-left: -500px;
 }
 .table {
 	margin-top : -50px;
-	margin-left : 45%;
+	display: flex;
+   	justify-content: center; /* 水平方向に中央揃え */
+    align-items: center;
+    margin-left: 200px;
 }
 .submit {
-	margin-top : 50px;
-	margin-left : 65%;
+	display: flex;
+   	justify-content: center; /* 水平方向に中央揃え */
+    align-items: center;
 }
 .submit input[type="submit"]{
+	margin-left: 600px;
+	margin-top : 50px;
 	background-color: #6495ED; /* 背景色を水色に設定 */
 	padding: 10px 20px;
 	color: white;
