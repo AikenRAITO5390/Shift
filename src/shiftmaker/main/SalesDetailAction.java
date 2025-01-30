@@ -65,10 +65,14 @@ public class SalesDetailAction extends Action {
 
 
 	            LocalDate now = LocalDate.now();// 現在の年月日をLocalDateで取得
-	            LocalDate pastDate = now.minusDays(7); // 現在から一週間前の日付
-	            LocalDate pastYear = now.minusYears(1).minusDays(7); // 現在から一年と一週間前の日付
 
-	            System.out.println(pastDate + "これが現在から一週間前の日にち");
+	            LocalDate pastBeforeDate = now.minusDays(8); // 現在から一週間前の日付
+	            LocalDate pastAfterDate = now.plusDays(8); // 現在から一週間後の日付
+
+	            LocalDate pastYear = now.minusYears(1);// 現在から一年前の日付
+	            LocalDate pastBeforeYear = now.minusYears(1).minusDays(8); // 現在から一年と一週間前の日付
+	            LocalDate pastAfterYear = now.minusYears(1).plusDays(8); // 現在から一年と一週間後の日付
+
 
 				// salelist をループしてデータを変換
 				for (Sales sale : salelist) {
@@ -90,13 +94,8 @@ public class SalesDetailAction extends Action {
 
 
 
-	             // 現在の年月と一致するデータのみ処理
-	                if (saleMonth == currentMonth && saleYear == currentYear) {
-
-//		                もし現在より一週間以上前のデータなら表示しない
-	                	if (saleLocalDate.isBefore(pastDate)){
-		                	continue;
-		                }
+	             // 現在の前後一週間分のデータのみ処理
+	                if (pastAfterDate.isAfter(saleLocalDate) && pastBeforeDate.isBefore(saleLocalDate)) {
 
 					    ArrayList<String> tmp = new ArrayList<>();// データを追加するための仮リスト
 
@@ -111,13 +110,8 @@ public class SalesDetailAction extends Action {
 
 
 
-	             // 一年前の年月と一致するデータのみ処理
-	                if (saleMonth == currentMonth && saleYear == currentYear-1) {
-
-//		                もし現在より一年と一週間以上前のデータなら表示しない
-	                	if (saleLocalDate.isBefore(pastYear)){
-		                	continue;
-		                }
+	             // 一年前の前後一週間分のデータのみ処理
+	                if (pastAfterYear.isAfter(saleLocalDate) && pastBeforeYear.isBefore(saleLocalDate)) {
 
 	                	// データを追加するための仮リスト
 					    ArrayList<String> tmp = new ArrayList<>();
@@ -131,25 +125,6 @@ public class SalesDetailAction extends Action {
 					    ar1.add(tmp);//一行目にデータを追加
 	                }
 
-
-//	 --------------------------------------------------------------------------------------------------
-
-	             // AIで予測した年月と一致するデータのみ処理
-	                // 現在の日から一週間だけ表示
-//	                if (saleMonth == currentMonth && saleYear == currentYear) {
-//		                ArrayList<String> tmp = new ArrayList<>();// データを追加するための仮リスト
-//
-//					    SimpleDateFormat formatter = new SimpleDateFormat("MM月dd日");// フォーマッタの作成
-//				        String dateString = formatter.format(sale.getDate());// Date → String に変換
-//
-//				        tmp.add(String.valueOf(sale.getDaySales())); // 売上
-//					    tmp.add("AIの予測売上");// 店舗名
-//					    tmp.add(dateString);// 日付
-//					    ar1.add(tmp);//一行目にデータを追加
-//
-//	                }
-//	            	---------------------------------------------------------------------------------------
-
 				}
 
 
@@ -158,21 +133,17 @@ public class SalesDetailAction extends Action {
 				for(int i = 1; i < 8; i++){
 					ArrayList<String> tmp = new ArrayList<>();// データを追加するための仮リスト
 
-
 					DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("MM/dd");//フォーマッタ
 
 					LocalDate futureDate = now.plusDays(i); // 現在からi日後を計算
 
-
 					String sales_date_AI = futureDate.format(formatter2);//Stringに直す
-
 
 					int year = futureDate.getYear();//i日後の年
 					int month = futureDate.getMonthValue();//i日後の月
 					int day = futureDate.getDayOfMonth();//i日後の日
 
-
-					int japan_money  = salesAnalyze.main(month, day, year) * 155;//日本円に変換
+					int japan_money  = salesAnalyze.main(day, month, year) * 155;//日本円に変換
 
 			        tmp.add(String.valueOf(japan_money)); // AIが予測した売上
 				    tmp.add("AIの予測売上");// 店舗名
@@ -180,7 +151,8 @@ public class SalesDetailAction extends Action {
 				    ar1.add(tmp);//一行目にデータを追加
 				}
 
-// ------------------------------------------------------------------------------------------------
+
+
 
 
 				//### 売上グラフの元データをセッションに保持 ###
