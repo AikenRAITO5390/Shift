@@ -25,6 +25,9 @@
     white-space: nowrap; /* 改行をしない */
     overflow: hidden; /* はみ出た部分を非表示 */
     text-overflow: ellipsis; /* 省略記号を表示 */
+
+
+    overflow-x: scroll; /* 縦方向のスクロールバーを表示 */
 }
 .workertable th {
     background-color: #6495ED; /* 背景色を水色に設定 */
