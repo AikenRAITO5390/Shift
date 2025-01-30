@@ -25,6 +25,10 @@
 	position: absolute;
     left: 5%; /* 画面の中央に配置 */
     transform: translateX(-50%) translateX(-90%);
+    margin-left: -10%;
+}
+.sita {
+	margin-top : 60px;
 }
 </style>
 
@@ -68,8 +72,11 @@
     </div>
 
 	<div class="main">
-    <a class="link3" href="Main.action">メインへ戻る</a>
+    	<a class="link3" href="Main.action">メインへ戻る</a>
     </div>
+
+    <!-- 余白 -->
+    <div class="sita"></div>
 
 </body>
 <c:import url="../../common/footer.jsp"/>
