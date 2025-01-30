@@ -10,10 +10,13 @@
 <style>
 .Point_Setting {
     display: flex;
-    justify-content: left; /* 子要素を左右に均等に配置 */
-    align-items: stretch; /* 子要素の高さを揃える */
-    margin-top: 20px; /* ヘッダーの高さ分だけ下に配置 */
-    margin-left: 10%;
+    justify-content: space-between;
+    align-items: flex-startr; /* 子要素の高さを揃える */
+    /*margin-top: 20px; ヘッダーの高さ分だけ下に配置
+    margin-left: 10%;*/
+    max-width: 1200px; /* 最大幅を指定 */
+    width: 80%;
+    margin: 20px auto; /* 左右の余白を均等に */
 }
 .power_Setting h1{
 	text-align: center;
@@ -30,54 +33,72 @@
 }
 /*一週間分のテーブル*/
 .week_Setting {
-    width: 35%; /* 必要に応じて幅を設定 */
-    height: 10px; /* 縦の長さを指定 */
+	display: flex;/*追加*/
+    width: 25%; /* 必要に応じて幅を設定 */
+    /*height: 10px;  縦の長さを指定 */
+    /*min-height: 50px;  適切な高さを設定 */
+    /*padding: 5px;*/
+    flex-direction: column;/*追加*/
+    align-items: center;/*追加*/
+    padding: 10px;/*追加*/
+
 
 }
 /*一か月分の入力された点数*/
 .point_conetnt input[type="number"]{
-    width: 200%; /* 必要に応じて幅を設定 */
-    margin-left: 20px;
-    margin-top: 15px;
+    width: 100%; /* 必要に応じて幅を設定 */
+    padding: 3px; /* 余白を小さく */
+    margin: 2px 0; /* 上下の間隔を小さく */
+    font-size: 14px; /* フォントサイズを調整 */
 }
 /*２つの変更ボタン*/
 .power_Setting button{
 	text-align: center;
 }
+/*スクロールバー*/
+.scrollable-vertical {
+    height: 300px; /* 必要に応じて調整 */
+    overflow-y: scroll; /* 縦方向のスクロールバーを表示 */
+    /*width: 80%; 画面の幅いっぱいに広げる */
+    width: calc(100% -10px); /* 余白を防ぐ */
+    box-sizing: border-box; /* パディングとボーダーを含めた全体の幅と高さを指定 */
+    overflow-x: hidden; /* 横方向のスクロールバーを非表示 */
+    max-width: 100%;  /*最大幅を指定して余分なスペースを防ぐ*/
+    margin-left: 20px;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    position: relative; /* ボタンを右下に固定するため */
+}
 /*一か月のカレンダー表示する*/
 .point_conetnt{
 	border: 1px solid ; /* 枠線を設定 */
 	background-color: #FFFFFF; /* 背景色を設定 */
-    padding: 2px; /* 枠線と内容の間にスペースを追加 */
+    padding: 10px; /* 枠線と内容の間にスペースを追加 */
     border-radius: 5px; /* 角を丸くする */
-    display: inline-block; /*文字の幅だけ線をひく*/
-    width: 60%; /* 画面の幅いっぱいに広げる */
-    height: 400px; /* 縦の長さを指定 */
-    margin-left: -5%;
+    /*display: inline-block; 文字の幅だけ線をひく*/
+    display: flex;
+    flex-direction: column; /* 縦並びにする */
+    width: 70%; /* 画面の幅いっぱいに広げる */
+    height: 300px; /* 縦の長さを指定 */
+    margin-left: 0%;
 }
 /*一か月の日付*/
 .point_conetnt table{
-	margin-left: -35px;
+	margin-left: 0;
+	width: 50%;
 }
-/*一か月のパワーバランス変更ボタン*/
-.point_conetnt button{
-	margin-left: 640px;
-	margin-top: 30px;
-}
+
 /*一か月の日付*/
 .point_conetnt label{
-	margin-left: 32px;
-	width: 85%; /* 画面の幅いっぱいに広げる */
-}
-/*スクロールバー*/
-.scrollable-vertical {
-    height: 400px; /* 必要に応じて調整 */
-    overflow-y: scroll; /* 縦方向のスクロールバーを表示 */
-    width: 80%; /* 画面の幅いっぱいに広げる */
-    box-sizing: border-box; /* パディングとボーダーを含めた全体の幅と高さを指定 */
-    overflow-x: hidden; /* 横方向のスクロールバーを非表示 */
-    max-width: 100%; /* 最大幅を指定して余分なスペースを防ぐ */
-    margin-left: 80px;
+	/*margin-left: 32px;
+	width: 85%; 画面の幅いっぱいに広げる */
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap:5px; /* ラベルと入力欄の間を狭くする */
+    width: 100%;
+    padding: 5px 0;
 }
 /*土曜に色*/
 .week_Setting tr:nth-child(6) input[type="number"] {
@@ -105,9 +126,12 @@
 }
 /*変更ボタン*/
 .point_conetnt button{
-    margin-top: 20px;
-	margin-left: 92%;
-	margin-bottom: 20px;
+	align-self: flex-end; /* ボタンを右下に配置 */
+    margin-top: 10px;
+    font-size: 14px;
+    position: absolute;
+    /*right: 80px;
+    bottom: 20px;*/
 }
 /*トップページに戻るリンク*/
 .power_Setting a{
@@ -116,7 +140,25 @@
 }
 /*hr*/
 .hr {
-	width: 220%;
+	width: 200%;
+}
+
+
+/* ラベル部分 */
+.point_conetnt label span {
+    min-width: 20px; /* ラベルの幅を固定 */
+    text-align: right; /* 右寄せにする */
+}
+
+/* レスポンシブ対応 */
+@media screen and (max-width: 768px) {
+    .Point_Setting {
+        margin-left: 5%;
+        flex-direction: column;
+    }
+    .week_Setting {
+        width: 100%;
+    }
 }
 </style>
 
@@ -130,9 +172,9 @@
 <body>
 <div class = "power_Setting">
 
-<h1>～パワーバランス設定～</h1>
-<p>"${toDay}分"</p>
-<a href="Main.action">トップページに戻る</a>
+	<h1>～パワーバランス設定～</h1>
+	<p>"${toDay}分"</p>
+	<a href="Main.action">トップページに戻る</a>
 
 <!-- 2つの表を横の並べるためのやつ！ -->
 <div class = "Point_Setting">
@@ -191,11 +233,11 @@
 	                <tr>
 	                    <td><label>${loopStatus.index + 1}</label></td>
 	                    <td>
-	                        <input type="number" name="DayScore_${loopStatus.index + 1}" id="DayScore_${loopStatus.index + 1}" >
+	                        <input type="number" name="DayScore_${loopStatus.index + 1}" id="DayScore_${loopStatus.index + 1}">
 	                         <span class="error" id="DayScore_${loopStatus.index + 1}Error"></span>
-	                         <div class="hr">
-	                         <hr>
-	                         </div>
+	                		<div class="hr">
+	                		<hr>
+	                		</div>
 	                    </td>
 	                    	<input type="hidden" name="WorkDayScore_${loopStatus.index + 1}" value="${entry.key}">
 	                </tr>
@@ -209,11 +251,12 @@
 
 	</form>
 	</div>
-</div>
+
 
 	<script>
 
 	 //　dateList[日付][その時の点数]
+
 	<c:forEach var="dateMap" items="${dateList}" varStatus="loopStatus">
 		<c:forEach var="entry" items="${dateMap.entrySet()}">
 			<c:forEach var="power" items="${power_list}">
@@ -317,6 +360,7 @@
 	});
 	</script>
 
+</div>
 <c:import url="../../common/footer.jsp"/>
 
 </body>
