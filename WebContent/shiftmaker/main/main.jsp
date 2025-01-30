@@ -14,12 +14,14 @@
 <div class="main-content">
 <div class="left-content">
 <h2>📜　シフト</h2>
+<div class="hidari">
 <ul>
         <li><a href="ShiftSelect.action">作成</a></li>
         <li><a href="ShiftEdit.action">編集</a></li>
         <li><a href="ShiftChoose.action">閲覧</a></li>
         <li><a href="ShiftDelete.action">削除</a></li>
 </ul>
+</div>
 <div class="h2top-content">
 <h2>👦　シフト作成者</h2>
 <ul>
@@ -30,13 +32,14 @@
 
 <div class="center-content">
 <h2>👬　従業員</h2>
+<div class="hidari">
 <ul>
         <li><a href="WorkerSignUp.action">登録</a></li>
         <li><a href="WorkerList.action">編集</a></li>
         <li><a href="WorkerDate.action">閲覧</a></li>
         <li><a href="WorkerList.action">削除</a></li>
 </ul>
-
+</div>
 <div class="h2top-content">
 <h2>💪　シフト条件</h2>
 <ul>
