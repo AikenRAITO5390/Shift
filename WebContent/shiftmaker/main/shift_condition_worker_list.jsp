@@ -22,11 +22,15 @@
     color: white;
 }
 .main{
-	position: absolute;
-    left: 5%; /* 画面の中央に配置 */
-    transform: translateX(-50%) translateX(-90%);
-    margin-left: -10%;
+	display: flex;
+   	justify-content: center; /* 水平方向に中央揃え */
+    	align-items: center;
 }
+.main a{
+	margin-top: 50px;
+	margin-left: 900px;
+}
+コンテキスト メニューあり
 .sita {
 	margin-top : 60px;
 }
@@ -72,7 +76,7 @@
     </div>
 
 	<div class="main">
-    	<a class="link3" href="Main.action">メインへ戻る</a>
+    	<a href="Main.action">メインへ戻る</a>
     </div>
 
     <!-- 余白 -->

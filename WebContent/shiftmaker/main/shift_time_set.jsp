@@ -13,11 +13,30 @@
 	margin-top : 80px;
 	text-align : center;
 }
+/*時間設定*/
 .time {
-	margin-left : 38%;
+	margin-left : 41% !important;
+}
+/*アルファベット*/
+.time label{
+	margin-left : -55%;
+}
+/*終了予定時間*/
+.end{
+	margin-left : 95%;
+}
+.end select{
+	margin-left : 15%;
+	width: 2550%;
+}
+.start{
+	margin-left : 25%;
+}
+.start select{
+	width: 180%;
 }
 .kara {
-	margin-left : 10%;
+	margin-left : 230%;
 }
 .time_time {
 	margin-top : 60px;
@@ -38,10 +57,7 @@
 	margin-left : 40%;
 }
 
-td {
-    width: 100px; /* 必要に応じて幅を調整 */
-    box-sizing: border-box; /* パディングとボーダーを含めた幅を計算 */
-}
+
 .sita {
 	margin-top : 60px;
 }
@@ -73,6 +89,7 @@ td {
                 <td><label>${fn:substring('ABCD', i, i+1)}</label></td>
 
                 <td>
+                <div class="start">
                 <%--スタート時間の表示--%>
                 <%--初期値timeSelectStart(下で設定）、nameはAのworkTimeStartでわたす　--%>
                     <select id="timeSelectStart_${fn:substring('ABCD', i, i+1)}" name="workTimeStart_${i}">
@@ -94,9 +111,12 @@ td {
 	                                <option value="23:00:00">23:00</option>
 	                                <option value="24:00:00">24:00</option>
                     </select>
+                    </div>
                 </td>
 				<td><h3 class="kara">～</h3></td>
                 <td>
+
+                <div class="end">
                 <%--エンド時間の表示--%>
                 <%--初期値timeSelectEnd(下で設定）、nameはAのworkTimeEndでわたす　--%>
                     <select id="timeSelectEnd_${fn:substring('ABCD', i, i+1)}" name="workTimeEnd_${i}">
@@ -118,7 +138,9 @@ td {
 	                                <option value="23:00:00">23:00</option>
 	                                <option value="24:00:00">24:00</option>
                     </select>
+                    </div>
                 </td>
+
 				<%--Idをわたす。hiddenで隠す --%>
                   <input type="hidden" name="workTimeId_${i}" value="${fn:substring('ABCD', i, i+1)}">
             </tr>
