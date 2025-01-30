@@ -96,15 +96,18 @@ public class ShiftEditSaveAction extends Action {
 	    java.sql.Date sqlShiftDate = new java.sql.Date(shiftDate.getTime());
 	    LocalDate selectedDate = sqlShiftDate.toLocalDate();
 
-	    // シフト情報を取得
-	    Shift shift = shiftDao.getShiftScore(worker, sqlShiftDate, store);
-	    String shiftScore = String.valueOf(shift.getShiftScore());
-
 	    // カスタム時間の場合の処理
 	    String customStartTime = req.getParameter("customStartTime");
 	    String customEndTime = req.getParameter("customEndTime");
 	    Timestamp timestampCustomStartTime = null;
 	    Timestamp timestampCustomEndTime = null;
+
+	    // シフト情報を取得
+	    Shift shift = shiftDao.getShiftScore(worker, sqlShiftDate, store);
+	    if (shift == null) {
+	        //shift = shiftDao.insertCustomWorkTime_shiftEdit(sqlShiftDate, worker.getWorkerId(), worker.getStoreId(), timestampCustomStartTime, timestampCustomEndTime, "0", null, null, null, null);
+	    }
+	    String shiftScore = String.valueOf(shift.getShiftScore());
 
 	    if ("E".equals(workTimeId)) {
 	        // カスタム時間を Timestamp に変換
