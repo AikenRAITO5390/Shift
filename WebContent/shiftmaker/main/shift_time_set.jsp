@@ -16,46 +16,66 @@
 }
 /*時間設定*/
 .time {
-	margin-left : 41% !important;
+			display: flex;
+   			justify-content: center; /* 水平方向に中央揃え */
+    		align-items: center;
+    		margin-left: 400px;
+    		margin-top: -20px;
+    		font-size: 15px;
 }
 /*アルファベット*/
 .time label{
-	margin-left : -85%;
+	margin-rigth : 10px;
 }
 /*終了予定時間*/
 .end{
-	margin-left : 93%;
+		margin-left : 20px;
 }
 .end select{
-	margin-left : 15%;
-	width: 2550%;
+	width: 100px;
+	font-size: 15px;
 }
 .start{
-	margin-left : 15%;
+
 }
 .start select{
-	width: 180%;
+	width: 100px;
+	margin-left: 10px;
+	font-size: 15px;
 }
 .kara {
-	margin-left : 240%;
+	margin-left : 20px;
 }
+
+
+
 .time_time {
-	margin-top : 60px;
 	text-align : center;
 }
 .time_time select{
 	margin-left : 30px;
+	font-size: 15px;
 }
 .time_time h3{
 	margin-left : 1.5%;
 }
 .ok{
-	margin-top : 60px;
-	margin-left : 60%;
+	margin-top : 40px;
+	display: flex;
+   	justify-content: center; /* 水平方向に中央揃え */
+    align-items: center;
+    margin-left: 500px;
+}
+
+.ok button{
+	width: 100px;
 }
 .no{
 	margin-top : -30px;
-	margin-left : 40%;
+	display: flex;
+   	justify-content: center; /* 水平方向に中央揃え */
+    align-items: center;
+	margin-left : -400px;
 }
 
 
@@ -152,7 +172,7 @@
 
 <!-- 営業時間設定（値保持） -->
 <div class="time_time">
-    <h2>営業時間設定</h2>
+    <h2>～営業時間設定～</h2>
 
 
     <select name="storeTimeStart">
