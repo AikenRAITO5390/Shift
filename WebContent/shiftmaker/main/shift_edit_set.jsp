@@ -13,12 +13,16 @@
 	text-align : center;
 }
 .h3 {
-	margin-top : 40px;
+	margin-top : 35px;
 	text-align : center;
+}
+.worker h4{
+	margin-top : 40px;
+	margin-left : 5%;
 }
 .worker {
 	margin-top : 40px;
-	margin-left : 20%;
+	margin-left : 5%;
 }
 .table {
 	margin-top : -145px;
@@ -35,12 +39,41 @@
 /*アルファベットの場合*/
 .workTimeId {
 	margin-top : -46px;
-	margin-left : 14%;
+	margin-left : 18%;
+
+    border: 1px solid #000; /* 枠線を黒に設定 */
+    width: 20%;
+    text-align : center;
+
 }
 /*時間選択済の場合*/
 .workTimeId2 {
 	margin-top : -46px;
 	margin-left : 14%;
+
+    border: 1px solid #000; /* 枠線を黒に設定 */
+    width: 15%;
+    text-align : center;
+}
+
+/*従業員のIDデータ*/
+.workerid {
+	margin-top : -46px;
+	margin-left : 18%;
+
+
+    border: 1px solid #000; /* 枠線を黒に設定 */
+    width: 20%;
+    text-align : center;
+}
+/*日付のデータ*/
+.date {
+	margin-top : -46px;
+	margin-left : 18%;
+
+    border: 1px solid #000; /* 枠線を黒に設定 */
+    width: 20%;
+    text-align : center;
 }
 </style>
 
@@ -67,27 +100,27 @@
 
 			<div class="worker">
 			<c:if test="${not empty workerId}">
-		        <h3>選択された従業員:
-		            ${workerId}
-		        </h3>
+		        <h4>選択された従業員:</h4>
+		            <div class="workerid">${workerId}</div>
+
 		    </c:if>
 
 			<c:if test="${not empty date}">
-		        <h3>選択された日付:
-		            ${date}
-		        </h3>
+		        <h4>選択された日付:</h4>
+		            <div class="date">${date}</div>
+
 		    </c:if>
 
-		    <h3>元のシフト希望:</h3>
+		    <h4>元のシフト希望:</h4>
 
 			<div class="workTimeId">
 	        <c:if test="${not empty workTimeId}">
-			    <h3>
+			    <p>
 			        <c:choose>
 			            <c:when test="${workTimeId == 'T'}">〇</c:when>
 			            <c:otherwise>${workTimeId}</c:otherwise>
 			        </c:choose>
-			    </h3>
+			    </p>
 			</c:if>
 			</div>
 
