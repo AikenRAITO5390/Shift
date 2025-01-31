@@ -8,53 +8,93 @@
 <title>シフト編集</title>
 
 <style>
-.h2 {
-	margin-top : 60px;
-	text-align : center;
+
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 🔹 全体を中央に配置 */
+    justify-content: center;
+    width: 100%;
 }
-.h3 {
-	margin-top : 35px;
-	text-align : center;
-}
-.worker h4{
-	margin-top : 5px;
-	margin-left : 5%;
-}
-.worker {
-	margin-top : 40px;
-	margin-left : 25%;
-}
-.table {
-	margin-top : -13%;
-	margin-left : 50%;
-}
+
 .submit {
-	margin-top : 50px;
-	margin-left : 65%;
+    text-align: center;
+    margin-top: 50px;
 }
+
+/* "戻る" ボタンの中央配置 */
 .a {
-	margin-top : -25px;
-	margin-left : 60%;
+    text-align: center;
+    margin-top: 10px;
 }
-/*アルファベットの場合*/
+
+/* シフト希望情報 */
 .workTimeId {
-	margin-top : -2.5%;
-	margin-left : 14%;
+    padding: 5px 10px; /* 内側の余白 */
+    min-width: 100px; /* 最小幅を確保 */
+    max-width: 200px; /* 最大幅を設定 */
+    margin-left: -15px; /* 🔹 さらに左に寄せる */
+}
 
-    /*border: 1px solid #000;枠線を黒に設定 */
+/* "元のシフト希望" のラベルと内容を横並びに */
+.shift-container {
+    display: flex; /* 横並び */
+    align-items: center; /* 縦方向中央揃え */
+    flex-wrap: wrap; /* 画面が狭い時は折り返し */
+    gap: 5px; /* `h4` と `workTimeId` の間に適度な余白 */
+    justify-content: center; /* 🔹 中央寄せ */
+}
+
+/*従業員のIDデータ*/
+.workerid {
+	margin-top : -46px;
+	margin-left : 18%;
+    border: 1px solid #000; /* 枠線を黒に設定 */
     width: 20%;
-    text-align :left;
+    text-align : center;
+}
+
+.worker-table-container {
+    display: flex; /* worker と table を横並びに */
+    justify-content: center; /* 🔹 全体を中央に配置 */
+    align-items: flex-start; /* 上端を揃える */
+     width: 80%; /* 🔹 横幅を調整（90% → 80% に変更） */
+    margin: 0 auto; /* 中央配置 */
+     gap: 20px; /* 🔹 余白を調整 */
+}
+
+.worker {
+   flex: none; /* 🔹 必要以上に伸縮しないようにする */
+    width: auto; /* 🔹 必要に応じてサイズ調整 */
 
 }
-/*時間選択済の場合*/
-.workTimeId2 {
-	margin-top : -2%;
-	margin-left : 10%;
 
-    /*border: 1px solid #000;  枠線を黒に設定 */
-    width: 20%;
-    text-align : left;
+.table {
+   flex: none; /* 🔹 必要以上に伸縮しないようにする */
+    width: auto; /* 🔹 必要に応じてサイズ調整 */
+
 }
+
+.h2{
+	margin-top:30px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* 🔹 中央揃え */
+    align-items: center; /* 縦方向中央揃え */
+    gap: 20px; /* 🔹 ボタンの間隔を調整 */
+    margin-top: 50px;
+}
+
+/* レスポンシブ対応 */
+@media screen and (max-width: 768px) {
+    .shift-container {
+        flex-direction: column; /* 画面幅が狭い時は縦並びにする */
+        align-items: flex-start; /* 左寄せ */
+    }
+}
+
 </style>
 
 <c:import url="../../common/header.jsp"/>
@@ -77,7 +117,7 @@
 
 
 		<form action="ShiftEditSave.action?date=${date}?workerId=${workerId}&count=${count}" method="post">
-		<div class="edit">
+		<div class="worker-table-container">
 			<div class="worker">
 			<c:if test="${not empty workerId}">
 		        <h4>選択された従業員:${workerId}</h4>
@@ -91,27 +131,27 @@
 
 		    </c:if>
 
-		    <h4>元のシフト希望:
+			<div class="shift-container">
+			    <h4>元のシフト希望:</h4>
 
-			<div class="workTimeId">
-	        <c:if test="${not empty workTimeId}">
+				<div class="workTimeId">
+		        	<c:if test="${not empty workTimeId}">
+				    	<p>
+				       		<c:choose>
+				            	<c:when test="${workTimeId == 'T'}">〇</c:when>
+				            	<c:otherwise>${workTimeId}</c:otherwise>
+				        	</c:choose>
+				   		</p>
+					</c:if>
 
-			        <c:choose>
-			            <c:when test="${workTimeId == 'T'}">〇</c:when>
-			            <c:otherwise>${workTimeId}</c:otherwise>
-			        </c:choose>
 
-			</c:if>
+
+		        	<c:if test="${not empty startHour_c}">
+		            	<p>${startHour_c}:00 - ${endHour_c}:00</p>
+		        	</c:if>
+		        </div>
 			</div>
 
-			<div class="workTimeId2">
-	        <c:if test="${not empty startHour_c}">
-	            ${startHour_c}:00 - ${endHour_c}:00
-	        </c:if>
-	        </div>
-	        </h4>
-
-			</div>
 		</div>
 			<div class="table">
 	        <table>
@@ -193,6 +233,7 @@
 	            </tbody>
 	        </table>
 	        </div>
+	   </div>
 
 	        <script>
 			    document.addEventListener("DOMContentLoaded", () => {
@@ -226,8 +267,14 @@
 
 	        <input type="hidden" name="workerId" value="${param.workerId}">
     		<input type="hidden" name="date" value="${date}">
-	        <div class="submit"><input type="submit" value="変更"></div>
-	        <div class="a"><a href="ShiftEdit.action">戻る</a></div>
+    		<div class="button-container">
+		        <div class="submit">
+		        	<input type="submit" value="変更">
+				</div>
+		        <div class="a">
+		        	<a href="ShiftEdit.action">戻る</a>
+		        </div>
+		    </div>
 	    </form>
 
 
