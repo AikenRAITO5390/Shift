@@ -22,10 +22,6 @@
      align-items: center;
 }
 
-button {
-    width: 100px;  /* 横幅を100pxに設定 */
-}
-
 .button2 {
 	 display: flex;
      justify-content: center;
