@@ -223,7 +223,7 @@ body {
 	<div class="login">
 	<div class="login-triangle"></div>
 
-	<h2 class="login-header">Log in</h2>
+	<h2 class="login-header">従業員Login</h2>
 
 	 <div id="idDiv">
 	 <div class="id">
