@@ -16,6 +16,10 @@
 	margin-top : 35px;
 	margin-left : 90%;
 }
+
+.submit button{
+	width:80px;
+}
 .main input[type="submit"]{
 	margin-top : -40px;
 	margin-left : 80%;
@@ -32,11 +36,14 @@ table {
 	width: 90%;
 	border-collapse: collapse;
 	margin: 20px auto;
+	table-layout: fixed;
 }
 th, td {
 	border: 1px solid #ddd;
 	padding: 8px;
 	text-align: center;
+	width: 40px !important;
+	height: 40px !important;
 }
 th {
 	background-color: #f4f4f4;
