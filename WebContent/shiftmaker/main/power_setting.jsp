@@ -10,13 +10,14 @@
 <style>
 .Point_Setting {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-startr; /* 子要素の高さを揃える */
     /*margin-top: 20px; ヘッダーの高さ分だけ下に配置
     margin-left: 10%;*/
-    max-width: 1200px; /* 最大幅を指定 */
+    max-width: 100%; /* 最大幅を指定 */
     width: 80%;
     margin: 20px auto; /* 左右の余白を均等に */
+    height: auto;
 }
 .power_Setting h1{
 	text-align: center;
@@ -65,10 +66,9 @@
     overflow-x: hidden; /* 横方向のスクロールバーを非表示 */
     max-width: 100%;  /*最大幅を指定して余分なスペースを防ぐ*/
     margin-left: 20px;
-    max-width: 700px;
     display: flex;
     flex-direction: column;
-    position: relative; /* ボタンを右下に固定するため */
+    position: relative;/* ボタンを右下に固定するため */
 }
 /*一か月のカレンダー表示する*/
 .point_conetnt{
@@ -79,9 +79,13 @@
     /*display: inline-block; 文字の幅だけ線をひく*/
     display: flex;
     flex-direction: column; /* 縦並びにする */
-    width: 70%; /* 画面の幅いっぱいに広げる */
+    width: 55%; /* 画面の幅いっぱいに広げる */
     height: 300px; /* 縦の長さを指定 */
-    margin-left: 0%;
+    position: relative; /* ボタンを絶対位置指定するため */
+
+}
+.point_conetnt>div:last-of-type{
+    margin-left: auto;
 }
 /*一か月の日付*/
 .point_conetnt table{
@@ -121,18 +125,31 @@
 }
 /*変更ボタン*/
 .week_Setting button{
-	margin-top: 20px;
+	margin-top: 10px;
 	margin-left: 37%;
 }
 /*変更ボタン*/
-.point_conetnt button{
-	align-self: flex-end; /* ボタンを右下に配置 */
-    margin-top: 10px;
-    font-size: 14px;
+.button-container{
     position: absolute;
-    /*right: 80px;
-    bottom: 20px;*/
+    right: -70px; /* ボタンを point_conetnt の右側面に配置 */
+    top: 95%;
+    transform: translateY(-50%); /* 垂直中央揃え */
+    display: flex;
+
 }
+
+/* ボタンのスタイル */
+.button-container button {
+    font-size: 14px;
+    padding: 8px 16px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap; /* ボタン内のテキストが折り返されないように */
+}
+
+
 /*トップページに戻るリンク*/
 .power_Setting a{
 	margin-left: 80%;
@@ -223,32 +240,31 @@
 
 <!-- 一か月の必要点数を設定する -->
 <div class = point_conetnt>
-<form id = 'dayForm' action="DayPowerSettingResult.action" method="post">
+	<form id = 'dayForm' action="DayPowerSettingResult.action" method="post">
 
-<!-- スクロールバーつける -->
-	<div class="scrollable-vertical">
-	    <table class="table table-hover">
-	        <c:forEach var="dateMap" items="${dateList}" varStatus="loopStatus">
-	            <c:forEach var="entry" items="${dateMap.entrySet()}">
-	                <tr>
-	                    <td><label>${loopStatus.index + 1}</label></td>
-	                    <td>
-	                        <input type="number" name="DayScore_${loopStatus.index + 1}" id="DayScore_${loopStatus.index + 1}">
-	                         <span class="error" id="DayScore_${loopStatus.index + 1}Error"></span>
-	                		<div class="hr">
-	                		<hr>
-	                		</div>
-	                    </td>
-	                    	<input type="hidden" name="WorkDayScore_${loopStatus.index + 1}" value="${entry.key}">
-	                </tr>
-	            </c:forEach>
-	        </c:forEach>
-	    </table>
-	 </div>
-
-
-	    <button type="submit">変更</button>
-
+		<!-- スクロールバーつける -->
+		<div class="scrollable-vertical">
+		    <table class="table table-hover">
+		        <c:forEach var="dateMap" items="${dateList}" varStatus="loopStatus">
+		            <c:forEach var="entry" items="${dateMap.entrySet()}">
+		                <tr>
+		                    <td><label>${loopStatus.index + 1}</label></td>
+		                    <td>
+		                        <input type="number" name="DayScore_${loopStatus.index + 1}" id="DayScore_${loopStatus.index + 1}">
+		                         <span class="error" id="DayScore_${loopStatus.index + 1}Error"></span>
+		                		<div class="hr">
+		                		<hr>
+		                		</div>
+		                    </td>
+		                    	<input type="hidden" name="WorkDayScore_${loopStatus.index + 1}" value="${entry.key}">
+		                </tr>
+		            </c:forEach>
+		        </c:forEach>
+		    </table>
+		 </div>
+		 <div class="button-container">
+        	<button type="submit">変更</button>
+		 </div>
 	</form>
 	</div>
 
