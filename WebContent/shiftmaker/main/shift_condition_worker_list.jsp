@@ -24,10 +24,10 @@
 .main{
 	display: flex;
    	justify-content: center; /* 水平方向に中央揃え */
-    	align-items: center;
+    align-items: center;
 }
 .main a{
-	margin-top: 50px;
+	margin-top: 20px;
 	margin-left: 900px;
 }
 コンテキスト メニューあり
@@ -80,7 +80,7 @@
     </div>
 
     <!-- 余白 -->
-    <div class="sita"></div>
+    <div class="sita">　</div>
 
 </body>
 <c:import url="../../common/footer.jsp"/>
