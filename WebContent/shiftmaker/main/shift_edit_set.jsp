@@ -25,8 +25,8 @@
 	margin-left : 5%;
 }
 .table {
-	margin-top : -145px;
-	margin-left : 45%;
+	margin-top : -195px;
+	margin-left : 50%;
 }
 .submit {
 	margin-top : 50px;
@@ -41,7 +41,7 @@
 	margin-top : -46px;
 	margin-left : 18%;
 
-    border: 1px solid #000; /* 枠線を黒に設定 */
+    border: 1px solid #000;  /*枠線を黒に設定 */
     width: 20%;
     text-align : center;
 
@@ -51,8 +51,8 @@
 	margin-top : -46px;
 	margin-left : 14%;
 
-    border: 1px solid #000; /* 枠線を黒に設定 */
-    width: 15%;
+    border: 1px solid #000;  /*枠線を黒に設定 */
+    width: 20%;
     text-align : center;
 }
 
@@ -122,11 +122,11 @@
 			        </c:choose>
 			    </p>
 			</c:if>
-			</div>
 
-			<div class="workTimeId2">
+
+
 	        <c:if test="${not empty startHour_c}">
-	            <h3>${startHour_c}:00 - ${endHour_c}:00</h3>
+	            <p>${startHour_c}:00 - ${endHour_c}:00</p>
 	        </c:if>
 	        </div>
 
