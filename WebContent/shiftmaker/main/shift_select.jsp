@@ -13,20 +13,31 @@
 <style>
 .ShiftMain{
 	margin-top: 60px;
-	margin-left: 42%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.ShiftMain button{
+.buttom{
+	 display: flex;
+    justify-content: center;
+    align-items: center;
+	 margin-top: 10px;
+
+}
+
+.buttom button{
 	 width: 100px;
 	 background-color: #6495ED;
-	 margin-left: 7%;
-	 margin-top: 30px;
 
 }
 
  .aAction {
-	margin-left: 35%;
-	margin-top: 10px;
+ 	 display: flex;
+    justify-content: center;
+    align-items: center;
+	margin-left: 450px;
+	margin-top: 30px;
 }
 </style>
 
@@ -35,12 +46,13 @@
 <body>
 <div class="ShiftMain">
 <h1>～シフト作成～</h1>
+</div>
+<div class="buttom">
 <%--ShiftCreateActionにボタンで飛ばす --%>
 <button onclick="location.href='ShiftCreate.action'" >作成</button>
-
+</div>
 <div class =" aAction">
 <a href="Main.action">メインへ戻る</a>
-</div>
 </div>
 </body>
 

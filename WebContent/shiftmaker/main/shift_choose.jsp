@@ -14,17 +14,31 @@
 	margin-top : 60px;
 	text-align : center;
 }
+
 .button1 {
-	margin-top : 42px;
-	margin-left : 40%;
+	 margin-top : 42px;
+	 display: flex;
+     justify-content: center;
+     align-items: center;
 }
+
+button {
+    width: 100px;  /* 横幅を100pxに設定 */
+}
+
 .button2 {
-	margin-top : -33px;
-	margin-left : 54%;
+	 display: flex;
+     justify-content: center;
+     align-items: center;
+     margin-left: 100px;
 }
+
 .a {
 	margin-top : 80px;
-	margin-left : 65%;
+	display: flex;
+     justify-content: center;
+     align-items: center;
+     margin-left: 400px;
 }
 </style>
 
@@ -42,10 +56,11 @@
 
 	<h3>閲覧したいシフトを選択してください。</h3>
 
-
+</div>
 
 	<form action="ShiftEmployee.action" method="post">
-		<button class="button1">社員用</button>
+		<div class="button1">
+		<button>社員用</button>
 	</form>
 
 
@@ -54,17 +69,14 @@
 	<div class="button2">
 		<button>バイト用</button>
 	</div>
+	</div>
 
 	</form>
 
-
-</div>
-
 <!-- 戻るリンク -->
-<div>
+
 <div class="a">
 	    <a href="Main.action">メインへ</a>
-</div>
 </div>
 
 <c:import url="../../common/footer.jsp"/>

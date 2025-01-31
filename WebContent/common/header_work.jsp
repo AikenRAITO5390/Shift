@@ -4,9 +4,9 @@
 <style>
 .sidebar {
     display: none;
+     background-color: #7d7d7d;
     width: 200px;
     height: 100%;
-    background-color: #7d7d7d;
     position: fixed;
     left: 0;
     top: 50px;
@@ -46,6 +46,19 @@ color: white;
     margin: 0; /* デフォルトのマージンをリセット */
     padding: 2px 0; /* 上下のパディングを設定 */
 
+}
+
+button {
+    background-color: #75A9FF; /* ボタンの背景色を設定 */
+    color: white; /* ボタンのテキスト色を設定 */
+    padding: 10px 10px; /* ボタンの内側の余白を設定 */
+    border: none; /* ボタンの枠線をなしに設定 */
+    border-radius: 5px; /* ボタンの角を丸くする */
+    cursor: pointer; /* カーソルをポインタに変更 */
+}
+
+button:hover {
+    background-color: #005FFF; /* ホバー時の背景色を設定 */
 }
 </style>
 <script>

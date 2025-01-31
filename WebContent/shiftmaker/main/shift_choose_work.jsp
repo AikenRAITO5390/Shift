@@ -14,36 +14,31 @@
 	margin-top : 60px;
 	text-align : center;
 }
-.button1 {
-	margin-top : 42px;
-	margin-left : 40%;
-}
-.button2 {
-	margin-top : -33px;
-	margin-left : 54%;
 
-	background-color: #6495ED; /* 背景色を水色に設定 */
-    color: white;
+.button1 {
+	 margin-top : 42px;
+	 display: flex;
+     justify-content: center;
+     align-items: center;
 }
+
+button {
+    width: 100px;  /* 横幅を100pxに設定 */
+}
+
+.button2 {
+	 display: flex;
+     justify-content: center;
+     align-items: center;
+     margin-left: 100px;
+}
+
 .a {
 	margin-top : 80px;
-	margin-left : 65%;
-}
-.ok input[type="submit"]{
-	margin-top : -20px;
-	margin-left: 55%;
-	background-color: #6495ED; /* 背景色を水色に設定 */
-	color: white;
-	border-radius: 4px; /* 角を丸くする */
-	border: none; /* ボーダーをなしに設定 */
-}
-.ok2 input[type="submit"]{
-	margin-top : 25px;
-	margin-left: 40%;
-	background-color: #6495ED; /* 背景色を水色に設定 */
-	color: white;
-	border-radius: 4px; /* 角を丸くする */
-	border: none; /* ボーダーをなしに設定 */
+	display: flex;
+     justify-content: center;
+     align-items: center;
+     margin-left: 400px;
 }
 
 </style>
@@ -62,31 +57,25 @@
 
 	<h3>閲覧したいシフトを選択してください</h3>
 
-
+</div>
 
 	<form action="ShiftEmployeeWork.action" method="post">
-		<div class="ok2">
-		<input type="submit" value="社員用">
-		</div>
+<div class="button1">
+	<button>社員用</button>
 	</form>
 
 
 
 	<form action="ShiftWork.action" method="post">
-	<div class="ok">
-		<input type="submit" value="バイト用">
+	<div class="button2">
+		<button>バイト用</button>
 	</div>
-
+</div>
 	</form>
 
-
-</div>
-
 <!-- 戻るリンク -->
-<div>
 <div class="a">
 	    <a href="MainWork.action">メインへ</a>
-</div>
 </div>
 
 <c:import url="../../common/footer.jsp"/>
