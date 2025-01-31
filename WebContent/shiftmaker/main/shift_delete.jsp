@@ -12,16 +12,17 @@
 }
 .lt {
 	margin-top : -15px;
-	margin-left : 100px;
+	margin-left : 6%;
 	margin-bottom : -40px;
 }
 .gt {
 	margin-top : -90px;
-	margin-left : 1100px;
+	margin-left : 88%;
+	margin-bottom : 10px;
 }
 .year {
 	margin-top : 10px;
-	margin-left : 580px;
+	margin-left : 47%;
 	margin-bottom : 60px;
 }
 /*ラベル(なまえ)*/
@@ -38,6 +39,7 @@
 }
 .table_table {
     overflow-x: scroll; /* 縦方向のスクロールバーを表示 */
+    width: 100%;
 }
 .delete {
 	margin-top : 60px;
@@ -79,7 +81,7 @@
     <title>シフト削除</title>
     <style>
         .shiftAction{margin-top : 60px;}
-        table {border-collapse: collapse; width: 90%;  table-layout: fixed; margin-bottom: 10px; }
+        table {border-collapse: collapse; width: 90%;  table-layout: fixed; margin-bottom: 10px; margin-left: 50px;}
         th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
        .shiftAction th { background-color: #6495ED; color: white;
 			  text-align: center; /* テキストを中央揃え */
