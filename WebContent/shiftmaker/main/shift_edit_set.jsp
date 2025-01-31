@@ -39,11 +39,11 @@
 /*アルファベットの場合*/
 .workTimeId {
 	margin-top : -46px;
-	margin-left : 18%;
+	margin-left : 12%;
 
-    border: 1px solid #000;  /*枠線を黒に設定 */
+    /*border: 1px solid #000;枠線を黒に設定 */
     width: 20%;
-    text-align : center;
+    text-align :left;
 
 }
 /*時間選択済の場合*/
@@ -55,6 +55,17 @@
     width: 20%;
     text-align : center;
 }
+
+
+.edit {
+    flex: 1; /* 可変幅を持たせる */
+    margin-right: 20px; /* `table` との間隔を設定 */
+}
+
+.table {
+    flex: 1; /* 可変幅を持たせる */
+}
+
 
 /*従業員のIDデータ*/
 .workerid {
@@ -97,17 +108,17 @@
 
 
 		<form action="ShiftEditSave.action?date=${date}?workerId=${workerId}&count=${count}" method="post">
-
+		<div class="edit">
 			<div class="worker">
 			<c:if test="${not empty workerId}">
-		        <h4>選択された従業員:</h4>
-		            <div class="workerid">${workerId}</div>
+		        <h4>選択された従業員:${workerId}</h4>
+		            <!-- div class="workerid"></div-->
 
 		    </c:if>
 
 			<c:if test="${not empty date}">
-		        <h4>選択された日付:</h4>
-		            <div class="date">${date}</div>
+		        <h4>選択された日付:${date}</h4>
+		            <!-- div class="date"></div-->
 
 		    </c:if>
 
@@ -132,7 +143,7 @@
 
 
 			</div>
-
+		</div>
 			<div class="table">
 	        <table>
 	            <thead>
