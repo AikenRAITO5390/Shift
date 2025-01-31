@@ -76,6 +76,34 @@ IMG.imgGraph {
     height: auto; /* 画像の比率を保持 */
 }
 
+
+
+/* 登録ボタンと戻るリンクの配置 */
+.touroku {
+
+    align-items: center; /* 中央揃え */
+    margin-top: 40px; /* 上の要素との間隔を確保 */
+}
+
+.touroku button {
+    margin-bottom: 10px; /* 戻るリンクとの間隔 */
+}
+/* 戻るリンクダブルの配置 */
+.return {
+
+    align-items: center; /* 中央揃え */
+    margin-top: 40px; /* 上の要素との間隔を確保 */
+}
+
+.return a {
+    margin-bottom: 10px; /* 戻るリンクとの間隔 */
+}
+
+.kanryou {
+	align-items: center; /* 中央揃え */
+    margin-top: 60px; /* 上の要素との間隔を確保 */
+}
+
 /* レスポンシブデザイン */
 @media screen and (max-width: 768px) {
     h2 {

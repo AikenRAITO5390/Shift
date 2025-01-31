@@ -14,13 +14,14 @@
 	<div class="tmain">
 		<h2>～売上登録完了～</h2>
 
-		<p>売上の登録が完了しました</p>
+		<div class="kanryou">
+			<p>売上の登録が完了しました</p>
 
-
-		<a href="Sales.action">売上へ</a>
-
-		<a href="Main.action">メインメニューへ</a>
-
+			<div class="return">
+				<a href="Sales.action">売上へ</a>
+				<a href="Main.action">メインメニューへ</a>
+			</div>
+		</div>
 
 	</div>
 </div>
