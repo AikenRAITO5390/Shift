@@ -417,7 +417,7 @@ public class ShiftDao extends Dao{
 
 				if(old == null){
 
-					String sql = "INSERT INTO SHIFT (SHIFT_DATE, WORKER_ID, STORE_ID, SHIFTHOPE_TIME_START, SHIFTHOPE_TIME_END, SHIFT_SCORE, SHIFT_HOPE_TIME_ID, WORK_TIME_ID, SHIFT_TIME_START, SHIFT_TIME_END) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					String sql = "INSERT INTO SHIFT (SHIFT_DATE, WORKER_ID, STORE_ID, SHIFTHOPE_TIME_START, SHIFTHOPE_TIME_END, SHIFT_SCORE, SHIFTHOPE_TIME_ID, WORK_TIME_ID, SHIFT_TIME_START, SHIFT_TIME_END) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				    statement = connection.prepareStatement(sql);
 				    statement.setDate(1, shiftDate);
 				    statement.setString(2, workerId);

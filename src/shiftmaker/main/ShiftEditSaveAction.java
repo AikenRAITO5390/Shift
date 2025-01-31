@@ -105,7 +105,9 @@ public class ShiftEditSaveAction extends Action {
 	    // シフト情報を取得
 	    Shift shift = shiftDao.getShiftScore(worker, sqlShiftDate, store);
 	    if (shift == null) {
-	        //shift = shiftDao.insertCustomWorkTime_shiftEdit(sqlShiftDate, worker.getWorkerId(), worker.getStoreId(), timestampCustomStartTime, timestampCustomEndTime, "0", null, null, null, null);
+	        shiftDao.insertCustomWorkTime_shiftEdit(sqlShiftDate, worker.getWorkerId(), manager.getStoreId(), timestampCustomStartTime, timestampCustomEndTime, "0", null, null, null, null);
+	        // 再度shift情報を取得
+	        shift = shiftDao.getShiftScore(worker, sqlShiftDate, store);  // 必要に応じて再取得
 	    }
 	    String shiftScore = String.valueOf(shift.getShiftScore());
 
