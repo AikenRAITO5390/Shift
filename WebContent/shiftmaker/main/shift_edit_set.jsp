@@ -17,15 +17,15 @@
 	text-align : center;
 }
 .worker h4{
-	margin-top : 40px;
+	margin-top : 5px;
 	margin-left : 5%;
 }
 .worker {
 	margin-top : 40px;
-	margin-left : 5%;
+	margin-left : 25%;
 }
 .table {
-	margin-top : -195px;
+	margin-top : -13%;
 	margin-left : 50%;
 }
 .submit {
@@ -38,8 +38,8 @@
 }
 /*アルファベットの場合*/
 .workTimeId {
-	margin-top : -46px;
-	margin-left : 12%;
+	margin-top : -2.5%;
+	margin-left : 14%;
 
     /*border: 1px solid #000;枠線を黒に設定 */
     width: 20%;
@@ -48,43 +48,12 @@
 }
 /*時間選択済の場合*/
 .workTimeId2 {
-	margin-top : -46px;
-	margin-left : 14%;
+	margin-top : -2%;
+	margin-left : 10%;
 
-    border: 1px solid #000;  /*枠線を黒に設定 */
+    /*border: 1px solid #000;  枠線を黒に設定 */
     width: 20%;
-    text-align : center;
-}
-
-
-.edit {
-    flex: 1; /* 可変幅を持たせる */
-    margin-right: 20px; /* `table` との間隔を設定 */
-}
-
-.table {
-    flex: 1; /* 可変幅を持たせる */
-}
-
-
-/*従業員のIDデータ*/
-.workerid {
-	margin-top : -46px;
-	margin-left : 18%;
-
-
-    border: 1px solid #000; /* 枠線を黒に設定 */
-    width: 20%;
-    text-align : center;
-}
-/*日付のデータ*/
-.date {
-	margin-top : -46px;
-	margin-left : 18%;
-
-    border: 1px solid #000; /* 枠線を黒に設定 */
-    width: 20%;
-    text-align : center;
+    text-align : left;
 }
 </style>
 
@@ -122,25 +91,25 @@
 
 		    </c:if>
 
-		    <h4>元のシフト希望:</h4>
+		    <h4>元のシフト希望:
 
 			<div class="workTimeId">
 	        <c:if test="${not empty workTimeId}">
-			    <p>
+
 			        <c:choose>
 			            <c:when test="${workTimeId == 'T'}">〇</c:when>
 			            <c:otherwise>${workTimeId}</c:otherwise>
 			        </c:choose>
-			    </p>
+
 			</c:if>
+			</div>
 
-
-
+			<div class="workTimeId2">
 	        <c:if test="${not empty startHour_c}">
-	            <p>${startHour_c}:00 - ${endHour_c}:00</p>
+	            ${startHour_c}:00 - ${endHour_c}:00
 	        </c:if>
 	        </div>
-
+	        </h4>
 
 			</div>
 		</div>
