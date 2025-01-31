@@ -128,7 +128,7 @@
 						<label>パスワード</label>
 					</th>
 					<td>
-						<input type="text" name="worker_password" placeholder="パスワードを入力してください" size="30" maxlength="20" value="${worker_password}" required />
+						<input type="text" name="worker_password" placeholder="パスワードを入力してください" size="30" pattern="^[a-zA-Z0-9]+$" minlength="4" maxlength="20" value="${worker_password}" required />
 						<div>${errors.get("worker_password")}</div>
 						<div class="mt-3"></div>
 					</td>

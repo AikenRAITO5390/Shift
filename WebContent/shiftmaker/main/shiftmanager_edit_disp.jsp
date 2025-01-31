@@ -1,4 +1,4 @@
-<%-- 学生更新JSP --%>
+<%-- シフト作成者情報変更JSP --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -23,15 +23,16 @@
         <form id="myForm" action="ShiftManagerSignupResult.action" method="post">
 <%-- css設定のためのdiv_class --%>
 <%-- 店舗ID --%>
-<div class ="form-group">
-		<label>店舗ID</label>
-		<input type="text" value="${storeId}">
-
+<div class="form-group">
+    <label>店舗ID</label>
+    <input type="text" name="storeId" id="storeId" pattern="^[a-zA-Z0-9]{1,7}$" maxlength="7"
+     	title="半角英数字で1〜7文字以内を入力してください"  value="${storeId}" required />
+    <span class="error" id="storeIdError"></span>
 </div>
 <%--名前  --%>
 <div class ="form-group">
 		<label>名前</label>
-		<input type="text" name="managerName" id="managerName" placeholder="名前を入力してください"
+		<input type="text" name="managerName" id="managerName" placeholder="名前を入力してください"  maxlength="30"
 			value="${managerName}" />
 			  <span class="error" id="nameError"></span>
 </div>
@@ -39,7 +40,7 @@
 <div class ="form-group">
 <%-- パスワード --%>
 		<label>パスワード</label>
-		<input type="text" name="password" id="password" placeholder="パスワードを入力してください"
+		<input type="text" name="password" id="password" placeholder="パスワードを入力してください" pattern="^[a-zA-Z0-9]+$" minlength="4" maxlength="20"
 			value="${password}" />
 			  <span class="error" id="passwordError"></span>
 </div>
@@ -47,15 +48,15 @@
 <div class ="form-group">
 	<%-- メール --%>
 		<label>メールアドレス</label>
-			<input type="text" id="email" name="email" placeholder="メールを入力してください"
-			 value="${email}" />
+			<input type="text" id="email" name="email" placeholder="メールを入力してください"  pattern="^[a-zA-Z0-9.-_]{1,40}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+			 maxlength="40" value="${email}" />
 			<span class="error" id="emailError"></span>
 
 </div>
 <div class ="form-group">
 	<%-- 店舗名 --%>
 		<label>店情報</label>
-			<input type="text" name="storeName" id="storeName" placeholder="お店情報を入力してください"
+			<input type="text" name="storeName" id="storeName" placeholder="お店情報を入力してください" maxlength="20"
 			 value="${storeName}" />
 			 <span class="error" id="storeNameError"></span>
 </div>

@@ -152,7 +152,7 @@
 <div>
 		<label>パスワード</label>
 
-		<input type="text" name="WORKER_PASSWORD" size="70" value="${worker.workerPassword}" required maxlength="20">
+		<input type="text" name="WORKER_PASSWORD" size="70" value="${worker.workerPassword}" pattern="^[a-zA-Z0-9]+$" minlength="4" maxlength="20" required>
 </div>
 <br>
 <div>
