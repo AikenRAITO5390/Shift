@@ -27,13 +27,11 @@ public class ShiftEditSaveAction extends Action {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-	    System.out.println("★★★★★★③★★★★★★");
 
 	    // セッションを取得
 	    HttpSession session = req.getSession();
 	    Store manager = (Store) session.getAttribute("user");
 	    if (manager == null) {
-	        System.out.println("Error: storeがセッションにありません");
 	        res.sendRedirect("login.jsp");
 	        return;
 	    }
@@ -163,7 +161,6 @@ public class ShiftEditSaveAction extends Action {
 	    req.setAttribute("managerName", store_login.getManagerName());
 	    String countStr = req.getParameter("count");
 		int count = Integer.parseInt(countStr);
-		System.out.println("count：" + count);
 		req.setAttribute("count", count);
 
 	    // JSPに転送

@@ -14,9 +14,6 @@ public class ShiftEditResultAction extends Action{
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
-		System.out.println("★★★★★★④★★★★★★");
-
-		System.out.println("完了ページ");
 		HttpSession session = req.getSession(); // セッション
         Store store = (Store) session.getAttribute("user"); // ログインユーザーを取得
 
