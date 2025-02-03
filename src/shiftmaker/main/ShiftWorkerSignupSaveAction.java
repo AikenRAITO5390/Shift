@@ -3,6 +3,7 @@ package shiftmaker.main;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -276,6 +277,12 @@ public class ShiftWorkerSignupSaveAction extends Action {
             // worker_judgeがFalseの場合
             req.setAttribute("isWorkerJudgeTrue", false);
         }
+
+        // 月の最初の日と最後の日を取得
+        YearMonth yearMonth = YearMonth.of(year, month);
+        LocalDate firstDayOfMonth = yearMonth.atDay(1);
+        int seru = firstDayOfMonth.getDayOfWeek().getValue();
+        req.setAttribute("seru", seru);
 
     	req.setAttribute("dateKeys", dateKeys);
     	req.setAttribute("dates", dates);

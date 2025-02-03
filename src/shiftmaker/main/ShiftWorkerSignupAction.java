@@ -76,7 +76,6 @@ public class ShiftWorkerSignupAction extends Action{
 		// カレンダーを作成
 		List<LocalDate> dates = calende.Calender(year, nextmonth);
 
-
 		System.out.println("dates: " + dates);
 
 		// ShiftDBにデータが存在するか確認
