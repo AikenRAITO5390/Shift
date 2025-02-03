@@ -40,5 +40,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/smile-io-2.6.0-sources.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/smile-io-2.6.0.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/smile-math-2.6.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/openblas-platform-0.3.28-1.5.11.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
