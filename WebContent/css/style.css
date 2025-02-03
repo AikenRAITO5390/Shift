@@ -18,21 +18,23 @@ body {
     padding: 10px; /* 枠線と内容の間にスペースを追加 */
     border-radius: 5px;
     text-align: center; /* テキストを中央揃えにする */
-    width: 240px; /* 幅を固定 */
-    height: 50px; /* 高さを固定 */
+    width: 350px; /* 幅を固定 */
+    height: 65px; /* 高さを固定 */
     box-sizing: border-box;
+    font-size: 35px;
 }
 .right-content{
-	margin-left: 200px;
-	margin-top: -355px;
+	margin-left: 60%;
+	margin-top: -452px;
+
 }
 .left-content{
-	margin-left: -800px;
+	margin-left: -60%;
 	margin-top: 80px;
 }
 
 .center-content{
-	margin-top:-305px;
+	margin-top: -380px;
 }
 
 
@@ -45,8 +47,8 @@ body {
     border-radius: 5px;
     text-align: center; /* テキストを中央揃えにする */
 
-    width: 240px; /* 幅を固定 */
-    height: 50px; /* 高さを固定 */
+    width: 350px; /* 幅を固定 */
+    height: 60px; /* 高さを固定 */
     box-sizing: border-box;
 }
 
@@ -57,7 +59,7 @@ body {
 
 .left-content, .center-content, .right-content {
 	display: flex;
-	 flex-direction: column;
+	flex-direction: column;
     justify-content: center; /* 水平方向の中央揃え */
     align-items: center;
 }
@@ -72,9 +74,10 @@ ul li a {
     padding: 1px; /* 枠線と内容の間にスペースを追加 */
     border-radius: 5px;
     text-align: center; /* テキストを中央揃えにする */
-    width: 150px; /* 幅を固定 */
-    height: 25px; /* 高さを固定 */
+    width: 250px; /* 幅を固定 */
+    height: 35px; /* 高さを固定 */
     box-sizing: border-box;
+    font-size: 25px;
 
 }
 
@@ -120,20 +123,21 @@ input[type="submit"]:hover {
 
 
 .right-content ul li {
-    margin-bottom: 100px; /* 4行分のスペースを追加 */
+    margin-bottom: 120px; /* 4行分のスペースを追加 */
     border: 2px solid black; /* 青い枠線を設定 */
     padding: 1px; /* 枠線と内容の間にスペースを追加 */
     border-radius: 5px;
     text-align: center; /* テキストを中央揃えにする */
 	margin-left: -20px;
-    width: 150px; /* 幅を固定 */
-    height: 25px; /* 高さを固定 */
+    width: 250px; /* 幅を固定 */
+    height: 35px; /* 高さを固定 */
     box-sizing: border-box;
 
 }
-
+/*左にちょっとうごかすやつ*/
 .hidari ul li{
-	margin-left: -50px;
+	margin-left: -26px;
+
 }
 
 /* 従業員メイン画面 */
@@ -142,7 +146,7 @@ input[type="submit"]:hover {
     flex-direction: column; /* 縦方向に配置 */
     justify-content: center; /* 子要素を上下中央に配置 */
     align-items: center; /* 子要素を左右中央に配置 */
-        margin-top: 90px; /* ヘッダーの高さ分だけ下に配置 */
+    margin-top: 90px; /* ヘッダーの高さ分だけ下に配置 */
      margin-left: 50px/* ヘッダーの高さ分だけ下に配置 */
 }
 
