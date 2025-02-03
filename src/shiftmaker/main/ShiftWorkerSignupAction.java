@@ -2,7 +2,6 @@ package shiftmaker.main;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,8 +31,6 @@ public class ShiftWorkerSignupAction extends Action{
 
 		// ログインユーザーを取得
      	Worker loginuser = (Worker)session.getAttribute("user");
-     	// 確認用
-    	System.out.println("loginuser：" + loginuser);
 
 		// WorkerDaoを初期化
 		WorkerDao workerDao = new WorkerDao();
@@ -47,17 +44,14 @@ public class ShiftWorkerSignupAction extends Action{
 
 		// loginuserからworkerIdを取得
 	    String workerId = loginuser.getWorkerId();
-        // 確認用
-    	System.out.println("workerId：" + workerId);
+
         // データベースから該当の従業員情報を取得
         Worker worker = workerDao.get(workerId);
-        // 確認用
-    	System.out.println("worker：" + worker);
+
 
     	// loginuserからstoreIdを取得
     	Store store = storeDao.get(loginuser.getStoreId());
-    	// 確認用
-    	System.out.println("store：" + store);
+
 
         LocalDate todaysDate = LocalDate.now();// LcalDateインスタンスを取得
 		int year = todaysDate.getYear();// 現在の年を取得
@@ -77,9 +71,6 @@ public class ShiftWorkerSignupAction extends Action{
 		// カレンダーを作成
 		List<LocalDate> dates = calende.Calender(year, nextmonth);
 
-		dates.removeIf(Objects::isNull);
-
-		System.out.println("dates: " + dates);
 
 		// ShiftDBにデータが存在するか確認
         boolean shiftExists = shiftDao.checkIfShiftExists(workerId, year, nextmonth);
@@ -87,12 +78,9 @@ public class ShiftWorkerSignupAction extends Action{
         try{
         	// シフトデータが存在しない場合、新規作成
             if (!shiftExists) {
-                System.out.println("シフトデータが存在しないため、新規作成します。");
-                System.out.println(dates);
                 shiftDao.createShift(workerId, 1, null, null, null, null, null, null, loginuser.getStoreId(), dates);
             }
         } catch (Exception e){
-        	System.out.println("エラー");
 	        e.printStackTrace();
         }
 

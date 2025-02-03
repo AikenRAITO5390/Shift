@@ -46,11 +46,6 @@ public class WorkerDateAction extends Action {
         req.setAttribute("managerName", stores.getManagerName());
 
 
-
-        System.out.println("Stores: " + stores);
-        System.out.println("Filtered Workers: " + filteredWorkers);
-        System.out.println("Filtered Workers: " + filteredWorkersnot);
-
         req.getRequestDispatcher("worker_date.jsp").forward(req, res);
     }
 }

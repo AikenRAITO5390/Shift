@@ -59,11 +59,7 @@ public class WorkerUpdateExecuteAction extends Action {
 		String WORKER_PASSWORD = req.getParameter("WORKER_PASSWORD");
 		String STORE_NAME = req.getParameter("STORE_NAME");
 
-		System.out.println(WORKER_ID);
-	    System.out.println(WORKER_NAME);
-	    System.out.println(WORKER_DATE);
-	    System.out.println(WORKER_ADDRESS);
-	    System.out.println(WORKER_TEL);
+
 
 
 

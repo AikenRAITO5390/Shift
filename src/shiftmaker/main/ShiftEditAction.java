@@ -26,8 +26,6 @@ public class ShiftEditAction extends Action{
 	@Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
-		System.out.println("★★★★★★①★★★★★★");
-
 		// セッションを取得
         HttpSession session = req.getSession();
 
@@ -57,7 +55,6 @@ public class ShiftEditAction extends Action{
         // ログインユーザーを取得
      	Store manager = (Store)session.getAttribute("user");
         if (manager == null) {
-            System.out.println("Error: storeがセッションにありません");
             res.sendRedirect("login.jsp");
             return;
         }
@@ -66,7 +63,6 @@ public class ShiftEditAction extends Action{
 
         // 店舗IDを取得
         String storeId = manager.getStoreId();
-        System.out.println("storeId: " + storeId);
 
         //従業員情報一覧を格納するリスト
       	List<Worker> worker_list = new ArrayList<>();
@@ -75,13 +71,6 @@ public class ShiftEditAction extends Action{
 
         // 店舗IDに基づいてシフト情報を取得
         List<Shift> shifts = shiftDao.getShiftsByStoreId(storeId);
-
-        // 確認用
-        for (Shift aaa : shifts){
-            System.out.println("shifts: " + aaa.getWorkTimeId());
-            System.out.println("shifts: " + aaa.getShiftTimeStart());
-            System.out.println("shifts: " + aaa.getShiftTimeEnd());
-        }
 
         // 従業員IDと日付をキーにシフト情報を格納するマップ
         Map<String, Map<LocalDate, Shift>> shiftMap = new HashMap<>();
@@ -92,7 +81,6 @@ public class ShiftEditAction extends Action{
         for (Shift shift : shifts) {
         	// workeridのnullチェック
             if (shift.getWorker() == null) {
-                System.out.println("Worker is null for shift: " + shift);
                 continue;
             }
             String workerId = shift.getWorker().getWorkerId();
@@ -117,16 +105,13 @@ public class ShiftEditAction extends Action{
 
             // 日付を取得
             LocalDate shiftDate = shift.getShiftDate().toLocalDate();
-            System.out.println("shiftDate: " + shiftDate);
             String workTimeId = shift.getWorkTimeId();
-            System.out.println("workTimeId: " + workTimeId);
 
             // LocalDate を java.sql.Date に変換
             Date sqlDate = Date.valueOf(shiftDate);
 
             // shift_score を取得
             String shiftScore = shiftDao.shiftScoreGet2(sqlDate, storeId, workerId);
-            System.out.println("shiftScore: " + shiftScore);
 
             // String を int に変換
             int shiftScore2 = 0;  // 初期値を 0 に設定

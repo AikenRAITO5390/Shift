@@ -21,19 +21,15 @@ public class ShiftEditSetAction extends Action{
 	@Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
-		System.out.println("★★★★★★②★★★★★★");
-
 		// セッションを取得
 		HttpSession session = req.getSession();
 
 		String countStr = req.getParameter("count");
 		int count = (countStr != null && !countStr.isEmpty()) ? Integer.parseInt(countStr) : 0;
-		System.out.println("count：" + count);
 
 		// ログインユーザーを取得
      	Store manager = (Store)session.getAttribute("user");
         if (manager == null) {
-            System.out.println("Error: storeがセッションにありません");
             res.sendRedirect("login.jsp");
             return;
         }
@@ -68,23 +64,13 @@ public class ShiftEditSetAction extends Action{
 
 		// リクエストパラメータを取得
         String workerId = req.getParameter("workerId");
-        // 確認用
-        System.out.println("workerId: " + workerId);
         String shiftDateString = req.getParameter("date");
-        // 確認用
-        System.out.println("date: " + shiftDateString);
         String workTimeId = req.getParameter("workTimeId");
         req.setAttribute("workTimeId", workTimeId);
-     	// 確認用
-        System.out.println("workTimeId: " + workTimeId);
         String customStartTime = req.getParameter("shiftTimeStart");
         req.setAttribute("customStartTime", customStartTime);
-        // 確認用
-        System.out.println("customStartTime: " + customStartTime);
         String customEndTime = req.getParameter("shiftTimeEnd");
         req.setAttribute("customEndTime", customEndTime);
-     	// 確認用
-        System.out.println("customEndTime: " + customEndTime);
 
 
      // カスタム時間の検証（エラー処理）
@@ -120,10 +106,6 @@ public class ShiftEditSetAction extends Action{
 
 	    // 店舗の勤務時間を取得
         List<Store> workTimes = storeDao.getWorkTimes(manager.getStoreId());
-
-        // 確認用
-        System.out.println(workTimes);
-        System.out.println("店舗ID: " + manager.getStoreId());
 
         // Worker オブジェクトを取得
         Worker worker = workerDao.get(workerId);

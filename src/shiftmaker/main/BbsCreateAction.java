@@ -18,16 +18,12 @@ public class BbsCreateAction extends Action {
 
 
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        System.out.println("動いてますよー！");
 
         HttpSession session = req.getSession();
 
         Store store = (Store) session.getAttribute("store");
-        System.out.println("②★★★★★★manager★★★★★★");
-        System.out.println("Store: " + store);
 
         Worker worker = (Worker) session.getAttribute("worker");
-        System.out.println("Worker: " + worker);
 
         Store stores = (Store) session.getAttribute("user"); // ログインユーザーを取得
 
@@ -42,33 +38,20 @@ public class BbsCreateAction extends Action {
         String WorkerId = worker != null ? worker.getWorkerId() : null;
         String ManagerId = store != null ? store.getManagerId() : null;
 
-        // デバッグメッセージを追加
-        System.out.println("③★★★★★★manager★★★★★★");
-        System.out.println("ManagerName :" + ManagerName);
-        System.out.println("WorkerName :" + WorkerName);
-        System.out.println("WorkerId :" + WorkerId);
-        System.out.println("投稿者 :" + ManagerName);
-        System.out.println("STORE_ID :" + StoreId);
-        System.out.println("WorkerName :" + WorkerName);
 
         // 今日の日付
-        System.out.println("④★★★★★★manager★★★★★★");
         Date today = new Date();
-        System.out.println("Today (Date): " + today);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = sdf.format(today);
 
 
         //連番やるやつ
-        System.out.println("⑤★★★★★★manager★★連番★★★★");
         BBSDao dao = new BBSDao();
         BBS bbsid = dao.get(store.getStoreId());
 
         //
         int BbsId = bbsid != null ? bbsid.getBbsId() : 0;
 
-
-        System.out.println("取得したBbsIdは: " + BbsId);
 
         // 取得したBBS_IDをリクエストに設定する
         req.setAttribute("BbsId", BbsId);
@@ -86,7 +69,6 @@ public class BbsCreateAction extends Action {
         req.setAttribute("StoreId", StoreId);
         req.setAttribute("managerName", store_login.getManagerName());
 
-        System.out.println(UserName);
 
         if (worker != null) {
             req.getRequestDispatcher("bbs_create_worker.jsp").forward(req, res);

@@ -94,6 +94,13 @@
 
 
         <c:set var="counter" value="0" />
+        <c:if test="${seru > 0}">
+        <tr>
+        <c:forEach var="seru" begin="1" end="${seru}">
+        	<td>　</td>
+        	<c:set var="counter" value="${counter + 1}" />
+        </c:forEach>
+        </c:if>
 		<c:forEach var="dateKey" items="${dateKeys}" varStatus="status">
 		    <c:if test="${counter % 7 == 0}">
 		        <tr>

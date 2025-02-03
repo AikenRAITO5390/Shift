@@ -24,8 +24,6 @@ public class WorkerDetailAction extends Action {
 
 		Store store = sDao.get(store_login.getStoreId());
 
-        System.out.println("動いてますよ～！");
-        System.out.println("worker:" + workerId);
 
 
         if (worker != null) {

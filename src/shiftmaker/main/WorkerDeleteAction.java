@@ -31,15 +31,9 @@ public class WorkerDeleteAction extends Action {
         // リクエストパラメータの取得
         String WORKER_ID = req.getParameter("WORKER_ID");
 
-        // コンソールで確認
-        System.out.println("取得したWORKER_ID: " + WORKER_ID);
 
         // 選択された従業員IDから従業員インスタンスを取得
         Worker worker = wDao.get(WORKER_ID);
-
-        // コンソールで確認
-        System.out.println("取得したWorker: " + worker);
-
 
 
         // ログインユーザーの店舗IDをもとに店舗の一覧を取得

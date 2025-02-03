@@ -19,7 +19,6 @@ public class BbsCreateExecuteAction extends Action {
 	//manager用のやつ!!!!
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-    	System.out.println("⑤★★★★★★manager★★★★★★");
         WorkerDao wDao = new WorkerDao();
         StoreDao sDao = new StoreDao();
         BBSDao bDao = new BBSDao();
@@ -44,30 +43,6 @@ public class BbsCreateExecuteAction extends Action {
         String BBS_DATE = req.getParameter("BBS_DATE");
         String MANAGER_ID = req.getParameter("MANAGER_ID");//nullはまずい！
 
-//        String bbsIdStr = req.getParameter("BBS_ID");
-//        int BBS_ID = 0;
-//
-//        if (bbsIdStr != null && !bbsIdStr.isEmpty()) {
-//            try {
-//                BBS_ID = Integer.parseInt(bbsIdStr);
-//            } catch (NumberFormatException e) {
-//                e.printStackTrace();
-//                // 必要に応じてエラーハンドリングを追加
-//            }
-//        }
-//
-//        // 取得したBBS_IDを使用して処理を続けます
-//        System.out.println("取得したBBS_IDは: " + BBS_ID);
-
-
-
-        System.out.println("⑥★★★★★★manager★★★★★★");
-        System.out.println("WORKER_ID :"+ WORKER_ID);
-        System.out.println("BBS_TEXT :"+ BBS_TEXT);
-        //System.out.println("BBS_ID :"+ BBS_ID);
-        System.out.println("STORE_ID :"+ STORE_ID);
-        System.out.println("BBS_DATE :"+ BBS_DATE);
-        System.out.println("MANAGER_ID :"+ MANAGER_ID);
 
         // DBからデータ取得
         Worker worker = null;
@@ -77,10 +52,6 @@ public class BbsCreateExecuteAction extends Action {
             worker = wDao.get(MANAGER_ID);
         }
 
-        System.out.println("⑦★★★★★★manager★★★★★★");
-        System.out.println("worker :" + worker);
-
-        System.out.println("workerId :" +(worker != null ? worker.getWorkerId() : "null"));
 
         Store storeFromDb = sDao.get(STORE_ID);
         if (storeFromDb == null) {
@@ -94,23 +65,18 @@ public class BbsCreateExecuteAction extends Action {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = dateFormat.parse(BBS_DATE);
 
-        System.out.println("⑧★★★★★★manager★★★★★★");
-        System.out.println(date);
-
 
         //連番のやつほしい
-        System.out.println("⑤★★★★★★manager★★連番★★★★");
         BBSDao dao = new BBSDao();
         BBS bbsid = dao.get(store.getStoreId());
 
         int BbsId = bbsid != null ? bbsid.getBbsId() : 0;
-        System.out.println("取得したBbsIdは: " + BbsId);
+
 
 
         // 新しいBBSインスタンスを作成
         BBS bbs = new BBS();
         bbs.setWorker(worker);
-        System.out.println("worker :"+ worker);
         bbs.setBbsText(BBS_TEXT);
         //bbs.setBbsId(BBS_ID);
         bbs.setStore(storeFromDb);

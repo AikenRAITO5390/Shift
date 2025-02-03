@@ -17,13 +17,8 @@ public class ShiftWorkerSignupResultAction extends Action{
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		 HttpSession session = req.getSession();
 		 Worker worker = (Worker) session.getAttribute("user");
-		   WorkerDao wDao = new WorkerDao();
+		 WorkerDao wDao = new WorkerDao();
 		 Worker worker_login = wDao.get(worker.getWorkerId());
-
-		System.out.println("★★★★★★④★★★★★★");
-
-		System.out.println("完了ページ");
-
 
 	    // JSPへフォワード
 		req.setAttribute("WorkerName", worker_login.getWorkerName());

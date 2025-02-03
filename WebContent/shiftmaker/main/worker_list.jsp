@@ -24,7 +24,7 @@
 
 /*バイトの一覧テーブル*/
 .workertable {
-     width: 98%; /* 画面の幅いっぱいに広げる */
+     width: 99%; /* 画面の幅いっぱいに広げる */
     margin-left: 5px;
     text-align: center;
     white-space: nowrap; /* 改行をしない */
@@ -45,6 +45,39 @@
 }
 .update {
     display: none;
+}
+
+.workertable-container {
+    display: flex;
+}
+
+.table-container {
+
+    width: 90%;
+    overflow-x: auto;
+}
+
+.button-group {
+ margin-bottom: -31px; /* ボタングループ間のスペースを調整 */
+    margin-top: 30px; /* ボタングループの上にスペースを追加 */
+    margin-left: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.update-link, .delete-link {
+    display: inline-block;
+    margin-bottom: 0; /* ボタン間のスペースを調整 */
+}
+
+.update-link, .delete-link {
+    display: block;
+    margin-bottom: 5px; /* ボタン間のスペースを調整 */
+}
+
+.update-link, .delete-link {
+    display: block;
+    margin-bottom: 5px; /* ボタン間のスペースを調整 */
 }
 
 
@@ -101,7 +134,9 @@
     <p>従業員が見つかりませんでした。</p>
 </c:if>
 
-<div class="workertable">
+<div class="workertable-container">
+    <div class="table-container">
+    <div class="workertable">
     <c:if test="${not empty workersnot}">
         <table class="table table-hover workertable">
             <tr>
@@ -124,20 +159,26 @@
                     <td>${worker.workerTel}</td>
                     <td>${worker.workerPassword}</td>
                     <td>${stores.storeName}</td>
-
-                    <td>
-                    <a href="WorkerUpdate.action?workerId=${worker.workerId}" class="update-link">変更</a>
-                    <a href="WorkerDelete.action?WORKER_ID=${worker.workerId}" class="delete-link">削除</a>
-                    </td>
-
-				</tr>
-
-
             </c:forEach>
         </table>
 
-    </c:if>
+        </c:if>
+      </div>
+      </div>
+
+      <div class="buttons-container">
+        <c:forEach var="worker" items="${workersnot}">
+            <div class="button-group">
+
+
+                    <a href="WorkerUpdate.action?workerId=${worker.workerId}" class="update-link">変更</a>
+                    <a href="WorkerDelete.action?WORKER_ID=${worker.workerId}" class="delete-link">削除</a>
+                                </div>
+        </c:forEach>
+    </div>
 </div>
+
+
 <hr>
 
 <div class="h3_h3">
@@ -149,7 +190,9 @@
 </c:if>
 
 
-<div class="managertable">
+<div class="workertable-container">
+    <div class="table-container">
+    <div class="workertable">
 <c:if test="${not empty workers}">
     <table class="table table-hover">
         <tr>
@@ -170,15 +213,23 @@
                 <td>${worker.workerTel}</td>
                 <td>${worker.workerPassword}</td>
                 <td>${stores.storeName}</td>
+</c:forEach>
+                       </table>
 
-                <td><a href="WorkerUpdate.action?workerId=${worker.workerId}">変更</a>
-                <a href="WorkerDelete.action?WORKER_ID=${worker.workerId}">削除</a></td>
-            </tr>
+        </c:if>
+      </div>
+      </div>
+  <div class="buttons-container">
+        <c:forEach var="worker" items="${workers}">
+            <div class="button-group">
+
+               <a href="WorkerUpdate.action?workerId=${worker.workerId}">変更</a>
+                <a href="WorkerDelete.action?WORKER_ID=${worker.workerId}">削除</a>
+                </div>
         </c:forEach>
-    </table>
-    <hr>
-</c:if>
+    </div>
 </div>
+
 
 
 <c:import url="../../common/footer.jsp"/>
