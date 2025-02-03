@@ -2,7 +2,6 @@ package shiftmaker.main;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -77,7 +76,6 @@ public class ShiftWorkerSignupAction extends Action{
 		// カレンダーを作成
 		List<LocalDate> dates = calende.Calender(year, nextmonth);
 
-		dates.removeIf(Objects::isNull);
 
 		System.out.println("dates: " + dates);
 
