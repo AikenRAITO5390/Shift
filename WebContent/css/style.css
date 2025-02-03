@@ -159,10 +159,11 @@ input[type="submit"]:hover {
     background-color: #75A9FF;
     border-radius: 5px;
     text-align: center; /* テキストを中央揃えにする */
-    width: 240px; /* 幅を固定 */
-    height: 50px; /* 高さを固定 */
+    width: 350px; /* 幅を固定 */
+    height: 65px; /* 高さを固定 */
     box-sizing: border-box;
     display: inline-block; /* ブロックレベルの動作を確保 */
+    font-size: 35px;
 }
 
 /* PointSetting.jspの設定*/
