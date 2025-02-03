@@ -5,14 +5,41 @@
 <html>
 
 <style>
-.logout {
-	margin-top : 60px;
-	text-align : center;
+login {
+margin-top: 20px;
+  width: 500px;
+  margin: 16px auto;
+  font-size: 16px;
+}
+/* Reset top and bottom margins from certain elements */.login-header,.login p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+/* The triangle form is achieved by a CSS hack */.login-triangle {
+  width: 0;
+  margin-right: auto;
+  margin-left: auto;
+  border: 12px solid transparent;
+  border-bottom-color: #28d;
+}
+.login-header {
+  background: #28d;
+  padding: 20px;
+  font-size: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
 }
 .logout_ok {
 	margin-top : 60px;
 	text-align : center;
 
+}
+body {
+	margin-top: 70px;
+  background: #f5f5f5 ;
+  font-family: 'Open Sans', sans-serif;
 }
 .ok input[type="submit"]{
 	margin-top : 62px;
@@ -36,65 +63,20 @@
 	border-radius: 5px; /* 角を丸くする */
 	border: none; /* ボーダーをなしに設定 */
 }
-.header {
-	position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 50px;
-    background: #7d7d7d;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: white;
-    z-index: 1000;
-    flex-direction: row; /* 横方向に配置 */
-    justify-content: space-between; /* 左右に配置 */
-}
-.sidebar {
-    display: none;
-    width: 200px;
-    height: 100%;
-    background-color: #7d7d7d;
-    position: fixed;
-    left: 0;
-    top: 50px;
-    padding: 10px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-}
-.ushiro {
-    display: flex;
-    flex-direction: column; /* 縦方向に配置 */
-    align-items: flex-end; /* 右端に配置 */
-    justify-content: center; /* 垂直方向に中央揃え */
-    height: 100%; /* 親要素の高さを継承 */
-    padding-right: 15px;
+
+.haikei {
+    border: 2px solid #000; /* 2pxの黒い実線で囲む */
+    background-color: #FFFFFF; /* 背景色を指定 */
+    padding: 10px; /* 内側の余白を追加 */
+    width: 100%; /* 親要素の幅を設定 */
+    max-width: 550px; /* 最大幅を設定 */
+     height: 400px;
+    margin: 0 auto;
 }
 
-.ushiro a,
-.ushiro p {
-    margin: 0; /* デフォルトのマージンをリセット */
-    padding: 2px 0; /* 上下のパディングを設定 */
-
+.inner-content {
+    width: auto; /* 内側の要素の幅を自動に設定 */
 }
-.footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 15px;
-    background: #7d7d7d;
-    color: white;
-    z-index: 1000;
-}
-.footer p {
-    font-size: 12px; /* 文字サイズを12pxに設定 */
-    margin: 0; /* デフォルトのマージンをリセット */
-    padding: 0; /* デフォルトのパディングをリセット */
-    line-height: 15px; /* 行の高さを15pxに設定 */
-    text-align: center;
-}
-
 
 </style>
 
@@ -102,26 +84,17 @@
     <title>managerログアウト</title>
 </head>
 
-<div class="header">
-    <div style="display: flex; align-items: center;">
-        <button onclick="toggleSidebar()">三</button>
-        <div id="sidebar" class="sidebar">
-        <jsp:include page="../common/navigation.jsp" />
-    </div>
-        <h2>まるごとシフトくん</h2>
-    </div>
-    <div class="ushiro">
-        <a href="../Logout.action">ログアウト</a>
-        <p>${user.managerName}さん</p>
-    </div>
-</div>
-
+<c:import url="../common/header.jsp"/>
 
 <body>
 
-<div class="logout">
-	<h2>ログアウト</h2>
-</div>
+<div class="haikei">
+	<div class="inner-content">
+
+<div class="login">
+	<div class="login-triangle"></div>
+
+	<h2 class="login-header">シフト作成者ログアウト</h2>
 
 <div class="logout_ok">
     <h3>ログアウトしますか？</h3>
@@ -140,7 +113,8 @@
     </form>
 </div>
 
-
+</div>
+</div>
 <c:import url="../common/footer.jsp"/>
 
 </body>
