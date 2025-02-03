@@ -297,7 +297,7 @@
 
 
 	document.addEventListener('DOMContentLoaded', function() {
-	    console.log("ページが読み込まれました");
+
 
 	    document.getElementById('myForm').addEventListener('submit', function(event) {
 	        var isValid = true;
@@ -366,10 +366,10 @@
 	                dayScore.classList.remove('error-placeholder');
 	            }
 	            </c:forEach>
-	        console.log("DayScore isValid: " + isValiDay);
+
 
 	        if (!isValiDay) {
-	            console.log("フォーム送信を防止します");
+
 	            event.preventDefault();
 	        }
 	    });

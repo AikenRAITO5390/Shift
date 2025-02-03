@@ -58,8 +58,6 @@ public class PowerSettingAction extends Action{
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat sdi = new SimpleDateFormat("yyyy年MM月");
         // 結果を表示
-        System.out.println("次の月の最初の日付: " + sdf.format(firstDayOfNextMonth));
-        System.out.println("次の月の最後の日付: " + sdf.format(lastDayOfNextMonth));
 
         calendar.setTime(firstDayOfNextMonth);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -97,7 +95,7 @@ public class PowerSettingAction extends Action{
 			// リクエストに学生リストをセット
 			// リクエストにデータをセット
 			req.setAttribute("power_list", list);
-			System.out.println(list);
+
 		} else {// 店舗が存在していなかった場合
 			req.setAttribute("errors", errors);
 		}

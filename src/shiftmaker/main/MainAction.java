@@ -22,14 +22,11 @@ public class MainAction extends Action{
 		Store store_login = (Store)session.getAttribute("user");
 		Map<String, String> errors = new HashMap<>();
 
-		System.out.println("ログインユーザーの更新");
-		System.out.println(store_login.getStoreId());
-		System.out.println(store_login.getManagerName());
 		Store store = sDao.get(store_login.getStoreId());
 		if (store != null) {// ゲットした社員のID,名前、パスワード、メール、店舗名を渡す
 			req.setAttribute("managerName", store.getManagerName());
 
-			System.out.println(store.getManagerName());
+
 		} else {// 学生が存在していなかった場合
 			errors.put("managername", "社員情報が存在していません");
 			req.setAttribute("errors", errors);

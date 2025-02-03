@@ -82,7 +82,6 @@ public class PowerSettingResultAction extends Action {
 		        store.setWorkWeekScore(workWeekScoreInts[i]);
 		        store.setWeekScore(weekScoreInts[i]);
 
-		        System.out.println("★★5");
 
 		        // 学生を保存
 		        sDao.save_Power(store);

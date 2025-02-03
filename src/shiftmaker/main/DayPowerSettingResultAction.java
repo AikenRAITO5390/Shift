@@ -61,19 +61,18 @@ public class DayPowerSettingResultAction extends Action{
 		                weekdayScoreListDate.add(sqlDate);
 		            }
 		        }
-	            System.out.println("Day Scores (Int): " + dayScoreListInt);
-	            System.out.println("Workday Scores (Date): " + weekdayScoreListDate);
+
 		    // ここでworkTimeIdDates, workTimeEnds, workTimeStartsを使って処理を行う
 
 	    List<Store> storelist = sDao.filterStore(store_login.getStoreId());
 	    List<Worker> workerlist = wDao.getWorkersByStoreId(store_login.getStoreId());
-	    System.out.println(workerlist);
+
 
 	    Shift shift ;
 
 	    if (dayScoreListInt != null) {
 		    for (int i = 0; i < dayScoreListInt.size(); i++) {
-		    	System.out.println(i);
+
 		    	for (Worker worker : workerlist) {
 		    		shift = new Shift();
 

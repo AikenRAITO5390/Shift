@@ -24,7 +24,7 @@ public class MainWorkAction extends Action{
 
 		Worker worker = wDao.get(worker_login.getWorkerId());
 		Store store = worker.getStore();
-		System.out.println(store);
+
 		if (worker != null) {// ゲットした社員のID,名前、パスワード、メール、店舗名を渡す
 			req.setAttribute("WorkerName", worker.getWorkerName());
 		} else {// 学生が存在していなかった場合

@@ -25,16 +25,13 @@ public class LoginExecuteAction extends Action {
         String WORKER_ID = req.getParameter("WORKER_ID");
         String WORKER_PASSWORD = req.getParameter("WORKER_PASSWORD");
 
-        System.out.println(req.getParameter("WORKER_ID"));
-        System.out.println(WORKER_PASSWORD);
 
         // DBからデータ取得
         Worker worker = workerDAO.login(WORKER_ID, WORKER_PASSWORD);
 
-        System.out.println("①★★★★★★★★★★★★★★");
         // もし、ログインが成功したら
         if (worker != null) {
-            System.out.println("②★★★★★★★★★★★★★★");
+
             // Sessionを有効にする
             HttpSession session = req.getSession(true);
 

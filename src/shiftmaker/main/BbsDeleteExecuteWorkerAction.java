@@ -12,7 +12,7 @@ import tool.Action;
 public class BbsDeleteExecuteWorkerAction extends Action {
 	@Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        System.out.println("②★★★★★★managerdelete★★★★★★");
+
         // ローカル変数の宣言
         BBSDao bDao = new BBSDao(); // BBS Dao
         HttpSession session = req.getSession(); // セッション
@@ -23,16 +23,16 @@ public class BbsDeleteExecuteWorkerAction extends Action {
 
         //中江つけたし
         String Sachiko_Bbs = req.getParameter("id_id");
-        System.out.println("取得したsachikoBBS_ID：" + Sachiko_Bbs);
+
 
         // デバッグ情報の追加
         if ( Sachiko_Bbs == null) {
-            System.out.println("BBS_IDがnullです。パラメータ名を確認してください。");
+
             res.sendRedirect("bbs_delete_error.jsp");
         } else {
             try {
                 //int bbsIdInt = Integer.parseInt(BBS_ID);
-                System.out.println("変換後のBBS_ID: " +  Sachiko_Bbs);
+
 
                 // 投稿の削除処理を実行
                 bDao.delete(Sachiko_Bbs);
@@ -40,7 +40,7 @@ public class BbsDeleteExecuteWorkerAction extends Action {
                 // 削除完了後に一覧画面へリダイレクト
                 req.getRequestDispatcher("bbs_delete_workerok.jsp").forward(req, res);
             } catch (NumberFormatException e) {
-                System.out.println("BBS_IDの変換に失敗しました: " + e.getMessage());
+
                 res.sendRedirect("bbs_delete_error.jsp");
             }
             //BBS_IDの変換に失敗しましたってでる！！なんで！！どこが違うんだ！！！

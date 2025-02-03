@@ -93,7 +93,6 @@ public class ShiftTimeSettingAction extends Action {
 		        store.setStoreTimeStart(storeTimeStarts);
 		        store.setStoreTimeEnd(storeTimeEnds);
 
-		        System.out.println("★★5");
 
 		        // 保存
 		        sDao.save_Time(store);

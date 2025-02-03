@@ -17,7 +17,7 @@ public class BbsDeleteAction extends Action {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-    	System.out.println("①★★★★★★managerdelete★★★★★★");
+
         // ローカル変数の宣言
         BBSDao bDao = new BBSDao(); // BBS Dao
         HttpSession session = req.getSession(); // セッション
@@ -32,11 +32,10 @@ public class BbsDeleteAction extends Action {
         String MANAGER_ID = req.getParameter("MANAGER_ID");
 
         BBS bbs = bDao.get_BbsId(BBS_ID);
-        System.out.println("取得したbbs: " + bbs);
+
 
         // コンソールで確認
-        System.out.println("取得したBBS_ID: " + BBS_ID);
-        System.out.println("取得したMANAGER_ID: " + MANAGER_ID);
+
 
         Worker worker = bbs.getWorker();
         String worker_name = Optional.ofNullable(worker)
@@ -60,8 +59,7 @@ public class BbsDeleteAction extends Action {
         req.setAttribute("managerName", store_login.getManagerName());
       //  req.setAttribute("WorkerName", WorkerName);
 
-        System.out.println("取得したtext: " + text);
-        System.out.println("取得したworker:" + worker_name);
+
 
         req.getRequestDispatcher("bbs_delete.jsp").forward(req, res);
      } else {
@@ -71,8 +69,6 @@ public class BbsDeleteAction extends Action {
          req.setAttribute("user", user);
          req.setAttribute("managerName", store_login.getManagerName());
 
-         System.out.println("取得したuser: " + user);
-         System.out.println("取得したtext: " + text);
 
 
     	 req.getRequestDispatcher("bbs_delete.jsp").forward(req, res);

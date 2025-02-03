@@ -29,7 +29,7 @@ public class BbsDeleteWorkerAction extends Action{
 
 
 	        BBS bbs = bDao.get_BbsId(BBS_ID);
-	        System.out.println("取得したbbs: " + bbs);
+
 
 	        Worker worker_delete = bbs.getWorker();
 	        String worker_name = Optional.ofNullable(worker_delete)
@@ -41,8 +41,7 @@ public class BbsDeleteWorkerAction extends Action{
 	        String text = bbs.getBbsText();
 
 	        // コンソールで確認
-	        System.out.println("取得したBBS_ID: " + BBS_ID);
-	        System.out.println("取得したWORKER_ID: " + WORKER_ID);
+
 
 	    if (worker_name != null) {
 	        req.setAttribute("BBS_ID", BBS_ID);
@@ -63,8 +62,7 @@ public class BbsDeleteWorkerAction extends Action{
 	         req.setAttribute("WorkerName", worker_login.getWorkerName());
 
 
-	         System.out.println("取得したuser: " + user);
-	         System.out.println("取得したtext: " + text);
+
 	         req.getRequestDispatcher("bbs_delete_worker.jsp").forward(req, res);
 	    }
 	 }

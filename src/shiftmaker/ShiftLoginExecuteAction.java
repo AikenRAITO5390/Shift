@@ -32,8 +32,6 @@ public class ShiftLoginExecuteAction extends Action{
 		//String name = req.getParameter("namae");
 		//String school_cd = req.getParameter("school_cd");
 
-		System.out.println(req.getParameter("MANAGER_ID"));
-		System.out.println(PASSWORD);
 
 		//DBからデータ取得 3
 		store=storeDAO.login(MANAGER_ID,PASSWORD);
@@ -51,10 +49,10 @@ public class ShiftLoginExecuteAction extends Action{
 
 		// 認証済みフラグを立てる
 //		teacher.setAuthenticated(true);
-		System.out.println("①★★★★★★★★★★★★★★");
+
 		//もし、ログインが成功したら
 		if(store!=null){
-			System.out.println("②★★★★★★★★★★★★★★");
+
 			//Sessionを有効にする
 			HttpSession session = req.getSession(true);
 			store.setAuthenticated(true);
