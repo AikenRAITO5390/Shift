@@ -40,6 +40,7 @@ public class WorkerDao extends Dao{
 
         ps.close();
         rs.close();
+        con.close();
 
         //ログインされたworkerのデータを返す
         return worker;

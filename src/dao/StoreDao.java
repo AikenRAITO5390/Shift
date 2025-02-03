@@ -45,6 +45,7 @@ public class StoreDao extends Dao{
 
         ps.close();
         rs.close();
+        con.close();
 
         //ログインされたworkerのデータを返す
         return store;
