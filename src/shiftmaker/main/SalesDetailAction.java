@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -58,12 +57,6 @@ public class SalesDetailAction extends Action {
 				ArrayList<ArrayList<String>> ar1 = new ArrayList<>();// 現在の年月用
 
 
-				// 現在の年月を取得
-	            Calendar calendar = Calendar.getInstance();
-	            int currentMonth = calendar.get(Calendar.MONTH) + 1; // Calendar.MONTHは0始まりなので+1する
-	            int currentYear = calendar.get(Calendar.YEAR);
-
-
 	            LocalDate now = LocalDate.now();// 現在の年月日をLocalDateで取得
 
 	            LocalDate pastBeforeDate = now.minusDays(8); // 現在から一週間前の日付
@@ -72,26 +65,14 @@ public class SalesDetailAction extends Action {
 	            LocalDate pastYear = now.minusYears(1);// 現在から一年前の日付
 	            LocalDate pastBeforeYear = now.minusYears(1).minusDays(8); // 現在から一年と一週間前の日付
 	            LocalDate pastAfterYear = now.minusYears(1).plusDays(8); // 現在から一年と一週間後の日付
+	            LocalDate pastYear_two = now.minusYears(2);// 現在から二年前の日付
 
 
 				// salelist をループしてデータを変換
 				for (Sales sale : salelist) {
 
-					// データの日付の年月を取得
-	                Calendar saleCalendar = Calendar.getInstance();
-	                saleCalendar.setTime(sale.getDate());
-	                int saleMonth = saleCalendar.get(Calendar.MONTH) + 1; // Calendar.MONTHは0始まりなので+1する
-	                int saleYear = saleCalendar.get(Calendar.YEAR);
-
-
-
 	                Date saleDate = sale.getDate(); // Date型の取得
 	                LocalDate saleLocalDate = saleDate.toLocalDate(); // LocalDateに変換
-
-
-
-
-
 
 
 	             // 現在の前後一週間分のデータのみ処理
@@ -106,6 +87,7 @@ public class SalesDetailAction extends Action {
 					    tmp.add("現在の売上");// 店舗名
 					    tmp.add(dateString);// 日付
 					    ar1.add(tmp);//一行目にデータを追加
+
 	                }
 
 
@@ -123,9 +105,14 @@ public class SalesDetailAction extends Action {
 					    tmp.add("一年前の売上");// 店舗名
 					    tmp.add(dateString);// 日付
 					    ar1.add(tmp);//一行目にデータを追加
+
 	                }
 
 				}
+
+
+				int past_money = 0;// 1年前i日後の売上
+				int past_money_two = 0;// 2年前i日後の売上
 
 
 //				for文でAI予測をグラフに追加
@@ -137,21 +124,44 @@ public class SalesDetailAction extends Action {
 
 					LocalDate futureDate = now.plusDays(i); // 現在からi日後を計算
 
+
+
+					// salelist をループして、予測する日の一年前と二年前の売り上げを取得
+					for (Sales sale : salelist) {
+
+						Date saleDate = sale.getDate(); // Date型の取得
+		                LocalDate saleLocalDate = saleDate.toLocalDate(); // LocalDateに変換
+
+						// 一年前i日後の売上を取得
+		                if (saleLocalDate.equals(pastYear.plusDays(i))){
+							past_money = sale.getDaySales();
+						}
+						// 二年前i日後の売上を取得
+						if(saleLocalDate.equals(pastYear_two.plusDays(i))){
+							past_money_two = sale.getDaySales();
+						}
+					}
+
+
 					String sales_date_AI = futureDate.format(formatter2);//Stringに直す
+
 
 					int year = futureDate.getYear();//i日後の年
 					int month = futureDate.getMonthValue();//i日後の月
 					int day = futureDate.getDayOfMonth();//i日後の日
 
-					int japan_money  = salesAnalyze.main(day, month, year) * 155;//日本円に変換
+					// 予測した売上と今までの売上の平均を足す
+					int money  = (salesAnalyze.main(day, month, year) * 155) + past_money + past_money_two;//日本円に変換
+					// 2で割って日本円に直す
+					int money_japan = money / 3 ;
 
-			        tmp.add(String.valueOf(japan_money)); // AIが予測した売上
+
+			        tmp.add(String.valueOf(money_japan)); // AIが予測した売上
 				    tmp.add("AIの予測売上");// 店舗名
 				    tmp.add(sales_date_AI);// 日付
 				    ar1.add(tmp);//一行目にデータを追加
+
 				}
-
-
 
 
 
@@ -176,6 +186,8 @@ public class SalesDetailAction extends Action {
 
 				//jspへフォワード
 		req.getRequestDispatcher("sales_detail.jsp").forward(req, res);
+
+
 	}
 
 }

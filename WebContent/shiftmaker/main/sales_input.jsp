@@ -43,7 +43,7 @@
 
 			<label class="label1">売上金額を選択してください</label>
 			<!-- 売上金額入力 -->
-			<input type="number" name="sales" placeholder="売上金額を入力" maxlength="8" value="${sales}" min="0" required />
+			<input type="number" name="sales" placeholder="売上金額を入力" maxlength="8" value="${sales}" max="10000000" min="0" required />
 			<div>${errors.get("sales")}</div>
 
 			</div>
