@@ -7,6 +7,22 @@
 
 <title>パワーバランス設定完了</title>
 
+<style>
+.ok h2,p{
+	margin-top : 60px;
+	text-align : center;
+}
+.main{
+	margin-top : 3%;
+	margin-left : 42%;
+}
+.power{
+	margin-top : -1.3%;
+	margin-left : 52%;
+}
+
+</style>
+
 <head>
 <link rel="stylesheet" href="../../css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -14,10 +30,12 @@
 <body>
 <%-- ヘッダーとサイドバー --%>
 <c:import url="../../common/header.jsp"/>
+<div class="ok">
 	<h2>～パワーバランス設定完了～</h2>
 		<p>登録が完了しました</p>
-	<a href="Main.action">メインメニューへ</a>
-	<a href="PowerSetting.action">点数設定へ戻る</a>
+	<div class="main"><a href="Main.action">メインメニューへ</a></div>
+	<div class="power"><a href="PowerSetting.action">点数設定へ戻る</a></div>
+</div>
 </body>
 </html>
 
