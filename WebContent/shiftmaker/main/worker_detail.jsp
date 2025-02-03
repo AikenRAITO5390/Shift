@@ -25,7 +25,7 @@
 
 .back a{
 	margin-top : -30px;
-	margin-left : 700px;
+	margin-left : 70%;
 	font-size: 20px; /* フォントサイズを大きくする */
     font-weight: bold; /* 太字にする */
     pointer-events: auto;
