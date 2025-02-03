@@ -19,13 +19,13 @@
 
 .submit {
     text-align: center;
-    margin-top: 50px;
+    margin-top: 35px;
 }
 
 /* "戻る" ボタンの中央配置 */
 .a {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 28px;
 }
 
 /* シフト希望情報 */
@@ -43,6 +43,8 @@
     flex-wrap: wrap; /* 画面が狭い時は折り返し */
     gap: 5px; /* `h4` と `workTimeId` の間に適度な余白 */
     justify-content: center; /* 🔹 中央寄せ */
+
+    margin-top : -25px;
 }
 
 /*従業員のIDデータ*/
@@ -136,19 +138,20 @@
 
 				<div class="workTimeId">
 		        	<c:if test="${not empty workTimeId}">
-				    	<p>
+				    	<h4>
 				       		<c:choose>
 				            	<c:when test="${workTimeId == 'T'}">〇</c:when>
 				            	<c:otherwise>${workTimeId}</c:otherwise>
 				        	</c:choose>
-				   		</p>
+				   		</h4>
 					</c:if>
 
 
-
+					<h4>
 		        	<c:if test="${not empty startHour_c}">
 		            	<p>${startHour_c}:00 - ${endHour_c}:00</p>
 		        	</c:if>
+		        	</h4>
 		        </div>
 			</div>
 
