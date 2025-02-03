@@ -19,7 +19,6 @@ public class BBSAction extends Action {
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
     	HttpSession session = req.getSession();
 
-    	System.out.println("①◆◆◆◆◆◆managerスタート◆◆◆◆◆◆");
 
     	WorkerDao wDao = new WorkerDao();
         StoreDao sDao = new StoreDao();
@@ -32,8 +31,6 @@ public class BBSAction extends Action {
             res.sendRedirect("login.jsp");
             return;
         }
-        System.out.println("store :"+ store);
-
 
         Store store_login = sDao.get(store.getStoreId());
         List<Worker> workers = wDao.filter(store);
@@ -74,11 +71,6 @@ public class BBSAction extends Action {
 
         session.setAttribute("store", store);
 
-        System.out.println("store_login: " + store_login);
-        System.out.println("Filtered Workers: " + filteredWorkers);
-        System.out.println("Filtered Workers not: " + filteredWorkersnot);
-        System.out.println("Messages: " + messages);
-        System.out.println("MessagesName: " + managerName);
 
         req.getRequestDispatcher("bbs_list.jsp").forward(req, res);
     }

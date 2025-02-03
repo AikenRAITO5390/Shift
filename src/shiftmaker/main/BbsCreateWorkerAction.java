@@ -22,16 +22,12 @@ public class BbsCreateWorkerAction extends Action {
     }
 
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        System.out.println("動いてますよー！");
-
         HttpSession session = req.getSession();
 
         Store store = (Store) session.getAttribute("store");
-        System.out.println("②★★★★★★worker★★★★★★");
-        System.out.println("Store: " + store);
 
         Worker worker = (Worker) session.getAttribute("user");
-        System.out.println("Worker: " + worker);
+
         WorkerDao wDao = new WorkerDao();
 
         Worker worker_login = wDao.get(worker.getWorkerId());
@@ -50,21 +46,11 @@ public class BbsCreateWorkerAction extends Action {
         String WorkerId = worker != null ? worker.getWorkerId() : null;
 
 
-        // デバッグメッセージを追加
-        System.out.println("③★★★★★★worker★★★★★★" );
-        System.out.println("ManagerName :" + ManagerName);
-        System.out.println("WorkerName :" + WorkerName);
-        System.out.println("WorkerId :" + WorkerId);
-
-        System.out.println("投稿者 :" + (WorkerName != null ? WorkerName : ManagerName));
-        System.out.println("STORE_ID :" + StoreId);
-        System.out.println("WorkerName :" + WorkerName);
-
 
         // 今日の日付
-        System.out.println("④★★★★★★worker★★★★★★" );
+
         Date today = new Date();
-        System.out.println("Today (Date): " + today);
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = sdf.format(today);
 
