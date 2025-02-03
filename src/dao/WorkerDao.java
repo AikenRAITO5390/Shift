@@ -261,11 +261,17 @@ public class WorkerDao extends Dao{
 		PreparedStatement statement = null;
         // リザルトセット
         ResultSet rSet = null;
-
+        String sql = "SELECT * FROM WORKER " +
+                "WHERE STORE_ID = ? AND WORKER_JUDGE = TRUE " +
+                "UNION ALL " +
+                "SELECT * FROM WORKER " +
+                "WHERE STORE_ID = ? AND WORKER_JUDGE = FALSE " +
+                "ORDER BY WORKER_JUDGE DESC, WORKER_ID ASC";
 
         try {
-            statement = connection.prepareStatement("select * from worker where store_id=? order by worker_id asc");
+            statement = connection.prepareStatement(sql);
             statement.setString(1, store.getStoreId());
+            statement.setString(2, store.getStoreId());
 
             rSet = statement.executeQuery();
             list = postFilter(rSet, store);
