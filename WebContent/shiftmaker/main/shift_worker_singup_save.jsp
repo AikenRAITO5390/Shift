@@ -32,7 +32,7 @@
 }
 .table_table h3{
 	 margin-top: 0; /* 必要に応じて調整 */
-    margin-left: -400px;
+    margin-left: -44%;
 }
 
 
