@@ -23,19 +23,14 @@ public class ShiftWorkerSignupSetAction extends Action{
 	@Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
-		System.out.println("★★★★★★②★★★★★★");
-
 		// セッションを取得
 		HttpSession session = req.getSession();
 
 		String countStr = req.getParameter("count");
 		int count = Integer.parseInt(countStr);
-		System.out.println("count：" + count);
 
 		// ログインユーザーを取得
      	Worker loginuser = (Worker)session.getAttribute("user");
-     	// 確認用
-    	System.out.println("loginuser：" + loginuser);
 
 		// WorkerDaoを初期化
 		WorkerDao workerDao = new WorkerDao();
@@ -49,17 +44,11 @@ public class ShiftWorkerSignupSetAction extends Action{
 
 		// loginuserからworkerIdを取得
 	    String workerId = loginuser.getWorkerId();
-        // 確認用
-    	System.out.println("workerId：" + workerId);
         // データベースから該当の従業員情報を取得
         Worker worker = workerDao.get(workerId);
-        // 確認用
-    	System.out.println("worker：" + worker);
 
     	// loginuserからstoreIdを取得
     	String storeId = loginuser.getStoreId();
-    	// 確認用
-    	System.out.println("storeId：" + storeId);
 
      	LocalDate todaysDate = LocalDate.now();// LcalDateインスタンスを取得
 		Integer year = todaysDate.getYear();// 現在の年を取得
@@ -81,9 +70,6 @@ public class ShiftWorkerSignupSetAction extends Action{
      	// リクエストパラメータから日付を取得
 		// "shiftDay" パラメータで日付を取得
         String shiftDateString = req.getParameter("shiftDay");
-        System.out.println("shiftDay:" + shiftDateString);
-
-        System.out.println("選択した日:" + shiftDateString);
 
         // 日付が選択されている場合は、Date型に変換してリクエストにセット
         if (shiftDateString != null && !shiftDateString.isEmpty()) {
@@ -92,27 +78,19 @@ public class ShiftWorkerSignupSetAction extends Action{
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             // 文字列をjava.util.Date型に変換
             if(count == 1){
-            	System.out.println("count==1のif通ってます");
             	String shiftDate = yearstr + "-" + nextmonthstr + "-" + "0" + shiftDateString;
-                System.out.println("shiftDate:" + shiftDate);
             	Date utilDate = sdf.parse(shiftDate);
-            	System.out.println("utilDate:" + utilDate);
             	// java.sql.Dateに変換
                 java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-                System.out.println("sqlDate:" + sqlDate);
 
                 // java.sql.Date型でリクエスト属性にセット
                 req.setAttribute("shiftDate", sqlDate);
-                System.out.println("取得した日:" + sqlDate);
             } else {
             	Date utilDate = sdf.parse(shiftDateString);
-            	System.out.println("utilDate:" + utilDate);
             	// java.sql.Dateに変換
                 java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-                System.out.println("sqlDate:" + sqlDate);
                 // java.sql.Date型でリクエスト属性にセット
                 req.setAttribute("shiftDate", sqlDate);
-                System.out.println("取得した日:" + sqlDate);
             }
 
         }
@@ -144,10 +122,6 @@ public class ShiftWorkerSignupSetAction extends Action{
 
         // 店舗の勤務時間を取得
         List<Store> workTimes = storeDao.getWorkTimes(loginuser.getStoreId());
-
-        // 確認用
-        System.out.println(workTimes);
-        System.out.println("店舗ID" + loginuser.getStoreId());
 
         // worker_judgeの値を取得
         boolean workerJudge = worker.isWorkerJudge();

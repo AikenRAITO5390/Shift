@@ -28,26 +28,18 @@ public class ShiftWorkerSignupSaveAction extends Action {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
-    	System.out.println("★★★★★★③★★★★★★");
-
     	/*** ---------- 取得、初期化、宣言 ---------- ***/
     	// セッションを取得
     	HttpSession session = req.getSession();
 
     	// ログインユーザーを取得
      	Worker loginuser = (Worker)session.getAttribute("user");
-     	// 確認用
-    	System.out.println("loginuser：" + loginuser);
 
     	// loginuserからworkerIdを取得
 	    String workerId = loginuser.getWorkerId();
-        // 確認用
-    	System.out.println("workerId：" + workerId);
 
     	// loginuserからstoreIdを取得
     	String storeId = loginuser.getStoreId();
-    	// 確認用
-    	System.out.println("storeId：" + storeId);
 
     	// 初期化
     	ShiftDao shiftDao = new ShiftDao();
@@ -82,8 +74,6 @@ public class ShiftWorkerSignupSaveAction extends Action {
 
 		// リクエストパラメータを取得
     	String shiftDateString = req.getParameter("shiftDate");  // String型として取得
-    	// 確認用
-    	System.out.println("shiftDateString：" + shiftDateString);
 
     	String workTimeId = req.getParameter("workTimeId");
 
@@ -95,8 +85,6 @@ public class ShiftWorkerSignupSaveAction extends Action {
 
         // Store オブジェクトを取得
     	Store store = storeDao.get(loginuser.getStoreId());
-    	// 確認用
-    	System.out.println("store：" + store);
 
     	/*** ----------------------------------------------------------------------------- ***/
 
@@ -104,8 +92,6 @@ public class ShiftWorkerSignupSaveAction extends Action {
     	CalendeCreate calende = new CalendeCreate();
     	// カレンダーを作成
     	Map<LocalDate, String> dates = calende.generateCalendarWithDBInfo(year, nextmonth, storeId, workerId);
-    	// 確認用
-    	System.out.println("dates：" + dates);
 
     	// LocalDateリストをString型に変換
     	List<String> stringDates = new ArrayList<>();
@@ -118,8 +104,6 @@ public class ShiftWorkerSignupSaveAction extends Action {
     	        stringDates.add(null); // null値を保持
     	    }
     	}
-    	// 確認用
-    	System.out.println("更新前のstringDates：" + stringDates);
     	req.setAttribute("stringDates", stringDates);
 
     	// 文字列をDate型に変換
@@ -140,12 +124,8 @@ public class ShiftWorkerSignupSaveAction extends Action {
 
     		// SHIFTデータを取得
     		Shift shift = shiftDao.getShiftScore(worker, sqlShiftDate, store);
-    		// 確認用
-        	System.out.println("shift：" + shift);
 
         	String shiftScore = String.valueOf(shift.getShiftScore());
-        	// 確認用
-        	System.out.println("shiftScore：" + shiftScore);
 
         	// 選択された日付を文字列形式に変換
         	String selectedDateString = selectedDate.toString();
@@ -169,10 +149,6 @@ public class ShiftWorkerSignupSaveAction extends Action {
         	    }
         	}
 
-
-        	// 確認用
-        	System.out.println("更新後の stringDates：" + stringDates);
-
         	// Eに設定された時間をDBに保存するための変換など + 通常の保存（else側）
     		if ("E".equals(workTimeId)) {
     		    // カスタム時間を取得
@@ -182,12 +158,8 @@ public class ShiftWorkerSignupSaveAction extends Action {
     			customEndTime = req.getParameter("customEndTime");
 
     			String customStartTime2 = selectedDateString + " " + customStartTime + ":00:00";
-    			// 確認用
-	        	System.out.println("customStartTime2：" + customStartTime2);
 
 	        	String customEndTime2 = selectedDateString + " " + customEndTime + ":00:00";
-	        	// 確認用
-	        	System.out.println("customEndTime2：" + customEndTime2);
 
     			try {
     				shift_hope_time_id = null;
@@ -232,9 +204,6 @@ public class ShiftWorkerSignupSaveAction extends Action {
     		    }
     		}
 
-    		// 確認用
-    		System.out.println("nullAndTime：" + nullAndTime);
-
     		// カレンダーの日付ごとにshift_hope_time_idを取得
     		List<String> shiftHopeTimeIds = new ArrayList<>();
 
@@ -255,10 +224,6 @@ public class ShiftWorkerSignupSaveAction extends Action {
     		        shiftHopeTimeIds.add(null); // 日付がない場合はnull
     		    }
     		}
-
-    		// 確認用
-    		System.out.println("shiftHopeTimeIds：" + shiftHopeTimeIds);
-
 
     	// datesマップのキー（LocalDate）をリストに格納
     	List<LocalDate> dateKeys = new ArrayList<>(dates.keySet());
@@ -292,7 +257,6 @@ public class ShiftWorkerSignupSaveAction extends Action {
 
     	String countStr = req.getParameter("count");
 		int count = Integer.parseInt(countStr);
-		System.out.println("count：" + count);
 		req.setAttribute("count", count);
 
 
