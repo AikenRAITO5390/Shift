@@ -32,17 +32,12 @@
 }
 .table_table h3{
 	 margin-top: 0; /* 必要に応じて調整 */
-    margin-left: -400px;
+    margin-left: -44%;
 }
-
-
-
 .table_table {
 	margin-top: 100px;
     text-align: center;
-
 }
-
 .table_table table{
 	 margin: 0 auto;
 }

@@ -86,8 +86,17 @@ IMG.imgGraph {
 }
 
 .touroku button {
-    margin-bottom: 10px; /* 戻るリンクとの間隔 */
+    display: inline-block;
+    margin: 0 20px; /* 左右に20pxの間隔を設定 */
 }
+
+.touroku a {
+    display: inline-block;
+    margin: 0 20px; /* 左右に20pxの間隔を設定 */
+}
+
+
+
 /* 戻るリンクダブルの配置 */
 .return {
 
@@ -95,8 +104,10 @@ IMG.imgGraph {
     margin-top: 40px; /* 上の要素との間隔を確保 */
 }
 
+
 .return a {
-    margin-bottom: 10px; /* 戻るリンクとの間隔 */
+    display: inline-block;
+    margin: 0 20px; /* 左右に20pxの間隔を設定 */
 }
 
 .kanryou {

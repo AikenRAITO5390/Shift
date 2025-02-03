@@ -4,39 +4,35 @@
 <html>
 <style>
 .date1{
-    margin-top : -60px;
-    margin-left: 85%;
+    margin-left: 90%;
+    margin-top : -8%;
 }
 .name1{
-    margin-left: 20px;
-    margin-top : 15px;
+    margin-left: 2%;
+    margin-top : -2%;
 }
 .text1 textarea{
-
-	margin-top : -8%;
-    margin-left: 20px;
+	margin-top : 1%;
+    margin-left: 2%;
     width: 95%; /* 画面の幅いっぱいに広げる */
     height: 320px;
 }
 .create1{
- 	 z-index: 0;
+ 	z-index: 0;
 	border: 1px solid ; /* 枠線を設定 */
 	background-color: #EEEEEE; /* 背景色を設定 */
     padding: 2px; /* 枠線と内容の間にスペースを追加 */
     border-radius: 5px; /* 角を丸くする */
-    margin-top : 70px;
+    margin-top : 6%;
     display: inline-block; /*文字の幅だけ線をひく*/
     margin-left: 10px;
     width: 97%; /* 画面の幅いっぱいに広げる */
     height: 400px;
-     position: relative;
 }
-
-
  .submit input[type="submit"] {
-   z-index: 1;
+   	z-index: 1;
 	margin-top : -80px !important;
-	margin-left: 70%;
+	margin-left: 80%;
     background-color: #2C7CFF;
     color: white;
     border: 1px solid white;
@@ -47,13 +43,10 @@
     width: 160px;
      height: 60px;
     position: absolute;
-
 }
-
 textarea {
     resize: none; /* リサイズ機能を無効にする */
 }
-
 </style>
 
 <head>
