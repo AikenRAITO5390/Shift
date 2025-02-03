@@ -16,10 +16,6 @@ import tool.Action;
 public class WorkerDeleteExecuteAction extends Action {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        System.out.println("動いてるよー！！");
-
-
-
 
         // ローカル変数の宣言
         WorkerDao wDao = new WorkerDao(); // 従業員Dao
@@ -35,8 +31,6 @@ public class WorkerDeleteExecuteAction extends Action {
 
         // 従業員IDを探す
         String WORKER_ID = req.getParameter("WORKER_ID");
-        System.out.println("従業員ID：" + WORKER_ID);
-
 
         // 従業員IDから従業員インスタンスを取得
         Worker worker = wDao.get(WORKER_ID);

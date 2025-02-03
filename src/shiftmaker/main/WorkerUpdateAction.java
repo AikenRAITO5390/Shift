@@ -30,7 +30,7 @@ public class WorkerUpdateAction extends Action {
 //		String no = req.getParameter("student_no");//学番
 		String workerId = req.getParameter("workerId");//学番
 
-		System.out.println(workerId);
+
 
 		// 生年月日選択のための年リスト作成（例: 1950年～2023年）
 	    List<Integer> years = new ArrayList<>();

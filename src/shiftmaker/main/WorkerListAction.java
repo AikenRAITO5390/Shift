@@ -47,11 +47,6 @@ public class WorkerListAction extends Action {
         req.setAttribute("stores", stores);
 
 
-
-        System.out.println("Stores: " + stores);
-        System.out.println("Filtered Workers: " + filteredWorkers);
-        System.out.println("Filtered Workers: " + filteredWorkersnot);
-
         req.getRequestDispatcher("worker_list.jsp").forward(req, res);
     }
 }
