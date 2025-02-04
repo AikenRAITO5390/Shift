@@ -13,12 +13,12 @@
 	text-align : center;
 }
 .main{
-	margin-top : 3%;
-	margin-left : 42%;
+	margin-top : 4%;
+	margin-left : 38%;
 }
 .power{
-	margin-top : -1.3%;
-	margin-left : 52%;
+	margin-top : -1.9%;
+	margin-left : 53%;
 }
 
 </style>
