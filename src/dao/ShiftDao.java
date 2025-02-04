@@ -968,7 +968,8 @@ public class ShiftDao extends Dao{
 
 	// シフト削除用
 	public void deleteShiftsByYearAndMonth(String storeId, int year, int month) throws Exception {
-	    String sql = "DELETE FROM shift WHERE store_id = ? AND YEAR(shift_date) = ? AND MONTH(shift_date) = ?";
+	    String sql = "UPDATE shift SET work_time_id = null, shift_time_start = null, shift_time_end = null " +
+                "WHERE store_id = ? AND YEAR(shift_date) = ? AND MONTH(shift_date) = ?";
 	    try (Connection conn = getConnection();
 	         PreparedStatement ps = conn.prepareStatement(sql)) {
 	        ps.setString(1, storeId);
