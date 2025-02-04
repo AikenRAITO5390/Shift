@@ -4,7 +4,7 @@
 <style>
 .sidebar {
     display: none;
-    width: 200px;
+    width: 225px;
     height: 100%;
     background-color: #7d7d7d;
     position: fixed;
