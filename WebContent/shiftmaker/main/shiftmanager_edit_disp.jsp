@@ -25,8 +25,7 @@
 <%-- 店舗ID --%>
 <div class="form-group">
     <label>店舗ID</label>
-    <input type="text" name="storeId" id="storeId" pattern="^[a-zA-Z0-9]{1,7}$" maxlength="7"
-     	title="半角英数字で1〜7文字以内を入力してください"  value="${storeId}" required />
+    <input type="text" name="storeId" id="storeId" readonly="readonly" value="${storeId}" required />
     <span class="error" id="storeIdError"></span>
 </div>
 <%--名前  --%>
