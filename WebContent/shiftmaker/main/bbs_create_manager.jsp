@@ -5,7 +5,7 @@
 
 <style>
 .date1{
-    margin-top : -60px;
+    margin-top : -70px;
     margin-left: 85%;
 }
 .name1{
