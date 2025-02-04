@@ -4,16 +4,17 @@
 <html>
 <style>
 .date1{
-    margin-left: 90%;
-    margin-top : -8%;
+    margin-left: 85%;
+    margin-top: -150px;
+
 }
 .name1{
-    margin-left: 2%;
-    margin-top : -2%;
+    margin-left: 20px;
+    margin-top : 15px;
 }
 .text1 textarea{
-	margin-top : 1%;
-    margin-left: 2%;
+	margin-top : -10px;
+    margin-left: 20px;
     width: 95%; /* 画面の幅いっぱいに広げる */
     height: 320px;
 }
@@ -23,16 +24,17 @@
 	background-color: #EEEEEE; /* 背景色を設定 */
     padding: 2px; /* 枠線と内容の間にスペースを追加 */
     border-radius: 5px; /* 角を丸くする */
-    margin-top : 6%;
+    margin-top : 70px;
     display: inline-block; /*文字の幅だけ線をひく*/
     margin-left: 10px;
     width: 97%; /* 画面の幅いっぱいに広げる */
     height: 400px;
+     position: relative;
 }
  .submit input[type="submit"] {
-   	z-index: 1;
+   z-index: 1;
 	margin-top : -80px !important;
-	margin-left: 80%;
+	margin-left: 70%;
     background-color: #2C7CFF;
     color: white;
     border: 1px solid white;
