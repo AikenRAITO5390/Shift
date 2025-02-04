@@ -41,9 +41,17 @@
     overflow-x: scroll; /* 縦方向のスクロールバーを表示 */
     width: 100%;
 }
-.delete {
+.delete input[type="submit"]{
 	margin-top : 60px;
 	text-align : center;
+	background-color: #FF9999;
+    color: white;
+    border: 1px solid white;
+    padding: 10px 20px; /* ボタンの内側の余白を調整 */
+    width:  15%;
+    display: inline-block;
+    margin-left: 42%;
+    border-radius: 6px; /* 角を丸くする */
 }
 .main {
 	margin-top : 20px;
@@ -169,7 +177,7 @@
     <form action="ShiftDeleteCheck.action" method="post">
         <input type="hidden" name="year" value="${year}">
         <input type="hidden" name="month" value="${month}">
-        <button type="submit">このシフトを削除する</button>
+        <input type="submit" value="このシフトを削除する">
     </form>
     </div>
 

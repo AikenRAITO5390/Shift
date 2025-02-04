@@ -14,9 +14,18 @@
 	margin-top : 50px;
 	text-align : center;
 }
-.delete {
+.delete input[type="submit"]{
 	margin-top : 30px;
 	margin-left : 55%;
+
+	background-color: #FF9999;
+    color: white;
+    border: 1px solid white;
+    padding: 10px 20px; /* ボタンの内側の余白を調整 */
+    width:  5%;
+    display: inline-block;
+    border-radius: 6px; /* 角を丸くする */
+    text-align : center;
 }
 .modoru {
 	margin-top : -40px;
@@ -48,7 +57,7 @@
         <input type="hidden" name="month" value="${month}">
 
         <!-- 削除ボタン -->
-        <button type="submit">削除</button>
+        <input type="submit" value="削除">
     </form>
     </div>
 
