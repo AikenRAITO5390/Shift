@@ -46,6 +46,7 @@
 
 </ul>
 </div>
+<div class="aida">　</div>
 <div class="h2top-content">
 <h2>💪　シフト条件</h2>
 <ul>
