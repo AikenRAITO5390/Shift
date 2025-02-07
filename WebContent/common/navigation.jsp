@@ -80,7 +80,7 @@ function hideLinks(id) {
 </div>
 
 <ul>
-	<li><a href="#" onclick="showLinks('Shift_conditions')">💪　シフト</a></li>
+	<li><a href="#" onclick="showLinks('Shift_conditions')">💪　シフト条件</a></li>
 </ul>
 <div id="Shift_conditions" class="links" style="display:none;">
     <ul>
@@ -96,9 +96,8 @@ function hideLinks(id) {
 <div id="Worker" class="links" style="display:none;">
    <ul>
         <a href="WorkerSignUp.action">登録</a><br>
-        <a href="WorkerList.action">編集</a><br>
-        <a href="WorkerList.action">閲覧</a><br>
-        <a href="WorkerList.action">削除</a><br>
+        <a href="WorkerList.action">編集・削除</a><br>
+        <a href="WorkerDate.action">閲覧</a><br>
     </ul>
 </div>
 
